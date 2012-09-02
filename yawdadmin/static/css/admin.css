@@ -1,3 +1,15 @@
+body.dashboard {
+	padding: 10px 0 0 0;
+}
+
+th {
+	background-color: #3993ba;
+}
+
+th a {
+	color: #fff !important;
+}
+
 .help-inline ul {
 	list-style: none;
 	padding: 0;
@@ -6,4 +18,33 @@
 
 .required {
 	font-weight: bold;
+}
+
+.navbar .brand {
+	padding-left: 30px;
+	font: 200 18px 'Ubuntu Condensed', sans-serif;
+}
+
+.navbar .brand i {
+	margin-top: 5px;
+}
+
+.navbar-fixed-top .nav-collapse i {
+	opacity: 0.6;
+}
+
+.navbar-fixed-top .nav-collapse li:hover i {
+	opacity: 1;
+}
+
+.main {
+	padding: 35px;
+}
+
+.table-rounded {
+	border: 1px solid #DDD;
+	border-collapse: separate;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
 }

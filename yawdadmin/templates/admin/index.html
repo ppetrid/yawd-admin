@@ -11,36 +11,45 @@
 
 {% block content %}
 <div id="content-main">
-
 {% if app_list %}
-    {% for app in app_list %}
-        <table class="table table-bordered table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
-            <tr>
-                <th colspan="2" class="title"><a href="{{ app.app_url }}" class="section">{% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}</a></th>
-            </tr>
-        {% for model in app.models %}
-            <tr>
-            {% if model.perms.change %}
-                <th scope="row"><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
-            {% else %}
-                <th scope="row">{{ model.name }}</th>
-            {% endif %}
-                <td width="20%">
-                 <div data-toggle="buttons-checkbox" class="btn-group">
-                     {% if model.perms.add %}
-                     <a href="{{ model.admin_url }}add/" class="btn">{% trans 'Add' %}</a>
-                     {% endif %}
-                     {% if model.perms.change %}
-                     <a href="{{ model.admin_url }}" class="btn">{% trans 'Change' %}</a>
-                     {% endif %}
-                 </div>
-                </td>
-            </tr>
-        {% endfor %}
-        </table>
+	{% for app in app_list %}
+		<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
+			<thead>
+				<tr>
+					<th colspan="2" class="title"><a href="{{ app.app_url }}" class="section">{% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}</a></th>
+				</tr>
+            </thead>
+            <tbody>
+			{% for model in app.models %}
+				<tr>
+				{% if model.perms.change %}
+					<td><a href="{{ model.admin_url }}">{{ model.name }}</a></th>
+				{% else %}
+					<td>{{ model.name }}</th>
+				{% endif %}
+					<td>
+						<div class="pull-right">
+						{% if model.perms.add %}
+							<a href="{{ model.admin_url }}add/" class="btn btn-mini btn-success">
+								<i class="icon-plus icon-white"></i>&#xa0;
+								{% trans 'Add' %}
+							</a>
+						{% endif %}
+						{% if model.perms.change %}
+							<a href="{{ model.admin_url }}" class="btn btn-mini btn-info">
+								{% trans 'Change' %}
+								&#xa0;<i class="icon-edit icon-white"></i>
+							</a>
+						{% endif %}
+						</div>
+					</td>
+				</tr>
+			{% endfor %}
+			</tbody>
+		</table>
     {% endfor %}
 {% else %}
-    <p>{% trans "You don't have permission to edit anything." %}</p>
+    <p class="alert">{% trans "You don't have permission to edit anything." %}</p>
 {% endif %}
 </div>
 {% endblock %}

@@ -1,4 +1,4 @@
-{% load url from future %}{% load i18n admin_static %}<!DOCTYPE html>
+{% load url from future %}{% load i18n admin_static %}{% load yawdadmin_tags %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
     <head>
         <meta charset="utf-8">
@@ -6,6 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}" />
         <link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
+		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,greek-ext,cyrillic-ext,greek,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
         <!-- <link rel="stylesheet" type="text/css" href="/admins/css/rewrite.css" /> -->
         {% block extrastyle %}{% endblock %}
         {% block extrahead %}{% endblock %}
@@ -14,46 +15,10 @@
         {% endblock %}
     </head>
     {% load i18n %}
-    <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}pattern{% endblock %}">
+    <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}dashboard{% endblock %}">
         {% if not is_popup %}
         {% if user.is_active and user.is_staff %}
-        <div class="navbar">
-            <div class="navbar-inner">
-                <div class="container">
-                    <div class="nav-collapse">
-                        <ul class="nav">
-                            {% block userlinks %}
-                            <li class="active">
-                                <a href="javascript:;"> {% trans 'Welcome,' %}{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}</a>
-                            </li>
-                            {% url 'django-admindocs-docroot' as docsroot %}
-                            {% if docsroot %}
-                            <li>
-                                <a href="{{ docsroot }}">{% trans 'Documentation' %}</a>
-                            </li>
-                            {% endif %}
-
-                            {% url 'admin:password_change' as password_change_url %}
-                            {% if password_change_url %}
-                            <li>
-                                <a href="{{ password_change_url }}"> {% else %} <a href="{{ root_path }}password_change/">
-                            </li>
-                            {% endif %}
-                            {% trans 'Change password' %}</a>
-
-                            {% url 'admin:logout' as logout_url %}
-                            {% if logout_url %}
-                            <li>
-                                <a href="{{ logout_url }}"> {% else %} <a href="{{ root_path }}logout/">
-                            </li>
-                            {% endif %}
-                            {% trans 'Log out' %} </a>
-                            {% endblock %}
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
+			{% admin_top_menu %}
         {% endif %}
 
         {% endif %}

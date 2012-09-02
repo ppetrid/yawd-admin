@@ -1,0 +1,98 @@
+{% load i18n %}
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+    	<div class="container-fluid">
+    		<a class="brand" href="{{homeurl}}">
+    			<i class="icon-globe"></i>
+    			{% trans "Django administration" %}
+    		</a>
+    		<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
+				<span class="icon-align-justify"></span>
+			</a>
+            <div class="nav-collapse" role="menu">
+				<nav>
+					<ul class="nav">
+					{% for app in top_menu %}
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							{% if app.icon %}<i class="{{app.icon}}"></i>{% endif %}
+								&#xa0;{{app.name}}
+								{% if app.models|length > 1 %}<b class="caret"></b>{% endif %}
+							</a>
+							<ul class="dropdown-menu" role="menu">
+							{% for model in app.models %}
+								{% if model.perms.change %}
+									{% if model.separator %} <li class="divider"></li>{% endif %}
+									<li><a href="{{model.admin_url}}">{{model.name}}</a></li>
+								{% endif %}
+							{% endfor %}
+							</ul>
+                		</li>
+                	{% endfor %}
+                	</ul>
+				</nav>
+			</div>
+			<nav>
+				<ul class="nav pull-right">
+					{% if langs %}
+					<li class="divider-vertical hidden-phone hidden-tablet"></li>
+					<li class="dropdown">
+	                	<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							{% for lang in langs %}
+								{% if lang.name == LANGUAGE_CODE %}
+									{% get_language_info for lang.name as info %}
+									{% if lang.image %}<img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" />{% else %}{{info.name}}{% endif %}
+								{% endif %}
+							{% endfor %}
+	                		<b class="caret"></b>
+	                	</a>
+						<ul class="dropdown-menu pull-left">
+	                		{% for lang in langs %}
+	                			{% if lang.name != LANGUAGE_CODE %}
+	                			<li>
+	                				{% get_language_info for lang.name as info %}
+	                				<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}">
+	                				{% if lang.image %}<img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /> {% endif %}{{info.name}}
+	                				</a>
+	                			</li>
+	                			{% endif %}
+							{% endfor %}
+						</ul>
+					</li>
+					{% endif %}
+					<li class="divider-vertical hidden-phone hidden-tablet"></li>
+					<li class="dropdown">
+						<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							<i class="icon-user"></i>
+							&#xa0;{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}
+							<b class="caret"></b>
+						</a>
+						<ul class="dropdown-menu">
+							{% block userlinks %}
+								{% url 'django-admindocs-docroot' as docsroot %}
+	                    			{% if docsroot %}
+	                    			<li>
+	                    	    		<a href="{{ docsroot }}">{% trans 'Documentation' %}</a>
+	                    			</li>
+	                    			{% endif %}
+	                    			{% url 'admin:password_change' as password_change_url %}
+		                    		<li>
+		                        		<a href="{% if password_change_url %}{{ password_change_url }}{% else %}{{ homeurl }}password_change/{% endif %}">
+		                        			{% trans 'Change password' %}
+		                        		</a>
+		                    		</li>
+		                    		{% url 'admin:logout' as logout_url %}
+		                    		<li>
+		                    			<a href="{% if logout_url %}{{ logout_url }}{% else %}{{ homeurl }}logout/{% endif %}">
+		                    				{% trans 'Log out' %}
+		                    			</a>
+		                    		</li>
+		                    	{% endblock %}
+	                    	</ul>
+	                    </a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+	</div>
+</div>

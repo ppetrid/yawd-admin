@@ -3,6 +3,8 @@
 
 {% block extrastyle %}{{ block.super }}{% endblock %}
 
+{% block bodyclass %}login{% endblock %}
+
 {% block branding %}{% endblock %}
 
 {% block nav-global %}{% endblock %}
@@ -24,6 +26,7 @@
 <section class="span10 offset1">
     {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
     <p class="alert alert-error">
+    	<button type="button" class="close" data-dismiss="alert">×</button>
         {% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
     </p>
     {% endif %}
@@ -31,6 +34,7 @@
     {% if form.non_field_errors or form.this_is_the_login_form.errors %}
     {% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
     <p class="alert alert-error">
+    	<button type="button" class="close" data-dismiss="alert">×</button>
         {{ error }}
     </p>
     {% endfor %}
