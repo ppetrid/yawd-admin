@@ -6,32 +6,6 @@
     			<i class="icon-globe"></i>
     			{% trans "Django administration" %}
     		</a>
-    		<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar">
-				<span class="icon-align-justify"></span>
-			</a>
-            <div class="nav-collapse" role="menu">
-				<nav>
-					<ul class="nav">
-					{% for app in top_menu %}
-						<li class="dropdown">
-							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-							{% if app.icon %}<i class="{{app.icon}}"></i>{% endif %}
-								&#xa0;{{app.name}}
-								{% if app.models|length > 1 %}<b class="caret"></b>{% endif %}
-							</a>
-							<ul class="dropdown-menu" role="menu">
-							{% for model in app.models %}
-								{% if model.perms.change %}
-									{% if model.separator %} <li class="divider"></li>{% endif %}
-									<li><a href="{{model.admin_url}}">{{model.name}}</a></li>
-								{% endif %}
-							{% endfor %}
-							</ul>
-                		</li>
-                	{% endfor %}
-                	</ul>
-				</nav>
-			</div>
 			<nav>
 				<ul class="nav pull-right">
 					{% if langs %}
@@ -93,6 +67,32 @@
 					</li>
 				</ul>
 			</nav>
+			<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar ">
+				<span class="icon-align-justify"></span>
+			</a>
+            <div class="nav-collapse" role="menu">
+				<nav>
+					<ul class="nav">
+					{% for app in top_menu %}
+						<li class="dropdown">
+							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+							{% if app.icon %}<i class="{{app.icon}}"></i>{% endif %}
+								&#xa0;{{app.name}}
+								{% if app.models|length > 1 %}<b class="caret"></b>{% endif %}
+							</a>
+							<ul class="dropdown-menu" role="menu">
+							{% for model in app.models %}
+								{% if model.perms.change %}
+									{% if model.separator %} <li class="divider"></li>{% endif %}
+									<li><a href="{{model.admin_url}}">{{model.name}}</a></li>
+								{% endif %}
+							{% endfor %}
+							</ul>
+                		</li>
+                	{% endfor %}
+                	</ul>
+				</nav>
+			</div>
 		</div>
 	</div>
 </div>

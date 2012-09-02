@@ -49,21 +49,8 @@
 
 {% block content %}
   <div id="content-main">
-    {% block object-tools %}
-        {% if has_add_permission %}
-        <ul class="nav nav-list">
-            {% block object-tools-items %}
-            <li>
-                <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="addlink">
-                {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-                </a>
-            </li>
-            {% endblock %}
-        </ul>
-        {% endif %}
-    {% endblock %}
     {% if cl.formset.errors %}
-        <p class="alert alert-error">
+        <p class="alert alert-error close">
         {% blocktrans count cl.formset.errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
         </p>
         {{ cl.formset.non_form_errors }}
@@ -88,11 +75,26 @@
     </div>
   </div>
 {% endblock %}
+
 {% block sidebar %}
-{% if cl.has_filters %}
-  <div class="changelist-filter well" style="padding: 9px 0;">
-    <h3 class="filter-title">{% trans 'Filter' %}</h3>
-    {% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
-  </div>
-{% endif %}
+	{% block object-tools %}
+        {% if has_add_permission %}
+        <ul class="nav nav-list">
+            {% block object-tools-items %}
+            <li>
+                <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="span6 big-button">
+                	<i class="add-item"></i>
+                	{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+                </a>
+            </li>
+            {% endblock %}
+        </ul>
+        {% endif %}
+    {% endblock %}
+	{% if cl.has_filters %}
+		<div class="span12 changelist-filter well clearfix">
+			<h3 class="filter-title">{% trans 'Filter' %}</h3>
+			{% for spec in cl.filter_specs %}{% admin_list_filter cl spec %}{% endfor %}
+		</div>
+	{% endif %}
 {% endblock %}
