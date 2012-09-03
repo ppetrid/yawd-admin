@@ -1,17 +1,19 @@
 {% load url from future %}{% load i18n admin_static %}{% load yawdadmin_tags %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-    <head>
-        <meta charset="utf-8">
-        <title>{% block title %}{% endblock %}</title>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}" />
-        <link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
+	<head>
+		<meta charset="utf-8">
+		<title>{% block title %}{% endblock %}</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.css" %}" />
+		<link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,greek-ext,cyrillic-ext,greek,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
-        <!-- <link rel="stylesheet" type="text/css" href="/admins/css/rewrite.css" /> -->
+		<!-- <link rel="stylesheet" type="text/css" href="/admins/css/rewrite.css" /> -->
+		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
+		<script src="{% static "js/bootstrap.js" %}"></script>
         {% block extrastyle %}{% endblock %}
         {% block extrahead %}{% endblock %}
         {% block blockbots %}
-        <meta name="robots" content="NONE,NOARCHIVE" />
+		<meta name="robots" content="NONE,NOARCHIVE" />
         {% endblock %}
     </head>
     {% load i18n %}
@@ -47,16 +49,19 @@
             
             {% block pretitle %}{% endblock %}
             {% block content_title %}
-                {% if title %}  
+                {% if title %}
                 <div class="page-header">
-                    <h3>{{ title }}</h3>
+                    <h1>{{ title }}</h1>
                 </div>
                 {% endif %}
             {% endblock %}
+            {% block fullextra %}
+            	{% block object-tools %}{% endblock %}
+            {% endblock %}
+            {% block main-struct %}
             <div class="row-fluid show-grid">
                 <div class="span9">
                     {% block content %}
-                        {% block object-tools %}{% endblock %}
                         {{ content }}
                     {% endblock %}
                 </div>
@@ -64,11 +69,10 @@
                     {% block sidebar %}{% endblock %}
                 </div>
             </div>
+            {% endblock %}
             
             {% block footer %}{% endblock %}
         </div>
         {% endblock %}
-        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-        <script src="{% static "js/bootstrap.min.js" %}"></script>
     </body>
 </html>

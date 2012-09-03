@@ -77,7 +77,6 @@ class YawdAdminSite(AdminSite):
 
         # Sort the models alphabetically within each app.
         for app in app_list:
-            print app['models']
             app['models'].sort(key=lambda x: x['order'])
 
         return app_list

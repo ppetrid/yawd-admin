@@ -1,4 +1,4 @@
-body.dashboard, body.change-list {
+body.dashboard, body.change-list, body.change-form {
 	padding: 25px 0 0 0;
 }
 
@@ -16,7 +16,7 @@ thead th a {
 	color: #fff !important;
 }
 
-.help-inline ul {
+.help-inline ul, .alert-error ul {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -44,7 +44,7 @@ thead th a {
 }
 
 .main {
-	padding: 40px;
+	padding: 40px 40px 10px 40px;
 }
 
 .table-rounded {
@@ -63,6 +63,22 @@ thead th a {
 	margin: auto;
 }
 
+.history-item {
+	background: url('../img/database.png') 0px 0px no-repeat;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
+.preview-item {
+	background: url('../img/lookup.png') 0px 0px no-repeat;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
 .big-button {
 	text-align: center;
 	border: 1px solid #DDD;
@@ -70,7 +86,8 @@ thead th a {
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
-	margin-bottom: 30px;
+	margin-bottom: 10px;
+	display: block;
 	background: #F9F9F9;
 	background: -moz-linear-gradient(top, #F9F9F9 0%, #EFEFEF 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F9F9F9), color-stop(100%,#EFEFEF));
@@ -90,6 +107,8 @@ thead th a {
 	background: -ms-linear-gradient(top, #efefef 0%,#F9F9F9 100%);
 	background: linear-gradient(top, #efefef 0%,#F9F9F9 100%);
 	progid:DXImageTransform.Microsoft.gradient( startColorstr='#efefef', endColorstr='#F9F9F9',GradientType=0 );
+	text-decoration: None;
+	color: #08c;
 }
 
 .clearfix {
@@ -111,4 +130,35 @@ select[name="action"] {
 
 .action-counter {
 	color: #999;
+}
+
+.help:hover {
+	cursor: pointer;
+}
+
+.field {
+	padding: 4px;
+	margin: 1px;
+}
+
+.color-form.row-fluid {
+	background-color: #f9f9f9;
+	margin-bottom: 1px;
+	line-height: 30px;
+}
+
+.color-form.row-fluid.row2 {
+	background-color: #fdfdfd;
+}
+
+.form-horizontal .color-form .control-group {
+	margin-bottom: 0;
+}
+
+.submits {
+	margin: 40px 0 0 0;
+}
+
+.field h2 {
+	font-size: 16px;
 }

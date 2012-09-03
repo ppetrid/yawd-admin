@@ -1,8 +1,21 @@
 {% load i18n %}
-<div class="submits" {% if is_popup %}style="overflow: auto;"{% endif %}>
-{% if show_save %}<input type="submit" value="{% trans 'Save' %}" class="default btn" name="_save" {{ onclick_attrib }}/>{% endif %}
-{% if show_delete_link %}<a href="delete/" class="deletelink btn">{% trans "Delete" %}</a>{% endif %}
+<div class="row-fluid submits" {% if is_popup %}style="overflow: auto;"{% endif %}>
+	<div class="pull-right btn-group">
+{% if show_delete_link %}
+	<div class="input-prepend">
+		<span class="add-on"><i class="icon-remove"></i></span>
+		<a href="delete/" class="deletelink btn btn-danger">{% trans "Delete" %}</a>
+	</div>
+{% endif %}
 {% if show_save_as_new %}<input type="submit" class="btn" value="{% trans 'Save as new' %}" name="_saveasnew" {{ onclick_attrib }}/>{%endif%}
 {% if show_save_and_add_another %}<input type="submit" class="btn" value="{% trans 'Save and add another' %}" name="_addanother" {{ onclick_attrib }} />{% endif %}
 {% if show_save_and_continue %}<input type="submit" class="btn" value="{% trans 'Save and continue editing' %}" name="_continue" {{ onclick_attrib }}/>{% endif %}
+{% if show_save %}
+	<div class="input-append">
+  		<input type="submit" value="{% trans 'Save' %}" class="default btn btn-success" name="_save" {{ onclick_attrib }}/>
+  		<span class="add-on"><i class="icon-ok"></i></span>
+	</div>
+{% endif %}
+
+	</div>
 </div>

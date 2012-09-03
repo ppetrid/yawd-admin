@@ -16,7 +16,8 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  * ========================================================== */
-
+var yawdadmin = {};
+yawdadmin.jQuery = jQuery.noConflict(true);
 
 !function ($) {
 
@@ -57,7 +58,7 @@
 
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* =========================================================
  * bootstrap-modal.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#modals
@@ -296,7 +297,7 @@
     })
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* ============================================================
  * bootstrap-dropdown.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#dropdowns
@@ -446,7 +447,7 @@
       .on('keydown.dropdown.data-api touchstart.dropdown.data-api', toggle + ', [role=menu]' , Dropdown.prototype.keydown)
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* =============================================================
  * bootstrap-scrollspy.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#scrollspy
@@ -597,7 +598,7 @@
     })
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* ========================================================
  * bootstrap-tab.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#tabs
@@ -732,7 +733,7 @@
     })
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* ===========================================================
  * bootstrap-tooltip.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#tooltips
@@ -1007,7 +1008,7 @@
   , html: true
   }
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 
 /* ===========================================================
  * bootstrap-popover.js v2.1.0
@@ -1111,7 +1112,7 @@
   , template: '<div class="popover"><div class="arrow"></div><div class="popover-inner"><h3 class="popover-title"></h3><div class="popover-content"><p></p></div></div></div>'
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* ==========================================================
  * bootstrap-affix.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#affix
@@ -1215,7 +1216,7 @@
   })
 
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* ==========================================================
  * bootstrap-alert.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#alerts
@@ -1305,7 +1306,7 @@
     $('body').on('click.alert.data-api', dismiss, Alert.prototype.close)
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* ============================================================
  * bootstrap-button.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#buttons
@@ -1401,7 +1402,7 @@
     })
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* =============================================================
  * bootstrap-collapse.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#collapse
@@ -1559,7 +1560,7 @@
     })
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* ==========================================================
  * bootstrap-carousel.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#carousel
@@ -1735,7 +1736,7 @@
     })
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);
 /* =============================================================
  * bootstrap-typeahead.js v2.1.0
  * http://twitter.github.com/bootstrap/javascript.html#typeahead
@@ -2035,4 +2036,4 @@
     })
   })
 
-}(window.jQuery);
+}(yawdadmin.jQuery);

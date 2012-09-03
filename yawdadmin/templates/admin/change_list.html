@@ -1,11 +1,11 @@
 {% extends "admin/base_site.html" %}
-{% load adminmedia admin_list i18n %}
+{% load adminmedia admin_list i18n admin_static %}
 {% load url from future %}
 {% block extrastyle %}
   {{ block.super }}
-  <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/changelists.css" />
+  <link rel="stylesheet" type="text/css" href="{% static "css/changelists.css" %}"/>
   {% if cl.formset %}
-    <link rel="stylesheet" type="text/css" href="{% admin_media_prefix %}css/forms.css" />
+    <link rel="stylesheet" type="text/css" href="{% static "css/forms.css"  %}"/>
   {% endif %}
   {% if cl.formset or action_form %}
     {% url 'admin:jsi18n' as jsi18nurl %}
@@ -47,6 +47,22 @@
 
 {% block coltype %}flex{% endblock %}
 
+
+{% block object-tools %}
+	<div class="row-fluid nav">
+		{% block object-tools-items %}
+			{% if has_add_permission %}
+			<div class="span2">
+				<a href="add/{% if is_popup %}?_popup=1{% endif %}" class="big-button">
+					<i class="add-item"></i>
+					{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
+				</a>
+			</div>
+			{% endif %}
+		{% endblock %}
+	</div>
+{% endblock %}
+
 {% block content %}
   <div id="content-main">
     {% if cl.formset.errors %}
@@ -77,20 +93,6 @@
 {% endblock %}
 
 {% block sidebar %}
-	{% block object-tools %}
-        {% if has_add_permission %}
-        <ul class="nav nav-list">
-            {% block object-tools-items %}
-            <li>
-                <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="span6 big-button">
-                	<i class="add-item"></i>
-                	{% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
-                </a>
-            </li>
-            {% endblock %}
-        </ul>
-        {% endif %}
-    {% endblock %}
 	{% if cl.has_filters %}
 		<div class="span12 changelist-filter well clearfix">
 			<h3 class="filter-title">{% trans 'Filter' %}</h3>
