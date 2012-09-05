@@ -18,8 +18,9 @@
 									{% if lang.image %}<img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" />{% else %}{{info.name}}{% endif %}
 								{% endif %}
 							{% endfor %}
-	                		<b class="caret"></b>
+	                		{% if langs and langs|length > 1 %}<b class="caret"></b>{% endif %}
 	                	</a>
+	                	{% if langs and langs|length > 1 %}
 						<ul class="dropdown-menu pull-left">
 	                		{% for lang in langs %}
 	                			{% if lang.name != LANGUAGE_CODE %}
@@ -31,7 +32,7 @@
 	                			</li>
 	                			{% endif %}
 							{% endfor %}
-						</ul>
+						</ul>{% endif %}
 					</li>
 					{% endif %}
 					<li class="divider-vertical hidden-phone hidden-tablet"></li>
