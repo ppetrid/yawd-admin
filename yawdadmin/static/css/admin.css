@@ -28,7 +28,7 @@ thead th a {
 
 .navbar .brand {
 	padding-left: 30px;
-	font: 200 18px 'Ubuntu Condensed', sans-serif;
+	font: 100 16px 'Ubuntu Condensed', sans-serif;
 }
 
 .navbar .brand i {
@@ -173,4 +173,8 @@ select[name="action"] {
 
 .add-another:hover {
 	text-decoration: none;
+}
+
+.lang-switcher {
+	padding: 9px 15px 9px !important;
 }

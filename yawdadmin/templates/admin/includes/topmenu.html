@@ -11,11 +11,11 @@
 					{% if langs %}
 					<li class="divider-vertical hidden-phone hidden-tablet"></li>
 					<li class="dropdown">
-	                	<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+	                	<a data-toggle="dropdown" class="dropdown-toggle lang-switcher" href="#">
 							{% for lang in langs %}
 								{% if lang.name == LANGUAGE_CODE %}
 									{% get_language_info for lang.name as info %}
-									{% if lang.image %}<img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" />{% else %}{{info.name}}{% endif %}
+									{% if lang.image %}<img src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" />{% else %}{{info.name}}{% endif %}
 								{% endif %}
 							{% endfor %}
 	                		{% if langs and langs|length > 1 %}<b class="caret"></b>{% endif %}
@@ -27,7 +27,7 @@
 	                			<li>
 	                				{% get_language_info for lang.name as info %}
 	                				<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}">
-	                				{% if lang.image %}<img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /> {% endif %}{{info.name}}
+	                				{% if lang.image %}<img src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /> {% endif %}{{info.name}}
 	                				</a>
 	                			</li>
 	                			{% endif %}
@@ -79,7 +79,7 @@
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 							{% if app.icon %}<i class="{{app.icon}}"></i>{% endif %}
 								&#xa0;{{app.name}}
-								{% if app.models|length > 1 %}<b class="caret"></b>{% endif %}
+								<b class="caret"></b>
 							</a>
 							<ul class="dropdown-menu" role="menu">
 							{% for model in app.models %}
@@ -91,6 +91,20 @@
 							</ul>
                 		</li>
                 	{% endfor %}
+                	{% if option_app_labels %}
+                		<li class="dropdown">
+                			<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                				<i class="icon-cog"></i>
+                				&#xa0;{% trans "Options" %}
+                				<b class="caret"></b>
+                			</a>
+                			<ul class="dropdown-menu">
+                			{% for label in option_app_labels %}
+								<li><a href="{{label.url}}">{{label.app_label}}</a></li>
+							{% endfor %}
+                			</ul>
+                		</li>
+                	{% endif %}
                 	</ul>
 				</nav>
 			</div>
