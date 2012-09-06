@@ -1,7 +1,13 @@
+import re
+from functools import update_wrapper
 from django.contrib.admin.sites import AdminSite
+from django.conf.urls import patterns, url
 from django.utils.text import capfirst
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.contrib import admin
+from models import AppOption
+from utils import load_form_field, add_option_app_label, get_option_app_labels, init_option
+from views import AppOptionView
 
 class YawdAdminSite(AdminSite):
     
@@ -9,6 +15,21 @@ class YawdAdminSite(AdminSite):
         super(YawdAdminSite, self).__init__(*args, **kwargs)
         self._registry = admin.site._registry
         self._top_menu = {}
+        
+    def get_urls(self):
+        urlpatterns = super(YawdAdminSite, self).get_urls()
+        
+        def wrap(view, cacheable=False):
+            def wrapper(*args, **kwargs):
+                return self.admin_view(view, cacheable)(*args, **kwargs)
+            return update_wrapper(wrapper, view)
+
+        urlpatterns += patterns('',
+            url(r'^(?P<app_label>%s)/configuration-options/$' % '|'.join(get_option_app_labels()),
+            wrap(AppOptionView.as_view()),
+            name='app_label_options'))
+
+        return urlpatterns
         
     def register_top_menu_item(self, item, icon_class=''):
         app_labels = []
@@ -80,3 +101,48 @@ class YawdAdminSite(AdminSite):
             app['models'].sort(key=lambda x: x['order'])
 
         return app_list
+    
+    def register_options(self, app_label, options):
+        """
+        Allows an application to register admin options
+        on a certain field_label like so::
+        
+            admin_site.register_options('myapp', [{
+                'name' : 'Site name',
+                'field_type' : 'django.forms.EmailField'
+            }])
+        """
+        
+        if not app_label or not re.match(r'[a-zA-z_]+', app_label):
+            raise Exception("app_label must be set in register_options and contain only letters and underscores")
+        
+        for option in options:
+            
+            #check if option has a proper name
+            try:
+                name = option['name']
+            except KeyError:
+                raise Exception("Each option dictionary should have a 'name' key.")
+            
+            #Check if field_type is a valid type
+            try:
+                load_form_field(option['field_type'], 
+                    option['field_type_kwargs'] if 'field_type_kwargs' in option else {},
+                    label=option['label'] if 'label' in option else option['name'].title(),
+                    help_text = option['help_text'] if 'help_text' in option else '') 
+            except KeyError:
+                raise Exception("Each option dictionary should have a 'field_type' key.")
+            except Exception:
+                raise Exception("'field_type' should be a path to a python class defining a Form Field.")
+
+            db_option, created = AppOption.objects.get_or_create(name = name, app_label = app_label)
+            init_option(db_option, option)
+
+        if options:            
+            add_option_app_label(app_label)
+            
+    def unregister_option(self, app_label, name):
+        try:
+            AppOption.objects.filter(name=name, app_label=app_label).delete()
+        except:
+            raise Exception("Option not found")

@@ -1,0 +1,66 @@
+{% extends "admin/base_site.html" %}
+{% load i18n %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li><a href="../">{% trans "Home" %}</a> <span class="divider">/</span></li>
+    <li><a href="../../">{{ app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
+    <li class="active">{% trans "Configuration options" %}</li>
+</ul>
+{% endblock %}
+
+{% block main-struct %}
+<div id="content-main">
+	<form class="form-horizontal form-inline" action="." method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
+		
+		{% if save_on_top %}
+		<div class="row-fluid submits">
+			<div class="pull-right">
+				<input type="submit" value="{% trans 'Save' %}" class="default btn btn-small btn-success" name="_save" {{ onclick_attrib }}/>
+			</div>
+		</div>
+		{% endif %}
+		
+		<div class="row-fluid">
+			{% if errors %}
+    			<span class="span12 alert alert-error">
+    				<button type="button" class="close" data-dismiss="alert">×</button>
+    				{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+    				{{ form.non_field_errors }}
+    			</span>	
+			{% endif %}
+			
+			{% for field in form %}
+                <div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
+					<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
+					<div class="controls">
+						{% if field.is_readonly %}
+							<span><i>{{ field.contents }}</i></span>
+						{% elif field.is_checkbox %}
+							<span class="switch">
+								{{field}}
+								<span class="switch-track"></span>
+								<span class="switch-thumb"></span>
+							</span>
+						{% else %}
+							{{ field }}
+						{% endif %}
+						{% if field.help_text %}
+							<i class="help icon-question-sign" title="{{ field.field.help_text|safe }}"></i>
+						{% endif %}
+						{% if line.fields|length_is:'1' and not field.is_readonly and field.errors %}
+							<span class="help-inline">{{ field.errors }}</span>
+						{% endif %}
+					</div>
+				</div>
+            {% endfor %}
+
+			<div class="row-fluid submits">
+				<div class="pull-right">
+					<input type="submit" value="{% trans 'Save' %}" class="default btn btn-small btn-success" name="_save" {{ onclick_attrib }}/>
+				</div>
+			</div>
+		</div>
+	</form>
+</div>
+{% endblock %}
