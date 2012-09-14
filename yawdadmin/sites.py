@@ -123,7 +123,7 @@ class YawdAdminSite(AdminSite):
                 name = option['name']
             except KeyError:
                 raise Exception("Each option dictionary should have a 'name' key.")
-            
+
             #Check if field_type is a valid type
             try:
                 load_form_field(option['field_type'], 
@@ -133,7 +133,7 @@ class YawdAdminSite(AdminSite):
             except KeyError:
                 raise Exception("Each option dictionary should have a 'field_type' key.")
             except Exception:
-                raise Exception("'field_type' should be a path to a python class defining a Form Field.")
+                raise Exception("'field_type' should be a path to a Form Field class.")
 
             db_option, created = AppOption.objects.get_or_create(name = name, app_label = app_label)
             init_option(db_option, option)
