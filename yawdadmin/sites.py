@@ -4,7 +4,6 @@ from django.contrib.admin.sites import AdminSite
 from django.conf.urls import patterns, url
 from django.utils.text import capfirst
 from django.core.urlresolvers import reverse, NoReverseMatch
-from django.contrib import admin
 from models import AppOption
 from utils import load_form_field, add_option_app_label, get_option_app_labels, init_option
 from views import AppOptionView
@@ -13,7 +12,6 @@ class YawdAdminSite(AdminSite):
     
     def __init__(self, *args, **kwargs):
         super(YawdAdminSite, self).__init__(*args, **kwargs)
-        self._registry = admin.site._registry
         self._top_menu = {}
         
     def get_urls(self):
@@ -132,7 +130,7 @@ class YawdAdminSite(AdminSite):
                     help_text = option['help_text'] if 'help_text' in option else '') 
             except KeyError:
                 raise Exception("Each option dictionary should have a 'field_type' key.")
-            except Exception:
+            except Exception as e:
                 raise Exception("'field_type' should be a path to a Form Field class.")
 
             db_option, created = AppOption.objects.get_or_create(name = name, app_label = app_label)

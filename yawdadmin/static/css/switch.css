@@ -1,4 +1,11 @@
-/* Generated from LESS using BS mixins */
+/* Generated from LESS using BS mixins 
+
+ppetrid:
+This is not currently used in the project
+but it should be used/modified to allow
+for stylish check boxes
+
+*/
 .switch {
   display: inline-block;
   width: 75px;

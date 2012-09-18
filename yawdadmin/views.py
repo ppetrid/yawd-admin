@@ -7,8 +7,7 @@ from forms import AppOptionForm
 class AppOptionView(FormView):
     form_class = AppOptionForm
     template_name = 'admin/options.html'
-    success_url = reverse_lazy('admin:index')
-    
+
     def get_form_kwargs(self):
         kwargs = super(AppOptionView, self).get_form_kwargs()
         kwargs.update({'app_label' : self.kwargs['app_label'] })
@@ -17,7 +16,7 @@ class AppOptionView(FormView):
     def get_context_data(self, **kwargs):
         context = super(AppOptionView, self).get_context_data(**kwargs)
         context['app_label'] = self.kwargs['app_label']
-        context['title'] = '%s %s' % (self.kwargs['app_label'].title(), _('configuration options'))
+        context['title'] = '%s %s' % (self.kwargs['app_label'].title().replace('_', ' '), _('configuration options'))
         return context
     
     def form_valid(self, form):
@@ -27,4 +26,5 @@ class AppOptionView(FormView):
         """
         form.save()
         messages.add_message(self.request, messages.SUCCESS, _('The options were succesfully saved.'))
-        return super(AppOptionView, self).form_valid(form)
+        #Do not redirect, show the option page instead
+        return self.get(self.request, )

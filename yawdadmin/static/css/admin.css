@@ -178,3 +178,19 @@ select[name="action"] {
 .lang-switcher {
 	padding: 9px 15px 9px !important;
 }
+
+/* Elfinder overrides to remove boootstrap styling */
+
+table.elfinder-info-tb {
+	border-spacing: 2px;
+	border-color: gray;
+	line-height: normal;
+}
+
+table.elfinder-info-tb tr {
+	border-bottom: 1px solid #e3e3e3;
+}
+
+.elfinder-info-title {
+	line-height: normal;
+}

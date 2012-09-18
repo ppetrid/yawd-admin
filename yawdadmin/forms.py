@@ -1,7 +1,6 @@
 import re
 from django import forms
 from django.utils import simplejson as json
-from django.utils.encoding import smart_str
 from django.utils.translation import get_language_info, ugettext as _
 from models import AppOption
 from utils import load_form_field
@@ -10,7 +9,7 @@ from utils import load_form_field
 try:
     from translations.utils import get_supported_languages
 except:
-    #mimic the yawd-translation get_supported languages() behavior
+    #mimic the yawd-translations get_supported languages() behavior
     #for the languages defined in settings.LANGUAGES
     from django.conf import settings
     def get_supported_languages():
@@ -37,7 +36,7 @@ class AppOptionForm(forms.Form):
         for option in options:
             if not option.lang_dependant:
                 #instantiate the form field
-                field = load_form_field(smart_str(option.field_type), 
+                field = load_form_field(option.field_type, 
                     json.loads(option.field_type_kwargs) if option.field_type_kwargs else {},
                     help_text = option.help_text, 
                     label = option.label)
@@ -51,7 +50,7 @@ class AppOptionForm(forms.Form):
                 for lang in get_supported_languages():
 
                     #instatiate a form field for each language
-                    field = load_form_field(smart_str(option.field_type), 
+                    field = load_form_field(option.field_type, 
                         json.loads(option.field_type_kwargs) if option.field_type_kwargs else {},
                         help_text = _(option.help_text), 
                         label = '%(label)s (%(lang)s)' % {
