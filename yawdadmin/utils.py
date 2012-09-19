@@ -33,6 +33,9 @@ def init_option(db_option, option):
 
     if 'help_text' in option and db_option.help_text != option['help_text']:
         db_option.help_text = option['help_text']
+        
+    if 'order' in option and db_option.order != option['order']:
+        db_option.order = option['order'] 
     
     db_option.save()
 
@@ -111,6 +114,10 @@ def load_form_field(field_type, init_args, label, help_text=''):
         init_args['help_text'] = help_text
     if 'widget' in init_args:
         init_args['widget'] = _get_class_from_string(init_args['widget'])
+        if 'widget_kwargs' in init_args:
+            #instantiate the widget if widget_kwargs are provided
+            init_args['widget'] = init_args['widget'](**init_args['widget_kwargs'])  
+            del init_args['widget_kwargs']
 
     return field(**init_args)
 

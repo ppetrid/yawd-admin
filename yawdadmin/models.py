@@ -10,9 +10,11 @@ class AppOption(models.Model):
     lang_dependant = models.BooleanField(default=False)
     label = models.CharField(max_length=50)
     help_text = models.CharField(max_length=255)
+    order = models.IntegerField(default=0)
     
     class Meta:
         unique_together = ('app_label', 'name')
-        
+        ordering = ['app_label', 'lang_dependant', 'order']
+
     def __unicode__(self):
         return u'%s.%s' % (self.app_label, self.name)
