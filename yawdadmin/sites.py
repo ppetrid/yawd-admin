@@ -5,8 +5,10 @@ from django.conf.urls import patterns, url
 from django.utils.text import capfirst
 from django.core.urlresolvers import reverse, NoReverseMatch
 from models import AppOption
-from utils import load_form_field, add_option_app_label, get_option_app_labels, init_option
 from views import AppOptionView
+
+#TODO: option permissions???
+_optionset_labels = {}
 
 class YawdAdminSite(AdminSite):
     
@@ -15,6 +17,7 @@ class YawdAdminSite(AdminSite):
         self._top_menu = {}
         
     def get_urls(self):
+        global _optionset_labels
         urlpatterns = super(YawdAdminSite, self).get_urls()
         
         def wrap(view, cacheable=False):
@@ -23,9 +26,9 @@ class YawdAdminSite(AdminSite):
             return update_wrapper(wrapper, view)
 
         urlpatterns += patterns('',
-            url(r'^(?P<app_label>%s)/configuration-options/$' % '|'.join(get_option_app_labels()),
+            url(r'^configuration-options/(?P<optionset_label>%s)/$' % '|'.join(_optionset_labels.keys()),
             wrap(AppOptionView.as_view()),
-            name='app_label_options'))
+            name='optionset-label-options'))
 
         return urlpatterns
         
@@ -100,47 +103,40 @@ class YawdAdminSite(AdminSite):
 
         return app_list
     
-    def register_options(self, app_label, options):
+    def register_options(self, optionset_admin):
         """
-        Allows an application to register admin options
-        on a certain field_label like so::
-        
-            admin_site.register_options('myapp', [{
-                'name' : 'Site name',
-                'field_type' : 'django.forms.EmailField'
-            }])
+        Allows an application to register admin options like so::
+
+            admin_site.register_options(OptionSetAdminClass)
         """
+        global _optionset_labels
+        if not optionset_admin.optionset_label in _optionset_labels:
+            _optionset_labels[optionset_admin.optionset_label] = optionset_admin
+    
+    def unregister_options(self, optionset_admin):
+        optionset_label = optionset_admin.optionset_label
+        if optionset_label in _optionset_labels:
+            AppOption.objects.filter(optionset_label=optionset_label).delete()
+            del _optionset_labels[optionset_label]
         
-        if not app_label or not re.match(r'[a-zA-z_]+', app_label):
-            raise Exception("app_label must be set in register_options and contain only letters and underscores")
-        
-        for option in options:
-            
-            #check if option has a proper name
-            try:
-                name = option['name']
-            except KeyError:
-                raise Exception("Each option dictionary should have a 'name' key.")
+    def get_option_admin_urls(self):
+        """
+        Return a list of key-value pairs, containing all available optionset urls 
+        """
+        global _optionset_labels
 
-            #Check if field_type is a valid type
-            try:
-                load_form_field(option['field_type'], 
-                    option['field_type_kwargs'] if 'field_type_kwargs' in option else {},
-                    label=option['label'] if 'label' in option else option['name'].title(),
-                    help_text = option['help_text'] if 'help_text' in option else '') 
-            except KeyError:
-                raise Exception("Each option dictionary should have a 'field_type' key.")
-            except Exception as e:
-                raise Exception("'field_type' should be a path to a Form Field class.")
+        if not hasattr(self, 'option_admin_urls'):
+            option_urls = []
+            for option in _optionset_labels:
+                option_urls.append({ 'optionset_label' : _optionset_labels[option].verbose_name, 'url' : reverse('admin:optionset-label-options', kwargs={ 'optionset_label' : option }, current_app='admin')})
+            self.option_admin_urls = option_urls
 
-            db_option, created = AppOption.objects.get_or_create(name = name, app_label = app_label)
-            init_option(db_option, option)
-
-        if options:            
-            add_option_app_label(app_label)
-            
-    def unregister_option(self, app_label, name):
-        try:
-            AppOption.objects.filter(name=name, app_label=app_label).delete()
-        except:
-            raise Exception("Option not found")
+        return self.option_admin_urls
+    
+    def get_optionset_admin(self, optionset_label):
+        """
+        Returns the OptionSetAdmin class for this label
+        """
+        global _optionset_labels
+        if optionset_label in _optionset_labels:
+            return _optionset_labels[optionset_label]

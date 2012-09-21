@@ -1,7 +1,7 @@
 {% if fieldset.name %}<h2{% if 'collapse' in fieldset.classes %} class="pointer" data-toggle="collapse" data-target="#fieldset-no-{{forloop.counter}}"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% endif %}
 <fieldset id="fieldset-no-{{forloop.counter}}" class="module aligned {{ fieldset.classes }}">
     {% if fieldset.description %}
-        <div class="description alert">{{ fieldset.description|safe }}</div>
+        <div class="description alert alert-info">{{ fieldset.description|safe }}</div>
     {% endif %}
     {% for line in fieldset %}
         <div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">

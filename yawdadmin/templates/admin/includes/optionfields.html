@@ -1,0 +1,30 @@
+		<div class="row-fluid">	
+			{% for field in fieldset %}
+				<div class="row-fluid color-form {% cycle 'row1' 'row2' %}">
+					<div class="field">
+		                <div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
+							<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
+							<div class="controls">
+								{% if field.is_readonly %}
+									<span><i>{{ field.contents }}</i></span>
+								{% elif field.is_checkbox %}
+									<span class="switch">
+										{{field}}
+										<span class="switch-track"></span>
+										<span class="switch-thumb"></span>
+									</span>
+								{% else %}
+									{{ field }}
+								{% endif %}
+								{% if field.help_text %}
+									<i class="help icon-question-sign" title="{{ field.field.help_text|safe }}"></i>
+								{% endif %}
+								{% if not field.is_readonly and field.errors %}
+									<span class="help-inline">{{ field.errors }}</span>
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+            {% endfor %}
+		</div>

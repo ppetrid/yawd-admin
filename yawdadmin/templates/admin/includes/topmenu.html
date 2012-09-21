@@ -91,7 +91,7 @@
 							</ul>
                 		</li>
                 	{% endfor %}
-                	{% if option_app_labels %}
+                	{% if optionset_labels %}
                 		<li class="dropdown">
                 			<a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 				<i class="icon-cog"></i>
@@ -99,8 +99,8 @@
                 				<b class="caret"></b>
                 			</a>
                 			<ul class="dropdown-menu">
-                			{% for label in option_app_labels %}
-								<li><a href="{{label.url}}">{{label.app_label}}</a></li>
+                			{% for label in optionset_labels %}
+								<li><a href="{{label.url}}">{{label.optionset_label}}</a></li>
 							{% endfor %}
                 			</ul>
                 		</li>

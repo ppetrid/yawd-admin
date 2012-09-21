@@ -2,12 +2,25 @@
 {% load i18n %}
 
 {% block extrahead %}{{ block.super }}
-{{form.media}}
+{{optionset_admin.form.media}}
 <script>
 	(function($){ 
 		$(document).ready( function() {
 			$('.help').tooltip();
+
+			var ul = $('#language-codes');
+			ul.append(ul.children('li').detach().sort(function(a, b) {
+				return a.children[0].text > b.children[0].text;
+			}));
+
+			$('#fieldset-tabs a').click(function (e) {
+				 e.preventDefault();
+				 $(this).tab('show');
+			});
+			
+			$('#fieldset-tabs a:first').tab('show');
 		});
+
 	})(yawdadmin.jQuery);
 </script>
 {% endblock %}
@@ -32,47 +45,44 @@
 		{% endif %}
 		
 		<div class="row-fluid">
-			{% if errors %}
+			{% if optionset_admin.form.errors %}
     			<span class="span12 alert alert-error">
     				<button type="button" class="close" data-dismiss="alert">×</button>
     				{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
     				{{ form.non_field_errors }}
     			</span>	
 			{% endif %}
-			
-			{% for field in form %}
-				<div class="row-fluid color-form {% cycle 'row1' 'row2' %}">
-					<div class="field">
-		                <div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
-							<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
-							<div class="controls">
-								{% if field.is_readonly %}
-									<span><i>{{ field.contents }}</i></span>
-								{% elif field.is_checkbox %}
-									<span class="switch">
-										{{field}}
-										<span class="switch-track"></span>
-										<span class="switch-thumb"></span>
-									</span>
-								{% else %}
-									{{ field }}
-								{% endif %}
-								{% if field.help_text %}
-									<i class="help icon-question-sign" title="{{ field.field.help_text|safe }}"></i>
-								{% endif %}
-								{% if line.fields|length_is:'1' and not field.is_readonly and field.errors %}
-									<span class="help-inline">{{ field.errors }}</span>
-								{% endif %}
-							</div>
-						</div>
-					</div>
+		</div>
+		
+		<fieldset>
+		{% with fieldset=optionset_admin.formfields %}
+		{% include "admin/includes/optionfields.html" %}
+		{% endwith %}
+		
+		<div id="fieldset-tabs">
+			<h2>{% trans "Translatable options" %}</h2>
+			<ul id="language-codes" class="nav nav-tabs">
+			{% for fieldsetname, fieldset in optionset_admin.langformfields.items %}
+				<li>
+					<a href="#langtab-{{ forloop.counter0 }}">
+						{% get_language_info for fieldsetname as lang %}
+						{{lang.name}}
+					</a>
+				</li>
+			{% endfor %}
+			</ul>
+			<div class="tab-content">
+			{% for fieldsetname, fieldset in optionset_admin.langformfields.items %}
+				<div class="tab-pane" id="langtab-{{ forloop.counter0 }}">
+				{% include "admin/includes/optionfields.html" %}
 				</div>
-            {% endfor %}
+			{% endfor %}
+			</div>
+		</div>
 
-			<div class="row-fluid submits">
-				<div class="pull-right">
-					<input type="submit" value="{% trans 'Save' %}" class="default btn btn-small btn-success" name="_save" {{ onclick_attrib }}/>
-				</div>
+		<div class="row-fluid submits">
+			<div class="pull-right">
+				<input type="submit" value="{% trans 'Save' %}" class="default btn btn-small btn-success" name="_save" {{ onclick_attrib }}/>
 			</div>
 		</div>
 	</form>
