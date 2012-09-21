@@ -111,7 +111,10 @@ class YawdAdminSite(AdminSite):
         """
         global _optionset_labels
         if not optionset_admin.optionset_label in _optionset_labels:
+            #Add admin optionset to the registry
             _optionset_labels[optionset_admin.optionset_label] = optionset_admin
+            #Initialize options
+            optionset_admin()
     
     def unregister_options(self, optionset_admin):
         optionset_label = optionset_admin.optionset_label
