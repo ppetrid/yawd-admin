@@ -134,7 +134,10 @@ class OptionSetAdmin(object):
                     lang_field.label = '%s (%s)' % (lang_field.label, lang.upper())
                     
                     self.form.fields[field_name] = lang_field
-                    self.form.fields[field_name].initial = self.value_dict[attr][lang]
+                    try:
+                        self.form.fields[field_name].initial = self.value_dict[attr][lang]
+                    except KeyError:
+                        self.form.fields[field_name].initial = ''
                     
                     #add to land dependant options
                     self.lang_options[field_name] = (attr, lang)

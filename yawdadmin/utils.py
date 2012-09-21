@@ -47,8 +47,10 @@ def get_option_value(optionset_admin, db_option, current_only):
 
     if not db_option.lang_dependant:
         return field.to_python(db_option.value) if db_option.value else '' 
-    
-    value_dict = json.loads(db_option.value)
+
+    value_dict = {}
+    for key, value in json.loads(db_option.value).items():
+        value_dict[smart_str(key)] = value
 
     if current_only:
         curr_lang = get_language()

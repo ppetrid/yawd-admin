@@ -59,6 +59,7 @@
 		{% include "admin/includes/optionfields.html" %}
 		{% endwith %}
 		
+		{% if optionset_admin.langformfields %}
 		<div id="fieldset-tabs">
 			<h2>{% trans "Translatable options" %}</h2>
 			<ul id="language-codes" class="nav nav-tabs">
@@ -79,6 +80,7 @@
 			{% endfor %}
 			</div>
 		</div>
+		{% endif %}
 
 		<div class="row-fluid submits">
 			<div class="pull-right">
