@@ -7,7 +7,7 @@
 <div class="results">
 <table cellspacing="0" id="result_list" class="table table-bordered table-striped">
 <thead>
-<tr>
+<tr class="navbar-inner">
 {% for header in result_headers %}<th scope="col"{{ header.class_attrib }}>
 {% if header.sortable %}<a href="{{ header.url }}">{% endif %}
 {{ header.text|capfirst }}

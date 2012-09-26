@@ -7,13 +7,7 @@ th {
 }
 
 thead th {
-	background-color: #3993ba;
-	color: #ddd;
 	font-weight: bold !important;
-}
-
-thead th a {
-	color: #fff !important;
 }
 
 .help-inline ul, .alert-error ul, .alert-success ul {
@@ -63,8 +57,32 @@ thead th a {
 	margin: auto;
 }
 
+.processing-item {
+	background: url('../img/processing.png') 0px 0px no-repeat;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
 .history-item {
 	background: url('../img/database.png') 0px 0px no-repeat;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
+.fancy-globe-item {
+	background: url('../img/fancy-globe.png') 0px 0px no-repeat;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
+.globe-item {
+	background: url('../img/globe.png') 0px 0px no-repeat;
 	width: 32px;
 	height: 32px;
 	display: block;
