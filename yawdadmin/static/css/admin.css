@@ -212,3 +212,14 @@ table.elfinder-info-tb tr {
 .elfinder-info-title {
 	line-height: normal;
 }
+
+/* Form field classes */
+
+.tinymce {
+	width: 80%;
+}
+
+.textarea-medium {
+	width: 50%;
+	height: 80px;
+}
