@@ -1,9 +1,7 @@
 {% extends "admin/base_site.html" %}
-{% load i18n %}
+{% load i18n yawdadmin_filters %}
 
 {% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/dashboard.css" />{% endblock %}
-
-{% block coltype %}colMS{% endblock %}
 
 {% block bodyclass %}dashboard{% endblock %}
 
@@ -12,7 +10,11 @@
 {% block content %}
 <div id="content-main">
 {% if app_list %}
+	{% with sep=app_list|length|divide:2 %}
+	<div class="row-fluid">
+		<div class="span6">
 	{% for app in app_list %}
+		{% if forloop.counter0 == sep %}</div><div class="span6">{% endif %}
 		<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
 			<thead>
 				<tr class="navbar-inner">
@@ -48,6 +50,9 @@
 			</tbody>
 		</table>
     {% endfor %}
+    	</div>
+    </div>
+    {% endwith %}
 {% else %}
     <p class="alert">{% trans "You don't have permission to edit anything." %}</p>
 {% endif %}

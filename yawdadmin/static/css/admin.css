@@ -2,6 +2,11 @@ body.dashboard, body.change-list, body.change-form {
 	padding: 25px 0 0 0;
 }
 
+.container-fluid {
+	max-width: 1400px !important;
+	margin: auto;
+}
+
 th {
 	font-weight: normal !important;
 }
