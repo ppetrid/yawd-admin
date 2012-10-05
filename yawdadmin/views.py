@@ -7,8 +7,8 @@ class AppOptionView(TemplateView):
     
     def get_form_kwargs(self):
         """
-        Returns the keyword arguments for instanciating the 
-        form. Copied form the generic FormClass View
+        Returns the keyword arguments for instantiating the 
+        form. Copied form the generic FormView class-based view
         """
         kwargs = {}
         if self.request.method in ('POST', 'PUT'):

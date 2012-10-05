@@ -1,11 +1,13 @@
 {% extends "admin/change_form.html" %}{% load i18n %}
 
 {% block object-tools-items %}
+{% if perms.translations.view_translations %}
 <div class="span2">
 	<a href="messages/" class="big-button">
 		<i class="fancy-globe-item"></i>
 		{% trans "Translate messages" %}
 	</a>
 </div>
+{% endif %}
 {{block.super}}
 {% endblock %}
