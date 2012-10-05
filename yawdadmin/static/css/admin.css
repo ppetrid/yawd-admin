@@ -10,7 +10,7 @@ thead th {
 	font-weight: bold !important;
 }
 
-.help-inline ul, .alert-error ul, .alert-success ul {
+.help-inline ul, .alert-error ul, .alert-success ul, .messagelist {
 	list-style: none;
 	padding: 0;
 	margin: 0;
@@ -38,7 +38,7 @@ thead th {
 }
 
 .main {
-	padding: 40px 40px 10px 40px;
+	padding-top: 40px;
 }
 
 .table-rounded {
@@ -57,8 +57,24 @@ thead th {
 	margin: auto;
 }
 
+.loading-item {
+	background: url('../img/ajax-loader.gif') 4px 4px no-repeat transparent;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
 .processing-item {
 	background: url('../img/processing.png') 0px 0px no-repeat;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
+.reload-item {
+	background: url('../img/reload.png') 0px 0px no-repeat;
 	width: 32px;
 	height: 32px;
 	display: block;
@@ -222,4 +238,10 @@ table.elfinder-info-tb tr {
 .textarea-medium {
 	width: 50%;
 	height: 80px;
+}
+
+.textarea-full {
+	width: 98%;
+	padding: 1% !important;
+	height: 400px;
 }
