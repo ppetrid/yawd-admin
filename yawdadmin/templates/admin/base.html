@@ -8,7 +8,6 @@
 		<link rel="stylesheet" type="text/css" href="{% static "css/admin.css" %}" />
 		<!-- <link rel="stylesheet" type="text/css" href="{% static "css/switch.css" %}" />  -->
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,greek-ext,cyrillic-ext,greek,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
-		<!-- <link rel="stylesheet" type="text/css" href="/admins/css/rewrite.css" /> -->
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
 		<script src="{% static "js/bootstrap.js" %}"></script>
         {% block extrastyle %}{% endblock %}
@@ -27,7 +26,7 @@
         {% endif %}
         
         {% block mainbody %}
-        <div class="main {% block coltype %}colM{% endblock %}">
+        <div class="container-fluid main">
             
             {% block breadcrumbs %}
             <ul class="breadcrumb">
@@ -37,24 +36,22 @@
             {% endblock %}
             
             {% if messages %}
-            <div class="alert alert-success">
-				<button type="button" class="close" data-dismiss="alert">×</button>
-				<ul class="messagelist">
-                    {% for message in messages %}
-                    <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>
-                        {{ message }}
-                    </li>
-                    {% endfor %}
-                </ul>
-            </div>
+			<ul class="messagelist">
+				{% for message in messages %}
+				<li class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+					<button type="button" class="close" data-dismiss="alert">×</button>
+					{{ message }}
+				</li>
+				{% endfor %}
+			</ul>
             {% endif %}
 
             {% block pretitle %}{% endblock %}
             {% block content_title %}
                 {% if title %}
-                <div class="page-header">
+                <header class="page-header">
                     <h1>{{ title }}</h1>
-                </div>
+                </header>
                 {% endif %}
             {% endblock %}
             {% block fullextra %}
