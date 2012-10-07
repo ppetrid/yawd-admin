@@ -9,69 +9,32 @@
 		<!-- <link rel="stylesheet" type="text/css" href="{% static "css/switch.css" %}" />  -->
 		<link href='http://fonts.googleapis.com/css?family=Ubuntu+Condensed&subset=latin,greek-ext,cyrillic-ext,greek,latin-ext,cyrillic' rel='stylesheet' type='text/css'>
 		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
-		<script src="{% static "js/bootstrap.js" %}"></script>
-        {% block extrastyle %}{% endblock %}
-        {% block extrahead %}{% endblock %}
-        {% block blockbots %}
-		<meta name="robots" content="NONE,NOARCHIVE" />
-        {% endblock %}
-    </head>
-    {% load i18n %}
-    <body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}dashboard{% endblock %}">
-        {% if not is_popup %}
-        {% if user.is_active and user.is_staff %}
-			{% admin_top_menu %}
-        {% endif %}
-
-        {% endif %}
-        
-        {% block mainbody %}
-        <div class="container-fluid main">
-            
-            {% block breadcrumbs %}
-            <ul class="breadcrumb">
-                <li><a href="/">{% trans 'Home' %}</a> <span class="divider">/</span></li>
-                <li class="active">{% if title %} {{ title }}{% endif %}</li>
-            </ul>
-            {% endblock %}
-            
-            {% if messages %}
-			<ul class="messagelist">
-				{% for message in messages %}
+		<script src="{% static "js/bootstrap.js" %}"></script>{% block extrastyle %}{% endblock %}{% block extrahead %}{% endblock %}{% block blockbots %}
+		<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
+	</head>
+	<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}dashboard{% endblock %}">{% if not is_popup %}{% if user.is_active and user.is_staff %}
+		{% admin_top_menu %}{% endif %}{% endif %}{% block mainbody %}
+		<div class="container-fluid main">{% block breadcrumbs %}
+			<ul class="breadcrumb">
+				<li><a href="/">{% trans 'Home' %}</a> <span class="divider">/</span></li>
+				<li class="active">{% if title %} {{ title }}{% endif %}</li>
+			</ul>{% endblock %}{% if messages %}
+			<ul class="messagelist">{% for message in messages %}
 				<li class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
 					<button type="button" class="close" data-dismiss="alert">×</button>
 					{{ message }}
-				</li>
-				{% endfor %}
-			</ul>
-            {% endif %}
-
-            {% block pretitle %}{% endblock %}
-            {% block content_title %}
-                {% if title %}
-                <header class="page-header">
-                    <h1>{{ title }}</h1>
-                </header>
-                {% endif %}
-            {% endblock %}
-            {% block fullextra %}
-            	{% block object-tools %}{% endblock %}
-            {% endblock %}
-            {% block main-struct %}
-            <div class="row-fluid show-grid">
-                <div class="span9">
-                    {% block content %}
-                        {{ content }}
-                    {% endblock %}
-                </div>
-                <div class="span3">
-                    {% block sidebar %}{% endblock %}
-                </div>
-            </div>
-            {% endblock %}
-            
-            {% block footer %}{% endblock %}
-        </div>
-        {% endblock %}
-    </body>
+				</li>{% endfor %}
+			</ul>{% endif %}{% block pretitle %}{% endblock %}{% block content_title %}{% if title %}
+			<header class="page-header">
+				<h1>{{ title }}</h1>
+			</header>{% endif %}{% endblock %}{% block fullextra %}
+            	{% block object-tools %}{% endblock %}{% endblock %}{% block main-struct %}
+			<div class="row-fluid show-grid">
+				<div class="span9">{% block content %}
+					{{ content }}{% endblock %}
+				</div>
+				<div class="span3">{% block sidebar %}{% endblock %}</div>
+			</div>{% endblock %}{% block footer %}{% endblock %}
+		</div>{% endblock %}
+	</body>
 </html>
