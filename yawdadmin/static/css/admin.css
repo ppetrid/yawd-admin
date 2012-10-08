@@ -218,6 +218,15 @@ select[name="action"] {
 	padding: 9px 15px 9px !important;
 }
 
+.mini {
+	font-size: 9px;
+}
+
+.quiet, a.quiet:link, a.quiet:visited {
+	color: #999 !important;
+	font-weight: normal !important;
+}
+
 /* Elfinder overrides to remove boootstrap styling */
 
 table.elfinder-info-tb {
