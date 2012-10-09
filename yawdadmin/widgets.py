@@ -30,7 +30,7 @@ class ContentTypeSelect(forms.Select):
                    '        $(\'#%(fk_id)s\').attr(\'href\',%(id)s_choice_urls[$(this).val()]);'
                    '    });'
                    '  });'
-                   '})(django.jQuery);'
+                   '})(yawdadmin.jQuery);'
                    '</script>' % { 'choiceoutput' : choiceoutput, 
                                     'id' : attrs['id'],
                                     'fk_id' : self.lookup_id
