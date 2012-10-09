@@ -43,21 +43,16 @@
 
 {% block sidebar %}
 					<div class="well">
+						<h3 class="filter-title">{% trans 'Recent Actions' %}</h3>
 						<ul class="nav nav-list">
-							<li class="nav-header">{% filter utfupper %}{% trans 'Recent Actions' %}{% endfilter %}</li>
-							<li class="divider"></li>
-							<li class="nav-header">{% filter utfupper %}{% trans 'My Actions' %}{% endfilter %}</li>
-							<li>
-								{% load log %}
-							</li>
-							{% get_admin_log 10 as admin_log for_user user %}{% if not admin_log %}
+							<li class="nav-header">{% filter utfupper %}{% trans 'My Actions' %}{% endfilter %}</li>{% load log %}{% get_admin_log 10 as admin_log for_user user %}{% if not admin_log %}
 							<li>
 								<p class="tip">{% trans 'None available' %}</p>
 							</li>{% else %}{% for entry in admin_log %}
-							<li class="{% if entry.is_addition %}addlink{% endif %}{% if entry.is_change %}changelink{% endif %}{% if entry.is_deletion %}deletelink{% endif %}">{% if entry.is_deletion or not entry.get_admin_url %}
-								{{ entry.object_repr }}{% else %}
-								<a href="{{ entry.get_admin_url }}">{% if entry.is_addition %}<i class="icon-plus"></i>{% endif %}{% if entry.is_change %}<i class="icon-edit"></i>{% endif %}{{ entry.object_repr }}</a>{% endif %}
-								{% if entry.content_type %}
+							<li>{% if not entry.is_deletion and entry.get_admin_url %}
+								<a class="log-link" href="{{ entry.get_admin_url }}">{% endif %}
+									<i class="icon-{% if entry.is_addition %}plus{% elif entry.is_change %}edit{% elif entry.is_deletion %}remove{% endif %}"></i>{{ entry.object_repr }}{% if not entry.is_deletion and entry.get_admin_url %}
+								</a>{% endif %}{% if entry.content_type %}
 								<span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>{% else %}
 								<span class="mini quiet">{% trans 'Unknown content' %}</span>{% endif %}
 							</li>{% endfor %}{% endif %}

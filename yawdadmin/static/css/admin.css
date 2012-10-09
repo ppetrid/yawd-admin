@@ -218,6 +218,12 @@ select[name="action"] {
 	padding: 9px 15px 9px !important;
 }
 
+.log-link {
+	display: inline-block !important;
+	padding: 4px 5px !important;
+	margin: 0 -4px !important;
+}
+
 .mini {
 	font-size: 9px;
 }
@@ -225,6 +231,11 @@ select[name="action"] {
 .quiet, a.quiet:link, a.quiet:visited {
 	color: #999 !important;
 	font-weight: normal !important;
+}
+
+.filter-title {
+	font-size: 20px;
+	margin: 4px 0;
 }
 
 /* Elfinder overrides to remove bootstrap styling */
