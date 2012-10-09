@@ -227,7 +227,7 @@ select[name="action"] {
 	font-weight: normal !important;
 }
 
-/* Elfinder overrides to remove boootstrap styling */
+/* Elfinder overrides to remove bootstrap styling */
 
 table.elfinder-info-tb {
 	border-spacing: 2px;
@@ -258,4 +258,10 @@ table.elfinder-info-tb tr {
 	width: 98%;
 	padding: 1% !important;
 	height: 400px;
+}
+
+/* Original widget styling */
+
+a.related-lookup:hover {
+	text-decoration: none; 
 }
