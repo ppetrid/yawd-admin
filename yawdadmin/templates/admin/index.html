@@ -44,9 +44,9 @@
 {% block sidebar %}
 					<div class="well">
 						<ul class="nav nav-list">
-							<li class="nav-header">{% trans 'Recent Actions' %}</li>
+							<li class="nav-header">{% filter utfupper %}{% trans 'Recent Actions' %}{% endfilter %}</li>
 							<li class="divider"></li>
-							<li class="nav-header">{% trans 'My Actions' %}</li>
+							<li class="nav-header">{% filter utfupper %}{% trans 'My Actions' %}{% endfilter %}</li>
 							<li>
 								{% load log %}
 							</li>
