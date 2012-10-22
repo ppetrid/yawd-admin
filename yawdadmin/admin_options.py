@@ -53,9 +53,9 @@ class OptionSetBase(type):
         if not optionset_label or not re.match(r'[a-zA-z-]+', optionset_label):
             raise TypeError("optionset_label must be set and contain only letters and underscores")
         
-        # Because of the way imports happen (recursively), we may or may not be
-        # the first time this model tries to register with the framework. There
-        # should only be one class for each OptionSetAdmin.
+        # Because of the way imports happen (recursively), it may or may not be
+        # the first time this model tries to register with the framework. 
+        # There should only be one class for each OptionSetAdmin.
         global _optionsetadmin_classes
         if optionset_label in _optionsetadmin_classes:
             return _optionsetadmin_classes[optionset_label]
@@ -111,7 +111,6 @@ def _init_option(optionset_label, name, siteoption):
     
 class OptionSetAdmin(object):
     __metaclass__ = OptionSetBase
-    optionset_label = '' 
     
     def __init__(self, **kwargs):
         self.form = forms.Form(**kwargs)
