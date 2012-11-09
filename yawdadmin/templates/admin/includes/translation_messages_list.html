@@ -1,0 +1,34 @@
+{% load i18n %}{% if not warning %}
+<div id="update-alert" class="alert hide"><i class="icon-exclamation-sign"></i> {% trans "Are you sure you want to regenerate the messages? This will override your changes. " %} <strong class="do-regenerate pointer">{% trans "Yes" %}</strong></a> | <strong class="cancel-regenerate pointer">{% trans "No" %}</strong></a></div>
+{% endif %}
+{% if error %}
+<div class="alert alert-error">
+	<i class="icon-exclamation-sign"></i>
+	{{ error|safe }}
+</div>
+{% else %}
+	{% if warning %}
+	<div class="alert">
+		<i class="icon-exclamation-sign"></i>
+		{{ warning|safe }}
+	</div>
+	{% endif %}
+	{% if lang_files %}
+		<h2>{% trans "Available files" %}</h2>
+		<table class="table table-bordered table-striped">
+		{% for lang_file in lang_files %}
+		<tr>
+			<td>{{lang_file}}</td>
+			<td>
+				{% if perms.translations.edit_translations %}
+				<a class="btn btn-mini btn-info" href="{{lang_file}}">
+					{% trans 'Edit'%}
+					<i class="icon-edit icon-white"></i>
+				</a>
+				{% endif %}
+			</td>
+		</tr>
+		{% endfor %}
+		</table>
+	{% endif %}
+{% endif %}

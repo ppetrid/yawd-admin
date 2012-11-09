@@ -1,0 +1,74 @@
+{% load i18n %}
+<div id="{{ inline_admin_formset.formset.prefix }}-group">
+  <h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
+{{ inline_admin_formset.formset.management_form }}
+{% if inline_admin_formset.formset.non_form_errors %}
+	<div class="alert alert-error">
+		{{ inline_admin_formset.formset.non_form_errors }}
+	</div>
+{% endif %}
+
+
+{% if not inline_admin_formset.formset.initial_forms.0.initial.language and not inline_admin_formset.formset.extra_forms.0.initial.language %}
+	<div class="alert alert-error">
+		<i class="icon-exclamation-sign"></i>
+		<strong>{% trans "Warning!" %}</strong>
+		{% trans "Please set at least one language to manage translatable objects." %}
+	</div>
+{% else %}
+	<div id="{{ inline_admin_formset.formset.prefix }}-tabs">
+		<ul id="language-codes" class="nav nav-tabs">
+			{% for inline_admin_form in inline_admin_formset %}
+				{% if not forloop.last %}
+				<li>
+					<a{% with index=forloop.counter|stringformat:"s" %}{% if inline_admin_formset.formset.errors|slice:index|last %} class="alert-error"{% endif %}{% endwith %} href="#{{ inline_admin_formset.formset.prefix }}-{{ forloop.counter0 }}">
+				
+					{% if inline_admin_form.original %}
+						{% get_language_info for inline_admin_form.original.language_id as lang %}
+					{% else %}
+						{% get_language_info for inline_admin_form.form.initial.language as lang %}
+					{% endif %}
+					{{lang.name}}
+					</a>
+				</li>
+		{% endif %}{% endfor %}
+		</ul>
+	
+		<div class="tab-content">
+			{% for inline_admin_form in inline_admin_formset %}
+				{% if not forloop.last %}
+					<div class="tab-pane" id="{{ inline_admin_formset.formset.prefix }}-{{ forloop.counter0 }}">
+					{% if inline_admin_form.form.non_field_errors %}
+						<div class="alert alert-error">{{ inline_admin_form.form.non_field_errors }}</div>
+					{% endif %}
+					{% for fieldset in inline_admin_form %}
+						{% include "admin/includes/fieldset-with-hidden-language.html" %}
+					{% endfor %}
+					{% if inline_admin_form.has_auto_field %}
+						{{ inline_admin_form.pk_field.field }}
+					{% endif %}
+					{{ inline_admin_form.fk_field.field }}
+					</div>
+				{% endif %}
+			{% endfor %}
+		</div>
+	</div>
+	
+	<script>
+		(function($) {
+			var ul = $("#language-codes");
+			ul.append(ul.children("li").detach().sort(function(a, b) {
+				return a.children[0].text > b.children[0].text;
+			}));
+	
+			$('#{{ inline_admin_formset.formset.prefix }}-tabs a').click(function (e) {
+				  e.preventDefault();
+				  $(this).tab('show');
+			});
+			
+			$('#{{ inline_admin_formset.formset.prefix }}-tabs a:first').tab('show');
+	
+		})(yawdadmin.jQuery);
+	</script>
+{% endif %}
+</div>

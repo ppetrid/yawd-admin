@@ -22,7 +22,7 @@ class ContentTypeSelect(forms.Select):
                 pass
         choiceoutput += '};'
         
-        output += ('<script type="text/javascript">'
+        output += ('<script>'
                    '(function($) {'
                    '  $(document).ready( function() {'
                    '%(choiceoutput)s'

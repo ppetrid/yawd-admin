@@ -1,0 +1,93 @@
+{% extends "admin/base_site.html" %}{% load i18n %}
+
+{% block extrahead %}{% if perms.translations.edit_translations %}
+<script>
+(function($) {
+	
+	var call_and_update = function(el) {
+
+		var i = el.find('i');
+		var class_ = i.attr("class");
+		
+		i.removeClass(class_).addClass('loading-item');
+		
+		$.get(el.attr('href'), function(data) {
+			i.removeClass('loading-item').addClass(class_);
+			$('#content-main').html(data);
+		});
+	}
+	
+	$(document).ready( function() {
+		$('#update-messages').click(function() {	
+			call_and_update($(this));
+			return false;
+		});
+		
+		{% if not warning %}
+		$('#generate-messages').click(function() {
+			$('#update-alert').show();
+			return false;
+		});
+		
+		$('#content-main').on({ 
+			click : function() {
+				$('#update-alert').hide();
+			}
+		}, '.cancel-regenerate');
+		
+		$('#content-main').on({ 
+			click : function() {
+				$('#update-alert').hide();
+				call_and_update($('#generate-messages'));
+			}
+		}, '.do-regenerate');
+		{% endif %}
+	});
+})(yawdadmin.jQuery);
+</script>
+{% endif %}{% endblock %}
+
+{% block breadcrumbs %}
+<ul class="breadcrumb">
+    <li><a href="../../../../">{% trans 'Home' %}</a> <span class="divider">/</span></li>
+    <li><a href="../../../">{{ app_label|capfirst }}</a> <span class="divider">/</span></li>
+    <li><a href="../../">{{ module_name }}</a> <span class="divider">/</span></li>
+    <li><a href="../">{{ language }}</a> <span class="divider">/</span></li>
+    <li class="active">{{title}}</li>
+</ul>
+{% endblock %}
+
+{% block object-tools %}
+	{% if not error %}
+	<div class="row-fluid nav">
+		{% block object-tools-items %}
+			{% if perms.translations.edit_translations %}
+				<div class="span2">
+					<a id="{% if warning %}update-messages{% else %}generate-messages{% endif %}" href="generate/{% if not warning %}?delete=1{% endif %}" class="big-button">
+						<i class="processing-item"></i>
+						{% if warning %}
+						{% trans "Generate messages" %}
+						{% else %}
+						{% trans "Regenerate messages" %}
+						{% endif %}
+					</a>
+				</div>
+				{% if not warning %}
+				<div class="span2">
+					<a id="update-messages" href="generate/" class="big-button">
+						<i class="reload-item"></i>
+						{% trans "Update messages" %}
+					</a>
+				</div>
+				{% endif %}
+			{% endif %}
+    	{% endblock %}
+	</div>
+	{% endif %}
+{% endblock %}
+
+{% block main-struct %}
+	<section id="content-main">
+	{% include "admin/includes/translation_messages_list.html" %}
+	</section>
+{% endblock %}
