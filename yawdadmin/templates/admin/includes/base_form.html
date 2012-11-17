@@ -1,26 +1,22 @@
-{% load i18n %}
-   	{% if form.errors or form.non_field_errors %}
-	<div class="row-fluid">
- 		<span class="span12 alert alert-error">
-			<button type="button" class="close" data-dismiss="alert">×</button>
-			{% blocktrans count form.non_field_errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
-			{{ form.non_field_errors }}
-		</span>
-	</div>
-	{% endif %}
-	{% for field in form %}
-	<div class="row-fluid color-form {% cycle 'row1' 'row2' %}">
-		<div class="span12 field control-group{% if field.errors %} error{% endif %}">
-			<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.auto_id}}">{{ field.label }}:</label>
-			<div class="controls">
-				{{ field }}
-				{% if field.help_text %}
-					<i class="help icon-question-sign" title="{{ field.help_text|safe }}"></i>
-				{% endif %}
-				{% if field.errors %}
-					<span class="help-inline">{{ field.errors }}</span>
-				{% endif %}
-			</div>
-		</div>
-	</div>
-	{% endfor %}
+{% load i18n %}{% if form.errors or form.non_field_errors %}
+					<div class="row-fluid">
+				 		<span class="span12 alert alert-error">
+							<button type="button" class="close" data-dismiss="alert">×</button>
+							{% blocktrans count form.non_field_errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+							{{ form.non_field_errors }}
+						</span>
+					</div>{% endif %}{% for field in form %}
+					<div class="row-fluid color-form {% cycle 'row1' 'row2' %}">
+						<div class="span12 field control-group{% if field.errors %} error{% endif %}">
+							<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.auto_id}}">{{ field.label }}:</label>
+							<div class="controls">
+								{{ field }}
+								{% if field.help_text %}
+									<i class="help icon-question-sign" title="{{ field.help_text|safe }}"></i>
+								{% endif %}
+								{% if field.errors %}
+									<span class="help-inline">{{ field.errors }}</span>
+								{% endif %}
+							</div>
+						</div>
+					</div>{% endfor %}

@@ -1,23 +1,18 @@
-{% extends "admin/base_site.html" %}{% load i18n admin_modify %}
+{% extends "admin/base_site.html" %}{% load i18n admin_modify admin_urls %}{% load url from future %}
 
 {% block breadcrumbs %}
-<ul class="breadcrumb">
-    <li><a href="../../../../../">{% trans 'Home' %}</a> <span class="divider">/</span></li>
-    <li><a href="../../../../">{{ app_label|capfirst }}</a> <span class="divider">/</span></li>
-    <li><a href="../../../">{{ module_name }}</a> <span class="divider">/</span></li>
-    <li><a href="../../">{{ language }}</a> <span class="divider">/</span></li>
-    <li><a href="../">{% trans 'Translate Static Messages' %}</a> <span class="divider">/</span></li>
-    <li class="active">{{title}}</li>
-</ul>
-{% endblock %}
+			<ul class="breadcrumb">
+			    <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a> <span class="divider">/</span></li>
+			    <li><a href=".{% url 'admin:app_list' app_label=opts.app_label %}">{{ opts.app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
+			    <li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} <span class="divider">/</span></li>
+			    <li>{% if has_change_object_permission %}<a href="{% url opts|admin_urlname:'change' language.pk %}">{{ language }}</a>{% else %}{{ language }}{% endif %} <span class="divider">/</span></li>
+			    <li>{% if perms.translations.view_translations %}<a href="{% url 'admin:translations-messages-view' language.pk %}">{% trans 'Translate Static Messages' %}</a>{% else %}{% trans 'Translate Static Messages' %}{% endif %} <span class="divider">/</span></li>
+			    <li class="active">{{title}}</li>
+			</ul>{% endblock %}
 
-{% block main-struct %}
-	<section id="content-main">
-			{% comment %}<div class="alert">{% trans 'Translate and save the following messages.' %}</div>{% endcomment %}
-			<form class="form-horizontal form-inline" action="" method="post" >
-				{% csrf_token %}
-				{% include 'admin/includes/base_form.html' %}
-				{% submit_row %}
-			</form>
-	</section>
-{% endblock %}
+{% block main-struct %}	<section id="content-main">{% comment %}
+				<div class="alert">{% trans 'Translate and save the following messages.' %}</div>{% endcomment %}
+				<form class="form-horizontal form-inline" action="" method="post" >
+					{% csrf_token %}{% include 'admin/includes/base_form.html' %}{% submit_row %}
+				</form>
+			</section>{% endblock %}

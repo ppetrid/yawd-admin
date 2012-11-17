@@ -1,41 +1,27 @@
 {% if fieldset.name %}<h2{% if 'collapse' in fieldset.classes %} class="pointer" data-toggle="collapse" data-target="#fieldset-no-{{forloop.counter}}"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% endif %}
-<fieldset id="fieldset-no-{{forloop.counter}}" class="module aligned {{ fieldset.classes }}">
-    {% if fieldset.description %}
-        <div class="description alert">{{ fieldset.description|safe }}</div>
-    {% endif %}
-    {% for line in fieldset %}
-        <div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
-        	<div class="field">
-        	{% if not line.fields|length_is:'1' and line.errors %}
-    			<div class="alert alert-error">
-    				{{ line.errors }}
-    			</div>
-    		{% endif %}
-            {% for field in line %}
-                <div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
-					<label class="control-label{% if field.field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
-					<div class="controls">
-						{% if field.is_readonly %}
-							<span><i>{{ field.contents }}</i></span>
-						{% elif field.is_checkbox %}
-							<span class="switch">
-								{{field.field}}
-								<span class="switch-track"></span>
-								<span class="switch-thumb"></span>
-							</span>
-						{% else %}
-							{{ field.field }}
-						{% endif %}
-						{% if field.field.help_text %}
-							<i class="help icon-question-sign" title="{{ field.field.help_text|safe }}"></i>
-						{% endif %}
-						{% if line.fields|length_is:'1' and not field.is_readonly and field.errors %}
-							<span class="help-inline">{{ field.errors }}</span>
-						{% endif %}
-					</div>
-				</div>
-            {% endfor %}
-        </div>
-    </div>
-    {% endfor %}
-</fieldset>
+						<fieldset id="fieldset-no-{{forloop.counter}}" class="module aligned {{ fieldset.classes }}">{% if fieldset.description %}
+							<div class="description alert">
+								{{ fieldset.description|safe }}
+							</div>{% endif %}{% for line in fieldset %}
+							<div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
+								<div class="field">{% if not line.fields|length_is:'1' and line.errors %}
+									<div class="alert alert-error">
+										{{ line.errors }}
+									</div>{% endif %}{% for field in line %}
+									<div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
+										<label class="control-label{% if field.field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
+										<div class="controls">{% if field.is_readonly %}
+											<span><i>{{ field.contents }}</i></span>{% elif field.is_checkbox %}
+											<span class="switch">
+												{{field.field}}
+												<span class="switch-track"></span>
+												<span class="switch-thumb"></span>
+											</span>{% else %}
+											{{ field.field }}{% endif %}{% if field.field.help_text %}
+											<i class="help icon-question-sign" title="{{ field.field.help_text|safe }}"></i>{% endif %}{% if line.fields|length_is:'1' and not field.is_readonly and field.errors %}
+											<span class="help-inline">{{ field.errors }}</span>{% endif %}
+										</div>
+									</div>{% endfor %}
+								</div>
+							</div>{% endfor %}
+						</fieldset>

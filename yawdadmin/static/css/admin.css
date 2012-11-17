@@ -3,6 +3,10 @@
 	margin: auto;
 }
 
+h1, h2, h3, h4, h5, h6 {
+	font-family: 'Ubuntu Condensed', Arial, sans-serif;
+}
+
 th {
 	font-weight: normal !important;
 }
@@ -217,7 +221,7 @@ select[name="action"] {
 }
 
 .lang-switcher {
-	padding: 9px 15px 9px !important;
+	padding: 4px 15px 4px !important;
 }
 
 .log-link {

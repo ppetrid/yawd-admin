@@ -2,91 +2,59 @@
 {% load i18n admin_modify adminmedia admin_static %}
 {% load url from future %}
 
-{% block extrahead %}{{ block.super }}
-{% url 'admin:jsi18n' as jsi18nurl %}
-<script src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
-{{ media }}
-<script>
-	(function($){ 
-		$(document).ready( function() {
-			$('.help').tooltip();
-		});
-	})(yawdadmin.jQuery);
-</script>
-{% endblock %}
+{% block extrahead %}{{ block.super }}{% url 'admin:jsi18n' as jsi18nurl %}
+		<script src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
+		{{ media }}
+		<script>
+			(function($){ 
+				$(document).ready( function() {
+					$('.help').tooltip();
+				});
+			})(yawdadmin.jQuery);
+		</script>{% endblock %}
 
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
 
 {% block breadcrumbs %}{% if not is_popup %}
-<ul class="breadcrumb">
-    <li><a href="../../../">{% trans "Home" %}</a> <span class="divider">/</span></li>
-    <li><a href="../../">{{ app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
-    {% if has_change_permission %}<li><a href="../">{{ opts.verbose_name_plural|capfirst }}</a> <span class="divider">/</span></li>{% else %}
-    <li class="active">{{ opts.verbose_name_plural|capfirst }}</li>{% endif %}
-    {% if add %}<li class="active">{% trans "Add" %} {{ opts.verbose_name }}</li>{% else %}
-    <li class="active">{{ original|truncatewords:"18" }}</li>{% endif %}
-</ul>
-{% endif %}{% endblock %}
+			<ul class="breadcrumb">
+			    <li><a href="../../../">{% trans "Home" %}</a> <span class="divider">/</span></li>
+			    <li><a href="../../">{{ app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
+			    <li>{% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} <span class="divider">/</span></li>
+			    <li class="active">{% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
+			</ul>{% endif %}{% endblock %}
 
-{% block object-tools %}
-	{% if change and not is_popup %}
-	<div class="row-fluid nav">
-		{% block object-tools-items %}
-			<div class="span2">
-				<a href="history/" class="big-button">
-					<i class="history-item"></i>
-					{% trans "History" %}
-				</a>
-			</div>
-			{% if has_absolute_url %}
-			<div class="span2">
-				<a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="big-button">
-					<i class="preview-item"></i>
-					{% trans "View on site" %}
-				</a>
-			</div>
-			{% endif %}
-    	{% endblock %}
-	</div>
-	{% endif %}
-{% endblock %}
+{% block object-tools %}{% if change and not is_popup %}	<div class="row-fluid nav">{% block object-tools-items %}
+				<div class="span2">
+					<a href="history/" class="big-button">
+						<i class="history-item"></i> {% trans "History" %}
+					</a>
+				</div>{% if has_absolute_url %}
+				<div class="span2">
+					<a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="big-button">
+						<i class="preview-item"></i> {% trans "View on site" %}
+					</a>
+				</div>{% endif %}{% endblock %}
+			</div>{% endif %}{% endblock %}
 
 {% block main-struct %}
-<div id="content-main">
-	<form class="form-horizontal form-inline" {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
-		{% if save_on_top %}{% submit_row %}{% endif %}
-		<div class="row-fluid">
-			{% if is_popup %}<input type="hidden" name="_popup" value="1" />{% endif %}
-			{% if errors %}
-    			<span class="span12 alert alert-error">
-    				<button type="button" class="close" data-dismiss="alert">×</button>
-    				{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
-    				{{ adminform.form.non_field_errors }}
-    			</span>
-			{% endif %}
-			
-			{% for fieldset in adminform %}
-				{% include "admin/includes/fieldset.html" %}
-			{% endfor %}
-			
-			{% block after_field_sets %}{% endblock %}
-			
-			{% for inline_admin_formset in inline_admin_formsets %}
-				{% include inline_admin_formset.opts.template %}
-			{% endfor %}
-			
-			{% block after_related_objects %}{% endblock %}
-
-			{% submit_row %}
-
-			{% if adminform and add %}
-				<script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>
-			{% endif %}
-
-			{# JavaScript for prepopulated fields #}
-			{% prepopulated_fields_js %}
-
-		</div>
-	</form>
-</div>
-{% endblock %}
+			<div id="content-main">
+				<form class="form-horizontal form-inline" {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">
+					{% csrf_token %}{% block form_top %}{% endblock %}{% if save_on_top %}{% submit_row %}{% endif %}
+					<div class="row-fluid">{% if is_popup %}
+						<input type="hidden" name="_popup" value="1" />{% endif %}{% if errors %}
+			    		<span class="span12 alert alert-error">
+			    			<button type="button" class="close" data-dismiss="alert">×</button>
+			    			{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+			    			{{ adminform.form.non_field_errors }}
+			    		</span>{% endif %}{% for fieldset in adminform %}
+						{% include "admin/includes/fieldset.html" %}{% endfor %}
+						{% block after_field_sets %}{% endblock %}{% for inline_admin_formset in inline_admin_formsets %}
+						{% include inline_admin_formset.opts.template %}{% endfor %}
+						{% block after_related_objects %}{% endblock %}
+						{% submit_row %}{% if adminform and add %}
+							<script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>{% endif %}
+						{# JavaScript for prepopulated fields #}
+						{% prepopulated_fields_js %}
+					</div>
+				</form>
+			</div>{% endblock %}
