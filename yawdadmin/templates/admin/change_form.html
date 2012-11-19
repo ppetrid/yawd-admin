@@ -1,17 +1,11 @@
 {% extends "admin/base_site.html" %}
-{% load i18n admin_modify adminmedia admin_static %}
+{% load i18n admin_modify adminmedia admin_static yawdadmin_tags %}
 {% load url from future %}
 
 {% block extrahead %}{{ block.super }}{% url 'admin:jsi18n' as jsi18nurl %}
 		<script src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
-		{{ media }}
-		<script>
-			(function($){ 
-				$(document).ready( function() {
-					$('.help').tooltip();
-				});
-			})(yawdadmin.jQuery);
-		</script>{% endblock %}
+		<script src="{% static 'js/yawd-admin.js' %}"></script>
+		{% clean_media media %}{% endblock %}
 
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
 
@@ -47,13 +41,10 @@
 			    			{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
 			    			{{ adminform.form.non_field_errors }}
 			    		</span>{% endif %}{% for fieldset in adminform %}
-						{% include "admin/includes/fieldset.html" %}{% endfor %}
-						{% block after_field_sets %}{% endblock %}{% for inline_admin_formset in inline_admin_formsets %}
-						{% include inline_admin_formset.opts.template %}{% endfor %}
-						{% block after_related_objects %}{% endblock %}
+						{% include "admin/includes/fieldset.html" %}{% endfor %}{% block after_field_sets %}{% endblock %}{% for inline_admin_formset in inline_admin_formsets %}
+						{% include inline_admin_formset.opts.template %}{% endfor %}{% block after_related_objects %}{% endblock %}
 						{% submit_row %}{% if adminform and add %}
-							<script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>{% endif %}
-						{# JavaScript for prepopulated fields #}
+						<script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>{% endif %}
 						{% prepopulated_fields_js %}
 					</div>
 				</form>

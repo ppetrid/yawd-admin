@@ -1,4 +1,4 @@
-{% if fieldset.name %}<h2{% if 'collapse' in fieldset.classes %} class="pointer" data-toggle="collapse" data-target="#fieldset-no-{{forloop.counter}}"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% endif %}
+{% load i18n %}{% if fieldset.name %}<h2{% if 'collapse' in fieldset.classes %} class="pointer" data-toggle="collapse" data-target="#fieldset-no-{{forloop.counter}}"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% endif %}
 						<fieldset id="fieldset-no-{{forloop.counter}}" class="module aligned {{ fieldset.classes }}">{% if fieldset.description %}
 							<div class="description alert">
 								{{ fieldset.description|safe }}
@@ -18,7 +18,7 @@
 												<span class="switch-thumb"></span>
 											</span>{% else %}
 											{{ field.field }}{% endif %}{% if field.field.help_text %}
-											<i class="help icon-question-sign" title="{{ field.field.help_text|safe }}"></i>{% endif %}{% if line.fields|length_is:'1' and not field.is_readonly and field.errors %}
+											<i class="help icon-question-sign" data-html="true" data-title="{{ field.field.label }} - {% trans 'help text' %}" data-content="{{ field.field.help_text }}"></i>{% endif %}{% if line.fields|length_is:'1' and not field.is_readonly and field.errors %}
 											<span class="help-inline">{{ field.errors }}</span>{% endif %}
 										</div>
 									</div>{% endfor %}

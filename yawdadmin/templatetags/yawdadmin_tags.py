@@ -1,9 +1,12 @@
+import re
 from django import template
+from django.conf import settings
 from django.core import urlresolvers
 from yawdadmin import admin_site
 
 register = template.Library()
 
+@register.inclusion_tag('admin/includes/topmenu.html', takes_context=True)
 def admin_top_menu(context):
     return {
         'top_menu' : admin_site.top_menu(context['request']),
@@ -15,4 +18,9 @@ def admin_top_menu(context):
         'LANGUAGE_CODE' : context['LANGUAGE_CODE'],
         'optionset_labels' : admin_site.get_option_admin_urls() 
     }
-register.inclusion_tag('admin/includes/topmenu.html', takes_context=True)(admin_top_menu)
+
+@register.simple_tag
+def clean_media(media):
+    media._js = [i for i in media._js if not re.match(
+        r'%sadmin/js/(jquery(\.init)?\.)js' % settings.STATIC_URL, i)]
+    return media

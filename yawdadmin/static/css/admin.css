@@ -60,6 +60,12 @@ thead th {
 	border-radius: 4px;
 }
 
+.clearfix {
+	clear: both;
+}
+
+/* OBJECT TOOLS ICONS */
+
 .add-item {
 	background: url('../img/add-item.png') 0px 0px no-repeat;
 	width: 32px;
@@ -124,6 +130,14 @@ thead th {
 	margin: auto;
 }
 
+.configuration-item {
+	background: url('../img/configuration.png') 0px 0px no-repeat;
+	width: 32px;
+	height: 32px;
+	display: block;
+	margin: auto;
+}
+
 .big-button {
 	text-align: center;
 	border: 1px solid #DDD;
@@ -133,7 +147,7 @@ thead th {
 	border-radius: 6px;
 	margin-bottom: 10px;
 	display: block;
-	background: #F9F9F9;
+	background: #0088CC;
 	background: -moz-linear-gradient(top, #F9F9F9 0%, #EFEFEF 100%);
 	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F9F9F9), color-stop(100%,#EFEFEF));
 	background: -webkit-linear-gradient(top, #F9F9F9 0%,#EFEFEF 100%);
@@ -156,9 +170,7 @@ thead th {
 	color: #08c;
 }
 
-.clearfix {
-	clear: both;
-}
+/*  END ICONS */
 
 .actions {
 	padding: 8px !important;
@@ -281,4 +293,179 @@ table.elfinder-info-tb tr {
 
 a.related-lookup:hover {
 	text-decoration: none; 
+}
+
+div#id_password {
+	display: inline;
+}
+
+.selector-available, .selector-chosen {
+	float: left;
+	width: 45%;
+	text-align: center;
+	margin-bottom: 5px;
+}
+
+.selector-available {
+	margin-left: 1%;
+}
+
+.selector-available input, .selector-chosen input {
+	width: 88% !important;
+}
+
+.selector-available select, .selector-chosen select {
+	width: 99%;
+	height: 17.2em;
+}
+
+.selector {
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	background-color: #ddd;
+	overflow: auto;
+}
+
+.selector h2 {
+	line-height: 30px;
+	background-color: #08c;
+	color:  #eee;
+	-webkit-border-radius: 3px;
+	-moz-border-radius: 3px;
+	border-radius: 3px;
+}
+
+.selector ul.selector-chooser {
+	float: left;
+	width: 6%;
+	height: 50px;
+	background: #08c;
+	margin: 11em 1% 0 1%;
+	padding: 10px 0;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	border: 1px solid #06c;
+}
+
+@media (max-width: 455px) {
+	.selector ul.selector-chooser {
+		margin-top: 5px !important;
+		margin-left: 40%;
+	}
+}
+
+.selector-chooser li {
+    margin: 0;
+    padding: 5px;
+    padding-left: 40%;
+    list-style-type: none;
+}
+
+.selector-add, .selector-remove {
+    width: 16px;
+    height: 16px;
+    display: block;
+    text-indent: -3000px;
+    overflow: hidden;
+}
+
+.calendarbox, .clockbox {
+	background-color: #ddd;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+	padding: 5px;
+}
+
+.calendarnav-previous {
+	display: block;
+	position: absolute;
+	top: 8px;
+	left: 10px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.calendarnav-next {
+	display: block;
+	position: absolute;
+	top: 8px;
+	right: 10px;
+	color: #fff;
+	font-weight: bold;
+}
+
+.calendarnav-next:hover, .calendarnav-previous:hover {
+	text-decoration: none;
+	color: #eee;
+}  
+
+.calendar table {
+	margin: auto;
+}
+
+.calendar table caption {
+	background-color: #08c;
+	color: #fff;
+	padding: 3px 0;
+	font-weight: bold;
+}
+
+.clockbox h2 {
+	background-color: #08c;
+	color: #fff;
+	margin-top: 0; 
+	padding: 3px 20px;
+	font-weight: bold;
+	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-size: 14px;
+	line-height: 20px;
+}
+
+.calendar table td {
+	padding: 3px 6px;
+	border: 1px solid #eee;
+	background-color: #fff;
+	text-align: center;
+}
+
+.calendar table td:hover, .timelist li:hover {
+	background-color: #f8f8f8;
+}
+
+.calendar table th {
+	font-weight: bold !important;
+}
+
+.calendar-shortcuts {
+	text-align: center;
+}
+
+.calendar-cancel {
+	margin-bottom: 0;
+	text-align: center;
+}
+
+.calendar-cancel a {
+	color: #444;
+	font-size: .9em;
+}
+
+.calendar-cancel a:hover {
+	text-decoration: none;
+	color: #666;
+}
+
+.timelist {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+}
+
+.timelist li {
+	background-color: #fff;
+	border-bottom: 1px solid #eee;
+	padding: 3px;	
 }

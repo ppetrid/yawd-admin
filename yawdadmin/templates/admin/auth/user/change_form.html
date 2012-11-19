@@ -1,0 +1,13 @@
+{% extends "admin/change_form.html" %}{% load i18n %}
+
+{% block object-tools-items %}
+{% if perms.auth.edit_user %}
+<div class="span2">
+	<a href="password/" class="big-button">
+		<i class="configuration-item"></i>
+		{% trans "Change password" %}
+	</a>
+</div>
+{% endif %}
+{{block.super}}
+{% endblock %}
