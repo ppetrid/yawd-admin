@@ -46,7 +46,8 @@
 			    <li class="active">{{title}}</li>
 			</ul>{% endblock %}
 
-{% block object-tools %}{% if not error %}	<div class="row-fluid nav">{% block object-tools-items %}{% if perms.translations.edit_translations %}
+{% block object-tools %}{% if not error %}
+			<div class="row-fluid nav">{% block object-tools-items %}{% if perms.translations.edit_translations %}
 				<div class="span2">
 					<a id="{% if warning %}update-messages{% else %}generate-messages{% endif %}" href="generate/{% if not warning %}?delete=1{% endif %}" class="big-button">
 						<i class="processing-item"></i>

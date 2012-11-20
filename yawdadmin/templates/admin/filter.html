@@ -1,8 +1,5 @@
-{% load i18n yawdadmin_filters %}
-<ul class="nav nav-list">
-    <li class="nav-header">{% filter utfupper %}{% blocktrans with title as filter_title %} By {{ filter_title }} {% endblocktrans %}{% endfilter %}</li>
-    {% for choice in choices %}
-    <li{% if choice.selected %} class="active"{% endif %}><a href="{{ choice.query_string|iriencode }}">{{ choice.display }}</a></li>
-    {% endfor %}
-    <li class="divider"></li>
-</ul>
+{% load i18n yawdadmin_filters %}<ul class="nav nav-list">
+							<li class="nav-header">{% filter utfupper %}{% blocktrans with title as filter_title %} By {{ filter_title }} {% endblocktrans %}{% endfilter %}</li>{% for choice in choices %}
+							<li{% if choice.selected %} class="active"{% endif %}><a href="{{ choice.query_string|iriencode }}">{{ choice.display }}</a></li>{% endfor %}
+							<li class="divider"></li>
+						</ul>

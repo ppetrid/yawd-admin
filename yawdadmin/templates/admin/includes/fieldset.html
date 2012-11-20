@@ -1,5 +1,5 @@
-{% load i18n %}{% if fieldset.name %}<h2{% if 'collapse' in fieldset.classes %} class="pointer" data-toggle="collapse" data-target="#fieldset-no-{{forloop.counter}}"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% endif %}
-						<fieldset id="fieldset-no-{{forloop.counter}}" class="module aligned {{ fieldset.classes }}">{% if fieldset.description %}
+{% load i18n %}{% if fieldset.name %}<h2{% if 'collapse' in fieldset.classes %} class="pointer" data-toggle="collapse" data-target="#fieldset-no-{{forloop.counter}}"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>
+						{% endif %}<fieldset id="fieldset-no-{{forloop.counter}}" class="module aligned {{ fieldset.classes }}">{% if fieldset.description %}
 							<div class="description alert">
 								{{ fieldset.description|safe }}
 							</div>{% endif %}{% for line in fieldset %}

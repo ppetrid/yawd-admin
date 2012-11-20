@@ -1,79 +1,55 @@
-{% extends "admin/base_site.html" %}
-{% load i18n %}
+{% extends "admin/base_site.html" %}{% load i18n %}
 
 {% block extrastyle %}{{ block.super }}{% endblock %}
-
 {% block bodyclass %}login{% endblock %}
 
-{% block branding %}{% endblock %}
-
-{% block nav-global %}{% endblock %}
-
-{% block content_title %}{% endblock %}
-
-{% block breadcrumbs %}{% endblock %}
-
 {% block mainbody %}
-<section class="hero-unit">
-	<h1>{% trans "Django administration" %}</h1>
-	<p>{% trans "Welcome to the yawd-admin administration page. Please sign in to manage your website." %}</p>
-	<p>
-	{% for lang in langs %}{% get_language_info for lang.name as info %}
-	<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}"><img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /></a>
-	{% endfor %}
-	</p>
-</section>
-<section class="span10 offset1">
-    {% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
-    <p class="alert alert-error">
-    	<button type="button" class="close" data-dismiss="alert">×</button>
-        {% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
-    </p>
-    {% endif %}
-
-    {% if form.non_field_errors or form.this_is_the_login_form.errors %}
-    {% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
-    <p class="alert alert-error">
-    	<button type="button" class="close" data-dismiss="alert">×</button>
-        {{ error }}
-    </p>
-    {% endfor %}
-    {% endif %}
-    <div class="box">
-        <h3 class="title">{% trans 'Sign In' %}</h3>
-        <form class="form-inline pull-left" action="{{ app_path }}" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="this_is_the_login_form" value="1" />
-            <input type="hidden" name="next" value="{{ next }}" />
-            <div class="control-group{% if form.username.errors %} error{% endif %}">
-                {% if not form.this_is_the_login_form.errors %}
-                <label class="control-label required" for="id_username">{% trans 'Username:' %}</label>
-                {% endif %}
-                <div class="controls">
-                	<div class="input-prepend">
-                		<span class="add-on"><i class="icon-user"></i></span>
-                		{{ form.username }}
-                	</div>
-                	{% if form.username.errors %}<span class="help-inline">{{form.username.errors}}</span>{% endif %}
-                </div>
-            </div>
-            <div class="control-group{% if form.password.errors %} error{% endif %}">
-                {% if not form.this_is_the_login_form.errors %}
-                <label class="control-label required" for="id_password">{% trans 'Password:' %}</label>
-                {% endif %}
-                <div class="controls">
-                	<div class="input-prepend">
-                		<span class="add-on"><i class="icon-lock"></i></span>
-                		{{ form.password }}
-                	</div>
-                	{% if form.password.errors %}<span class="help-inline">{{form.password.errors}}</span>{% endif %}
-                </div>
-            </div>
-            <div class="submit-row">
-                <input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary" />
-            </div>
-    </div>
-</section>
-<script type="text/javascript">document.getElementById('id_username').focus()</script>
-</div>
-{% endblock %} 
+		<section class="hero-unit">
+			<h1>{% trans "Django administration" %}</h1>
+			<p>{% trans "Welcome to the yawd-admin administration page. Please sign in to manage your website." %}</p>
+			<p>{% for lang in langs %}{% get_language_info for lang.name as info %}
+				<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}"><img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /></a>{% endfor %}
+			</p>
+		</section>
+		<section class="span10 offset1">{% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
+			<p class="alert alert-error">
+				<button type="button" class="close" data-dismiss="alert">×</button>
+				{% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+			</p>{% endif %}{% if form.non_field_errors or form.this_is_the_login_form.errors %}{% for error in form.non_field_errors|add:form.this_is_the_login_form.errors %}
+			<p class="alert alert-error">
+    			<button type="button" class="close" data-dismiss="alert">×</button>
+				{{ error }}
+			</p>{% endfor %}{% endif %}
+			<div class="box">
+				<h3 class="title">{% trans 'Sign In' %}</h3>
+				<form class="form-inline pull-left" action="{{ app_path }}" method="post">
+					{% csrf_token %}
+					<input type="hidden" name="this_is_the_login_form" value="1" />
+					<input type="hidden" name="next" value="{{ next }}" />
+					<div class="control-group{% if form.username.errors %} error{% endif %}">{% if not form.this_is_the_login_form.errors %}
+						<label class="control-label required" for="id_username">{% trans 'Username:' %}</label>{% endif %}
+						<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-user"></i></span>
+								{{ form.username }}
+							</div>{% if form.username.errors %}
+							<span class="help-inline">{{form.username.errors}}</span>{% endif %}
+						</div>
+					</div>
+					<div class="control-group{% if form.password.errors %} error{% endif %}">{% if not form.this_is_the_login_form.errors %}
+						<label class="control-label required" for="id_password">{% trans 'Password:' %}</label>{% endif %}
+						<div class="controls">
+							<div class="input-prepend">
+								<span class="add-on"><i class="icon-lock"></i></span>
+								{{ form.password }}
+							</div>{% if form.password.errors %}
+							<span class="help-inline">{{form.password.errors}}</span>{% endif %}
+						</div>
+					</div>
+					<div class="submit-row">
+						<input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary" />
+					</div>
+				</form>
+			</div>
+		</section>
+		<script type="text/javascript">document.getElementById('id_username').focus()</script>{% endblock %} 

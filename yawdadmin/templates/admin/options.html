@@ -1,92 +1,62 @@
-{% extends "admin/base_site.html" %}
-{% load i18n %}
+{% extends "admin/base_site.html" %}{% load i18n admin_static %}{% load url from future %}
 
 {% block extrahead %}{{ block.super }}
-{{optionset_admin.form.media}}
-<script>
-	(function($){ 
-		$(document).ready( function() {
-			$('.help').tooltip();
-
-			var ul = $('#language-codes');
-			ul.append(ul.children('li').detach().sort(function(a, b) {
-				return a.children[0].text > b.children[0].text;
-			}));
-
-			$('#fieldset-tabs a').click(function (e) {
-				 e.preventDefault();
-				 $(this).tab('show');
-			});
-			
-			$('#fieldset-tabs a:first').tab('show');
-		});
-
-	})(yawdadmin.jQuery);
-</script>
-{% endblock %}
+		{{optionset_admin.form.media}}
+		<script src="{% static 'js/yawd-admin.js' %}"></script>
+		<script>
+			(function($) {
+				$(document).ready( function() {
+					$('#fieldset-tabs a').click(function (e) {
+						e.preventDefault();
+						$(this).tab('show');
+					});
+					$('#fieldset-tabs a:first').tab('show');
+				});
+			})(yawdadmin.jQuery);
+		</script>{% endblock %}
 
 {% block breadcrumbs %}
-<ul class="breadcrumb">
-    <li><a href="../../">{% trans "Home" %}</a> <span class="divider">/</span></li>
-    <li class="active">{% trans title %}</li>
-</ul>
-{% endblock %}
+			<ul class="breadcrumb">
+				<li><a href="{% url 'admin:index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+				<li class="active">{% trans title %}</li>
+			</ul>{% endblock %}
 
 {% block main-struct %}
-<div id="content-main">
-	<form class="form-horizontal form-inline" action="." method="post" id="{{ opts.module_name }}_form">{% csrf_token %}{% block form_top %}{% endblock %}
-		
-		{% if save_on_top %}
-		<div class="row-fluid submits">
-			<div class="pull-right">
-				<input type="submit" value="{% trans 'Save' %}" class="default btn btn-small btn-success" name="_save" {{ onclick_attrib }}/>
-			</div>
-		</div>
-		{% endif %}
-		
-		<div class="row-fluid">
-			{% if optionset_admin.form.errors %}
-    			<span class="span12 alert alert-error">
-    				<button type="button" class="close" data-dismiss="alert">×</button>
-    				{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
-    				{{ form.non_field_errors }}
-    			</span>	
-			{% endif %}
-		</div>
-		
-		<fieldset>
-		{% with fieldset=optionset_admin.formfields %}
-		{% include "admin/includes/optionfields.html" %}
-		{% endwith %}
-		
-		{% if optionset_admin.langformfields %}
-		<div id="fieldset-tabs">
-			<h2>{% trans "Translatable options" %}</h2>
-			<ul id="language-codes" class="nav nav-tabs">
-			{% for fieldsetname, fieldset in optionset_admin.langformfields.items %}
-				<li>
-					<a href="#langtab-{{ forloop.counter0 }}">
-						{% get_language_info for fieldsetname as lang %}
-						{{lang.name}}
-					</a>
-				</li>
-			{% endfor %}
-			</ul>
-			<div class="tab-content">
-			{% for fieldsetname, fieldset in optionset_admin.langformfields.items %}
-				<div class="tab-pane" id="langtab-{{ forloop.counter0 }}">
-				{% include "admin/includes/optionfields.html" %}
+			<div id="content-main">
+			<form class="form-horizontal form-inline" action="." method="post" id="{{ opts.module_name }}_form">
+				{% csrf_token %}{% block form_top %}{% endblock %}{% if save_on_top %}
+				<div class="row-fluid submits">
+					<div class="pull-right">
+						<input type="submit" value="{% trans 'Save' %}" class="default btn btn-small btn-success" name="_save" {{ onclick_attrib }}/>
+					</div>
+				</div>{% endif %}{% if optionset_admin.form.errors %}
+				<div class="row-fluid">
+					<span class="span12 alert alert-error">
+						<button type="button" class="close" data-dismiss="alert">×</button>
+						{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
+						{{ form.non_field_errors }}
+					</span>
+				</div>{% endif %}
+				<fieldset>{% with fieldset=optionset_admin.formfields %}{% include "admin/includes/optionfields.html" %}{% endwith %}{% if optionset_admin.langformfields %}
+					<div id="fieldset-tabs">
+						<h2>{% trans "Translatable options" %}</h2>
+						<ul id="language-codes" class="nav nav-tabs">{% for fieldsetname, fieldset in optionset_admin.langformfields.items %}
+							<li>
+								<a href="#langtab-{{ forloop.counter0 }}">{% get_language_info for fieldsetname as lang %}{{lang.name}}</a>
+							</li>{% endfor %}
+						</ul>
+						<div class="tab-content">{% for fieldsetname, fieldset in optionset_admin.langformfields.items %}
+							<div class="tab-pane" id="langtab-{{ forloop.counter0 }}">
+								{% include "admin/includes/optionfields.html" %}
+							</div>{% endfor %}
+						</div>
+					</div>{% endif %}
+				</fieldset>
+				<div class="row-fluid submits">
+					<div class="pull-right">
+						<input type="submit" value="{% trans 'Save' %}" class="default btn btn-success" name="_save" {{ onclick_attrib }}/>
+					</div>
 				</div>
-			{% endfor %}
-			</div>
+			</form>
 		</div>
-		{% endif %}
-
-		<div class="row-fluid submits">
-			<div class="pull-right">
-				<input type="submit" value="{% trans 'Save' %}" class="default btn btn-small btn-success" name="_save" {{ onclick_attrib }}/>
-			</div>
-		</div>
-	</form>
-</div>
 {% endblock %}

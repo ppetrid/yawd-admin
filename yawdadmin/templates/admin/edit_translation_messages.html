@@ -10,7 +10,8 @@
 			    <li class="active">{{title}}</li>
 			</ul>{% endblock %}
 
-{% block main-struct %}	<section id="content-main">{% comment %}
+{% block main-struct %}
+			<section id="content-main">{% comment %}
 				<div class="alert">{% trans 'Translate and save the following messages.' %}</div>{% endcomment %}
 				<form class="form-horizontal form-inline" action="" method="post" >
 					{% csrf_token %}{% include 'admin/includes/base_form.html' %}{% submit_row %}

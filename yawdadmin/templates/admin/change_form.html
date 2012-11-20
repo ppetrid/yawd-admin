@@ -1,6 +1,4 @@
-{% extends "admin/base_site.html" %}
-{% load i18n admin_modify adminmedia admin_static yawdadmin_tags %}
-{% load url from future %}
+{% extends "admin/base_site.html" %}{% load i18n admin_modify admin_static yawdadmin_tags admin_urls %}{% load url from future %}
 
 {% block extrahead %}{{ block.super }}{% url 'admin:jsi18n' as jsi18nurl %}
 		<script src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
@@ -11,13 +9,14 @@
 
 {% block breadcrumbs %}{% if not is_popup %}
 			<ul class="breadcrumb">
-			    <li><a href="../../../">{% trans "Home" %}</a> <span class="divider">/</span></li>
-			    <li><a href="../../">{{ app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
-			    <li>{% if has_change_permission %}<a href="../">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} <span class="divider">/</span></li>
+			    <li><a href="{% url 'admin:index' %}">{% trans "Home" %}</a> <span class="divider">/</span></li>
+			    <li><a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
+			    <li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} <span class="divider">/</span></li>
 			    <li class="active">{% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
 			</ul>{% endif %}{% endblock %}
 
-{% block object-tools %}{% if change and not is_popup %}	<div class="row-fluid nav">{% block object-tools-items %}
+{% block object-tools %}{% if change and not is_popup %}
+			<div class="row-fluid nav">{% block object-tools-items %}
 				<div class="span2">
 					<a href="history/" class="big-button">
 						<i class="history-item"></i> {% trans "History" %}

@@ -1,3 +1,7 @@
+body {
+	background-color: #fff;
+}
+
 .container-fluid {
 	max-width: 1400px !important;
 	margin: auto;
@@ -13,6 +17,10 @@ th {
 
 thead th {
 	font-weight: bold !important;
+}
+
+input[type="checkbox"] {
+	margin: -2px 0 0 0 !important;
 }
 
 .help-inline ul, .alert-error ul, .alert-success ul, .messagelist {
@@ -233,7 +241,7 @@ select[name="action"] {
 }
 
 .lang-switcher {
-	padding: 4px 15px 4px !important;
+	padding: 8px 15px 8px !important;
 }
 
 .log-link {
@@ -255,6 +263,36 @@ select[name="action"] {
 	font-size: 20px;
 	margin: 4px 0;
 }
+
+.paginator {
+	padding: 5px;
+	text-shadow: 0 1px 0 #666;
+	background-color: #F5F8FA;
+}
+
+.blue-degrade  {
+	background: #2F96B4;
+	background: -moz-linear-gradient(top, #5BC0DE 0%, #2F96B4 100%);
+	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#1098dc), color-stop(100%,#2F96B4));
+	background: -webkit-linear-gradient(top, #5BC0DE 0%,#2F96B4 100%);
+	background: -o-linear-gradient(top, #5BC0DE 0%,#2F96B4 100%);
+	background: -ms-linear-gradient(top, #5BC0DE 0%,#2F96B4 100%);
+	background: linear-gradient(top, #5BC0DE 0%,#2F96B4 100%);
+	progid:DXImageTransform.Microsoft.gradient( startColorstr='#5BC0DE', endColorstr='#2F96B4',GradientType=0 );
+	color: #fff;
+}
+
+/*.breadcrumb .active {
+	color: #fff;
+}
+
+.breadcrumb a {
+	color: #fff;
+}
+
+.breadcrumb li {
+	text-shadow: 0 1px 0 #666;
+}*/
 
 /* Elfinder overrides to remove bootstrap styling */
 
@@ -287,6 +325,19 @@ table.elfinder-info-tb tr {
 	width: 98%;
 	padding: 1% !important;
 	height: 400px;
+}
+
+.sortoptions {
+	display: inline-block;
+	float: right;
+}
+
+.sortoptions a:hover {
+	text-decoration: none;
+}
+
+.sortpriority {
+	font-size: .9em;
 }
 
 /* Original widget styling */
