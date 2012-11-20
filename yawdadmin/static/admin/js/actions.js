@@ -64,7 +64,7 @@
 			}
 		});
 		$(options.allToggle).show().click(function() {
-			checker($(this).attr("checked"));
+			checker($(this).is(':checked'));
 			updateCounter();
 		});
 		$("div.actions span.question a").click(function(event) {
