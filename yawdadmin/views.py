@@ -1,9 +1,15 @@
+from django.core.exceptions import PermissionDenied
 from django.contrib import messages
 from django.views.generic import TemplateView
 from django.utils.translation import ugettext as _
 
 class AppOptionView(TemplateView):
     template_name = 'admin/options.html'
+    
+    def dispatch(self, request, *args, **kwargs):
+        if not request.user.has_perm('yawdadmin.change_appoption'):
+            raise PermissionDenied
+        return super(AppOptionView, self).dispatch(request, *args, **kwargs)
     
     def get_form_kwargs(self):
         """

@@ -58,7 +58,7 @@
 										<li class="divider"></li>{% endif %}
 										<li><a href="{{model.admin_url}}">{{model.name}}</a></li>{% endif %}{% endfor %}
 									</ul>
-								</li>{% endfor %}{% if optionset_labels %}
+								</li>{% endfor %}{% if optionset_labels and perms.yawdadmin.change_appoption %}
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 										<i class="icon-cog"></i>&#xa0;{% trans "Options" %}

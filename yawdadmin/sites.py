@@ -1,4 +1,3 @@
-import re
 from functools import update_wrapper
 from django.contrib.admin.sites import AdminSite
 from django.conf.urls import patterns, url

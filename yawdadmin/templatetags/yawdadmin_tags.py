@@ -9,6 +9,7 @@ register = template.Library()
 @register.inclusion_tag('admin/includes/topmenu.html', takes_context=True)
 def admin_top_menu(context):
     return {
+        'perms' : context['perms'],
         'top_menu' : admin_site.top_menu(context['request']),
         'homeurl' : urlresolvers.reverse('admin:index'),
         'user' : context['user'],
