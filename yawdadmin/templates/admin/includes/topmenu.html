@@ -1,8 +1,8 @@
-{% load i18n %}<div class="navbar navbar-fixed-top">
+{% load i18n %}<div class="navbar-blue navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a class="brand" href="{{homeurl}}">
-						<i class="icon-globe"></i> {% trans "Django administration" %}
+						<i class="icon-globe icon-white"></i> {% trans "Django administration" %}
 					</a>
 					<nav>
 						<ul class="nav pull-right">{% if langs %}
@@ -25,7 +25,7 @@
 							<li class="divider-vertical hidden-phone hidden-tablet"></li>
 							<li class="dropdown">
 								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-									<i class="icon-user"></i>&#xa0;{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}
+									<i class="icon-user  icon-white"></i>&#xa0;{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">{% block userlinks %}{% url 'django-admindocs-docroot' as docsroot %}{% if docsroot %}
@@ -50,7 +50,7 @@
 							<ul class="nav">{% for app in top_menu %}
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#">{% if app.icon %}
-										<i class="{{app.icon}}"></i>
+										<i class="{{app.icon}} icon-white"></i>
 										{% endif %}&#xa0;{{app.name}}
 										<b class="caret"></b>
 									</a>
@@ -61,7 +61,7 @@
 								</li>{% endfor %}{% if optionset_labels and perms.yawdadmin.change_appoption %}
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-										<i class="icon-cog"></i>&#xa0;{% trans "Options" %}
+										<i class="icon-cog  icon-white"></i>&#xa0;{% trans "Options" %}
 										<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu">{% for label in optionset_labels %}
