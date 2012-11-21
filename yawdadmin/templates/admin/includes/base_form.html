@@ -12,7 +12,7 @@
 							<div class="controls">
 								{{ field }}
 								{% if field.help_text %}
-									<i class="help icon-question-sign" title="{{ field.help_text|safe }}"></i>
+									<i class="help icon-question-sign" data-html="true" data-title="{{ field.label }} - {% trans 'help text' %}" data-content="{{ field.help_text }}"></i>
 								{% endif %}
 								{% if field.errors %}
 									<span class="help-inline">{{ field.errors }}</span>

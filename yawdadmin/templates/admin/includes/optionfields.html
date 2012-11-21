@@ -1,4 +1,4 @@
-{% for field in fieldset %}
+{% load i18n %}{% for field in fieldset %}
 					<div class="row-fluid color-form {% cycle 'row1' 'row2' %}">
 						<div class="field">
 							<div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
@@ -11,7 +11,7 @@
 										<span class="switch-thumb"></span>
 									</span>{% else %}
 									{{ field }}{% endif %}{% if field.help_text %}
-									<i class="help icon-question-sign" title="{{ field.field.help_text|safe }}"></i>{% endif %}{% if not field.is_readonly and field.errors %}
+									<i class="help icon-question-sign" data-html="true" data-title="{{field.field.label}} - {% trans 'help text' %}" data-content="{{ field.field.help_text }}"></i>{% endif %}{% if not field.is_readonly and field.errors %}
 									<span class="help-inline">{{ field.errors }}</span>{% endif %}
 								</div>
 							</div>

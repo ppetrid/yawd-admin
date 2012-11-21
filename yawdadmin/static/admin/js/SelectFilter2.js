@@ -43,8 +43,14 @@ window.SelectFilter = {
         var selector_available = quickElement('div', selector_div, '');
         selector_available.className = 'selector-available';
         var title_available = quickElement('h2', selector_available, interpolate(gettext('Available %s') + ' ', [field_name]));
-        quickElement('img', title_available, '', 'src', admin_static_prefix + 'img/icon-unknown.gif', 'width', '10', 'height', '10', 'class', 'help help-tooltip', 'title', interpolate(gettext('This is the list of available %s. You may choose some by selecting them in the box below and then clicking the "Choose" arrow between the two boxes.'), [field_name]));
-
+        
+        var ic = quickElement('i', title_available, '', 'class', 'help help-tooltip icon-question-sign icon-white', 'data-placement', 'bottom', 'data-title', interpolate(gettext('Help text')), 'data-content', interpolate(gettext('This is the list of available %s. You may choose some by selecting them in the box below and then clicking the "Choose" arrow between the two boxes.'), [field_name]));
+        $(ic).popover({trigger : 'manual'}).click(function(e){
+			$('.help').not(this).popover('hide');
+			$(this).popover('toggle');
+			e.preventDefault(); 
+		});
+        
         var filter_p = quickElement('p', selector_available, '', 'id', field_id + '_filter');
         filter_p.className = 'selector-filter';
 
@@ -73,8 +79,14 @@ window.SelectFilter = {
         var selector_chosen = quickElement('div', selector_div, '');
         selector_chosen.className = 'selector-chosen';
         var title_chosen = quickElement('h2', selector_chosen, interpolate(gettext('Chosen %s') + ' ', [field_name]));
-        quickElement('img', title_chosen, '', 'src', admin_static_prefix + 'img/icon-unknown.gif', 'width', '10', 'height', '10', 'class', 'help help-tooltip', 'title', interpolate(gettext('This is the list of chosen %s. You may remove some by selecting them in the box below and then clicking the "Remove" arrow between the two boxes.'), [field_name]));
-
+        
+        var ic2 = quickElement('i', title_chosen, '', 'class', 'help help-tooltip icon-question-sign  icon-white', 'data-placement', 'bottom', 'data-title', interpolate(gettext('Help text')), 'data-content', interpolate(gettext('This is the list of chosen %s. You may remove some by selecting them in the box below and then clicking the "Remove" arrow between the two boxes.'), [field_name]));
+        $(ic2).popover({trigger : 'manual'}).click(function(e){
+			$('.help').not(this).popover('hide');
+			$(this).popover('toggle');
+			e.preventDefault(); 
+		});
+        
         var to_box = quickElement('select', selector_chosen, '', 'id', field_id + '_to', 'multiple', 'multiple', 'size', from_box.size, 'name', from_box.getAttribute('name'));
         to_box.className = 'filtered';
         var clear_all = quickElement('a', selector_chosen, gettext('Remove all'), 'title', interpolate(gettext('Click to remove all chosen %s at once.'), [field_name]), 'href', 'javascript: (function() { SelectBox.move_all("' + field_id + '_to", "' + field_id + '_from"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_remove_all_link');

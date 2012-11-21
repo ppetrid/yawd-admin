@@ -270,6 +270,12 @@ select[name="action"] {
 
 .help:hover {
 	cursor: pointer;
+	opacity: 1;
+}
+
+.help-tooltip {
+	margin: 3px 0 0 2px;
+	opacity: .9;
 }
 
 .field {
