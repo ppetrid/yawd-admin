@@ -33,11 +33,13 @@
 							</div>
 							<script>
 								(function($) {
-									$('#{{ inline_admin_formset.formset.prefix }}-tabs a').click(function (e) {
-										  e.preventDefault();
-										  $(this).tab('show');
-									});	
-									$('#{{ inline_admin_formset.formset.prefix }}-tabs a:first').tab('show');
+									$(document).ready(function() {
+										$('#{{ inline_admin_formset.formset.prefix }}-tabs a').click(function (e) {
+											e.preventDefault();
+											$(this).tab('show');
+										});
+										$('#{{ inline_admin_formset.formset.prefix }}-tabs a:first').tab('show');
+									});
 								})(yawdadmin.jQuery);
 							</script>{% endif %}
 						</div>
