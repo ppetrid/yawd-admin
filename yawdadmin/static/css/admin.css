@@ -83,6 +83,11 @@ input[type="checkbox"] {
 	opacity: .9;
 }
 
+.navbar-blue .btn-navbar:hover, .navbar-blue .btn-navbar:active, .navbar-blue .btn-navbar.active, .navbar-blue  .btn-navbar.disabled, .navbar-blue  .btn-navbar[disabled] {
+	color: white;
+	background-color: #005E9D;
+}
+
 .navbar-blue .nav li.dropdown.open > .dropdown-toggle, .navbar-blue .nav li.dropdown.active > .dropdown-toggle, .navbar-blue .nav li.dropdown.open.active > .dropdown-toggle {
 	background-color: #005E9D;
 }
