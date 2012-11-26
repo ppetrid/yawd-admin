@@ -1,12 +1,16 @@
 {% extends "admin/base_site.html" %}{% load admin_list i18n admin_static yawdadmin_tags %}{% load url from future %}
 
-{% block extrastyle %}{{ block.super }}{% if cl.formset or action_form %}{% url 'admin:jsi18n' as jsi18nurl %}
-		<script type="text/javascript" src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>{% endif %}{% if not actions_on_top and not actions_on_bottom %}
+{% block extrastyle %}{{ block.super }}{% if not actions_on_top and not actions_on_bottom %}
 		<style>
 			#changelist table thead th:first-child { width: inherit; }
 		</style>{% endif %}{% endblock %}
 
-{% block extrahead %}{{ block.super }}{% if action_form %}{% if actions_on_top or actions_on_bottom %}
+{% block extrahead %}{{ block.super }}{% if cl.formset or action_form %}{% url 'admin:jsi18n' as jsi18nurl %}
+		<script src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>{% endif %}{% if is_popup %}
+		<script>
+			var opener = parent;
+		</script>
+		{% endif %}{% if action_form %}{% if actions_on_top or actions_on_bottom %}
 		<script type="text/javascript">
 			(function($) {
 				$(document).ready(function($) {
@@ -18,12 +22,12 @@
 
 {% block bodyclass %}change-list{% endblock %}
 
-{% if not is_popup %}{% block breadcrumbs %}
+{% block breadcrumbs %}{% if not is_popup %}
 			<ul class="breadcrumb">
 				<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
 				<li><a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ app_label|capfirst }}</a> <span class="divider">/</span></li>
 				<li class="active">{{ cl.opts.verbose_name_plural|capfirst }}</li>
-			</ul>{% endblock %}{% endif %}
+			</ul>{% endif %}{% endblock %}
 
 {% block object-tools %}
 			<div class="row-fluid nav">{% block object-tools-items %}{% if has_add_permission %}
