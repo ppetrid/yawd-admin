@@ -11,15 +11,12 @@ class ContentTypeSelect(forms.Select):
     def render(self, name, value, attrs=None, choices=()):
         output = super(ContentTypeSelect, self).render(name, value, attrs, choices)
         
-        choices = chain(self.choices, choices)
         choiceoutput = ' var %s_choice_urls = {' % (attrs['id'],)
-        for choice in choices:
-            try:
-                ctype = ContentType.objects.get(pk=int(choice[0]))
-                choiceoutput += '    \'%s\' : \'../../../%s/%s?t=%s\','  % ( str(choice[0]), 
+        
+        for ctype in ContentType.objects.filter(pk__in=[int(c[0])for c in chain(self.choices, choices) if c[0]]):
+            choiceoutput += '    \'%s\' : \'../../../%s/%s?t=%s\','  % ( str(ctype.pk), 
                     ctype.app_label, ctype.model, ctype.model_class()._meta.pk.name)
-            except:
-                pass
+        
         choiceoutput += '};'
         
         output += ('<script>'
