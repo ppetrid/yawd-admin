@@ -1,12 +1,13 @@
 from functools import update_wrapper
-from django.contrib.admin.sites import AdminSite
 from django.conf.urls import patterns, url
-from django.utils.text import capfirst
+from django.conf import settings
+from django.contrib.admin.sites import AdminSite
+from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.utils.text import capfirst
 from models import AppOption
 from views import AppOptionView
 
-#TODO: option permissions???
 _optionset_labels = {}
 
 class YawdAdminSite(AdminSite):
@@ -14,6 +15,24 @@ class YawdAdminSite(AdminSite):
     def __init__(self, *args, **kwargs):
         super(YawdAdminSite, self).__init__(*args, **kwargs)
         self._top_menu = {}
+        
+    def check_dependencies(self):
+        """
+        Override the default method to check that the 
+        :class:`yawdadmin.middleware.PopupMiddleware` is installed
+        and ``yawdadmin`` is found in the INSTALLED_APPS setting **before**
+        ``django.contrib.admin``.
+        """
+        super(YawdAdminSite, self).check_dependencies()
+        if not AppOption._meta.installed:
+            raise ImproperlyConfigured("Put 'yawdadmin' in your "
+                "INSTALLED_APPS setting in order to use the yawd-admin application.")
+        if settings.INSTALLED_APPS.index('yawdadmin') > settings.INSTALLED_APPS.index('django.contrib.admin'):
+            raise ImproperlyConfigured("Put 'yawdadmin' before 'django.contrib.admin' "
+                "in your INSTALLED_APPS setting to use the yawd-admin application") 
+        if not 'yawdadmin.middleware.PopupMiddleware' in settings.MIDDLEWARE_CLASSES:
+            raise ImproperlyConfigured("Put 'yawdadmin.middleware.PopupMiddleware' "
+                "in your MIDDLEWARE_CLASSES setting in order to use the yawd-admin application.")
         
     def get_urls(self):
         global _optionset_labels
