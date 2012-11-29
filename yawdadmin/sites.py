@@ -187,6 +187,11 @@ class YawdAdminSite(AdminSite):
             #get the data
             from utils import get_analytics_data
             http = httplib2.Http()
+            
             extra_context['ga_data'] = get_analytics_data(credential.authorize(http))
+            
+            if 'error' in extra_context['ga_data']:
+                ls.ADMIN_GOOGLE_ANALYTICS_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, request.user) #@UndefinedVariable 
+                extra_context['ga_data']['url'] = ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step1_get_authorize_url() #@UndefinedVariable
             
         return super(YawdAdminSite, self).index(request, extra_context)
