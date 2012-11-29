@@ -77,13 +77,16 @@ def get_analytics_data(http):
     end_date = datetime.datetime.now()
     start_date = end_date + datetime.timedelta(-ls.ADMIN_GOOGLE_ANALYTICS['interval'])
     
-    pie_data = service.data().ga().get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
-        start_date = start_date.strftime('%Y-%m-%d'), end_date = end_date.strftime('%Y-%m-%d'),
-        metrics='ga:visits', dimensions='ga:date,ga:visitorType').execute()
+    try:
+        pie_data = service.data().ga().get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
+            start_date = start_date.strftime('%Y-%m-%d'), end_date = end_date.strftime('%Y-%m-%d'),
+            metrics='ga:visits', dimensions='ga:date,ga:visitorType').execute()
 
-    summed_data = service.data().ga().get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
-        start_date = start_date.strftime('%Y-%m-%d'), end_date = end_date.strftime('%Y-%m-%d'),
-        metrics='ga:pageviews, ga:visitors, ga:avgTimeOnSite, ga:entranceBounceRate, ga:percentNewVisits').execute()
+        summed_data = service.data().ga().get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
+            start_date = start_date.strftime('%Y-%m-%d'), end_date = end_date.strftime('%Y-%m-%d'),
+            metrics='ga:pageviews, ga:visitors, ga:avgTimeOnSite, ga:entranceBounceRate, ga:percentNewVisits').execute()
+    except Exception as e:
+        return { 'error' : e }
         
     data = {
         'summed' : {
@@ -97,7 +100,7 @@ def get_analytics_data(http):
         'chart' : _extract_chart_data(pie_data, start_date, end_date)
     }
     
-    cache.set('yawdadmin_ga', data)
+    cache.set('yawdadmin_ga', data, 3600)
     return data
     
 def _extract_chart_data(pie_data, start_date, end_date):

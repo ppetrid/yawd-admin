@@ -38,7 +38,7 @@
 			</ul>{% endblock %}
 
 {% block content %}
-					<div id="content-main">{% if ga_data %}
+					<div id="content-main">{% if ga_data %}{% if not error in ga_data %}
 						<div class="row-fluid">
 							<div class="span12" id="chart_div"></div>
 						</div>
@@ -49,7 +49,10 @@
 							<div class="span2 analytics-sum"><strong>{% trans 'Avg. visit time' %}:</strong><br/>{{ga_data.summed.avg_time}}</div>
 							<div class="span2 analytics-sum"><strong>{% trans 'Bounce rate' %}:</strong><br/>{{ga_data.summed.bounce_rate}}%</div>
 							<div class="span2 analytics-sum"><strong>{% trans 'New visits' %}:</strong><br/>{{ga_data.summed.new_visits}}%</div>
-						</div>{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
+						</div>{% else %}
+						<p class="row-fluid alert">
+							{% trans 'The granted user has no access to the provided analytics account.' %}
+						</p>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
 						<div class="row-fluid">
 							<div class="span6">{% for app in app_list %}{% if forloop.counter0 == sep %}
 							</div>
