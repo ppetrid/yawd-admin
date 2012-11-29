@@ -62,7 +62,7 @@ class AnalyticsAuthView(RedirectView):
         if not ls.ADMIN_GOOGLE_ANALYTICS_FLOW:
             raise Http404
         
-        if not xsrfutil.validate_token(settings.SECRET_KEY, request.REQUEST['state'], request.user):
+        if not ('state' in request.REQUEST and xsrfutil.validate_token(settings.SECRET_KEY, request.REQUEST['state'], request.user)):
             return  HttpResponseBadRequest()
         
         credential = ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step2_exchange(request.REQUEST) #@UndefinedVariable
