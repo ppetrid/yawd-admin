@@ -41,6 +41,15 @@ input[type="checkbox"] {
 	margin-top: 20px;
 }
 
+.alert-error a {
+	color: #892A28;
+}
+
+.alert-error a:hover {
+	color: #a94A68;
+	text-decoration: none;
+}
+
 .navbar .brand {
 	padding-left: 30px;
 	font: 300 16px 'Open Sans Condensed', sans-serif;
