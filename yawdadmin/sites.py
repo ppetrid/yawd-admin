@@ -1,12 +1,18 @@
+import httplib2
 from functools import update_wrapper
+from oauth2client import xsrfutil
+from oauth2client.file import Storage
 from django.conf.urls import patterns, url
 from django.conf import settings
 from django.contrib.admin.sites import AdminSite
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.http import HttpResponseRedirect
 from django.utils.text import capfirst
+from django.views.decorators.cache import never_cache
+from conf import settings as ls
 from models import AppOption
-from views import AppOptionView
+from views import AppOptionView, AnalyticsAuthView
 
 _optionset_labels = {}
 
@@ -24,7 +30,7 @@ class YawdAdminSite(AdminSite):
         ``django.contrib.admin``.
         """
         super(YawdAdminSite, self).check_dependencies()
-        if not AppOption._meta.installed:
+        if not AppOption._meta.installed:  #@UndefinedVariable
             raise ImproperlyConfigured("Put 'yawdadmin' in your "
                 "INSTALLED_APPS setting in order to use the yawd-admin application.")
         if settings.INSTALLED_APPS.index('yawdadmin') > settings.INSTALLED_APPS.index('django.contrib.admin'):
@@ -36,18 +42,17 @@ class YawdAdminSite(AdminSite):
         
     def get_urls(self):
         global _optionset_labels
-        urlpatterns = super(YawdAdminSite, self).get_urls()
         
         def wrap(view, cacheable=False):
             def wrapper(*args, **kwargs):
                 return self.admin_view(view, cacheable)(*args, **kwargs)
             return update_wrapper(wrapper, view)
 
-        urlpatterns += patterns('',
-            url(r'^configuration-options/(?P<optionset_label>%s)/$' % '|'.join(_optionset_labels.keys()),
-            wrap(AppOptionView.as_view()),
-            name='optionset-label-options'))
+        urlpatterns = patterns('',
+            url(r'^configuration-options/(?P<optionset_label>%s)/$' % '|'.join(_optionset_labels.keys()), wrap(AppOptionView.as_view()), name='optionset-label-options'),
+            url(r'^oauth2callback/$', wrap(AnalyticsAuthView.as_view()), name='oauth2-callback'))
 
+        urlpatterns += super(YawdAdminSite, self).get_urls() 
         return urlpatterns
         
     def register_top_menu_item(self, item, icon_class=''):
@@ -161,3 +166,27 @@ class YawdAdminSite(AdminSite):
         global _optionset_labels
         if optionset_label in _optionset_labels:
             return _optionset_labels[optionset_label]
+        
+    @never_cache
+    def index(self, request, extra_context={}):
+        """
+        This index view implementation adds Google Analytics
+        integration so that you can view important metrics 
+        right from the administrator interface.
+        """
+        #if admin google analytics is enabled
+        if ls.ADMIN_GOOGLE_ANALYTICS_FLOW:
+            #get the analytics user credentials
+            storage = Storage(ls.ADMIN_GOOGLE_ANALYTICS['token_file_name'])
+            credential = storage.get()
+            
+            if credential is None or credential.invalid == True:
+                ls.ADMIN_GOOGLE_ANALYTICS_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, request.user) #@UndefinedVariable 
+                return HttpResponseRedirect(ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step1_get_authorize_url()) #@UndefinedVariable
+            
+            #get the data
+            from utils import get_analytics_data
+            http = httplib2.Http()
+            extra_context['ga_data'] = get_analytics_data(credential.authorize(http))
+            
+        return super(YawdAdminSite, self).index(request, extra_context)

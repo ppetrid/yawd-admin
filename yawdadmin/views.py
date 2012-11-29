@@ -1,7 +1,13 @@
-from django.core.exceptions import PermissionDenied
+from oauth2client import xsrfutil
+from oauth2client.file import Storage
+from django.conf import settings
 from django.contrib import messages
-from django.views.generic import TemplateView
+from django.core.exceptions import PermissionDenied
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseBadRequest, Http404
 from django.utils.translation import ugettext as _
+from django.views.generic import TemplateView, RedirectView
+from conf import settings as ls
 
 class AppOptionView(TemplateView):
     template_name = 'admin/options.html'
@@ -43,3 +49,25 @@ class AppOptionView(TemplateView):
     
     def put(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
+    
+class AnalyticsAuthView(RedirectView):
+    """
+    This view implements the oauth2 authentication callback.
+    It stores the user credential to a file and redirects the user
+    to the admin index page on success. 
+    """
+    permanent = False
+    
+    def get(self, request, *args, **kwargs):
+        if not ls.ADMIN_GOOGLE_ANALYTICS_FLOW:
+            raise Http404
+        
+        if not xsrfutil.validate_token(settings.SECRET_KEY, request.REQUEST['state'], request.user):
+            return  HttpResponseBadRequest()
+        
+        credential = ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step2_exchange(request.REQUEST) #@UndefinedVariable
+        storage = Storage(ls.ADMIN_GOOGLE_ANALYTICS['token_file_name'])
+        storage.put(credential)
+        
+        self.url = reverse('admin:index')
+        return super(AnalyticsAuthView, self).get(request) 

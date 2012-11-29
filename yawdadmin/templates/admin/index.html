@@ -1,7 +1,34 @@
 {% extends "admin/base_site.html" %}
 {% load i18n yawdadmin_filters %}
 
-{% block extrastyle %}{{ block.super }}<link rel="stylesheet" type="text/css" href="{% load adminmedia %}{% admin_media_prefix %}css/dashboard.css" />{% endblock %}
+{% block extrahead %}{% if ga_data and ga_data.chart %}
+		<script src="https://www.google.com/jsapi"></script>
+		<script>
+			google.load("visualization", "1", {packages:["corechart"]}); 
+			google.setOnLoadCallback(drawChart);
+			
+			function drawChart() {   
+				var data = google.visualization.arrayToDataTable([
+					["{% trans 'Date' %}", "{% trans 'New' %}", "{% trans 'Returning' %}", "{% trans 'Total visits' %}"],{% for row in ga_data.chart %}
+					["{{row.date}}", {{row.new}}, {{row.returning}}, {{row.total}}],{% endfor %}
+				]);
+
+				var options = {
+					title: "{% trans 'Last 30 days visits' %}",
+					titleTextStyle: {color: '#111', fontSize: 18, fontName: 'Ubuntu Condensed' },
+					pointSize: 6,
+					chartArea: {width: '100%', top : 30, height: 220 },
+					legend: {position: 'in'},
+					axisTitlesPosition: 'in',
+					vAxis: {textPosition: 'in'},
+					hAxis: {textPosition: 'none'},
+					colors: ['#ED8D2D', '#F54747', '#2F96B4']
+				};
+
+				var chart = new google.visualization.AreaChart(document.getElementById('chart_div'));
+				chart.draw(data, options);
+			}
+		</script>{% endif %}{% endblock %}
 
 {% block bodyclass %}dashboard{% endblock %}
 
@@ -11,7 +38,18 @@
 			</ul>{% endblock %}
 
 {% block content %}
-					<div id="content-main">{% if app_list %}{% with sep=app_list|length|divide:2 %}
+					<div id="content-main">{% if ga_data %}
+						<div class="row-fluid">
+							<div class="span12" id="chart_div"></div>
+						</div>
+						<div class="row-fluid grey-degrade analytics-sum-wrapper add-bottom">
+							<div class="span2 analytics-sum"><strong>{% trans 'Total visits' %}:</strong><br/>{{ga_data.summed.visits}}</div>
+							<div class="span2 analytics-sum"><strong>{% trans 'Visitors' %}:</strong><br/>{{ga_data.summed.visitors}}</div>
+							<div class="span2 analytics-sum"><strong>{% trans 'Pageviews' %}:</strong><br/>{{ga_data.summed.pageviews}}</div>
+							<div class="span2 analytics-sum"><strong>{% trans 'Avg. visit time' %}:</strong><br/>{{ga_data.summed.avg_time}}</div>
+							<div class="span2 analytics-sum"><strong>{% trans 'Bounce rate' %}:</strong><br/>{{ga_data.summed.bounce_rate}}%</div>
+							<div class="span2 analytics-sum"><strong>{% trans 'New visits' %}:</strong><br/>{{ga_data.summed.new_visits}}%</div>
+						</div>{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
 						<div class="row-fluid">
 							<div class="span6">{% for app in app_list %}{% if forloop.counter0 == sep %}
 							</div>
@@ -44,7 +82,7 @@
 						<p class="alert">{% trans "You don't have permission to edit anything." %}</p>{% endif %}
 					</div>{% endblock %}
 
-{% block sidebar %}<div class="well">
+{% block sidebar %}<div class="well well-open">
 						<h3 class="filter-title">{% trans 'Recent Actions' %}</h3>
 						<ul class="nav nav-list">
 							<li class="nav-header">{% filter utfupper %}{% trans 'My Actions' %}{% endfilter %}</li>{% load log %}{% get_admin_log 10 as admin_log for_user user %}{% if not admin_log %}
@@ -57,6 +95,7 @@
 								</a>{% endif %}{% if entry.content_type %}
 								<span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>{% else %}
 								<span class="mini quiet">{% trans 'Unknown content' %}</span>{% endif %}
+								<span class="mini">{{entry.action_time|date:"d N, H:i"}}</span>
 							</li>{% endfor %}{% endif %}
 						</ul>
 					</div>

@@ -1,7 +1,10 @@
+import datetime, time
+from django.core.cache import cache
 from django.utils import simplejson as json
 from django.utils.translation import get_language
 from django.utils.encoding import smart_str
 from yawdadmin import admin_site
+from conf import settings as ls
 from models import AppOption
 
 def get_option(optionset_label, name, current_only=True):
@@ -60,3 +63,73 @@ def get_option_value(optionset_admin, db_option, current_only):
         for key in value_dict:
             value_dict[key] = field.to_python(value_dict[key])
             return value_dict
+        
+def get_analytics_data(http):
+    
+    #try to get cached data
+    data = cache.get('yawdadmin_ga', None)
+    if data:
+        return data
+    
+    from apiclient.discovery import build
+            
+    service = build('analytics', 'v3', http=http)
+    end_date = datetime.datetime.now()
+    start_date = end_date + datetime.timedelta(-ls.ADMIN_GOOGLE_ANALYTICS['interval'])
+    
+    pie_data = service.data().ga().get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
+        start_date = start_date.strftime('%Y-%m-%d'), end_date = end_date.strftime('%Y-%m-%d'),
+        metrics='ga:visits', dimensions='ga:date,ga:visitorType').execute()
+
+    summed_data = service.data().ga().get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
+        start_date = start_date.strftime('%Y-%m-%d'), end_date = end_date.strftime('%Y-%m-%d'),
+        metrics='ga:pageviews, ga:visitors, ga:avgTimeOnSite, ga:entranceBounceRate, ga:percentNewVisits').execute()
+        
+    data = {
+        'summed' : {
+            'visits' : pie_data['totalsForAllResults']['ga:visits'],
+            'pageviews' : summed_data['rows'][0][0],
+            'visitors' : summed_data['rows'][0][1],
+            'avg_time' : time.strftime('%H:%M:%S', time.gmtime(float(summed_data['rows'][0][2]))),
+            'bounce_rate' : round(float(summed_data['rows'][0][3]), 2),
+            'new_visits' : round(float(summed_data['rows'][0][4]), 2),
+        },
+        'chart' : _extract_chart_data(pie_data, start_date, end_date)
+    }
+    
+    cache.set('yawdadmin_ga', data)
+    return data
+    
+def _extract_chart_data(pie_data, start_date, end_date):
+    """
+    Format the Google Analytics data for use within an Area Chart.
+    """
+    
+    def update_record(record):
+        visits = 0
+        for key in ('new','returning'):
+            if not key in record:
+                record[key] = 0
+            visits += record[key]
+        record['total'] = visits
+        
+    date = start_date
+    current_row = date.strftime('%Y%m%d')
+    data = [{ 'date' : date.strftime('%A, %B %d, %Y')}]
+    
+    #calculate chart-ready data
+    for row in pie_data['rows']:
+        while row[0] != current_row:
+            update_record(data[len(data)-1])
+            date = date + datetime.timedelta(1)
+            data.append({'date' : date.strftime('%A, %B %d, %Y')})
+            current_row = date.strftime('%Y%m%d')
+
+        if row[1] == 'New Visitor':
+            data[len(data)-1]['new'] = int(row[2])
+        else:
+            data[len(data)-1]['returning'] = int(row[2])
+    
+    update_record(data[len(data)-1])
+    
+    return data
