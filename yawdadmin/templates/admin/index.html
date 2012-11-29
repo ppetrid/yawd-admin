@@ -52,7 +52,7 @@
 						</div>{% else %}
 						<p class="row-fluid alert alert-error">
 							<strong>{% trans 'Error!' %}</strong> {% trans 'Analytics data could not be generated: The granted user has no access to the provided analytics account.' %}
-							<a href="{{ga_data.url}}">{% 'Sign in as a different user' %}</a>
+							<a href="{{ga_data.url}}">{% trans 'Sign in as a different user' %}</a>
 						</p>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
 						<div class="row-fluid">
 							<div class="span6">{% for app in app_list %}{% if forloop.counter0 == sep %}
