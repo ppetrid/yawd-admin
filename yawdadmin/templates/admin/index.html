@@ -1,7 +1,7 @@
 {% extends "admin/base_site.html" %}
 {% load i18n yawdadmin_filters %}
 
-{% block extrahead %}{% if ga_data and ga_data.chart %}
+{% block extrahead %}{% if ga_data and not ga_data.error %}
 		<script src="https://www.google.com/jsapi"></script>
 		<script>
 			google.load("visualization", "1", {packages:["corechart"]}); 
@@ -38,7 +38,7 @@
 			</ul>{% endblock %}
 
 {% block content %}
-					<div id="content-main">{% if ga_data %}{% if not error in ga_data %}
+					<div id="content-main">{% if ga_data %}{% if not ga_data.error %}
 						<div class="row-fluid">
 							<div class="span12" id="chart_div"></div>
 						</div>
@@ -50,8 +50,8 @@
 							<div class="span2 analytics-sum"><strong>{% trans 'Bounce rate' %}:</strong><br/>{{ga_data.summed.bounce_rate}}%</div>
 							<div class="span2 analytics-sum"><strong>{% trans 'New visits' %}:</strong><br/>{{ga_data.summed.new_visits}}%</div>
 						</div>{% else %}
-						<p class="row-fluid alert">
-							{% trans 'The granted user has no access to the provided analytics account.' %}
+						<p class="row-fluid alert alert-error">
+							<strong>{% trans 'Error!' %}</strong> {% trans 'Analydics data could not be generated: The granted user has no access to the provided analytics account.' %}
 						</p>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
 						<div class="row-fluid">
 							<div class="span6">{% for app in app_list %}{% if forloop.counter0 == sep %}
