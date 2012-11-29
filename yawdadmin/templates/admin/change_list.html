@@ -58,7 +58,7 @@
 					</div>
 				</div>{% if cl.has_filters %}
 				<div class="span3">
-					<div class="changelist-filter well clearfix">
+					<div class="changelist-filter well well-open clearfix">
 						<h3 class="filter-title">{% trans 'Filter' %}</h3>{% for spec in cl.filter_specs %}
 						{% admin_list_filter cl spec %}{% endfor %}
 					</div>

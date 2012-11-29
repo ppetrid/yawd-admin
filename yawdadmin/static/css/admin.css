@@ -8,7 +8,7 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-	font-family: 'Ubuntu Condensed', Arial, sans-serif;
+	font-family: 'Open Sans Condensed', Arial, sans-serif;
 }
 
 th {
@@ -33,9 +33,17 @@ input[type="checkbox"] {
 	font-weight: bold;
 }
 
+.add-bottom {
+	margin-bottom: 20px;
+}
+
+.add-top {
+	margin-top: 20px;
+}
+
 .navbar .brand {
 	padding-left: 30px;
-	font: 100 16px 'Ubuntu Condensed', sans-serif;
+	font: 300 16px 'Open Sans Condensed', sans-serif;
 }
 
 .navbar .brand i {
@@ -146,6 +154,19 @@ input[type="checkbox"] {
 
 .clearfix {
 	clear: both;
+}
+
+.well-open {
+	background-color: #fff;
+	-webkit-box-shadow: none !important;
+	-moz-box-shadow: none !important;
+	box-shadow: none !important;
+	padding-top: 5px;
+}
+
+.well-open h3 {
+	background-color: #f5f5f5;
+	text-align: center;
 }
 
 /* OBJECT TOOLS ICONS */
@@ -370,6 +391,20 @@ select[name="action"] {
 .breadcrumb li {
 	text-shadow: 0 1px 0 #666;
 }*/
+
+#chart_div {
+	height: 250px;
+}
+
+.analytics-sum-wrapper {
+	border: 0;
+	border-bottom: 1px solid #eee;
+}
+
+.analytics-sum {
+	padding: 10px 0 5px 0;
+	text-align: center;
+}
 
 /* Elfinder overrides to remove bootstrap styling */
 
