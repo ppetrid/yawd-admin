@@ -55,7 +55,7 @@
 							{% trans 'Analytics data could not be generated' %}:{% if ga_data.error = 'refresh' %}
 							{% trans 'The key has expired.' %}{% else %}
 							{% trans 'Error code'%} <strong>{{ga_data.error}}</strong>.{% endif %}
-							<a href="{{ga_data.url}}">{% trans 'Re-authenticate application' %}</a>.
+							<a href="{{ga_data.url}}">{% trans 'Re-authenticate application' %}</a> signed-in with a proper google account.
 						</p>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
 						<div class="row-fluid">
 							<div class="span6">{% for app in app_list %}{% if forloop.counter0 == sep %}
