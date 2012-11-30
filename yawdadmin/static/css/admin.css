@@ -43,11 +43,11 @@ input[type="checkbox"] {
 
 .alert-error a {
 	color: #892A28;
+	text-decoration: underline;
 }
 
 .alert-error a:hover {
-	color: #a94A68;
-	text-decoration: none;
+	color: #a94A48;
 }
 
 .navbar .brand {

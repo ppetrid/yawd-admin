@@ -1,4 +1,5 @@
 import datetime, time
+from oauth2client.client import AccessTokenRefreshError
 from django.core.cache import cache
 from django.utils import simplejson as json
 from django.utils.translation import get_language
@@ -72,6 +73,7 @@ def get_analytics_data(http):
         return data
     
     from apiclient.discovery import build
+    from apiclient.errors import HttpError
             
     service = build('analytics', 'v3', http=http)
     end_date = datetime.datetime.now()
@@ -85,9 +87,11 @@ def get_analytics_data(http):
         summed_data = service.data().ga().get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
             start_date = start_date.strftime('%Y-%m-%d'), end_date = end_date.strftime('%Y-%m-%d'),
             metrics='ga:pageviews, ga:visitors, ga:avgTimeOnSite, ga:entranceBounceRate, ga:percentNewVisits').execute()
-    except Exception as e:
-        return { 'error' : e }
-        
+    except HttpError as e:
+        return { 'error' : e.resp.reason }
+    except AccessTokenRefreshError:
+        return { 'error' : 'refresh' }
+    
     data = {
         'summed' : {
             'visits' : pie_data['totalsForAllResults']['ga:visits'],
