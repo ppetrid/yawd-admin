@@ -8,6 +8,9 @@ class Income(models.Model):
     repeated = models.BooleanField(help_text='Is this income repeated?')
     when = models.CharField(blank=True, max_length=10, choices=(('monthly','Monthly'),('yearly','Yearly')), help_text='How often does this income occur?')
     
+    class Meta:
+        verbose_name_plural = 'Income'
+    
     def __unicode__(self):
         return u'%s' % self.title
 
