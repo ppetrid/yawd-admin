@@ -137,7 +137,7 @@ input[type="checkbox"] {
 .navbar-blue .navbar-inner, .blue-degrade {
 	background: #0088cc;
 	background: -moz-linear-gradient(top, #0088cc 0%, #005E9D 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#0088cc), color-stop(100%,#005E9D));
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#005E9D));
 	background: -webkit-linear-gradient(top, #0088cc 0%,#005E9D 100%);
 	background: -o-linear-gradient(top, #0088cc 0%,#005E9D 100%);
 	background: -ms-linear-gradient(top, #0088cc 0%,#005E9D 100%);
@@ -149,7 +149,7 @@ input[type="checkbox"] {
 	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1),0 1px 10px rgba(0, 0, 0, 0.1);
 }
 
-.grey-degrade, .breadcrumb {
+.grey-degrade, .breadcrumb, .tabular.inline-related .add-row td {
 	background-color: #FAFAFA;
 	background-image: -moz-linear-gradient(top, white, #F2F2F2);
 	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(white), to(#F2F2F2));
@@ -159,6 +159,21 @@ input[type="checkbox"] {
 	background-repeat: repeat-x;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F2F2F2',GradientType=0 );
 	border: 1px solid #D4D4D4;
+}
+
+.light-blue-degrade {
+	background: #308EBD;
+	background: -moz-linear-gradient(top, #308EBD 0%, #0088cc 100%);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#308EBD), to(#0088cc));
+	background: -webkit-linear-gradient(top, #308EBD 0%,#0088cc 100%);
+	background: -o-linear-gradient(top, #308EBD 0%,#0088cc 100%);
+	background: -ms-linear-gradient(top, #308EBD 0%,#0088cc 100%);
+	background: linear-gradient(top, #308EBD 0%,#0088cc 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#308EBD', endColorstr='#0088cc',GradientType=0 );
+	color: #fff;
+	webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1),0 1px 10px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1),0 1px 10px rgba(0,0,0,0.1);
+	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1),0 1px 10px rgba(0, 0, 0, 0.1);
 }
 
 .clearfix {
@@ -263,7 +278,7 @@ input[type="checkbox"] {
 	display: block;
 	background: #0088CC;
 	background: -moz-linear-gradient(top, #F9F9F9 0%, #EFEFEF 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#F9F9F9), color-stop(100%,#EFEFEF));
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#F9F9F9), to(#EFEFEF));
 	background: -webkit-linear-gradient(top, #F9F9F9 0%,#EFEFEF 100%);
 	background: -o-linear-gradient(top, #F9F9F9 0%,#EFEFEF 100%);
 	background: -ms-linear-gradient(top, #F9F9F9 0%,#EFEFEF 100%);
@@ -274,7 +289,7 @@ input[type="checkbox"] {
 .big-button:hover {
 	background: #F9F9F9;
 	background: -moz-linear-gradient(top, #efefef 0%, #f9f9f9 100%);
-	background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#efefef), color-stop(100%,#F9F9F9));
+	background: background: -webkit-gradient(linear, 0 0, 0 100%, from(#efefef), to(#f9f9f9));
 	background: -webkit-linear-gradient(top, #efefef 0%,#F9F9F9 100%);
 	background: -o-linear-gradient(top, #efefef 0%,#F9F9F9 100%);
 	background: -ms-linear-gradient(top, #efefef 0%,#F9F9F9 100%);
@@ -330,6 +345,10 @@ select[name="action"] {
 
 .form-horizontal .color-form .control-group {
 	margin-bottom: 0;
+}
+
+.form-horizontal fieldset {
+	border-bottom: 1px solid #EEE;
 }
 
 .submits {
@@ -641,3 +660,58 @@ div#id_password {
 	border-bottom: 1px solid #eee;
 	padding: 3px;	
 }
+
+/* End overriding widget styling */
+
+
+/* INLINES */
+
+.inline-related h3 {
+	margin: 0;
+	border: 0;
+	border-bottom: 1px solid #d4d4d4;
+	padding: 0 10px;
+	font-size: 16px;
+	color: #fff;
+	font-weight: normal;
+}
+
+.inline-related h3 a{
+	color: #ddd;
+	text-decoration: underline;
+}
+
+.inline-related h3 a:hover {
+	color: #fff;
+}
+
+.inline-related {
+	border: 1px solid #D4D4D4;
+	margin-bottom: 10px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.inline-related span.delete {
+	float: right;
+	display: inline-block;
+}
+
+.empty-form {
+	display: none;
+}
+
+.tabular.inline-related table {
+	margin-bottom: 0;
+}
+
+.tabular.inline-related table thead tr {
+	border: 0 !important;
+}
+
+.tabular.inline-related .add-row td {
+	border: 0 !important;
+	border-top: 1px solid #eee !important;
+}
+/* End inlines */
