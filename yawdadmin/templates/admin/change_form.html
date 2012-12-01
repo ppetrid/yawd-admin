@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}{% load i18n admin_modify admin_static yawdadmin_tags admin_urls %}{% load url from future %}
+{% extends "admin/base_site.html" %}{% load i18n admin_modify admin_static yawdadmin_tags yawdadmin_filters admin_urls %}{% load url from future %}
 
 {% block extrastyle %}{{ block.super }}
 			<link rel="stylesheet" type="text/css" href="{% static "css/fancybox/jquery.fancybox.css" %}" />{% endblock %}
@@ -14,7 +14,7 @@
 {% block breadcrumbs %}{% if not is_popup %}
 			<ul class="breadcrumb">
 			    <li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-			    <li><a href="{% url 'admin:app_list' app_label=opts.app_label %}">{{ app_label|capfirst|escape }}</a> <span class="divider">/</span></li>
+			    <li><a href="{% url 'admin:app_list' app_label=opts.app_label %}">{% with app_title=app_label|app_title|escape %}{{ app_title.title }}{% endwith %}</a> <span class="divider">/</span></li>
 			    <li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} <span class="divider">/</span></li>
 			    <li class="active">{% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
 			</ul>{% endif %}{% endblock %}

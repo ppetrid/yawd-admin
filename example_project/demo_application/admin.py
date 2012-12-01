@@ -19,7 +19,6 @@ class IncomeAdmin(admin.ModelAdmin):
     inlines = [TransactionInline]
     list_display = ('title', 'repeated', 'when')
     search_fields = ['title', 'description']
-    #date_hierarchy = 'transaction_set__date'
     fieldsets = ((None, {
         'fields' : ('title', 'description', 'invoice')
     }),
@@ -28,6 +27,9 @@ class IncomeAdmin(admin.ModelAdmin):
         'description' : 'Use the following fields for repeated transactions.',
         'classes' : ['collapse']
     }))
+    
+    #Custom yawd-admin attributes for the top bar
+    order = 1 #put this first in the dropdown list
     
 class ExpenseAdmin(admin.ModelAdmin):
     form = IncomeForm
@@ -42,11 +44,23 @@ class ExpenseAdmin(admin.ModelAdmin):
         'description' : 'Use the following fields for repeated transactions.',
     }))
     
+    #Custom yawd-admin attributes for the top bar
+    order = 2 #put this second, after the 'Income' model
+    
 class InvoiceAdmin(admin.ModelAdmin):
     search_fields = ['title']
     date_hierarchy = 'date'
     list_filter = ['number']
     
+    #Custom yawd-admin attributes for the top bar
+    order = 3 #put this third, after Income and Expenses
+    separator = True #print a separator row BEFORE this element
+    
 admin_site.register(Income, IncomeAdmin)
 admin_site.register(Expense, ExpenseAdmin)
 admin_site.register(Invoice, InvoiceAdmin)
+
+#Register this application's items to the top bar navigation!
+#Use any of the available bootstrap icon classes for the accompanying icon
+#http://twitter.github.com/bootstrap/base-css.html#icons
+admin_site.register_top_menu_item('demo_application', icon_class="icon-th")

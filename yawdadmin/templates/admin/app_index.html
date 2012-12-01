@@ -1,9 +1,9 @@
-{% extends "admin/base_site.html" %}{% load i18n %}{% load url from future %}
+{% extends "admin/base_site.html" %}{% load i18n yawdadmin_filters %}{% load url from future %}
 
 {% if not is_popup %}{% block breadcrumbs %}
 			<ul class="breadcrumb">
 				<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-				<li class="active">{% for app in app_list %}{% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}{% endfor %}</li>
+				<li class="active">{% for app in app_list %}{% blocktrans with app.name|app_title as name %}{{ name }}{% endblocktrans %}{% endfor %}</li>
 			</ul>{% endblock %}{% endif %}
 
 {% block main-struct %}

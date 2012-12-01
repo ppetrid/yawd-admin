@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}{% load admin_list i18n admin_static yawdadmin_tags %}{% load url from future %}
+{% extends "admin/base_site.html" %}{% load admin_list i18n admin_static yawdadmin_tags yawdadmin_filters %}{% load url from future %}
 
 {% block extrastyle %}{{ block.super }}{% if not actions_on_top and not actions_on_bottom %}
 		<style>
@@ -25,7 +25,7 @@
 {% block breadcrumbs %}{% if not is_popup %}
 			<ul class="breadcrumb">
 				<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-				<li><a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{{ app_label|capfirst }}</a> <span class="divider">/</span></li>
+				<li><a href="{% url 'admin:app_list' app_label=cl.opts.app_label %}">{% with app_title=app_label|app_title|escape %}{{ app_title.title }}{% endwith %}</a> <span class="divider">/</span></li>
 				<li class="active">{{ cl.opts.verbose_name_plural|capfirst }}</li>
 			</ul>{% endif %}{% endblock %}
 

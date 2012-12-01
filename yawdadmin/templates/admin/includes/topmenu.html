@@ -1,4 +1,4 @@
-{% load i18n %}<div class="navbar-blue navbar navbar-inverse navbar-fixed-top">
+{% load i18n yawdadmin_filters %}<div class="navbar-blue navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a class="brand" href="{{homeurl}}">
@@ -51,7 +51,7 @@
 								<li class="dropdown">
 									<a data-toggle="dropdown" class="dropdown-toggle" href="#">{% if app.icon %}
 										<i class="{{app.icon}} icon-white"></i>
-										{% endif %}&#xa0;{{app.name}}
+										{% endif %}&#xa0;{{app.name|app_title}}
 										<b class="caret"></b>
 									</a>
 									<ul class="dropdown-menu" role="menu">{% for model in app.models %}{% if model.perms.change %}{% if model.separator %}

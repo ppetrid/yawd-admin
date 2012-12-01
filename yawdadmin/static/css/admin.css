@@ -158,7 +158,11 @@ input[type="checkbox"] {
 	background-image: linear-gradient(to bottom, white, #F2F2F2);
 	background-repeat: repeat-x;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F2F2F2',GradientType=0 );
-	border: 1px solid #D4D4D4;
+	border: 1px solid #e4e4e4;
+}
+
+.breadcrumb {
+	font-size: 13px;
 }
 
 .light-blue-degrade {
@@ -278,7 +282,7 @@ input[type="checkbox"] {
 
 .big-button {
 	text-align: center;
-	border: 1px solid #DDD;
+	border: 1px solid #e4e4e4;
 	border-collapse: separate;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;

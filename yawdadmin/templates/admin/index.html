@@ -64,7 +64,7 @@
 								<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
 									<thead>
 										<tr class="navbar-inner">
-											<th colspan="2" class="title"><a href="{{ app.app_url }}" class="section">{% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}</a></th>
+											<th colspan="2" class="title"><a href="{{ app.app_url }}" class="section">{% blocktrans with app.name|app_title as name %}{{ name }}{% endblocktrans %}</a></th>
 										</tr>
 									</thead>
 									<tbody>{% for model in app.models %}
