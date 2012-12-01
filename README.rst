@@ -14,7 +14,7 @@ site and offers the following:
 * Mechanism for opening the original django admin popup windows with fancybox
 * Seamless integration with `yawd-translations` for multilingual admin websites
 
-.. image:: yawd-admin-screenshot.png
+.. image:: http://yawd.eu/media/images/yawd-admin-screenshot.png
 
 Usage and demo
 ==============
