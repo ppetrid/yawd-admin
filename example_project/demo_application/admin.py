@@ -1,5 +1,6 @@
 from django.contrib import admin
 from django.contrib.contenttypes import generic
+from django import forms
 from yawdadmin import admin_site
 from forms import IncomeForm
 from models import Transaction, Income, Expense, Invoice
@@ -64,3 +65,35 @@ admin_site.register(Invoice, InvoiceAdmin)
 #Use any of the available bootstrap icon classes for the accompanying icon
 #http://twitter.github.com/bootstrap/base-css.html#icons
 admin_site.register_top_menu_item('demo_application', icon_class="icon-th")
+
+
+#HOW TO USE THE ADMIN SITE OPTIONS
+from yawdadmin.admin_options import OptionSetAdmin, SiteOption
+
+class CustomOptions(OptionSetAdmin):
+    optionset_label = 'custom-options'
+    verbose_name = 'Custom Options'
+    
+    option_1 = SiteOption(field=forms.CharField(
+            widget=forms.Textarea(
+                attrs = {
+                    'class' : 'textarea-medium'
+                }
+            ),
+            required=False,
+            help_text='A fancy custom text area option.',
+        ))
+    
+    option_2 = SiteOption(field=forms.CharField(
+            help_text='The second awesome option. This one is required!',
+    ))
+    
+    option_3 = SiteOption(field=forms.BooleanField(
+            required=False,
+            help_text='Another custom option',
+            label='Boolean'
+        ))
+
+#register the OptionSetAdmin to the admin site
+#almost like we would do for a ModelAdmin
+admin_site.register_options(CustomOptions)
