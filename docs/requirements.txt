@@ -1,0 +1,2 @@
+yawd-admin
+Django>=1.4

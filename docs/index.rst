@@ -6,7 +6,9 @@
 yawd-admin django application documentation
 ===========================================
 
-`yawd-admin <http://yawd.eu/open-source-projects/yawd-admin/>`_ is a fresh administration website for django. It extends the default django admin site and offers the following:
+`yawd-admin <http://yawd.eu/open-source-projects/yawd-admin/>`_ is an
+administration website for django. It extends the default django admin site
+and offers the following:
 
 * A clean and beautiful bootstrap user interface
 * Hand-written pure HTML5/CSS3 code with indented HTML output
