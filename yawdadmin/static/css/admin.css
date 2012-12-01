@@ -162,18 +162,27 @@ input[type="checkbox"] {
 }
 
 .light-blue-degrade {
-	background: #308EBD;
-	background: -moz-linear-gradient(top, #308EBD 0%, #0088cc 100%);
-	background: -webkit-gradient(linear, 0 0, 0 100%, from(#308EBD), to(#0088cc));
-	background: -webkit-linear-gradient(top, #308EBD 0%,#0088cc 100%);
-	background: -o-linear-gradient(top, #308EBD 0%,#0088cc 100%);
-	background: -ms-linear-gradient(top, #308EBD 0%,#0088cc 100%);
-	background: linear-gradient(top, #308EBD 0%,#0088cc 100%);
-	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#308EBD', endColorstr='#0088cc',GradientType=0 );
+	background: #50AEDD;
+	background: -moz-linear-gradient(top, #50AEDD 0%, #0088cc 100%);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#50AEDD), to(#0088cc));
+	background: -webkit-linear-gradient(top, #50AEDD 0%,#0088cc 100%);
+	background: -o-linear-gradient(top, #50AEDD 0%,#0088cc 100%);
+	background: -ms-linear-gradient(top, #50AEDD 0%,#0088cc 100%);
+	background: linear-gradient(top, #50AEDD 0%,#0088cc 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#509ECD', endColorstr='#0088cc',GradientType=0 );
 	color: #fff;
 	webkit-box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1),0 1px 10px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1),0 1px 10px rgba(0,0,0,0.1);
 	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1),0 1px 10px rgba(0, 0, 0, 0.1);
+}
+
+.light-blue-degrade a {
+	color: #ddd;
+	text-decoration: underline;
+}
+
+.light-blue-degrade a:hover {
+	color: #fff;	
 }
 
 .clearfix {
@@ -276,7 +285,7 @@ input[type="checkbox"] {
 	border-radius: 6px;
 	margin-bottom: 10px;
 	display: block;
-	background: #0088CC;
+	background: #F9F9F9;
 	background: -moz-linear-gradient(top, #F9F9F9 0%, #EFEFEF 100%);
 	background: -webkit-gradient(linear, 0 0, 0 100%, from(#F9F9F9), to(#EFEFEF));
 	background: -webkit-linear-gradient(top, #F9F9F9 0%,#EFEFEF 100%);
@@ -301,21 +310,32 @@ input[type="checkbox"] {
 
 /*  END ICONS */
 
-.actions {
-	padding: 8px !important;
-	background-color: #F5F8FA;
-	margin-bottom: 20px;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+#changelist-top {
+	margin-bottom: 5px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.actions, .toolbar {
+	padding: 10px;
 }
 
 select[name="action"] {
-	margin-top: 8px;
+	margin-bottom: 0;
 }
 
-.action-counter {
-	color: #999;
+.small {
+	font-size: 13px;
+}
+
+ul.toplinks {
+	list-style: none;
+}
+
+ul.toplinks li {
+	float: left;
+	padding: 5px;
 }
 
 .help:hover {

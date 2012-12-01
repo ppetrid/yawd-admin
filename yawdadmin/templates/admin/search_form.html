@@ -1,12 +1,28 @@
-{% load i18n %}{% if cl.search_fields %}
-				<div class="toolbar">
-					<form class="changelist-search" action="" method="get">
-						<div><!-- DIV needed for valid HTML -->
-							<input type="text" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" />
-							<input type="submit" class="btn" value="{% trans 'Search' %}" />{% if show_result_count %}
-							<span class="small quiet">{% blocktrans count cl.result_count as counter %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}pop=1{% endif %}">{% blocktrans with cl.full_result_count as full_result_count %}{{ full_result_count }} total{% endblocktrans %}</a>)</span>{% endif %}{% for pair in cl.params.items %}{% ifnotequal pair.0 search_var %}
-							<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endifnotequal %}{% endfor %}
-						</div>
-					</form>
-				</div>
-				<script>document.getElementById("searchbar").focus();</script>{% endif %}
+{% load i18n %}{% if cl.search_fields %}<form id="search-form" class="changelist-search" action="" method="get">
+					<input type="hidden" size="40" name="{{ search_var }}" value="{{ cl.query }}" id="searchbar" />{% for pair in cl.params.items %}{% ifnotequal pair.0 search_var %}
+					<input type="hidden" name="{{ pair.0 }}" value="{{ pair.1 }}"/>{% endifnotequal %}{% endfor %}
+				</form>
+				<script>
+					(function($) {
+						$('#changelist-top').append('<div class="span6 toolbar form-search"><div class="pull-right">{% if show_result_count %}<span class="small">{% blocktrans count cl.result_count as counter %}{{ counter }} result{% plural %}{{ counter }} results{% endblocktrans %} (<a href="?{% if cl.is_popup %}pop=1{% endif %}">{% blocktrans with cl.full_result_count as full_result_count %}{{ full_result_count }} total{% endblocktrans %}</a>)</span>&#xa0;&#xa0;{% endif %}<div class="input-append"><input type="text" size="40" class="search-query" name="search_query" value="{% if cl.query %}{{ cl.query }}{% else %}{% trans 'Search...' %}{% endif %}" id="searchbar" /><button type="submit" class="btn" id="search-submit"><i class="icon-search"></i></button></div></div></div>');
+						$('#search-submit').click(function() {
+							$('input[name="{{search_var}}"]').val($('input[name="search_query"]').val());
+							$('#search-form').submit();
+							return false;
+						});
+						$('input[name="search_query"]').keypress(function(e) {
+							if (e.keyCode == 13) {
+								e.preventDefault();
+								$('input[name="{{search_var}}"]').val($(this).val());
+								$('#search-form').submit();
+								return false;
+							}
+						});
+						$('input[name="search_query"]').focus(function(e) {
+							this.select();
+						});
+						$('input[name="search_query"]').mouseup(function(e){
+							e.preventDefault();
+						});
+					})(yawdadmin.jQuery)
+				</script>{% endif %}
