@@ -66,7 +66,6 @@ admin_site.register(Invoice, InvoiceAdmin)
 #http://twitter.github.com/bootstrap/base-css.html#icons
 admin_site.register_top_menu_item('demo_application', icon_class="icon-th")
 
-
 #HOW TO USE THE ADMIN SITE OPTIONS
 from yawdadmin.admin_options import OptionSetAdmin, SiteOption
 
