@@ -2,9 +2,15 @@ from django.db import models
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes import generic
 
+class Invoice(models.Model):
+    title =  models.CharField(max_length='150', help_text='The expense title')
+    number = models.IntegerField()
+    date = models.DateField()
+    
 class Income(models.Model):
     title = models.CharField(max_length='150', help_text='The income title')
     description = models.TextField(blank=True, help_text='Optional description of the transaction')
+    invoice = models.ForeignKey(Invoice, blank=True, null=True)
     repeated = models.BooleanField(help_text='Is this income repeated?')
     when = models.CharField(blank=True, max_length=10, choices=(('monthly','Monthly'),('yearly','Yearly')), help_text='How often does this income occur?')
     
