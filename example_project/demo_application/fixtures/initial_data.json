@@ -1,11 +1,21 @@
 [
     {
         "pk": 1,
+        "model": "demo_application.invoice",
+        "fields": {
+            "date": "2012-11-30",
+            "number": 1,
+            "title": "Invoice #1"
+        }
+    },
+    {
+        "pk": 1,
         "model": "demo_application.income",
         "fields": {
             "repeated": false,
             "when": "",
             "description": "My lucky penny",
+            "invoice": null,
             "title": "My first money"
         }
     },
@@ -16,6 +26,7 @@
             "repeated": true,
             "when": "monthly",
             "description": "",
+            "invoice": null,
             "title": "More income"
         }
     },
