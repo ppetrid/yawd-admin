@@ -39,10 +39,10 @@
 
 {% block content %}
 					<div id="content-main">{% if ga_data %}{% if not ga_data.error %}
-						<div class="row-fluid">
+						<div class="row-fluid hidden-phone">
 							<div class="span12" id="chart_div"></div>
 						</div>
-						<div class="row-fluid grey-degrade analytics-sum-wrapper add-bottom">
+						<div class="row-fluid grey-degrade analytics-sum-wrapper add-bottom hidden-phone">
 							<div class="span2 analytics-sum"><strong>{% trans 'Total visits' %}:</strong><br/>{{ga_data.summed.visits}}</div>
 							<div class="span2 analytics-sum"><strong>{% trans 'Visitors' %}:</strong><br/>{{ga_data.summed.visitors}}</div>
 							<div class="span2 analytics-sum"><strong>{% trans 'Pageviews' %}:</strong><br/>{{ga_data.summed.pageviews}}</div>
@@ -50,7 +50,7 @@
 							<div class="span2 analytics-sum"><strong>{% trans 'Bounce rate' %}:</strong><br/>{{ga_data.summed.bounce_rate}}%</div>
 							<div class="span2 analytics-sum"><strong>{% trans 'New visits' %}:</strong><br/>{{ga_data.summed.new_visits}}%</div>
 						</div>{% else %}
-						<p class="row-fluid alert alert-error">
+						<p class="row-fluid alert alert-error hidden-phone">
 							<strong>{% trans 'Error!' %}</strong>
 							{% trans 'Analytics data could not be generated' %}:{% if ga_data.error = 'refresh' %}
 							{% trans 'The key has expired.' %}{% else %}

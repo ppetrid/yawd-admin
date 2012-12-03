@@ -134,12 +134,14 @@ input[type="checkbox"] {
 	opacity: 1;
 }
 
-.navbar-blue .nav-collapse .nav > li > a:hover, .navbar-blue .nav-collapse .dropdown-menu a:hover {
-	background-color: #005E9D !important;
-}
-
-.navbar-blue .nav-collapse .nav > li > a, .navbar-blue  .nav-collapse .dropdown-menu a {
-	color: #eee !important;
+@media (max-width: 979px) {
+	.navbar-blue .nav-collapse .nav > li > a:hover, .navbar-blue .nav-collapse .dropdown-menu a:hover {
+		background-color: #005E9D !important;
+	}
+	
+	.nav-collapse .nav > li > a, .nav-collapse .dropdown-menu a {
+		color: #eee;
+	}
 }
 
 .navbar-blue .btn-navbar {
