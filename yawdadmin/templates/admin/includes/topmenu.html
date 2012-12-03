@@ -25,7 +25,7 @@
 							<li class="divider-vertical hidden-phone hidden-tablet"></li>
 							<li class="dropdown">
 								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-									<i class="icon-user  icon-white"></i>&#xa0;{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}
+									<i class="icon-user icon-white"></i>&#xa0;{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}
 									<b class="caret"></b>
 								</a>
 								<ul class="dropdown-menu">{% block userlinks %}{% url 'django-admindocs-docroot' as docsroot %}{% if docsroot %}
@@ -43,7 +43,7 @@
 						</ul>
 					</nav>
 					<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar ">
-						<span class="icon-align-justify"></span>
+						<span class="icon-align-justify icon-white"></span>
 					</a>
 					<div class="nav-collapse" role="menu">
 						<nav>

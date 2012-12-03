@@ -109,7 +109,7 @@ input[type="checkbox"] {
 	background-color: #005E9D;
 }
 
-.navbar-blue .nav > li:hover > a {
+.navbar-blue .nav > li:hover > a, .navbar-blue.navbar-fixed-top .btn-navbar:hover span {
 	opacity: 1;
 }
 
@@ -118,7 +118,7 @@ input[type="checkbox"] {
 	border-right-color: #3497C2;
 }
 
-.navbar-blue.navbar-fixed-top .nav-collapse i {
+.navbar-blue.navbar-fixed-top .nav-collapse i, .navbar-blue.navbar-fixed-top .btn-navbar span {
 	opacity: .9;
 }
 
@@ -132,6 +132,33 @@ input[type="checkbox"] {
 	border-top-color: #fff;
 	border-bottom-color: #fff;
 	opacity: 1;
+}
+
+.navbar-blue .nav-collapse .nav > li > a:hover, .navbar-blue .nav-collapse .dropdown-menu a:hover {
+	background-color: #005E9D !important;
+}
+
+.navbar-blue .nav-collapse .nav > li > a, .navbar-blue  .nav-collapse .dropdown-menu a {
+	color: #eee !important;
+}
+
+.navbar-blue .btn-navbar {
+	margin-top: 3px;
+}
+
+.navbar-blue .btn-navbar {
+	color: white;
+	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25);
+	background-color: #0088cc;
+	background-image: -moz-linear-gradient(top, #0088cc, #005E9D);
+	background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#005E9D));
+	background-image: -webkit-linear-gradient(top, #0088cc, #005E9D);
+	background-image: -o-linear-gradient(top, #0088cc, #005E9D);
+	background-image: linear-gradient(to bottom, #0088cc, #005E9D);
+	background-repeat: repeat-x;
+	filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#ff005E9D', GradientType=0);
+	border-color: #0077aa;
+	filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
 }
 
 .navbar-blue .navbar-inner, .blue-degrade {
