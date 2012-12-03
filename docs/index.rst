@@ -12,6 +12,7 @@ and offers the following:
 
 * A clean and beautiful bootstrap user interface
 * Hand-written pure HTML5/CSS3 code with indented HTML output
+* Responsive interface, optimized for mobile phones and tablets
 * Register custom database settings (options) editable from the UI. You can use all **standard django form fields** for these settings
 * Integration with google analytics for displaying statistics in the admin home page
 * Register your applications to the top-bar navigation
