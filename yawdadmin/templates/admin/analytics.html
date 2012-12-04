@@ -1,0 +1,50 @@
+{% extends "admin/base_site.html" %}{% load i18n %}{% load url from future %}
+
+{% block breadcrumbs %}
+			<ul class="breadcrumb">
+				<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+				<li class="active">{% trans 'Configure Google Analytics' %}</li>
+			</ul>
+{% endblock %}
+
+{% block title %}{% trans 'Configure Google Analytics' %}{% endblock %}
+
+{% block main-struct %}<div id="content-main">
+			<section>
+				<table class="table table-bordered table-striped">
+					<tbody>
+						<tr>
+							<th>{% trans 'Profile ID' %}:</th>
+							<td>{{analytics_info.profile}}</td>
+						</tr>
+						<tr>
+							<th>{% trans 'Showing last' %}:</th>
+							<td>{{analytics_info.interval}} {% trans 'days' %}</td>
+						</tr>
+						<tr>
+							<th>{% trans 'Connected' %}:</th>
+							<td>{% if analytics_info.data %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}</td>
+						</tr>
+						<tr>
+							<th>{% trans 'Current session expiry' %}:</th>
+							<td>{% if analytics_info.data %}{{analytics_info.data.token_expiry}}{% else %}-{% endif %}</td>
+						</tr>
+						<tr>
+							<th>{% trans 'Refresh token' %}:</th>
+							<td>{% if analytics_info.data %}{% if analytics_info.data.refresh_token %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}{% else %}-{% endif %}</td>
+						</tr>
+					</tbody>
+				</table>
+				<div class="row">
+					<div class="span12">
+						<a href="{% url 'admin:analytics-connect' %}" class="btn">{% trans 'Authenticate new account' %}</a>
+						<i class="help icon-question-sign" data-html="true" data-title="{% trans 'Authenticate new account' %} - {% trans 'help text' %}" data-content="{% trans '<p>Use this button to connect to a Google account and enable statistics. The google account must have access to the above Google Analytics Profile ID.</p><p class=\'add-top\'>This action is required to be performed at least once.</p><p class=\'add-top\'>If a user is already connected (i.e. see \'connected\' column above) the stored credentials will be deleted and a new user can be connected.</p>' %}"></i>
+					</div>
+				</div>
+			</section>
+			<script>
+				(function($){
+					$('.help').popover();
+				})(yawdadmin.jQuery)
+			</script>
+		</div>{% endblock %}

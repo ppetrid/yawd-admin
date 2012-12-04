@@ -12,7 +12,7 @@ from django.utils.text import capfirst
 from django.views.decorators.cache import never_cache
 from conf import settings as ls
 from models import AppOption
-from views import AppOptionView, AnalyticsAuthView
+from views import AppOptionView, AnalyticsAuthView, AnalyticsConfigView, AnalyticsConnectView
 
 _optionset_labels = {}
 
@@ -50,7 +50,9 @@ class YawdAdminSite(AdminSite):
 
         urlpatterns = patterns('',
             url(r'^configuration-options/(?P<optionset_label>%s)/$' % '|'.join(_optionset_labels.keys()), wrap(AppOptionView.as_view()), name='optionset-label-options'),
-            url(r'^oauth2callback/$', wrap(AnalyticsAuthView.as_view()), name='oauth2-callback'))
+            url(r'^oauth2callback/$', wrap(AnalyticsAuthView.as_view()), name='oauth2-callback'),
+            url(r'^google-analytics/$', wrap(AnalyticsConfigView.as_view()), name='analytics'),
+            url(r'^google-analytics/connect/$', wrap(AnalyticsConnectView.as_view()), name='analytics-connect'))
 
         urlpatterns += super(YawdAdminSite, self).get_urls() 
         return urlpatterns
@@ -181,17 +183,11 @@ class YawdAdminSite(AdminSite):
             credential = storage.get()
             
             if credential is None or credential.invalid == True:
-                ls.ADMIN_GOOGLE_ANALYTICS_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, request.user) #@UndefinedVariable 
-                return HttpResponseRedirect(ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step1_get_authorize_url()) #@UndefinedVariable
-            
-            #get the data
-            from utils import get_analytics_data
-            http = httplib2.Http()
-            
-            extra_context['ga_data'] = get_analytics_data(credential.authorize(http))
-            
-            if 'error' in extra_context['ga_data']:
-                ls.ADMIN_GOOGLE_ANALYTICS_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, request.user) #@UndefinedVariable 
-                extra_context['ga_data']['url'] = ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step1_get_authorize_url() #@UndefinedVariable
+                extra_context['ga_data'] = { 'error' : 'authentication' }
+            else:
+                #get the data
+                from utils import get_analytics_data
+                http = httplib2.Http()
+                extra_context['ga_data'] = get_analytics_data(credential.authorize(http))
             
         return super(YawdAdminSite, self).index(request, extra_context)

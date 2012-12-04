@@ -1,4 +1,4 @@
-{% load i18n yawdadmin_filters %}<div class="navbar-blue navbar navbar-inverse navbar-fixed-top">
+{% load i18n yawdadmin_filters %}{% load url from future %}<div class="navbar-blue navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a class="brand" href="{{homeurl}}">
@@ -28,7 +28,11 @@
 									<i class="icon-user icon-white"></i>&#xa0;{% filter force_escape %}{% firstof user.first_name user.username %}{% endfilter %}
 									<b class="caret"></b>
 								</a>
-								<ul class="dropdown-menu">{% block userlinks %}{% url 'django-admindocs-docroot' as docsroot %}{% if docsroot %}
+								<ul class="dropdown-menu">{% block userlinks %}{% if analytics %}
+									<li>
+										<a href="{% url 'admin:analytics' %}">{% trans 'Configure Google Analytics' %}</a>
+									</li>
+									<li class="divider"></li>{% endif %}{% url 'django-admindocs-docroot' as docsroot %}{% if docsroot %}
 									<li>
 										<a href="{{ docsroot }}">{% trans 'Documentation' %}</a>
 									</li>{% endif %}{% url 'admin:password_change' as password_change_url %}

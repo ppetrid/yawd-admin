@@ -14,6 +14,12 @@ try:
 except AttributeError:
     pass
 
-ADMIN_GOOGLE_ANALYTICS_FLOW = flow_from_clientsecrets( ADMIN_GOOGLE_ANALYTICS['client_secrets'],
+if ADMIN_GOOGLE_ANALYTICS['client_secrets'] and ADMIN_GOOGLE_ANALYTICS['profile_id'] and ADMIN_GOOGLE_ANALYTICS['token_file_name']:
+    ADMIN_GOOGLE_ANALYTICS_FLOW = flow_from_clientsecrets( ADMIN_GOOGLE_ANALYTICS['client_secrets'],
         scope='https://www.googleapis.com/auth/analytics.readonly', redirect_uri='%soauth2callback/' % (
-        ADMIN_GOOGLE_ANALYTICS['admin_root_url'])) if ADMIN_GOOGLE_ANALYTICS['client_secrets'] and ADMIN_GOOGLE_ANALYTICS['profile_id'] and ADMIN_GOOGLE_ANALYTICS['token_file_name'] else None
+        ADMIN_GOOGLE_ANALYTICS['admin_root_url']))
+    #always prompt for authentication
+    ADMIN_GOOGLE_ANALYTICS_FLOW.params['approval_prompt'] = 'force'
+else:
+     ADMIN_GOOGLE_ANALYTICS_FLOW = None
+    

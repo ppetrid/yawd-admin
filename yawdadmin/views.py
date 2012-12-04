@@ -1,12 +1,13 @@
+import simplejson as json
 from oauth2client import xsrfutil
 from oauth2client.file import Storage
 from django.conf import settings
 from django.contrib import messages
 from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
-from django.http import HttpResponseBadRequest, Http404
+from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.utils.translation import ugettext as _
-from django.views.generic import TemplateView, RedirectView
+from django.views.generic import TemplateView, View
 from conf import settings as ls
 
 class AppOptionView(TemplateView):
@@ -50,7 +51,7 @@ class AppOptionView(TemplateView):
     def put(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
     
-class AnalyticsAuthView(RedirectView):
+class AnalyticsAuthView(View):
     """
     This view implements the oauth2 authentication callback.
     It stores the user credential to a file and redirects the user
@@ -59,8 +60,8 @@ class AnalyticsAuthView(RedirectView):
     permanent = False
     
     def get(self, request, *args, **kwargs):
-        if not ls.ADMIN_GOOGLE_ANALYTICS_FLOW:
-            raise Http404
+        #check view
+        valid_analytics_view(request)
         
         if not ('state' in request.REQUEST and xsrfutil.validate_token(settings.SECRET_KEY, request.REQUEST['state'], request.user)):
             return  HttpResponseBadRequest()
@@ -69,5 +70,65 @@ class AnalyticsAuthView(RedirectView):
         storage = Storage(ls.ADMIN_GOOGLE_ANALYTICS['token_file_name'])
         storage.put(credential)
         
-        self.url = reverse('admin:index')
-        return super(AnalyticsAuthView, self).get(request) 
+        messages.add_message(self.request, messages.SUCCESS, _('The user was successfully connected.'))
+        return HttpResponseRedirect(reverse('admin:analytics'))
+    
+class AnalyticsConfigView(TemplateView):
+    """
+    Admin view for the google analytics functionality. The view is 
+    accessible through the top bar navigation.
+    """
+    template_name = 'admin/analytics.html'
+    
+    def get_context_data(self, **kwargs):
+    
+        #check view
+        valid_analytics_view(self.request)
+        #get original context data
+        context = super(AnalyticsConfigView, self).get_context_data(**kwargs)
+        #load the token file
+        try:
+            dat_file = open(ls.ADMIN_GOOGLE_ANALYTICS['token_file_name'], 'r')
+            analytics = json.loads(dat_file.read())
+            dat_file.close()
+        except (IOError, json.decoder.JSONDecodeError):
+            analytics = {}
+        
+        context['analytics_info'] = {
+            'profile' : ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
+            'interval' : ls.ADMIN_GOOGLE_ANALYTICS['interval'],
+            'data' : analytics
+        }
+        
+        return context
+    
+class AnalyticsConnectView(View):
+    """
+    Connect a new user to the Google Analytics API
+    """
+    def get(self, request, *args, **kwargs):
+        
+        #check view
+        valid_analytics_view(request)
+        try: 
+            #Empty the token file 
+            dat_file = open(ls.ADMIN_GOOGLE_ANALYTICS['token_file_name'], 'w+')
+            dat_file.write('')
+            dat_file.close()
+        except:
+            messages.add_message(self.request, messages.ERROR, _('The server does not have permissions to write to the token file. Please contact your system administrator.'))
+            return HttpResponseRedirect(reverse('admin:analytics'))
+
+        #Initialize flow
+        ls.ADMIN_GOOGLE_ANALYTICS_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, request.user) #@UndefinedVariable
+        return HttpResponseRedirect(ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step1_get_authorize_url()) #@UndefinedVariable
+    
+def valid_analytics_view(request):
+    """
+    Check if the user is superuser and analytics functionality is enabled. 
+    """
+    if not request.user.is_superuser:
+            raise PermissionDenied
+    
+    if not ls.ADMIN_GOOGLE_ANALYTICS_FLOW:
+        raise Http404
