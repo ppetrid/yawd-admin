@@ -1,4 +1,7 @@
-import simplejson as json
+try:
+    import json
+except:
+    import simplejson as json
 from oauth2client import xsrfutil
 from oauth2client.file import Storage
 from django.conf import settings
