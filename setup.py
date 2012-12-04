@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
-import translations
+import yawdadmin
 
 setup(
       name='yawd-admin',
