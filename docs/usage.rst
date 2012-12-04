@@ -321,10 +321,15 @@ A screenshot of an analytics account showing the Profile ID.
 The last setting, ``admin_root_url`` must be set to the root url of the
 admin website.
 
-Now if you restart the web server and visit the admin index page 
-(e.g. http://localhost:8000/admin) you will be asked
-to grant the application access to view your google analytics data.
-Make sure the google account you link has access to the defined ``profile_id``.
+Now restart the web server and visit the admin interface 
+(e.g. http://localhost:8000/admin). 
 
-From the second visit and on, yawd-admin has already access to the data and 
-will not ask for confirmation again.
+.. image:: configure-google-analytics.png
+
+Visit the 'Configure Google Analytics' page (image above) and click 
+'Authenticate new account' to grant the application access to your 
+google analytics data. Make sure the google account you link has access 
+to the specified ``profile_id``.
+
+Now yawd-admin has stored your data and you don't need
+to go through the confirmation process again.
