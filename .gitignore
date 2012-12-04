@@ -1,2 +1,4 @@
 /.pydevproject
 /.project
+/dist
+/yawd_admin.egg-info
