@@ -25,4 +25,5 @@ setup(
         "django >= 1.4",
         "oauth2client"
         ],
+      zip_safe=False
 )
