@@ -4,8 +4,8 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.safestring import mark_safe
 
 class ContentTypeSelect(forms.Select):
-    def __init__(self, lookup_id,  attrs=None, choices=()):
-        self.lookup_id = lookup_id
+    def __init__(self, object_id,  attrs=None, choices=()):
+        self.object_id = 'id_%s' % object_id
         super(ContentTypeSelect, self).__init__(attrs, choices)
         
     def render(self, name, value, attrs=None, choices=()):
@@ -24,12 +24,13 @@ class ContentTypeSelect(forms.Select):
                    '  $(document).ready( function() {'
                    '%(choiceoutput)s'
                    '    $(\'#%(id)s\').change(function (){'
-                   '        $(\'#%(fk_id)s\').attr(\'href\',%(id)s_choice_urls[$(this).val()]);'
+                   '        $(\'#%(fk_id)s\').val(\'\');'
+                   '        $(\'#lookup_%(fk_id)s\').attr(\'href\',%(id)s_choice_urls[$(this).val()]+"&pop=1").siblings(\'strong\').html(\'\');'
                    '    });'
                    '  });'
                    '})(yawdadmin.jQuery);'
                    '</script>' % { 'choiceoutput' : choiceoutput, 
                                     'id' : attrs['id'],
-                                    'fk_id' : self.lookup_id
+                                    'fk_id' : self.object_id
                                   })
         return mark_safe(u''.join(output))
