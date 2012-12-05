@@ -47,11 +47,11 @@
         // If forms are laid out as table rows, insert the
         // "add" button in a new table row:
         var numCols = this.eq(-1).children().length;
-        $parent.append('<tr class="' + options.addCssClass + '"><td colspan="' + numCols + '"><a href="javascript:void(0)">' + options.addText + "</a></tr>");
+        $parent.append('<tr class="' + options.addCssClass + '"><td colspan="' + numCols + '"><i class="icon-plus admin-inline-icon"></i>&#xa0;<a href="javascript:void(0)">' + options.addText + "</a></tr>");
         addButton = $parent.find("tr:last a");
       } else {
         // Otherwise, insert it immediately after the last form:
-        $this.filter(":last").after('<div class="' + options.addCssClass + '"><a href="javascript:void(0)">' + options.addText + "</a></div>");
+        $this.filter(":last").after('<div class="' + options.addCssClass + '"><i class="icon-plus  admin-inline-icon"></i>&#xa0;<a href="javascript:void(0)">' + options.addText + "</a></div>");
         addButton = $this.filter(":last").next().find("a");
       }
       addButton.click(function(e) {

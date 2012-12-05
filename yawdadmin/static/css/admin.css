@@ -780,4 +780,8 @@ div#id_password {
 	border: 0 !important;
 	border-top: 1px solid #eee !important;
 }
+
+.admin-inline-icon {
+	vertical-align: baseline;
+}
 /* End inlines */
