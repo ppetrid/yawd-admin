@@ -94,7 +94,7 @@ class AnalyticsConfigView(TemplateView):
             dat_file = open(ls.ADMIN_GOOGLE_ANALYTICS['token_file_name'], 'r')
             analytics = json.loads(dat_file.read())
             dat_file.close()
-        except (IOError, json.decoder.JSONDecodeError):
+        except (IOError, ValueError):
             analytics = {}
         
         context['analytics_info'] = {
