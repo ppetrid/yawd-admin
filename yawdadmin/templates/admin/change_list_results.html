@@ -32,4 +32,7 @@
 											</tr>{% endfor %}
 										</tbody>
 									</table>
+								</div>{% else %}
+								<div class="alert add-top">
+									{% trans 'There are no records yet. Use the <strong>add</strong> button above to create new' %} {{cl.opts.app_label|capfirst}}!
 								</div>{% endif %}
