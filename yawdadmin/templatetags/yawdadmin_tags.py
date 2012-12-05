@@ -2,6 +2,7 @@ import re
 from django import template
 from django.conf import settings
 from django.core import urlresolvers
+from django.utils.translation import get_language
 from yawdadmin import admin_site
 from yawdadmin.conf import settings as ls
 
@@ -17,7 +18,7 @@ def admin_top_menu(context):
         'langs' : context['langs'] if 'langs' in context else [],
         'default_lang': context['default_lang'] if 'default_lang' in context else None,
         'clean_url' : context['clean_url'] if 'clean_url' in context else '',
-        'LANGUAGE_CODE' : context['LANGUAGE_CODE'],
+        'LANGUAGE_CODE' : get_language(),
         'optionset_labels' : admin_site.get_option_admin_urls(),
         'analytics' : context['user'].is_superuser and ls.ADMIN_GOOGLE_ANALYTICS_FLOW,
     }
