@@ -24,10 +24,10 @@
 												{{ inline_admin_form.fk_field.field }}{% spaceless %}{% for fieldset in inline_admin_form %}{% for line in fieldset %}{% for field in line %}{% if field.is_hidden %}
 												{{ field.field }}{% endif %}{% endfor %}{% endfor %}{% endfor %}{% endspaceless %}
 											</td>{% for fieldset in inline_admin_form %}{% for line in fieldset %}{% for field in line %}
-											<td class="{{ field.field.name }}">{% if field.is_readonly %}
+											<td class="control-group {{ field.field.name }}{% if field.field.errors %} error{% endif %}">{% if field.is_readonly %}
 												<p>{{ field.contents }}</p>{% else %}
-												{{ field.field.errors.as_ul }}
-												{{ field.field }}{% endif %}
+												{{ field.field }}{% if field.field.errors %}
+												<span class="help-inline">{{ field.field.errors }}</span>{% endif %}{% endif %}
 											</td>{% endfor %}{% endfor %}{% endfor %}{% if inline_admin_formset.formset.can_delete %}
 											<td class="delete">{% if inline_admin_form.original %}
 												{{ inline_admin_form.deletion_field.field }}{% endif %}
