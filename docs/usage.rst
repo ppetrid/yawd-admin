@@ -246,7 +246,8 @@ options this is preferred since it will hit the database only once):
  
  	<p><span>Option 1 value:</span> {{options.option_1}}</p>
  	
- 	
+.. _google-analytics:
+
 Integration with Google Analytics
 +++++++++++++++++++++++++++++++++
  
@@ -333,3 +334,25 @@ to the specified ``profile_id``.
 
 Now yawd-admin has stored your data and you don't need
 to go through the confirmation process again.
+
+.. _admin-inlines:
+
+Admin inlines
++++++++++++++
+
+Collapsing inlines
+------------------
+
+With yawd-admin you can collapse your inlines, like you do with
+your fieldsets. Collapsing an AdminInline is easy and works for
+both stacked and tabular inlines::
+
+.. code-block:: python
+	
+	class MyStackedInline(admin.StackedInline):
+		#bla bla
+		collapse = True
+		
+	class MyTabularInline(admin.TabularInline):
+		#bla bla
+		collapse = True
