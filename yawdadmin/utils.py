@@ -1,7 +1,6 @@
-import datetime, time
+import datetime, time, json
 from oauth2client.client import AccessTokenRefreshError
 from django.core.cache import cache
-from django.utils import simplejson as json
 from django.utils.translation import get_language
 from django.utils.encoding import smart_str
 from yawdadmin import admin_site

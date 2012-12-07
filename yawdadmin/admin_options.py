@@ -1,6 +1,5 @@
-import re, copy
+import re, copy, json
 from django import forms
-from django.utils import simplejson as json
 from utils import get_options
 from models import AppOption
 
