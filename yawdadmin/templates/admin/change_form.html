@@ -22,12 +22,12 @@
 {% block object-tools %}{% if change and not is_popup %}
 			<div class="row-fluid nav">{% block object-tools-items %}
 				<div class="span2">
-					<a href="history/" class="big-button">
+					<a href="{% url opts|admin_urlname:'history' original.pk|admin_urlquote %}" class="big-button">
 						<i class="history-item"></i> {% trans "History" %}
 					</a>
 				</div>{% if has_absolute_url %}
 				<div class="span2">
-					<a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="big-button">
+					<a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="big-button">
 						<i class="preview-item"></i> {% trans "View on site" %}
 					</a>
 				</div>{% endif %}{% endblock %}
