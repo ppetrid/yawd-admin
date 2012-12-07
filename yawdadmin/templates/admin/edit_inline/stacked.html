@@ -4,14 +4,27 @@
 								{{ inline_admin_formset.formset.management_form }}{% if inline_admin_formset.formset.non_form_errors %}
 								{{ inline_admin_formset.formset.non_form_errors }}{% endif %}{% for inline_admin_form in inline_admin_formset %}
 								<div class="inline-related{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
-									<h3 class="light-blue-degrade"><b>{{ inline_admin_formset.opts.verbose_name|title }}:</b>&nbsp;<span class="inline_label">{% if inline_admin_form.original %}{{ inline_admin_form.original }}{% else %}#{{ forloop.counter }}{% endif %}</span>{% if inline_admin_form.show_url %}
+									<h3 class="light-blue-degrade{%if inline_admin_form.form.errors or inline_admin_form.form.non_field_errors %} error{% endif %}"><b>{{ inline_admin_formset.opts.verbose_name|title }}:</b>&nbsp;<span class="inline_label">{% if inline_admin_form.original %}{{ inline_admin_form.original }}{% else %}#{{ forloop.counter }}{% endif %}</span>{% if inline_admin_formset.opts.modal %}
+										<span class="inline-edit"><i class="admin-inline-icon icon-edit icon-white"></i> <a class="inline-modal" data-toggle="modal" role="button" href="#modal-wrapper-{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">{% trans 'Edit' %}</a></span>{% endif %}{% if inline_admin_form.show_url %}
 										<a href="../../../r/{{ inline_admin_form.original_content_type_id }}/{{ inline_admin_form.original.id }}/">{% trans "View on site" %}</a>{% endif %}{% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}
 										<span class="delete">{{ inline_admin_form.deletion_field.field }} {{ inline_admin_form.deletion_field.label_tag }}</span>{% endif %}
-									</h3>{% if inline_admin_form.form.non_field_errors %}
-									{{ inline_admin_form.form.non_field_errors }}{% endif %}{% for fieldset in inline_admin_form %}
-									{% include "admin/includes/fieldset.html" %}{% endfor %}{% if inline_admin_form.has_auto_field %}
-									{{ inline_admin_form.pk_field.field }}{% endif %}
-									{{ inline_admin_form.fk_field.field }}
+									</h3>{% if inline_admin_formset.opts.modal %}
+									<div class="modal hide fade" id="modal-wrapper-{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
+  										<div class="modal-header">
+  											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+  											<h3>Edit {{ inline_admin_formset.opts.verbose_name|title }}</h3>
+  										</div>
+  										<div class="modal-body">
+										{% endif %}{% if inline_admin_form.form.non_field_errors %}
+										{{ inline_admin_form.form.non_field_errors }}{% endif %}{% for fieldset in inline_admin_form %}
+										{% include "admin/includes/fieldset.html" %}{% endfor %}{% if inline_admin_form.has_auto_field %}
+										{{ inline_admin_form.pk_field.field }}{% endif %}
+										{{ inline_admin_form.fk_field.field }}{% if inline_admin_formset.opts.modal %}
+										</div>
+										<div class="modal-footer">
+											<button class="btn btn-success" data-dismiss="modal" aria-hidden="true">OK</button>
+										</div>
+									</div>{% endif %}
 								</div>{% endfor %}
 							</div>
 						</div>

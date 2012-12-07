@@ -22,7 +22,8 @@
     var updateElementIndex = function(el, prefix, ndx) {
       var id_regex = new RegExp("(" + prefix + "-(\\d+|__prefix__))");
       var replacement = prefix + "-" + ndx;
-      if ($(el).attr("for")) {
+      var jel = $(el);
+      if (jel.attr("for")) {
         $(el).attr("for", $(el).attr("for").replace(id_regex, replacement));
       }
       if (el.id) {
@@ -30,6 +31,11 @@
       }
       if (el.name) {
         el.name = el.name.replace(id_regex, replacement);
+      }
+      var modal = jel.find('.modal');
+      if (modal.length) {
+    	  modal.attr('id', 'modal-wrapper-'+replacement);
+    	  jel.find('.inline-modal').attr('href', '#modal-wrapper-'+replacement);
       }
     };
     var totalForms = $("#id_" + options.prefix + "-TOTAL_FORMS").attr("autocomplete", "off");
@@ -62,6 +68,12 @@
         row.removeClass(options.emptyCssClass)
           .addClass(options.formCssClass)
           .attr("id", options.prefix + "-" + nextIndex);
+        var modal = row.find("#modal-wrapper-"+options.prefix + "-empty");
+        if (modal.length) {
+        	var modal_id = "modal-wrapper-"+options.prefix + "-" + nextIndex;
+        	modal.attr("id", modal_id);
+        	row.find('a.inline-modal').attr("href", "#" + modal_id);
+        }
         if (row.is("tr")) {
           // If the forms are laid out in table rows, insert
           // the remove button into the last table cell:
@@ -73,7 +85,7 @@
         } else {
           // Otherwise, just insert the remove button as the
           // last child element of the form's container:
-          row.children(":first").append('<span><a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText + "</a></span>");
+          row.children(":first").append('<span class="inline-edit"><i class="admin-inline-icon icon-trash icon-white"></i>&#xa0;<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText + "</a></span>");
         }
         row.find("*").each(function() {
           updateElementIndex(this, options.prefix, totalForms.val());

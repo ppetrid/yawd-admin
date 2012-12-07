@@ -533,6 +533,11 @@ table.elfinder-info-tb tr {
 	height: 400px;
 }
 
+.textarea-popup {
+	width: 210px;
+	height: 60px;
+}
+
 .sortoptions {
 	display: inline-block;
 	float: right;
@@ -742,13 +747,44 @@ div#id_password {
 	font-weight: normal;
 }
 
-.inline-related h3 a{
+.inline-related h3 a {
 	color: #ddd;
 	text-decoration: underline;
 }
 
 .inline-related h3 a:hover {
 	color: #fff;
+}
+
+.inline-related h3.error {
+	background: #B94A48;
+	background: -moz-linear-gradient(top, #C95A58 0%, #B94A48 100%);
+	background: -webkit-gradient(linear, 0 0, 0 100%, from(#C95A58), to(#B94A48));
+	background: -webkit-linear-gradient(top, #C95A58 0%,#B94A48 100%);
+	background: -o-linear-gradient(top, #C95A58 0%,#B94A48 100%);
+	background: -ms-linear-gradient(top, #C95A58 0%,#B94A48 100%);
+	background: linear-gradient(top, #C95A58 0%,#D96A68 100%);
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C95A58', endColorstr='#B94A48',GradientType=0 );
+}
+
+.inline-related .modal h3 {
+	color: #000;
+	font-size: 30px;
+	border: 0;
+	font-weight: bold;
+	padding: 10px 10px 0 10px;
+}
+
+.inline-related .modal h3 a {
+	color: #08c;
+	text-decoration: none;
+	font-weight: normal;
+	font-size: 15px;
+}
+
+.inline-related h3 .modal a:hover {
+	color: #005580;
+	text-decoration: underline;
 }
 
 .inline-related {
@@ -783,5 +819,15 @@ div#id_password {
 
 .admin-inline-icon {
 	vertical-align: baseline;
+}
+
+.inline-edit {
+	border-left: 1px #f4f4f4 solid;
+	padding: 0 0 0 10px;
+	margin: 0 0 0 10px;
+}
+
+.inline-edit a:focus {
+	outline: none;
 }
 /* End inlines */

@@ -344,7 +344,7 @@ Collapsing inlines
 ------------------
 
 With yawd-admin you can collapse your inlines, like you do with
-your fieldsets. Collapsing an AdminInline is easy and works for
+your fieldsets. Collapsing an admin inline is easy and works for
 both stacked and tabular inlines::
 
 .. code-block:: python
@@ -356,3 +356,19 @@ both stacked and tabular inlines::
 	class MyTabularInline(admin.TabularInline):
 		#bla bla
 		collapse = True
+		
+Modal inlines
+-------------
+
+Another nice & new option is the inline modal functionality. It can
+be really useful when you have a lot of fields in your inline model. Add
+``modal=True`` to the ``StackedInline`` class and your inline form will
+open in a popup-style modal window::
+
+.. code-block:: python
+
+	class MyStackedInline(admin.StackedInline):
+		#bla bla
+		collapse = True 
+
+This does not work with tabular inlines
