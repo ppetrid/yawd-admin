@@ -25,6 +25,7 @@ def admin_top_menu(context):
 
 @register.simple_tag
 def clean_media(media):
-    media._js = [i for i in media._js if not re.match(
-        r'%sadmin/js/((jquery(\.init)?|collapse|admin/RelatedObjectLookups)(\.min)?\.)js' % settings.STATIC_URL, i)]
+    if hasattr(media, '_js'):
+        media._js = [i for i in media._js if not re.match(
+            r'%sadmin/js/((jquery(\.init)?|collapse|admin/RelatedObjectLookups)(\.min)?\.)js' % settings.STATIC_URL, i)]
     return media

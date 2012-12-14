@@ -6,7 +6,7 @@
 				<li class="active">{% for app in app_list %}{% blocktrans with app.name|app_title as name %}{{ name }}{% endblocktrans %}{% endfor %}</li>
 			</ul>{% endblock %}{% endif %}
 
-{% block main-struct %}
+{% block content %}
 			<div id="content-main">{% if app_list %}{% for app in app_list %}
 				<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
 					<thead>
