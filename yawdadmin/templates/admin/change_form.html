@@ -33,7 +33,7 @@
 				</div>{% endif %}{% endblock %}
 			</div>{% endif %}{% endblock %}
 
-{% block main-struct %}
+{% block content %}
 			<div id="content-main">
 				<form class="form-horizontal form-inline" {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">
 					{% csrf_token %}{% block form_top %}{% endblock %}{% if save_on_top %}{% submit_row %}{% endif %}

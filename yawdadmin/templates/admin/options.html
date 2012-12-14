@@ -21,7 +21,7 @@
 				<li class="active">{% trans title %}</li>
 			</ul>{% endblock %}
 
-{% block main-struct %}
+{% block content %}
 			<div id="content-main">
 			<form class="form-horizontal form-inline" action="." method="post" id="{{ opts.module_name }}_form">
 				{% csrf_token %}{% block form_top %}{% endblock %}{% if save_on_top %}
