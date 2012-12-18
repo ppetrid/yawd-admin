@@ -447,20 +447,216 @@ input[type="checkbox"] {
 	background: url('../img/gcons/globe.png') 0px 0px no-repeat;
 }
 
+.happy-face-item {
+	background: url('../img/gcons/happy-face.png') 0px 0px no-repeat;
+}
+
+.headphone-item {
+	background: url('../img/gcons/headphone.png') 0px 0px no-repeat;
+}
+
+.heart-item {
+	background: url('../img/gcons/heart.png') 0px 0px no-repeat;
+}
+
+.home-item {
+	background: url('../img/gcons/home.png') 0px 0px no-repeat;
+}
+
+.id-item {
+	background: url('../img/gcons/ID.png') 0px 0px no-repeat;
+}
+
+.ipod-item {
+	background: url('../img/gcons/ipod.png') 0px 0px no-repeat;
+}
+
+.lab-item {
+	background: url('../img/gcons/lab.png') 0px 0px no-repeat;
+}
+
+.lady-item {
+	background: url('../img/gcons/lady.png') 0px 0px no-repeat;
+}
+
+.lamp-item {
+	background: url('../img/gcons/lamp.png') 0px 0px no-repeat;
+}
+
+.leaves-item {
+	background: url('../img/gcons/light.png') 0px 0px no-repeat;
+}
+
+.line-globe-item {
+	background: url('../img/gcons/line-globe.png') 0px 0px no-repeat;
+}
+
+.lock-item {
+	background: url('../img/gcons/lock.png') 0px 0px no-repeat;
+}
+
 .lookup-item {
 	background: url('../img/gcons/lookup.png') 0px 0px no-repeat;
+}
+
+.male-user-item {
+	background: url('../img/gcons/male-user.png') 0px 0px no-repeat;
+}
+
+.microphone-item {
+	background: url('../img/gcons/microphone.png') 0px 0px no-repeat;
+}
+
+.mobile-item {
+	background: url('../img/gcons/mobile.png') 0px 0px no-repeat;
+}
+
+.mobile-02-item {
+	background: url('../img/gcons/mobile-02.png') 0px 0px no-repeat;
+}
+
+.mouse-item {
+	background: url('../img/gcons/mouse.png') 0px 0px no-repeat;
+}
+
+.multi-agents-item {
+	background: url('../img/gcons/multi-agents.png') 0px 0px no-repeat;
+}
+
+.multi-node-item {
+	background: url('../img/gcons/multi-node.png') 0px 0px no-repeat;
+}
+
+.network-item {
+	background: url('../img/gcons/network.png') 0px 0px no-repeat;
+}
+
+.network-pc-item {
+	background: url('../img/gcons/network-pc.png') 0px 0px no-repeat;
+}
+
+.next-item {
+	background: url('../img/gcons/next-item.png') 0px 0px no-repeat;
+}
+
+.phone-item {
+	background: url('../img/gcons/phone.png') 0px 0px no-repeat;
 }
 
 .pie-chart-item {
 	background: url('../img/gcons/pie-chart.png') 0px 0px no-repeat;
 }
 
+.pin-item {
+	background: url('../img/gcons/pin.png') 0px 0px no-repeat;
+}
+
+.plane-item {
+	background: url('../img/gcons/plane.png') 0px 0px no-repeat;
+}
+
+.print-item {
+	background: url('../img/gcons/print.png') 0px 0px no-repeat;
+}
+
 .processing-item {
 	background: url('../img/gcons/processing.png') 0px 0px no-repeat;
 }
 
+.processing-02-item {
+	background: url('../img/gcons/processing-02.png') 0px 0px no-repeat;
+}
+
+.push-pin-item {
+	background: url('../img/gcons/push-pin.png') 0px 0px no-repeat;
+}
+
+.recycle-empty-item {
+	background: url('../img/gcons/recycle-empty.png') 0px 0px no-repeat;
+}
+
+.recycle-full-item {
+	background: url('../img/gcons/recycle-full.png') 0px 0px no-repeat;
+}
+
 .reload-item {
 	background: url('../img/gcons/reload.png') 0px 0px no-repeat;
+}
+
+.rss-item {
+	background: url('../img/gcons/rss.png') 0px 0px no-repeat;
+}
+
+.satellite-item {
+	background: url('../img/gcons/satellite.png') 0px 0px no-repeat;
+}
+
+.save-item {
+	background: url('../img/gcons/save.png') 0px 0px no-repeat;
+}
+
+.scale-item {
+	background: url('../img/gcons/scale.png') 0px 0px no-repeat;
+}
+
+.scissors-item {
+	background: url('../img/gcons/scissors.png') 0px 0px no-repeat;
+}
+
+.screen-item {
+	background: url('../img/gcons/screen.png') 0px 0px no-repeat;
+}
+
+.search-item {
+	background: url('../img/gcons/search.png') 0px 0px no-repeat;
+}
+
+.server-item {
+	background: url('../img/gcons/server.png') 0px 0px no-repeat;
+}
+
+.shield-item {
+	background: url('../img/gcons/shield.png') 0px 0px no-repeat;
+}
+
+.shut-down-item {
+	background: url('../img/gcons/shut-down.png') 0px 0px no-repeat;
+}
+
+.star-item {
+	background: url('../img/gcons/star.png') 0px 0px no-repeat;
+}
+
+.tag-item {
+	background: url('../img/gcons/tag.png') 0px 0px no-repeat;
+}
+
+.tap-item {
+	background: url('../img/gcons/tap.png') 0px 0px no-repeat;
+}
+
+.tree-item {
+	background: url('../img/gcons/tree.png') 0px 0px no-repeat;
+}
+
+.umbrella-item {
+	background: url('../img/gcons/umbrella.png') 0px 0px no-repeat;
+}
+
+.unlock-item {
+	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+}
+
+.usb-item {
+	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+}
+
+.van-item {
+	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+}
+
+.wifi-item {
+	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
 }
 
 .big-button {

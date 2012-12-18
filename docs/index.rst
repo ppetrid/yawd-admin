@@ -32,6 +32,7 @@ Contents:
 
    installation
    usage
+   customize
 
 Indices and tables
 ==================
