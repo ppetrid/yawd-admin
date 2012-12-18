@@ -91,6 +91,9 @@ def get_analytics_data(http):
     except AccessTokenRefreshError:
         return { 'error' : 'refresh' }
     
+    if not 'rows' in summed_data:
+        return { 'error' :  'empty' }
+
     data = {
         'summed' : {
             'visits' : pie_data['totalsForAllResults']['ga:visits'],
