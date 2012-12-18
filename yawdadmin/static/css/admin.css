@@ -241,8 +241,26 @@ input[type="checkbox"] {
 
 /* OBJECT TOOLS ICONS */
 
-.add-item {
-	background: url('../img/add-item.png') 0px 0px no-repeat;
+.loading-item, .add-item, .addressbook-item, .agent-item, .apple-item, 
+.arrow-round-item, .badge-item, .bar-chart-item, .bar-chart-02-item,
+.battery-full-item, .bird-item, .boat-item, .bookmark-item, .briefcase-item,
+.calculator-item, .calendar-item, .cassete-item, .chain-item, .chat-item,
+.chat-02-item, .cloud-filled-item, .cloud-outline-item, .computer-item,
+.configuration-item, .counfiguration-02-item, .connected-item, .connections-item,
+.container-item, .copy-item, .database-item, .delete-item, .disc-item, 
+.dollar-item, .download-item, .edit-item, .email-item, .fan-item, .fancy-globe-item,
+.female-user-item, .fire-item, .first-aid-item, .flag-item, .flower-item,
+.full-screen-item, .glasses-item, .globe-item, .happy-face-item, .headphone-item,
+.heart-item, .home-item, .id-item, .ipod-item, .lab-item, .lady-item,
+.lamp-item, .leaves-item, .light-item, .line-globe-item, .lock-item, .lookup-item,
+.male-user-item, .microphone-item, .mobile-item, .mobile-02-item, .mouse-item,
+.multi-agents-item, .music-node-item, .network-item, .next-item, .phone-item,
+.pie-chart-item, .pin-item, .plane-item, .print-item, .processing-item,
+.processing-02-item, .push-pin-item, .recycle-empty-item, .recycle-full-item,
+.reload-item, .rss-item, .satellite-item, .save-item, .scissors-item,
+.screen-item, .search-item, .server-item, .shield-item, .shut-down-item,
+.star-item, .tag-item, .tap-item, .tree-item, .umbrella-item, .unlock-item,
+.usb-item, .van-item, .wifi-item, .world-item {
 	width: 32px;
 	height: 32px;
 	display: block;
@@ -251,66 +269,202 @@ input[type="checkbox"] {
 
 .loading-item {
 	background: url('../img/ajax-loader.gif') 4px 4px no-repeat transparent;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
 }
 
-.processing-item {
-	background: url('../img/processing.png') 0px 0px no-repeat;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
+.add-item {
+	background: url('../img/gcons/add-item.png') 0px 0px no-repeat;
 }
 
-.reload-item {
-	background: url('../img/reload.png') 0px 0px no-repeat;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
+.addressbook-item {
+	background: url('../img/gcons/addressbook.png') 0px 0px no-repeat;
 }
 
-.history-item {
-	background: url('../img/database.png') 0px 0px no-repeat;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
+.agent-item {
+	background: url('../img/gcons/agent.png') 0px 0px no-repeat;
 }
 
-.fancy-globe-item {
-	background: url('../img/fancy-globe.png') 0px 0px no-repeat;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
+.apple-item {
+	background: url('../img/gcons/apple.png') 0px 0px no-repeat;
 }
 
-.globe-item {
-	background: url('../img/globe.png') 0px 0px no-repeat;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
+.arrow-round-item {
+	background: url('../img/gcons/arrow-round.png') 0px 0px no-repeat;
 }
 
-.preview-item {
-	background: url('../img/lookup.png') 0px 0px no-repeat;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
+.badge-item {
+	background: url('../img/gcons/badge.png') 0px 0px no-repeat;
+}
+
+.bar-chart-item {
+	background: url('../img/gcons/bar-chart.png') 0px 0px no-repeat;
+}
+
+.bar-chart-02-item {
+	background: url('../img/gcons/bar-chart-02.png') 0px 0px no-repeat;
+}
+
+.battery-full-item {
+	background: url('../img/gcons/battery-full.png') 0px 0px no-repeat;
+}
+
+.bird-item {
+	background: url('../img/gcons/bird.png') 0px 0px no-repeat;
+}
+
+.boat-item {
+	background: url('../img/gcons/boat.png') 0px 0px no-repeat;
+}
+
+.bookmark-item {
+	background: url('../img/gcons/bookmark.png') 0px 0px no-repeat;
+}
+
+.briefcase-item {
+	background: url('../img/gcons/briefcase.png') 0px 0px no-repeat;
+}
+
+.calculator-item {
+	background: url('../img/gcons/calculator.png') 0px 0px no-repeat;
+}
+
+.calendar-item {
+	background: url('../img/gcons/calendar.png') 0px 0px no-repeat;
+}
+
+.cassete-item {
+	background: url('../img/gcons/cassete.png') 0px 0px no-repeat;
+}
+
+.chain-item {
+	background: url('../img/gcons/chain.png') 0px 0px no-repeat;
+}
+
+.chat-item {
+	background: url('../img/gcons/chat.png') 0px 0px no-repeat;
+}
+
+.chat-02-item {
+	background: url('../img/gcons/chat-02.png') 0px 0px no-repeat;
+}
+
+.cloud-filled-item {
+	background: url('../img/gcons/cloud-filled.png') 0px 0px no-repeat;
+}
+
+.cloud-outline-item {
+	background: url('../img/gcons/cloud-outline.png') 0px 0px no-repeat;
+}
+
+.computer-item {
+	background: url('../img/gcons/computer.png') 0px 0px no-repeat;
 }
 
 .configuration-item {
-	background: url('../img/configuration.png') 0px 0px no-repeat;
-	width: 32px;
-	height: 32px;
-	display: block;
-	margin: auto;
+	background: url('../img/gcons/configuration.png') 0px 0px no-repeat;
+}
+
+.configuration-02-item {
+	background: url('../img/gcons/configuration-02.png') 0px 0px no-repeat;
+}
+
+.connected-item {
+	background: url('../img/gcons/connected.png') 0px 0px no-repeat;
+}
+
+.connections-item {
+	background: url('../img/gcons/connections.png') 0px 0px no-repeat;
+}
+
+.container-item {
+	background: url('../img/gcons/container.png') 0px 0px no-repeat;
+}
+
+.copy-item {
+	background: url('../img/gcons/copy-item.png') 0px 0px no-repeat;
+}
+
+.database-item {
+	background: url('../img/gcons/database.png') 0px 0px no-repeat;
+}
+
+.delete-item {
+	background: url('../img/gcons/delete-item.png') 0px 0px no-repeat;
+}
+
+.disc-item {
+	background: url('../img/gcons/disc.png') 0px 0px no-repeat;
+}
+
+.dollar-item {
+	background: url('../img/gcons/dollar.png') 0px 0px no-repeat;
+}
+
+.download-item {
+	background: url('../img/gcons/download.png') 0px 0px no-repeat;
+}
+
+.edit-item {
+	background: url('../img/gcons/edit.png') 0px 0px no-repeat;
+}
+
+.email-item {
+	background: url('../img/gcons/email.png') 0px 0px no-repeat;
+}
+
+.fan-item {
+	background: url('../img/gcons/fan.png') 0px 0px no-repeat;
+}
+
+.fancy-globe-item {
+	background: url('../img/gcons/fancy-globe.png') 0px 0px no-repeat;
+}
+
+.female-user-item {
+	background: url('../img/gcons/female-user.png') 0px 0px no-repeat;
+}
+
+.fire-item {
+	background: url('../img/gcons/fire.png') 0px 0px no-repeat;
+}
+
+.first-aid-item {
+	background: url('../img/gcons/first-aid.png') 0px 0px no-repeat;
+}
+
+.flag-item {
+	background: url('../img/gcons/flag.png') 0px 0px no-repeat;
+}
+
+.flower-item {
+	background: url('../img/gcons/flower.png') 0px 0px no-repeat;
+}
+
+.full-screen-item {
+	background: url('../img/gcons/full-screen.png') 0px 0px no-repeat;
+}
+
+.glasses-item {
+	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+}
+
+.globe-item {
+	background: url('../img/gcons/globe.png') 0px 0px no-repeat;
+}
+
+.lookup-item {
+	background: url('../img/gcons/lookup.png') 0px 0px no-repeat;
+}
+
+.pie-chart-item {
+	background: url('../img/gcons/pie-chart.png') 0px 0px no-repeat;
+}
+
+.processing-item {
+	background: url('../img/gcons/processing.png') 0px 0px no-repeat;
+}
+
+.reload-item {
+	background: url('../img/gcons/reload.png') 0px 0px no-repeat;
 }
 
 .big-button {
