@@ -503,12 +503,27 @@ input[type="checkbox"] {
 
 #changelist-top {
 	margin-bottom: 5px;
+}
+
+#changelist-top.navbar .navbar-inner {
+	-webkit-box-shadow: 0 0 0 !important;
+	-moz-box-shadow: 0 0 0 !important;
+	box-shadow: 0 0 0 !important;
+	border: 1px solid #E4E4E4 !important;
 	-webkit-border-radius: 6px;
 	-moz-border-radius: 6px;
 	border-radius: 6px;
 }
 
-.actions, .toolbar {
+#changelist-top.navbar .btn, #changelist-top.navbar select[name="action"], #changelist-top.navbar .search-query {
+	margin-top: 5px;
+}
+
+#changelist-top.navbar .small, #changelist-top.navbar .label {
+	vertical-align: middle;
+}
+
+.toolbar {
 	padding: 10px;
 }
 
@@ -888,6 +903,30 @@ div#id_password {
 
 /* End overriding widget styling */
 
+/* SELECT2 STYLING */
+
+div.select2-container {
+	min-width: 180px;
+}
+
+/* End Select 2styling */
+
+/* CHANGELIST FILTERS STYLING */
+
+.filters div.select2-container {
+	margin: 0 10px;
+}
+
+.filters .nav-header {
+	margin-top: 0 !important;
+	padding-top: 0 !important;
+}
+
+.filters .divider {
+	margin: 9px 1px 3px 1px !important;
+}
+
+/* End filters styline */
 
 /* INLINES */
 
