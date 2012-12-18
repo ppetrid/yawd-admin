@@ -52,9 +52,10 @@
 						<div class="row-fluid hidden-phone">
 							<div class="span12 alert">
 								<strong>{% trans 'Warning!' %}</strong>
-								{% trans 'Analytics data could not be generated' %}:{% if ga_data.error = 'refresh' %}
-								{% trans 'The key has expired.' %}{% elif ga_data.error = 'authentication' %}
-								{% trans 'The analytics user is not authenticated.' %} <a href="{% url 'admin:analytics' %}">{% trans 'Click here' %}</a> to connect a user with the analytics account.{% else %}
+								{% trans 'Analytics data could not be generated' %}:{% if ga_data.error == 'refresh' %}
+								{% trans 'The key has expired.' %}{% elif ga_data.error == 'authentication' %}
+								{% trans 'The analytics user is not authenticated.' %} <a href="{% url 'admin:analytics' %}">{% trans 'Click here' %}</a> to connect a user with the analytics account.{% elif ga_data.error == 'empty' %}
+								{% trans 'Your account has no data yet. <strong>Just be patient, visits will come!<strong> :)' %}{% else %}
 								{% trans 'Error code'%} <strong>{{ga_data.error}}</strong>.{% endif %}
 							</div>
 						</div>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
