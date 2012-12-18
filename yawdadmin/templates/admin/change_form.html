@@ -23,12 +23,12 @@
 			<div class="row-fluid nav">{% block object-tools-items %}
 				<div class="span2">
 					<a href="history/" class="big-button">
-						<i class="history-item"></i> {% trans "History" %}
+						<i class="database-item"></i> {% trans "History" %}
 					</a>
 				</div>{% if has_absolute_url %}
 				<div class="span2">
 					<a href="../../../r/{{ content_type_id }}/{{ object_id }}/" class="big-button">
-						<i class="preview-item"></i> {% trans "View on site" %}
+						<i class="lookup-item"></i> {% trans "View on site" %}
 					</a>
 				</div>{% endif %}{% endblock %}
 			</div>{% endif %}{% endblock %}
