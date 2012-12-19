@@ -10,7 +10,7 @@
 			<div id="content-main">{% if app_list %}{% for app in app_list %}
 				<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
 					<thead>
-						<tr class="navbar-inner">
+						<tr class="grey-degrade">
 							<th colspan="2" class="title"><a href="{{ app.app_url }}" class="section">{% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}</a></th>
 						</tr>
 					</thead>

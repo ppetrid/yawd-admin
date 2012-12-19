@@ -2,6 +2,8 @@ import re
 from django import template
 from django.conf import settings
 from django.core import urlresolvers
+from django.contrib.admin.views.main import PAGE_VAR
+from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
 from yawdadmin import admin_site
 from yawdadmin.conf import settings as ls
@@ -29,3 +31,18 @@ def clean_media(media):
         media._js = [i for i in media._js if not re.match(
             r'%sadmin/js/((jquery(\.init)?|collapse|admin/RelatedObjectLookups)(\.min)?\.)js' % settings.STATIC_URL, i)]
     return media
+
+@register.simple_tag
+def yawdadmin_paginator_number(cl,i):
+    """
+    Generates an individual page index link in a paginated list.
+    """
+    if i == '.':
+        return mark_safe('<li class="disabled"><a href="javascript:void(0);">...</a></li>')
+    elif i == cl.page_num:
+        return mark_safe('<li class="active"><a href="javascript:void(0);">%s</a></li>' % str(i+1))
+    else:
+        return '<li><a href="%s"%s>%s</a></li>' % (
+                           cl.get_query_string({PAGE_VAR: i}),
+                           mark_safe(' class="end"' if i == cl.paginator.num_pages-1 else ''),
+                           i+1)

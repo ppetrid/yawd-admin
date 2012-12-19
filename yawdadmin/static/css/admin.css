@@ -182,6 +182,10 @@ input[type="checkbox"] {
 	box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.1),0 1px 10px rgba(0, 0, 0, 0.1);
 }
 
+.navbar-blue .navbar-inner {
+	border: 0;
+}
+
 .grey-degrade, .breadcrumb, .tabular.inline-related .add-row td {
 	background-color: #FAFAFA;
 	background-image: -moz-linear-gradient(top, white, #F2F2F2);
@@ -723,6 +727,13 @@ input[type="checkbox"] {
 	padding: 10px;
 }
 
+.actions span.all,
+.actions span.action-counter,
+.actions span.clear,
+.actions span.question {
+	display: none;
+}
+
 select[name="action"] {
 	margin-bottom: 0;
 }
@@ -817,13 +828,27 @@ ul.toplinks li {
 	margin: 4px 0;
 }
 
-.paginator {
-	padding: 5px;
-	text-shadow: 0 1px 0 #eee;
-	color: #666;
-	-webkit-border-radius: 4px;
-	-moz-border-radius: 4px;
-	border-radius: 4px;
+.paginator-wrapper {
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	border-radius: 6px;
+}
+
+.pagination-medium {
+	margin: 5px;
+	height: 30px;
+}
+
+.paginator-extra {
+	margin: 5px 0 5px 10px;
+	height: 30px;	
+}
+
+.paginator-extra span.count {
+	font-family: 'Open Sans Condensed', Arial, sans-serif;
+	font-weight: bold;
+	font-size: 17px;
+	line-height: 30px;
 }
 
 .breadcrumb li:first-child i {
@@ -1216,7 +1241,7 @@ div.select2-container {
 	margin: 0 0 0 10px;
 }
 
-.inline-edit a:focus {
+.inline-edit a:focus, .navbar a:focus {
 	outline: none;
 }
 /* End inlines */

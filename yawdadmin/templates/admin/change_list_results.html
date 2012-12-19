@@ -5,7 +5,7 @@
 								<div class="results">
 									<table cellspacing="0" id="result_list" class="table table-bordered table-striped">
 										<thead>
-											<tr class="navbar-inner">{% for header in result_headers %}
+											<tr class="grey-degrade">{% for header in result_headers %}
 												<th scope="col"{{ header.class_attrib }}>
 													<span class="text">{% if header.sortable %}
 														<a href="{{ header.url_primary }}">{{ header.text|capfirst }}</a>{% else %}
