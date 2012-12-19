@@ -1205,4 +1205,9 @@ div#id_password {
 .inline-edit a:focus, .navbar a:focus {
 	outline: none;
 }
+
 /* End inlines */
+
+.popover-content {
+	line-height: 20px;
+}
