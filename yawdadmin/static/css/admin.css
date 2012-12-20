@@ -1151,6 +1151,9 @@ div.select2-container {
 
 /* INLINES */
 
+.inline-wrapper {
+	margin-bottom: 30px;
+}
 .inline-related h3 {
 	margin: 0;
 	border: 0;

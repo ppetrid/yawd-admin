@@ -11,7 +11,7 @@
 									<div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
 										<label class="control-label{% if field.field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
 										<div class="controls">{% if field.is_readonly %}
-											<span><i>{{ field.contents }}</i></span>{% elif field.is_checkbox %}
+											<span><i>{{ field.contents|linebreaksbr }}</i></span>{% elif field.is_checkbox %}
 											<span class="switch">
 												{{field.field}}
 												<span class="switch-track"></span>
