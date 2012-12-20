@@ -2,6 +2,10 @@ body {
 	background-color: #fff;
 }
 
+body.modal-open {
+	overflow: hidden;
+}
+
 .container-fluid {
 	max-width: 1400px !important;
 	margin: auto;
