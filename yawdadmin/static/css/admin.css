@@ -3,7 +3,7 @@ body {
 }
 
 body.modal-open {
-    overflow: hidden;
+	overflow: hidden;
 }
 
 .container-fluid {
