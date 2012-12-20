@@ -896,7 +896,7 @@ table.elfinder-info-tb tr {
 	width: 100%;
 }
 
-.textarea-small {
+.textarea-small, .vLargeTextField {
 	width: 50%;
 	height: 45px;
 }
