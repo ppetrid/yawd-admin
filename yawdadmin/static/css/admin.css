@@ -27,6 +27,10 @@ input[type="checkbox"] {
 	margin: -2px 0 0 0 !important;
 }
 
+fieldset {
+	margin-bottom: 25px;
+}
+
 .help-inline ul, .alert-error ul, .alert-success ul, .messagelist {
 	list-style: none;
 	padding: 0;
@@ -907,8 +911,13 @@ table.elfinder-info-tb tr {
 	width: 100%;
 }
 
-.textarea-small {
+.textarea-small, .vLargeTextField {
 	width: 50%;
+	height: 60px;
+}
+
+.textarea-large, .modal .vLargeTextField {
+	width: 75%;
 	height: 45px;
 }
 
@@ -921,11 +930,6 @@ table.elfinder-info-tb tr {
 	width: 98%;
 	padding: 1% !important;
 	height: 400px;
-}
-
-.textarea-popup {
-	width: 210px;
-	height: 60px;
 }
 
 .sortoptions {
@@ -1151,9 +1155,14 @@ div.select2-container {
 
 /* INLINES */
 
-.inline-wrapper {
-	margin-bottom: 30px;
+.inline-group {
+	margin-bottom: 25px;
 }
+
+.inline-related h2 {
+	padding-left: 10px;
+}
+
 .inline-related h3 {
 	margin: 0;
 	border: 0;
@@ -1164,13 +1173,15 @@ div.select2-container {
 	font-weight: normal;
 }
 
-.inline-related h3 a {
-	color: #ddd;
+.inline-related h3 a, .inline-deletelink {
+	color: #333;
+	font-family: 'Open Sans Condensed', Arial, sans-serif;
+	font-size: 16px;
 	text-decoration: underline;
 }
 
-.inline-related h3 a:hover {
-	color: #fff;
+.inline-related h3 a:hover, .inline-deletelink:hover {
+	color: #555;
 }
 
 .inline-related h3.error {
@@ -1182,6 +1193,10 @@ div.select2-container {
 	background: -ms-linear-gradient(top, #C95A58 0%,#B94A48 100%);
 	background: linear-gradient(top, #C95A58 0%,#D96A68 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C95A58', endColorstr='#B94A48',GradientType=0 );
+}
+
+.inline-related .modal h2 {
+	padding-left: 0;
 }
 
 .inline-related .modal h3 {
@@ -1212,6 +1227,31 @@ div.select2-container {
 	border-radius: 4px;
 }
 
+.inline-related-modal-wrapper {
+	border-bottom: 1px solid #eee;
+}
+
+.inline-related-modal-wrapper .add-row {
+	background-color: #f9f9f9;
+	margin-bottom: 1px;
+	padding: 10px;
+}
+
+.inline-related-modal {
+	margin: 0 0 1px 0 !important;
+	border: 0 !important;
+	background-color: #fdfdfd;
+}
+
+.inline-modal-header {
+	border-bottom: 0 !important;
+	color: #333 !important;
+}
+
+.inline-related-modal .inline-edit {
+	border-color: #444 !important;
+} 
+
 .inline-related span.delete {
 	float: right;
 	display: inline-block;
@@ -1219,6 +1259,10 @@ div.select2-container {
 
 .empty-form {
 	display: none;
+}
+
+.inline-related fieldset {
+	margin-bottom: 0;	
 }
 
 .tabular.inline-related table {

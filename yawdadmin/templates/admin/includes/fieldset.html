@@ -3,7 +3,7 @@
 							<div class="description alert">
 								{{ fieldset.description|safe }}
 							</div>{% endif %}{% for line in fieldset %}
-							<div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
+							<div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %}{% if field.field.is_hidden %} has-hidden-field{% endif %}{% if forloop.last and forloop.counter == 1 and field.field.is_hidden %} hidden{% endif %}{% endfor %}">
 								<div class="field">{% if not line.fields|length_is:'1' and line.errors %}
 									<div class="alert alert-error">
 										{{ line.errors }}
