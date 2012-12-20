@@ -898,6 +898,11 @@ table.elfinder-info-tb tr {
 
 .textarea-small, .vLargeTextField {
 	width: 50%;
+	height: 60px;
+}
+
+.textarea-large, .modal .vLargeTextField {
+	width: 75%;
 	height: 45px;
 }
 
@@ -910,11 +915,6 @@ table.elfinder-info-tb tr {
 	width: 98%;
 	padding: 1% !important;
 	height: 400px;
-}
-
-.textarea-popup {
-	width: 210px;
-	height: 60px;
 }
 
 .sortoptions {
