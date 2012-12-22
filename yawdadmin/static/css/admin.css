@@ -1172,6 +1172,19 @@ div#id_password {
 	padding: 10px 10px 0 10px;
 }
 
+h3.popover-title {
+	padding: 8px 14px !important;
+	margin: 0 !important;
+	font-size: 16px !important;
+	font-weight: normal !important;
+	line-height: 18px !important;
+	background-color: #F7F7F7 !important;
+	border-bottom: 1px solid #EBEBEB !impotrant;
+	-webkit-border-radius: 5px 5px 0 0 !important;
+	-moz-border-radius: 5px 5px 0 0 !important;
+	border-radius: 5px 5px 0 0 !important;
+}
+
 .inline-related .modal h3 a {
 	color: #08c;
 	text-decoration: none;
