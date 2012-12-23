@@ -5,7 +5,10 @@
 							{% blocktrans count form.non_field_errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
 							{{ form.non_field_errors }}
 						</span>
-					</div>{% endif %}{% for field in form %}
+					</div>{% endif %}{% if form.hidden_fields %}
+					<div>{% for field in form.hidden_fields %}
+					{{field}}{% endfor %}
+					</div>{% endif %}{% for field in form.visible_fields %}
 					<div class="row-fluid color-form {% cycle 'row1' 'row2' %}">
 						<div class="span12 field control-group{% if field.errors %} error{% endif %}">
 							<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.auto_id}}">{{ field.label }}:</label>

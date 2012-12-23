@@ -916,7 +916,7 @@ table.elfinder-info-tb tr {
 	height: 60px;
 }
 
-.textarea-large, .modal .vLargeTextField {
+.modal .vLargeTextField {
 	width: 75%;
 	height: 45px;
 }
@@ -924,6 +924,11 @@ table.elfinder-info-tb tr {
 .textarea-medium {
 	width: 50%;
 	height: 80px;
+}
+
+.textarea-large {
+	width: 50%;
+	height: 160px;
 }
 
 .textarea-full {
