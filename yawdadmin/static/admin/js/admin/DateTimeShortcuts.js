@@ -75,7 +75,7 @@ var DateTimeShortcuts = {
         clock_box.style.position = 'absolute';
         clock_box.className = 'clockbox module';
         clock_box.setAttribute('id', DateTimeShortcuts.clockDivName + num);
-        document.body.appendChild(clock_box);
+        yawdadmin.jQuery(inp).closest('.modal, body').append(clock_box);
         addEvent(clock_box, 'click', DateTimeShortcuts.cancelEventPropagation);
 
         quickElement('h2', clock_box, gettext('Choose a time'));
@@ -173,7 +173,7 @@ var DateTimeShortcuts = {
         cal_box.style.position = 'absolute';
         cal_box.className = 'calendarbox module';
         cal_box.setAttribute('id', DateTimeShortcuts.calendarDivName1 + num);
-        document.body.appendChild(cal_box);
+        yawdadmin.jQuery(inp).closest('.modal, body').append(cal_box);
         addEvent(cal_box, 'click', DateTimeShortcuts.cancelEventPropagation);
 
         // next-prev links
