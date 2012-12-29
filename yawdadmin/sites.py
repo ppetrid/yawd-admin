@@ -12,7 +12,7 @@ from django.utils.text import capfirst
 from django.views.decorators.cache import never_cache
 from conf import settings as ls
 from models import AppOption
-from views import AppOptionView, AnalyticsAuthView, AnalyticsConfigView, AnalyticsConnectView
+from views import AppOptionView, AnalyticsAuthView, AnalyticsConfigView, AnalyticsConnectView, MyAccountView
 
 _optionset_labels = {}
 
@@ -52,7 +52,9 @@ class YawdAdminSite(AdminSite):
             url(r'^configuration-options/(?P<optionset_label>%s)/$' % '|'.join(_optionset_labels.keys()), wrap(AppOptionView.as_view()), name='optionset-label-options'),
             url(r'^oauth2callback/$', wrap(AnalyticsAuthView.as_view()), name='oauth2-callback'),
             url(r'^google-analytics/$', wrap(AnalyticsConfigView.as_view()), name='analytics'),
-            url(r'^google-analytics/connect/$', wrap(AnalyticsConnectView.as_view()), name='analytics-connect'))
+            url(r'^google-analytics/connect/$', wrap(AnalyticsConnectView.as_view()), name='analytics-connect'),
+            url(r'^my-account/$', wrap(MyAccountView.as_view()), name='my-account'),
+)
 
         urlpatterns += super(YawdAdminSite, self).get_urls() 
         return urlpatterns

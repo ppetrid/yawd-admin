@@ -35,12 +35,15 @@
 									<li class="divider"></li>{% endif %}{% url 'django-admindocs-docroot' as docsroot %}{% if docsroot %}
 									<li>
 										<a href="{{ docsroot }}">{% trans 'Documentation' %}</a>
-									</li>{% endif %}{% url 'admin:password_change' as password_change_url %}
+									</li>{% endif %}
 									<li>
-										<a href="{% if password_change_url %}{{ password_change_url }}{% else %}{{ homeurl }}password_change/{% endif %}">{% trans 'Change password' %}</a>
-									</li>{% url 'admin:logout' as logout_url %}
+										<a href="{% url 'admin:my-account' %}">{% trans 'My Account' %}</a>
+									</li>{% if user.has_usable_password %}
 									<li>
-										<a href="{% if logout_url %}{{ logout_url }}{% else %}{{ homeurl }}logout/{% endif %}">{% trans 'Log out' %}</a>
+										<a href="{% url 'admin:password_change' %}">{% trans 'Change Password' %}</a>
+									</li>{% endif %}<li class="divider"></li>{% url 'admin:logout' as logout_url %}
+									<li>
+										<a href="{% if logout_url %}{{ logout_url }}{% else %}{{ homeurl }}logout/{% endif %}">{% trans 'Logout' %}</a>
 									</li>{% endblock %}
 								</ul>
 							</li>

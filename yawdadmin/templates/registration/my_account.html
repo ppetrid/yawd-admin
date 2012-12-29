@@ -1,0 +1,20 @@
+{% extends "admin/base_site.html" %}{% load i18n admin_static %}
+
+{% block extrahead %}{{block.super}}<script src="{% static 'js/yawd-admin.js' %}"></script>{% endblock %}
+
+{% block object-tools %}
+			<div class="row-fluid nav">
+				<div class="span2">
+					<a href="{% url 'admin:password_change' %}" class="big-button">
+						<i class="configuration-item"></i> {% trans "Change password" %}
+					</a>
+				</div>
+			</div>{% endblock %}
+
+{% block content %}
+			<form class="form-horizontal" method="POST" action=".">
+				{% csrf_token %}
+				<fieldset>{% include 'admin/includes/base_form.html' %}
+				</fieldset>
+				<input type="submit" value="{% trans 'Update account' %}" class="btn btn-success" />
+			</form>{% endblock %}

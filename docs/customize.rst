@@ -58,3 +58,19 @@ icon name as is in this case. E.g.:
 	 <i class="add-item"></i>
 	 <i class="copy-item"></i>
 
+
+"My account" view
++++++++++++++++++
+
+yawdadmin comes with a new admin view to allow staff users edit their own
+account information (username,  first name, last name and email). This view
+uses a ModelForm of the standard ``django.contrib.auth.models.User`` model.
+
+If your projects makes use of the
+`new django 1.5 custom user functionality <https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user>`_
+you can set the ``ADMIN_USER_MODELFORM`` yawd-admin setting to override the 
+ModelForm used by the view (in settings.py):
+
+.. code-block:: python
+
+	ADMIN_USER_MODELFORM = MyModelForm

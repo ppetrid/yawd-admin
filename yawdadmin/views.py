@@ -7,7 +7,7 @@ from django.core.exceptions import PermissionDenied
 from django.core.urlresolvers import reverse
 from django.http import HttpResponseBadRequest, HttpResponseRedirect, Http404
 from django.utils.translation import ugettext as _
-from django.views.generic import TemplateView, View
+from django.views.generic import TemplateView, View, UpdateView
 from conf import settings as ls
 
 class AppOptionView(TemplateView):
@@ -132,3 +132,24 @@ def valid_analytics_view(request):
     
     if not ls.ADMIN_GOOGLE_ANALYTICS_FLOW:
         raise Http404
+    
+class MyAccountView(UpdateView):
+    template_name = 'registration/my_account.html'
+    form_class = ls.ADMIN_USER_MODELFORM
+    
+    def __init__(self, *args, **kwargs):
+        super(MyAccountView, self).__init__(*args, **kwargs)
+        self.success_url = reverse('admin:my-account')
+        
+    def form_valid(self, form):
+        messages.add_message(self.request, messages.SUCCESS, _('Your account has been updated successfuly.'))
+        return super(MyAccountView, self).form_valid(form)
+    
+    def get_object(self):
+        return self.request.user
+    
+    def get_context_data(self, **kwargs):
+        context = super(MyAccountView, self).get_context_data(**kwargs)
+        context['title'] = _('My account')
+        return context
+    
