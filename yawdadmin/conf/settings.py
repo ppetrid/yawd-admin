@@ -24,5 +24,11 @@ if ADMIN_GOOGLE_ANALYTICS['client_secrets'] and ADMIN_GOOGLE_ANALYTICS['profile_
 else:
      ADMIN_GOOGLE_ANALYTICS_FLOW = None
      
-ADMIN_USER_MODELFORM = getattr(settings, 'ADMIN_USERMODELFORM', AdminUserModelForm)
-    
+ADMIN_USER_MODELFORM = getattr(settings, 'ADMIN_USER_MODELFORM', AdminUserModelForm)
+
+#load the modelform if it's a string
+if isinstance(ADMIN_USER_MODELFORM, str):
+    from django.utils.importlib import import_module
+    _user_modelform_split = ADMIN_USER_MODELFORM.split('.')
+    _user_modelform_module = import_module('.'.join(_user_modelform_split[:-1]))
+    ADMIN_USER_MODELFORM = getattr(_user_modelform_module, _user_modelform_split[-1])

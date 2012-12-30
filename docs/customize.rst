@@ -73,4 +73,8 @@ ModelForm used by the view (in settings.py):
 
 .. code-block:: python
 
-	ADMIN_USER_MODELFORM = MyModelForm
+	ADMIN_USER_MODELFORM = 'myapp.module.MyModelForm'
+
+Note that the setting value can be a string or Class. A string is normally
+preferred to avoid import errors during environment initialization.
+.
