@@ -1,18 +1,8 @@
-{% extends "admin/base_site.html" %}{% load i18n %}
+{% extends "admin/logged_out_base.html" %}{% load i18n %}
 
 {% block bodyclass %}login{% endblock %}
 
-{% block mainbody %}
-		<section class="hero-unit">
-			<h1>{% trans "Django administration" %}</h1>
-			<p>{% trans "Welcome to the yawd-admin administration page. Please sign in to manage your website." %}</p>
-			<p>{% for lang in langs %}{% get_language_info for lang.name as info %}
-				<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}"><img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /></a>{% endfor %}
-			</p>
-		</section>
-		<section class="span10 offset1">
-			<p class="alert alert-info">{% trans "Thanks for spending some quality time with the Web site today." %}</p>
+{% block content %}<p class="alert alert-info">{% trans "Thanks for spending some quality time with the Web site today." %}</p>
 			<p>
 				<a href="{% url 'admin:index' %}">{% trans 'Log in again' %}</a>
-			</p>
-		</section>{% endblock %}
+			</p>{% endblock %}

@@ -1,17 +1,8 @@
-{% extends "admin/base_site.html" %}{% load i18n %}
+{% extends "admin/logged_out_base.html" %}{% load i18n %}
 
-{% block extrastyle %}{{ block.super }}{% endblock %}
 {% block bodyclass %}login{% endblock %}
 
-{% block mainbody %}
-		<section class="hero-unit">
-			<h1>{% trans "Django administration" %}</h1>
-			<p>{% trans "Welcome to the yawd-admin administration page. Please sign in to manage your website." %}</p>
-			<p>{% for lang in langs %}{% get_language_info for lang.name as info %}
-				<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}"><img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /></a>{% endfor %}
-			</p>
-		</section>
-		<section class="span10 offset1">{% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
+{% block content %}{% if form.errors and not form.non_field_errors and not form.this_is_the_login_form.errors %}
 			<p class="alert alert-error">
 				<button type="button" class="close" data-dismiss="alert">×</button>
 				{% blocktrans count form.errors.items|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
@@ -21,7 +12,9 @@
 				{{ error }}
 			</p>{% endfor %}{% endif %}
 			<div class="box">
-				<h3 class="title">{% trans 'Sign In' %}</h3>
+				<header class="page-header">
+					<h3 class="title">{% trans 'Sign In' %}</h3>
+				</header>
 				<form class="form-inline pull-left" action="{{ app_path }}" method="post">
 					{% csrf_token %}
 					<input type="hidden" name="this_is_the_login_form" value="1" />
@@ -51,5 +44,4 @@
 					</div>
 				</form>
 			</div>
-		</section>
-		<script type="text/javascript">document.getElementById('id_username').focus()</script>{% endblock %} 
+			<script type="text/javascript">document.getElementById('id_username').focus();</script>{% endblock %} 
