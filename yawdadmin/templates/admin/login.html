@@ -12,9 +12,7 @@
 				{{ error }}
 			</p>{% endfor %}{% endif %}
 			<div class="box">
-				<header class="page-header">
-					<h3 class="title">{% trans 'Sign In' %}</h3>
-				</header>
+				<h3 class="title">{% trans 'Sign In' %}</h3>
 				<form class="form-inline pull-left" action="{{ app_path }}" method="post">
 					{% csrf_token %}
 					<input type="hidden" name="this_is_the_login_form" value="1" />
@@ -40,7 +38,8 @@
 						</div>
 					</div>
 					<div class="submit-row">
-						<input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary" />
+						<input type="submit" value="{% trans 'Log in' %}" class="btn btn-primary" />{% url 'admin_password_reset' as password_reset_url %}{% if password_reset_url %}
+ 						&#xa0;<a class="small" href="{{ password_reset_url }}">{% trans 'Forgot password?' %}</a>{% endif %}
 					</div>
 				</form>
 			</div>
