@@ -54,6 +54,15 @@ fieldset {
 	text-decoration: underline;
 }
 
+.alert-error a.btn {
+	color: #111;
+	text-decoration: none;
+}
+
+.alert-error a.btn-danger {
+	color: #fff !important;
+}
+
 .alert-error a:hover {
 	color: #a94A48;
 }
