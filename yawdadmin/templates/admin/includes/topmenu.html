@@ -4,7 +4,7 @@
 					<a class="brand" href="{{homeurl}}">
 						<i class="icon-globe icon-white"></i> {% trans "Django administration" %}
 					</a>
-					<nav>
+					<nav id="logged-user-menu">
 						<ul class="nav pull-right">{% if langs %}
 							<li class="divider-vertical hidden-phone hidden-tablet"></li>
 							<li class="dropdown">
@@ -30,20 +30,20 @@
 								</a>
 								<ul class="dropdown-menu">{% block userlinks %}{% if analytics %}
 									<li>
-										<a href="{% url 'admin:analytics' %}">{% trans 'Configure Google Analytics' %}</a>
+										<a id="ga-configuration-link" href="{% url 'admin:analytics' %}">{% trans 'Configure Google Analytics' %}</a>
 									</li>
 									<li class="divider"></li>{% endif %}{% url 'django-admindocs-docroot' as docsroot %}{% if docsroot %}
 									<li>
-										<a href="{{ docsroot }}">{% trans 'Documentation' %}</a>
+										<a id="documentation-link" href="{{ docsroot }}">{% trans 'Documentation' %}</a>
 									</li>{% endif %}
 									<li>
-										<a href="{% url 'admin:my-account' %}">{% trans 'My Account' %}</a>
+										<a id="my-account-link" href="{% url 'admin:my-account' %}">{% trans 'My Account' %}</a>
 									</li>{% if user.has_usable_password %}
 									<li>
-										<a href="{% url 'admin:password_change' %}">{% trans 'Change Password' %}</a>
+										<a id="change-password-link" href="{% url 'admin:password_change' %}">{% trans 'Change Password' %}</a>
 									</li>{% endif %}<li class="divider"></li>{% url 'admin:logout' as logout_url %}
 									<li>
-										<a href="{% if logout_url %}{{ logout_url }}{% else %}{{ homeurl }}logout/{% endif %}">{% trans 'Logout' %}</a>
+										<a id="logout-link" href="{% if logout_url %}{{ logout_url }}{% else %}{{ homeurl }}logout/{% endif %}">{% trans 'Logout' %}</a>
 									</li>{% endblock %}
 								</ul>
 							</li>
