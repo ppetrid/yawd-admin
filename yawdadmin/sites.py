@@ -1,27 +1,27 @@
 import httplib2
 from functools import update_wrapper
-from oauth2client import xsrfutil
 from oauth2client.file import Storage
 from django.conf.urls import patterns, url
 from django.conf import settings
 from django.contrib.admin.sites import AdminSite
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
-from django.http import HttpResponseRedirect
 from django.utils.text import capfirst
 from django.views.decorators.cache import never_cache
 from conf import settings as ls
 from models import AppOption
-from views import AppOptionView, AnalyticsAuthView, AnalyticsConfigView, AnalyticsConnectView, MyAccountView
+from views import AppOptionView, AnalyticsAuthView, AnalyticsConfigView, \
+    AnalyticsConnectView, MyAccountView
 
 _optionset_labels = {}
 
+
 class YawdAdminSite(AdminSite):
-    
+
     def __init__(self, *args, **kwargs):
         super(YawdAdminSite, self).__init__(*args, **kwargs)
         self._top_menu = {}
-        
+
     def check_dependencies(self):
         """
         Override the default method to check that the 
@@ -32,14 +32,18 @@ class YawdAdminSite(AdminSite):
         super(YawdAdminSite, self).check_dependencies()
         if not AppOption._meta.installed:  #@UndefinedVariable
             raise ImproperlyConfigured("Put 'yawdadmin' in your "
-                "INSTALLED_APPS setting in order to use the yawd-admin application.")
+                                       "INSTALLED_APPS setting in order to "
+                                       "use the yawd-admin application.")
         if settings.INSTALLED_APPS.index('yawdadmin') > settings.INSTALLED_APPS.index('django.contrib.admin'):
-            raise ImproperlyConfigured("Put 'yawdadmin' before 'django.contrib.admin' "
-                "in your INSTALLED_APPS setting to use the yawd-admin application") 
+            raise ImproperlyConfigured("Put 'yawdadmin' before "
+                                       "'django.contrib.admin' in your "
+                                       "INSTALLED_APPS setting to use the "
+                                       "yawd-admin application") 
         if not 'yawdadmin.middleware.PopupMiddleware' in settings.MIDDLEWARE_CLASSES:
             raise ImproperlyConfigured("Put 'yawdadmin.middleware.PopupMiddleware' "
-                "in your MIDDLEWARE_CLASSES setting in order to use the yawd-admin application.")
-        
+                                       "in your MIDDLEWARE_CLASSES setting "
+                                       "in order to use the yawd-admin application.")
+
     def get_urls(self):
         global _optionset_labels
         
@@ -48,17 +52,17 @@ class YawdAdminSite(AdminSite):
                 return self.admin_view(view, cacheable)(*args, **kwargs)
             return update_wrapper(wrapper, view)
 
-        urlpatterns = patterns('',
-            url(r'^configuration-options/(?P<optionset_label>%s)/$' % '|'.join(_optionset_labels.keys()), wrap(AppOptionView.as_view()), name='optionset-label-options'),
-            url(r'^oauth2callback/$', wrap(AnalyticsAuthView.as_view()), name='oauth2-callback'),
-            url(r'^google-analytics/$', wrap(AnalyticsConfigView.as_view()), name='analytics'),
-            url(r'^google-analytics/connect/$', wrap(AnalyticsConnectView.as_view()), name='analytics-connect'),
-            url(r'^my-account/$', wrap(MyAccountView.as_view()), name='my-account'),
-)
+        up = patterns('',
+                      url(r'^configuration-options/(?P<optionset_label>%s)/$' % '|'.join(_optionset_labels.keys()), wrap(AppOptionView.as_view()), name='optionset-label-options'),
+                      url(r'^oauth2callback/$', wrap(AnalyticsAuthView.as_view()), name='oauth2-callback'),
+                      url(r'^google-analytics/$', wrap(AnalyticsConfigView.as_view()), name='analytics'),
+                      url(r'^google-analytics/connect/$', wrap(AnalyticsConnectView.as_view()), name='analytics-connect'),
+                      url(r'^my-account/$', wrap(MyAccountView.as_view()), name='my-account'),
+            )
 
-        urlpatterns += super(YawdAdminSite, self).get_urls() 
-        return urlpatterns
-        
+        up += super(YawdAdminSite, self).get_urls() 
+        return up
+
     def register_top_menu_item(self, item, icon_class=''):
         app_labels = []
         for model, model_admin in self._registry.iteritems():
@@ -70,13 +74,13 @@ class YawdAdminSite(AdminSite):
                 self._top_menu[item] = icon_class
         else:
             raise Exception("Item has to be a valid app_label")
-        
+
     def unregister_top_menu_item(self, item):
         if isinstance(item, basestring) and item in self._top_menu:
             del self._top_menu[item]
         else:
             raise Exception("Item is not registered in the top menu")
-    
+
     def top_menu(self, request):
         user = request.user
         app_dict = {}
@@ -129,7 +133,7 @@ class YawdAdminSite(AdminSite):
             app['models'].sort(key=lambda x: x['order'])
 
         return app_list
-    
+
     def register_options(self, optionset_admin):
         """
         Allows an application to register admin options like so::
@@ -142,13 +146,13 @@ class YawdAdminSite(AdminSite):
             _optionset_labels[optionset_admin.optionset_label] = optionset_admin
             #Initialize options
             optionset_admin()
-    
+
     def unregister_options(self, optionset_admin):
         optionset_label = optionset_admin.optionset_label
         if optionset_label in _optionset_labels:
             AppOption.objects.filter(optionset_label=optionset_label).delete()
             del _optionset_labels[optionset_label]
-        
+
     def get_option_admin_urls(self):
         """
         Return a list of key-value pairs, containing all available optionset urls 
@@ -162,7 +166,7 @@ class YawdAdminSite(AdminSite):
             self.option_admin_urls = option_urls
 
         return self.option_admin_urls
-    
+
     def get_optionset_admin(self, optionset_label):
         """
         Returns the OptionSetAdmin class for this label
@@ -170,7 +174,7 @@ class YawdAdminSite(AdminSite):
         global _optionset_labels
         if optionset_label in _optionset_labels:
             return _optionset_labels[optionset_label]
-        
+
     @never_cache
     def index(self, request, extra_context={}):
         """
@@ -191,5 +195,5 @@ class YawdAdminSite(AdminSite):
                 from utils import get_analytics_data
                 http = httplib2.Http()
                 extra_context['ga_data'] = get_analytics_data(credential.authorize(http))
-            
+
         return super(YawdAdminSite, self).index(request, extra_context)
