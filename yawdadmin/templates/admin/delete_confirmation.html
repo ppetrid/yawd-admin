@@ -10,7 +10,7 @@
 			</ul>{% endblock %}
 
 {% block content %}
-			<div class="row-fluid show-grid">{% if perms_lacking or protected %}{% if perms_lacking %}
+			<div id="content-main" class="row-fluid show-grid">{% if perms_lacking or protected %}{% if perms_lacking %}
 				<p>{% blocktrans with object as escaped_object %}Deleting the {{ object_name }} '{{ escaped_object }}' would result in deleting related objects, but your account doesn't have permission to delete the following types of objects:{% endblocktrans %}</p>
 				<ul>{% for obj in perms_lacking %}
 					<li>{{ obj }}</li>{% endfor %}
@@ -23,9 +23,10 @@
 				<ul>
 					{{ deleted_objects|unordered_list }}
 				</ul>
-				<form action="" method="post">
+				<form action="" method="post" class="add-top">
 					{% csrf_token %}
 					<input type="hidden" name="post" value="yes" />
-					<input type="submit" class="btn" value="{% trans "Yes, I'm sure" %}" />
+					<a href="../" class="btn"><i class="icon-chevron-left"></i> {% trans 'Cancel' %}</a>
+					<input type="submit" class="btn btn-danger" value="{% trans "Yes, I'm sure" %}" />
 				</form>{% endif %}
 			</div>{% endblock %}
