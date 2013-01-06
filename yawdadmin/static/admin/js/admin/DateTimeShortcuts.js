@@ -2,6 +2,20 @@
 //     <input type="text" class="vDateField">
 //     <input type="text" class="vTimeField">
 
+var findPosXRel = function(el) {
+	$el = yawdadmin.jQuery(el);
+	if ($el.closest('.modal, body').prop("tagName").toLowerCase() == 'body') return findPosX(el);
+	return $el.position().left;
+}
+
+var findPosYRel = function(el) {
+	$el = yawdadmin.jQuery(el);
+	$closest = $el.closest('.modal, body');
+	if ($closest.prop("tagName").toLowerCase() == 'body') return findPosY(el);
+	return $el.position().top + $closest.find('.modal-header').height() + 18;
+}
+
+
 var DateTimeShortcuts = {
     calendars: [],
     calendarInputs: [],
@@ -105,16 +119,16 @@ var DateTimeShortcuts = {
         // Recalculate the clockbox position
         // is it left-to-right or right-to-left layout ?
         if (getStyle(document.body,'direction')!='rtl') {
-            clock_box.style.left = findPosX(clock_link) + 17 + 'px';
+            clock_box.style.left = findPosXRel(clock_link) + 17 + 'px';
         }
         else {
             // since style's width is in em, it'd be tough to calculate
             // px value of it. let's use an estimated px for now
             // TODO: IE returns wrong value for findPosX when in rtl mode
             //       (it returns as it was left aligned), needs to be fixed.
-            clock_box.style.left = findPosX(clock_link) - 110 + 'px';
+            clock_box.style.left = findPosXRel(clock_link) - 110 + 'px';
         }
-        clock_box.style.top = Math.max(0, findPosY(clock_link) - 30) + 'px';
+        clock_box.style.top = Math.max(0, findPosYRel(clock_link) - 30) + 'px';
 
         // Show the clock box
         clock_box.style.display = 'block';
@@ -229,16 +243,16 @@ var DateTimeShortcuts = {
         // Recalculate the clockbox position
         // is it left-to-right or right-to-left layout ?
         if (getStyle(document.body,'direction')!='rtl') {
-            cal_box.style.left = findPosX(cal_link) + 17 + 'px';
+            cal_box.style.left = findPosXRel(cal_link) + 17 + 'px';
         }
         else {
             // since style's width is in em, it'd be tough to calculate
             // px value of it. let's use an estimated px for now
             // TODO: IE returns wrong value for findPosX when in rtl mode
             //       (it returns as it was left aligned), needs to be fixed.
-            cal_box.style.left = findPosX(cal_link) - 180 + 'px';
+            cal_box.style.left = findPosXRel(cal_link) - 180 + 'px';
         }
-        cal_box.style.top = Math.max(0, findPosY(cal_link) - 75) + 'px';
+        cal_box.style.top = Math.max(0, findPosYRel(cal_link) - 75) + 'px';
 
         cal_box.style.display = 'block';
         addEvent(window.document, 'click', function() { DateTimeShortcuts.dismissCalendar(num); return true; });
