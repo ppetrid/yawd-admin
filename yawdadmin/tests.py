@@ -139,9 +139,6 @@ class PermissionTestCase(TestCase):
     """
     Check all standard admin views of a model, all expected to return
     a specific status (e.g. 200 on success, 403 on permission denied).
-    
-    This test assumes a user with username 'ppetrid' and password 'ppetrid'
-    exists and an 'admin' superuser is also present in 'test-users.json'.
     """
 
     def naive_admin_check(self, model_prefix, expected_status, item=1):
