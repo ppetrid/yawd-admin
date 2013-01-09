@@ -12,10 +12,10 @@
 		<script>
 			(function($) {
 				$(document).ready(function($) {
-					$('.filters .select2').select2().change(function(e) {
+					$('#changelist-filters .select2').select2().change(function(e) {
 						document.location = $(this).children('option:selected').data('href');
 					});
-					$('.filters .dropdown-menu').click(function (e) {
+					$('#changelist-filters .dropdown-menu').click(function (e) {
 					    e.stopPropagation();
 					});
 				});
@@ -65,7 +65,7 @@
 								<div id="changelist-top" class="navbar">
 									<div class="navbar-inner actions">{% if action_form and actions_on_top and cl.full_result_count %}
 										{% admin_actions %}{% endif %}{% if cl.has_filters %}
-										<ul class="nav pull-right filters">
+										<ul id="changelist-filters" class="nav pull-right filters">
 											<li class="divider-vertical"></li>
 											<li class="dropdown pull-right">
 												<a href="#" class="dropdown-toggle" data-toggle="dropdown">
