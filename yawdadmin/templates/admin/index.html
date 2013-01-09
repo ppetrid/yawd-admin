@@ -75,7 +75,7 @@
 											<td>{{ model.name }}</td>{% endif %}
 											<td>
 												<div class="pull-right">{% if model.perms.add %}
-													<a href="{{ model.admin_url }}add/" class="btn btn-mini btn-success">
+													<a href="{{ model.add_url }}" class="btn btn-mini btn-success">
 														<i class="icon-plus icon-white"></i>&#xa0;{% trans 'Add' %}
 													</a>{% endif %}{% if model.perms.change %}
 													<a href="{{ model.admin_url }}" class="btn btn-mini btn-info">
