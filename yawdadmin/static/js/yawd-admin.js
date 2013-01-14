@@ -82,11 +82,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
 			self.attr('data-fancybox-type','iframe').attr('href', href).fancybox();
 		});
 		
-		$('.help').popover({trigger : 'manual'}).click(function(e){
-			$('.help').not(this).popover('hide');
-			$(this).popover('toggle');
-			e.preventDefault(); 
-		});
+		$('body').popover({selector:'.help', trigger: 'hover'});
 		
 		var ul = $('#language-codes');
 		if (ul.length) {
