@@ -369,6 +369,6 @@ open in a popup-style modal window:
 
 	class MyStackedInline(admin.StackedInline):
 		#bla bla
-		collapse = True 
+		modal = True 
 
 This does not work with tabular inlines
