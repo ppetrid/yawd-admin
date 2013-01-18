@@ -12,9 +12,11 @@
 			</div>{% endblock %}
 
 {% block content %}
-			<form class="form-horizontal" method="POST" action=".">
-				{% csrf_token %}
-				<fieldset>{% include 'admin/includes/base_form.html' %}
-				</fieldset>
-				<input type="submit" value="{% trans 'Update account' %}" class="btn btn-success" />
-			</form>{% endblock %}
+			<div id="content-main">
+				<form class="form-horizontal" method="POST" action=".">
+					{% csrf_token %}
+					<fieldset>{% include 'admin/includes/base_form.html' %}
+					</fieldset>
+					<input type="submit" value="{% trans 'Update account' %}" class="btn btn-success" />
+				</form>
+			</div>{% endblock %}
