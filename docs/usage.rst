@@ -371,4 +371,18 @@ open in a popup-style modal window:
 		#bla bla
 		modal = True 
 
+Inline description
+------------------
+
+When setting a model's fieldsets you can provide a ``description`` key to
+specify a text that will be displayed under the fieldset header. Now you can
+achieve the same effect with your inlines using the ``description`` member
+in your Inline class:
+
+.. code-block:: python
+
+	class MyStackedInline(admin.StackedInline):
+		#bla bla
+		description = 'My inline description text'
+
 This does not work with tabular inlines

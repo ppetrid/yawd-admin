@@ -1,5 +1,6 @@
 {% load i18n %}<div id="{{ inline_admin_formset.formset.prefix }}-group">
-							<h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>
+							<h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>{% if inline_admin_formset.opts.description %}
+							<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
 							{{ inline_admin_formset.formset.management_form }}{% if inline_admin_formset.formset.non_form_errors %}
 							<div class="alert alert-error">
 								{{ inline_admin_formset.formset.non_form_errors }}
@@ -40,6 +41,6 @@
 										});
 										$('#{{ inline_admin_formset.formset.prefix }}-tabs a:first').tab('show');
 									});
-								})(yawdadmin.jQuery);
+								})(yawdadmin.jQuery);{% block extrainlinejs %}{% endblock %}
 							</script>{% endif %}
 						</div>
