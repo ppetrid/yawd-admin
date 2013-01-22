@@ -1198,15 +1198,25 @@ div.select2-container {
 }
 
 .inline-related h3 a, .inline-deletelink {
-	color: #333;
+	color: #fff;
 	font-family: 'Open Sans Condensed', Arial, sans-serif;
 	font-size: 16px;
 	text-decoration: underline;
 }
 
 .inline-related h3 a:hover, .inline-deletelink:hover {
+	color: #eee;
+}
+
+.inline-related-modal h3 a, .inline-related-modal .inline-deletelink, .tabular .inline-deletelink {
+	color: #333;
+}
+
+.inline-related-modal h3 a:hover, .inline-related-modal .inline-deletelink:hover, .tabular .inline-deletelink:hover {
 	color: #555;
 }
+
+
 
 .inline-related h3.error {
 	background: #B94A48;

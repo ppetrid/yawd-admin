@@ -85,7 +85,8 @@
         } else {
           // Otherwise, just insert the remove button as the
           // last child element of the form's container:
-          row.children(":first").append('<span class="inline-edit"><i class="admin-inline-icon icon-trash"></i>&#xa0;<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText + "</a></span>");
+          var extra_class = (modal.length) ? '' : ' icon-white'; 
+          row.children(":first").append('<span class="inline-edit"><i class="admin-inline-icon icon-trash'+extra_class+'"></i>&#xa0;<a class="' + options.deleteCssClass + '" href="javascript:void(0)">' + options.deleteText + "</a></span>");
         }
         row.find("*").each(function() {
           updateElementIndex(this, options.prefix, totalForms.val());
