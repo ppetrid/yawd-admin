@@ -66,9 +66,6 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
 
 (function($){ 
 	$(document).ready( function() {
-		var $body = $('#main-content').on('shown', '.modal', function () { $body.style('overflow','hidden'); })
-			.on('hidden', '.modal', function () { $body.removeClass('modal-open'); });
-		
 		$('.add-another, .related-lookup').each(function() {
 			var href = this.href;
 			var self = $(this);
