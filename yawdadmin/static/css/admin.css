@@ -1295,13 +1295,8 @@ h3.popover-title {
 	color: #333 !important;
 }
 
-.inline-related-modal .inline-edit {
+.inline-related-modal .inline-edit, .inline-related-modal span.delete {
 	border-color: #444 !important;
-} 
-
-.inline-related span.delete {
-	float: right;
-	display: inline-block;
 }
 
 .empty-form {
@@ -1329,7 +1324,7 @@ h3.popover-title {
 	vertical-align: baseline;
 }
 
-.inline-edit {
+.inline-edit, .inline-related span.delete {
 	border-left: 1px #f4f4f4 solid;
 	padding: 0 0 0 10px;
 	margin: 0 0 0 10px;
