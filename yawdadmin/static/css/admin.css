@@ -675,19 +675,23 @@ fieldset {
 }
 
 .unlock-item {
-	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+	background: url('../img/gcons/unlock.png') 0px 0px no-repeat;
 }
 
 .usb-item {
-	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+	background: url('../img/gcons/usb.png') 0px 0px no-repeat;
 }
 
 .van-item {
-	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+	background: url('../img/gcons/van.png') 0px 0px no-repeat;
 }
 
 .wifi-item {
-	background: url('../img/gcons/glasses.png') 0px 0px no-repeat;
+	background: url('../img/gcons/wifi.png') 0px 0px no-repeat;
+}
+
+.world-item {
+	background: url('../img/gcons/world.png') 0px 0px no-repeat;
 }
 
 .big-button {
