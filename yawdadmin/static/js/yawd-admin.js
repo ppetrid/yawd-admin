@@ -79,7 +79,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
 			self.attr('data-fancybox-type','iframe').attr('href', href).fancybox();
 		});
 		
-		$('body').popover({selector:'.help', trigger: 'hover'});
+		$('body').popover({selector:'.help', trigger: 'hover', delay: {hide: '1500'}});
 		
 		var ul = $('#language-codes');
 		if (ul.length) {

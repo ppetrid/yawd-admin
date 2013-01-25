@@ -44,7 +44,7 @@
 			</section>
 			<script>
 				(function($){
-					$('.help').popover();
+					$('.help').popover({trigger: 'hover', delay: {hide: '1500'}});
 				})(yawdadmin.jQuery)
 			</script>
 		</div>{% endblock %}
