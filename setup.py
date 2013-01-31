@@ -1,10 +1,11 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
+import yawdadmin
 
 setup(
       name='yawd-admin',
       url='http://yawd.eu/open-source-projects/yawd-admin/',
-      version = '0.5.0',
+      version = yawdadmin.__version__,
       description='An administration website for Django',
       author='yawd',
       author_email='info@yawd.eu',
