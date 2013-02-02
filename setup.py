@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 from setuptools import setup, find_packages
-import yawdadmin
 
 setup(
       name='yawd-admin',
       url='http://yawd.eu/open-source-projects/yawd-admin/',
-      version = yawdadmin.__version__,
+      version = '0.7.0-rc1',
       description='An administration website for Django',
       author='yawd',
       author_email='info@yawd.eu',
@@ -23,6 +22,7 @@ setup(
         ],
       include_package_data = True,
       install_requires = [
+        "httplib2",
         "django >= 1.4",
         "oauth2client"
         ],
