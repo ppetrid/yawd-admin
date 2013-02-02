@@ -6,9 +6,11 @@ Installing yawd-admin
 Prerequisites
 +++++++++++++
 
-yawd-admin requires that the `oauth2client` library is installed in your python environment::
+yawd-admin requires that the `oauth2client` and `httplib2` libraries
+are installed in your python environment::
 	
 	$ pip install oauth2client
+	$ pip install httplib2
 
 If you plan to use the yawd-admin google analytics functionality, 
 the `google-api-python-client` must also be installed::
