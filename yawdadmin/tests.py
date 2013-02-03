@@ -102,6 +102,11 @@ class YawdAdminBaseSeleniumTestCase(BaseSeleniumTestCase):
         self.selenium.find_css('#id_password').send_keys(self.password)
         self.selenium.find_element_by_xpath('//input[@value="Log in"]').click()
         self.selenium.wait_for_css("#content-main")
+        
+    def logout(self):
+        self.selenium.find_css('#logged-user-menu .dropdown-toggle').click()
+        self.selenium.find_css('#logout-link').click()
+        self.selenium.wait_for_css('.page-header')
 
     def open_modal_inline(self, prefix):
         self.selenium.find_element_by_xpath('//a[@class="inline-modal" and @href="#modal-wrapper-%s"]' % prefix).click()
