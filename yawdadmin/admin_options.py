@@ -1,5 +1,6 @@
 import re, copy, json
 from django import forms
+from django.utils.encoding import force_text
 from utils import get_options
 from models import AppOption
 
@@ -129,7 +130,7 @@ class OptionSetAdmin(object):
                     #generate the form field
                     field_name = '%s_%s' % (attr, lang)
                     lang_field = copy.deepcopy(value.field)
-                    lang_field.label = '%s (%s)' % (lang_field.label, lang.upper())
+                    lang_field.label = '%s (%s)' % (force_text(lang_field.label), lang.upper())
                     
                     self.form.fields[field_name] = lang_field
                     try:
