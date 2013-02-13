@@ -79,8 +79,29 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
 			self.attr('data-fancybox-type','iframe').attr('href', href).fancybox();
 		});
 		
-		$('body').popover({selector:'.help', trigger: 'hover', delay: {hide: '1500'}});
-		
+		$('body').popover({selector:'.help',
+				trigger: 'hover',
+				delay: {hide: '1500'},
+				placement: function (tip, element) {
+					$container = $(element).closest('.modal');
+					if ($container.length) {
+						var eloffset = $(element).offset();
+						var coffset = $container.offset();
+						var offset = {top: eloffset.top - coffset.top,
+								left: eloffset.left - coffset.left}
+						height = $container.outerHeight();
+						width = $container.outerWidth();
+						vert = 0.5 * height - offset.top;
+						vertPlacement = vert > 0 ? 'bottom' : 'top';
+						horiz = 0.5 * width - offset.left;
+						horizPlacement = horiz > 0 ? 'right' : 'left';
+						placement = Math.abs(horiz) > Math.abs(vert) ?  horizPlacement : vertPlacement;
+						return placement;
+					}
+					return 'right';
+				}
+		});
+
 		var ul = $('#language-codes');
 		if (ul.length) {
 			ul.append(ul.children("li").detach().sort(function(a, b) {
