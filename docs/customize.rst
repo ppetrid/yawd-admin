@@ -77,4 +77,25 @@ ModelForm used by the view (in settings.py):
 
 Note that the setting value can be a string or Class. A string is normally
 preferred to avoid import errors during environment initialization.
-.
+
+
+Model icons
++++++++++++
+
+You can set an accompanying icon class for each of your models in the
+``ModelAdmin`` class.
+
+.. code-block:: python
+
+	class MyModelAdmin(admin.ModelAdmin):
+		....
+		title_icon = 'icon-group'
+		
+yawd-admin will display this icon in various places (e.g drop-down menus,
+change list pages, change form pages) in an effort to make your UI more
+eye-appealing.
+
+The icon classes you can choose from are listed 
+`here <http://fortawesome.github.com/Font-Awesome/>`_. yawd-admin uses the
+font-awesome bootstrap icons instead of the original ones. Therefore
+you can apply any CSS rule to customize the look & feel of your icons.

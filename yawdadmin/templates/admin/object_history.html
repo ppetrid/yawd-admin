@@ -1,5 +1,10 @@
 {% extends "admin/base_site.html" %}{% load i18n admin_urls %}
 
+{% block content_title %}{% if title %}
+			<header class="page-header">
+				<h1><i class="icon-pencil title-icon"></i>{{title}}{% comment %}<span class="blue pull-right elorus-head small">Elorus beta <span class="elorus-icon"></span>{% endcomment %}</h1>
+			</header>{% endif %}{% endblock %}
+
 {% block breadcrumbs %}
 		<ul class="breadcrumb">
 			<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>

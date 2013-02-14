@@ -63,7 +63,7 @@
 									</a>
 									<ul class="dropdown-menu" role="menu">{% for model in app.models %}{% if model.perms.change %}{% if model.separator %}
 										<li class="divider"></li>{% endif %}
-										<li><a href="{{model.admin_url}}">{{model.name}}</a></li>{% endif %}{% endfor %}
+										<li><a href="{{model.admin_url}}">{% if model.title_icon %}<i class="{{model.title_icon}}"></i> {% endif %}{{model.name}}</a></li>{% endif %}{% endfor %}
 									</ul>
 								</li>{% endfor %}{% if optionset_labels and perms.yawdadmin.change_appoption %}
 								<li class="dropdown">

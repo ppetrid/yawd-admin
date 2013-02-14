@@ -114,6 +114,7 @@ class YawdAdminSite(AdminSite):
 
                         model_dict['order'] = model_admin.order if hasattr(model_admin, 'order') else 3
                         model_dict['separator'] = model_admin.separator if hasattr(model_admin, 'separator') else False
+                        model_dict['title_icon'] = model_admin.title_icon if hasattr(model_admin, 'title_icon') else False
 
                         if app_label in app_dict:
                             app_dict[app_label]['models'].append(model_dict)

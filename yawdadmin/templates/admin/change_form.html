@@ -11,6 +11,11 @@
 
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
 
+{% block content_title %}{% if title %}
+			<header class="page-header">
+				<h1>{% if adminform.model_admin.title_icon %}<i class="{{adminform.model_admin.title_icon}} title-icon"></i>{% endif %}{{title}}</h1>
+			</header>{% endif %}{% endblock %}
+
 {% block breadcrumbs %}{% if not is_popup %}
 			<ul class="breadcrumb">
 			    <li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
