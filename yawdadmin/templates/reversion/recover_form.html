@@ -1,0 +1,19 @@
+{% extends "reversion/revision_form.html" %}
+{% load url from future %}
+{% load i18n %}
+
+
+{% block breadcrumbs %}
+    <ul class="breadcrumbs">
+			    <li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+			    <li><a href="{% url 'admin:app_list' app_label %}">{{app_label|capfirst|escape}}</a></a> <span class="divider">/</span></li>
+        <li><a href="{{changelist_url}}">{{opts.verbose_name_plural|capfirst}}</a> <span class="divider">/</span></li>
+        <li><a href="{{recoverlist_url}}">{% blocktrans with opts.verbose_name_plural as name %}Recover deleted {{name}}{% endblocktrans %}</a> <span class="divider">/</span></li>
+        <li>{{title}}</li>
+    </ul>
+{% endblock %}
+
+
+{% block form_top %}
+    <p>{% blocktrans %}Press the save button below to recover this version of the object.{% endblocktrans %}</p>
+{% endblock %}
