@@ -1,0 +1,10 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+
+{% block object-tools-items %}
+    {% if not is_popup %}
+        <div class="span2"><a href="{{recoverlist_url}}" class="recoverlink big-button">{% blocktrans with cl.opts.verbose_name_plural|escape as name %}Recover deleted {{name}}{% endblocktrans %}</a></div>
+    {% endif %}
+    {{block.super}}
+{% endblock %}
