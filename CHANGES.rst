@@ -12,6 +12,7 @@ v.0.6.0, 2013.02.11
 * Collapsible inlines
 * Fixed google analytics bugs (thanks to @chielteuben)
 * Various css updates
+* Added django-reversion, django-mptt templates (thanks to @pahaz)
 
 v.0.5.0, 2012.11.01
 ====================

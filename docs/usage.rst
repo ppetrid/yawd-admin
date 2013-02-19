@@ -372,3 +372,15 @@ open in a popup-style modal window:
 		modal = True 
 
 This does not work with tabular inlines
+
+Templates for popular django applications
+-----------------------------------------
+
+yawd-admin comes with templates for the following popular django
+applications (thanks `pahaz <https://github.com/pahaz>`_)::
+
+* django-reversion
+* django-mptt
+
+Just remember to place yawd-admin above these applications in your
+``settings.py`` file.
