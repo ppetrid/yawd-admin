@@ -1,5 +1,5 @@
 {% load i18n %}
-					<div class="row-fluid submits" {% if is_popup %}style="overflow: auto;"{% endif %}>
+					<div class="row-fluid submits submit-row" {% if is_popup %}style="overflow: auto;"{% endif %}>
 						<div class="pull-right">{% if show_delete_link %}
 							<a href="delete/" class="deletelink btn btn-danger">{% trans "Delete" %}</a>{% endif %}{% if show_save_as_new %}
 							<input type="submit" class="btn" value="{% trans 'Save as new' %}" name="_saveasnew" {{ onclick_attrib }}/>{%endif%}{% if show_save_and_add_another %}

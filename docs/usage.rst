@@ -371,6 +371,8 @@ open in a popup-style modal window:
 		#bla bla
 		modal = True 
 
+This does not work with tabular inlines
+
 Inline description
 ------------------
 
@@ -385,4 +387,16 @@ in your Inline class:
 		#bla bla
 		description = 'My inline description text'
 
-This does not work with tabular inlines
+.. _other-templates:
+
+Templates for popular django applications
++++++++++++++++++++++++++++++++++++++++++
+
+yawd-admin comes with templates for the following popular django
+applications (thanks `pahaz <https://github.com/pahaz>`_)::
+
+* django-reversion
+* django-mptt
+
+Just remember to place yawd-admin above these applications in your
+``settings.py`` file.
