@@ -45,6 +45,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
             var o = new Option(newRepr, newId);
             elem.options[elem.options.length] = o;
             o.selected = true;
+            yawdadmin.jQuery(elem).change();
         } else if (elemName == 'INPUT') {
             if (elem.className.indexOf('vManyToManyRawIdAdminField') != -1 && elem.value) {
                 elem.value += ',' + newId;
