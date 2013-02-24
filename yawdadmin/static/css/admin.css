@@ -112,6 +112,10 @@ fieldset {
 	color: #333;
 }
 
+.datetimeshortcuts i {
+	color: #333;
+}
+
 .main {
 	padding-top: 60px;
 }
