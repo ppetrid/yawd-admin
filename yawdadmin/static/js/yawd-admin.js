@@ -80,8 +80,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
 		});
 		
 		$('body').popover({selector:'.help',
-				trigger: 'hover',
-				delay: {hide: '1500'},
+				trigger: 'click',
 				placement: function (tip, element) {
 					$container = $(element).closest('.modal');
 					if ($container.length) {
