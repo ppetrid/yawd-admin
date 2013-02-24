@@ -1067,16 +1067,21 @@ div#id_password {
 .selector-chooser li {
     margin: 0;
     padding: 5px;
-    padding-left: 40%;
+    padding-left: 38%;
     list-style-type: none;
 }
 
 .selector-add, .selector-remove {
-    width: 16px;
+    line-height: 16px;
     height: 16px;
+    width: 16px;
     display: block;
-    text-indent: -3000px;
-    overflow: hidden;
+    color: #eee;
+}
+
+.selector-add:hover, .selector-remove:hover {
+	color: #fff;
+	text-decoration: none;
 }
 
 .calendarbox, .clockbox {

@@ -66,10 +66,13 @@ window.SelectFilter = {
         // <ul class="selector-chooser">
         var selector_chooser = quickElement('ul', selector_div, '');
         selector_chooser.className = 'selector-chooser';
-        var add_link = quickElement('a', quickElement('li', selector_chooser, ''), gettext('Choose'), 'title', gettext('Choose'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_from","' + field_id + '_to"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_add_link');
-        add_link.className = 'selector-add icon-arrow-right icon-white';
-        var remove_link = quickElement('a', quickElement('li', selector_chooser, ''), gettext('Remove'), 'title', gettext('Remove'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_to","' + field_id + '_from"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_remove_link');
-        remove_link.className = 'selector-remove icon-arrow-left icon-white';
+        var add_link = quickElement('a', quickElement('li', selector_chooser, ''), '', 'title', gettext('Choose'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_from","' + field_id + '_to"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_add_link');
+        add_link.className = 'selector-add';
+        $(add_link).append('<i class="icon-arrow-right"></i>');
+        
+        var remove_link = quickElement('a', quickElement('li', selector_chooser, ''), '', 'title', gettext('Remove'), 'href', 'javascript: (function(){ SelectBox.move("' + field_id + '_to","' + field_id + '_from"); SelectFilter.refresh_icons("' + field_id + '");})()', 'id', field_id + '_remove_link');
+        remove_link.className = 'selector-remove';
+        $(remove_link).append('<i class="icon-arrow-left"></i>');
 
         // <div class="selector-chosen">
         var selector_chosen = quickElement('div', selector_div, '');
