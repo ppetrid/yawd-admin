@@ -87,7 +87,7 @@ class YawdAdminSite(AdminSite):
 
         for model, model_admin in self._registry.items():
             app_label = model._meta.app_label
-            if app_label in self._top_menu:
+            if app_label in self._top_menu and (not hasattr(model_admin, 'exclude_from_top_menu') or not model_admin.exclude_from_top_menu):
                 has_module_perms = user.has_module_perms(app_label)
 
                 if has_module_perms:
