@@ -154,6 +154,15 @@ The above will place `MyPageAdmin` before `MyCategoryAdmin` and
 If you do not set a custom `ModelAdmin` order, yawd-admin will use the
 standard alphabetical order for your models.
 
+You can exclude a certain model from the top-bar navigation. To do so
+set the ``exclude_from_top_menu`` attribute to True:
+
+.. code-block:: python
+
+	class MyExcludedAdmin(admin.ModelAdmin)
+		... #bla bla..
+		exclude_from_top_menu = True
+
 Admin db options
 ++++++++++++++++
 
