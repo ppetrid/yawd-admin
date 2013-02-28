@@ -3,7 +3,7 @@
 Changelog
 +++++++++
 
-v.0.6.0, 2013.02.11
+v.0.6.0, 2013.02.28
 ===================
 
 * Added modal inlines functionality
@@ -13,6 +13,7 @@ v.0.6.0, 2013.02.11
 * Fixed google analytics bugs (thanks to @chielteuben)
 * Various css updates
 * Added django-reversion, django-mptt templates (thanks to @pahaz)
+* Various minor enhancements, like the ability to exclude a model from the top menu
 
 v.0.5.0, 2012.11.01
 ====================

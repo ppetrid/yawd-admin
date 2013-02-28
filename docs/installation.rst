@@ -17,8 +17,8 @@ the `google-api-python-client` must also be installed::
 
 	$ pip install google-api-python-client
 	
-yawd-admin is tested with django 1.4. Older django versions are not 
-supported. 
+To see which Django versions work with yawd-admin please see
+:ref:`django-versions`.
 
 .. _installation:
 
@@ -39,8 +39,12 @@ or the `github repository <https://github.com/yawd/yawd-admin/>`_::
 Either ways all :ref:`prerequisites` (**except** from `google-api-python-client`)
 will be automatically installed.
 
-Since yawd-admin is actively being developed the github version is generally 
-preferred; it contains all latest updates & fixes.
+.. note::
+
+	Since yawd-admin is actively being developed the github version is
+	generally preferred (especially if you use the latest django); the
+	``master`` branch always contains all latest updates & fixes and is
+	generally considered stable.
 	
 .. _demo-project:
 
@@ -84,3 +88,25 @@ understand how to use yawd-admin.
 Once you are done, you can deactivate the virtual environment::
 
    $ deactivate yawdadmin
+
+.. _changelog:
+
+Changelog
++++++++++
+
+v.0.6.0, 2013.02.28
+-------------------
+
+* Added modal inlines functionality
+* Upgraded to bootstrap v2.2.2
+* Added gcons icon set
+* Collapsible inlines
+* Fixed google analytics bugs (thanks to `@chielteuben <https://github.com/chielteuben>`_)
+* Various css updates
+* Added django-reversion, django-mptt templates (thanks to `@pahaz <https://github.com/pahaz>`_)
+* Various minor enhancements, like the ability to exclude a model from the top menu
+
+v.0.5.0, 2012.11.01
+-------------------
+
+* Initial Release
