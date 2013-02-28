@@ -6,6 +6,7 @@ setup(
       url='http://yawd.eu/open-source-projects/yawd-admin/',
       version = '0.6.0',
       description='An administration website for Django',
+      long_description=open('README.rst', 'rt').read(),
       author='yawd',
       author_email='info@yawd.eu',
       packages=find_packages(),
