@@ -1,4 +1,4 @@
 httplib2
 oauth2client
 yawd-admin
-Django>=1.4
+Django>=1.5
