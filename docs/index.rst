@@ -25,16 +25,17 @@ and offers the following:
 Screenshot of the yawd-admin index page (taken from the 
 `http://yawd.eu/ <http://yawd.eu/>`_ production website).
 
+.. _django-versions:
+
 Django version compatibility
 ++++++++++++++++++++++++++++
 
-yawd-admin v0.5.0: `Django v.1.4.1 <https://www.djangoproject.com/m/releases/1.4/Django-1.4.1.tar.gz>`_
-yawd-admin v0.6.0: `Django v.1.4.5 <https://www.djangoproject.com/m/releases/1.4/Django-1.4.5.tar.gz>`_
+The following yawd-admin versions might also work with other Django 
+releases (older or newer), however such combinations are NOT tested.
 
-note::
-	All the above yawd-admin versions might also work with other Django
-	releases (older or newer). However we have NOT tested yawd-admin with
-	any setup other than above.
+| **yawd-admin v0.5.0:** `Django v.1.4.1 <https://www.djangoproject.com/m/releases/1.4/Django-1.4.1.tar.gz>`_
+| **yawd-admin v0.6.0:** `Django v.1.4.5 <https://www.djangoproject.com/m/releases/1.4/Django-1.4.5.tar.gz>`_
+
 
 Contents
 ++++++++
@@ -45,6 +46,7 @@ Contents
    installation
    usage
    customize
+   changelog
 
 Indices and tables
 ==================

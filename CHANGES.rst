@@ -3,7 +3,7 @@
 Changelog
 +++++++++
 
-v.0.6.0, 2013.02.11
+v.0.6.0, 2013.02.28
 ===================
 
 * Added modal inlines functionality
