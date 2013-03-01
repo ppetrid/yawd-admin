@@ -97,7 +97,6 @@ Changelog
 v.0.7.0, ?
 ----------
 
-* new type of inlines: modal inlines
 * "my account" view for non-admin users to edit their own info
 * reworked filters section
 * reworked authentication/registration templates
