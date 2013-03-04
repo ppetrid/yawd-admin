@@ -163,6 +163,43 @@ set the ``exclude_from_top_menu`` attribute to True:
 		... #bla bla..
 		exclude_from_top_menu = True
 
+Custom top-bar menus
+--------------------
+
+In addition to the app/model-driven top bar menus, you can also create
+custom menus. To do that you should use the ``register_top_menu_item``
+method, specifying child menu items like this:
+
+.. code-block:: python
+
+	from yawdadmin import admin_site
+	admin_site.register_top_menu_item('Custom menu', icon_class="icon-th",
+		children=[{'name': 'Custom view 1', 'admin_url': reverse_lazy('custom-url-view'), 'order': 1, 'title_icon': 'icon-hand-left' },
+		          {'name': 'Custom view 2', 'admin_url': reverse_lazy('custom-url-view-2'), 'order': 2, separator: True, 'title_icon': 'icon-hand-right' }],
+	perms=perms_func) 
+
+
+The ``children`` keyword argument must be a list holding the actual sub-menu items.
+Each item in this list must be a dictionary with the following keys:
+
+* *name*: The menu item name. **Required**
+* *admin_url*: The menu item URL. **Required**
+* *title_icon*: The class of the leading icon. Optional.
+* *order*: The item's order among its siblings. Optional.
+* *separator*: If a separator should be placed *before* this item (just like with model-driven menus). Optional.
+
+The ``perms`` keyword argument is **optional**. If you wish to control the
+permissions on each menu item, you can specify a function that accepts
+both the current request and a menu item as arguments and returns either True -when the user is allowed
+to view the item-, or False. Example implementation:
+
+.. code-block:: python
+
+	def perms_func(request, item):
+		if not request.user.is_superuser and item['admin_url'].startswith('/private'):
+			return False
+		return True
+
 Admin db options
 ++++++++++++++++
 

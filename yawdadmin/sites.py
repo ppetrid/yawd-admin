@@ -6,6 +6,7 @@ from django.conf import settings
 from django.contrib.admin.sites import AdminSite
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
+from django.utils.encoding import force_text
 from django.utils.text import capfirst
 from django.views.decorators.cache import never_cache
 from conf import settings as ls
@@ -13,10 +14,13 @@ from models import AppOption
 from views import AppOptionView, AnalyticsAuthView, AnalyticsConfigView, \
     AnalyticsConnectView, MyAccountView
 
+
 _optionset_labels = {}
 
 
 class YawdAdminSite(AdminSite):
+
+    top_menu_default_order = 3
 
     def __init__(self, *args, **kwargs):
         super(YawdAdminSite, self).__init__(*args, **kwargs)
@@ -63,7 +67,17 @@ class YawdAdminSite(AdminSite):
         up += super(YawdAdminSite, self).get_urls() 
         return up
 
-    def register_top_menu_item(self, item, icon_class=''):
+    def register_top_menu_item(self, item, icon_class='', children={}, perms=None):
+        """
+        When no children are provided, the ``item`` is expected to be a
+        valid application label.
+        Otherwise, a custom menu can be constructed based on the children
+        structure.
+        The ``perms`` argument can be a function that will be called at
+        runtime. Given the request and a model item as keyword arguments, 
+        the function should return whether the item is to be displayed or
+        not (``True`` or ``False``).
+        """
         app_labels = []
         for model, model_admin in self._registry.iteritems():
             if not model._meta.app_label in app_labels:
@@ -72,8 +86,24 @@ class YawdAdminSite(AdminSite):
         if isinstance(item, basestring) and item in app_labels:
             if not item in self._top_menu:
                 self._top_menu[item] = icon_class
+        elif item and children:
+            for child in children:
+                if not 'name' in child or not 'admin_url' in child:
+                    raise Exception("Children must contain at least a 'name' and an 'admin_url'")
+                if not perms:
+                    child['show'] = True
+                if not 'order' in child:
+                    child['order'] = self.top_menu_default_order
+
+            if not item in self._top_menu:
+                self._top_menu[force_text(item)] = {'name': item,
+                                        'icon': icon_class,
+                                        'models': children}
+                if perms:
+                    #store the function reference
+                    self._top_menu[item]['perms'] = perms
         else:
-            raise Exception("Item has to be a valid app_label")
+            raise Exception("Item has to be a valid app_label or children must be explicitly set.")
 
     def unregister_top_menu_item(self, item):
         if isinstance(item, basestring) and item in self._top_menu:
@@ -99,7 +129,7 @@ class YawdAdminSite(AdminSite):
                         info = (app_label, model._meta.module_name)
                         model_dict = {
                             'name': capfirst(model._meta.verbose_name_plural),
-                            'perms': perms,
+                            'show': perms['change'],
                         }
                         if perms.get('change', False):
                             try:
@@ -112,7 +142,7 @@ class YawdAdminSite(AdminSite):
                             except NoReverseMatch:
                                 pass
 
-                        model_dict['order'] = model_admin.order if hasattr(model_admin, 'order') else 3
+                        model_dict['order'] = model_admin.order if hasattr(model_admin, 'order') else self.top_menu_default_order
                         model_dict['separator'] = model_admin.separator if hasattr(model_admin, 'separator') else False
                         model_dict['title_icon'] = model_admin.title_icon if hasattr(model_admin, 'title_icon') else False
 
@@ -126,7 +156,17 @@ class YawdAdminSite(AdminSite):
                                 'has_module_perms': has_module_perms,
                                 'models': [model_dict],
                             }
+
         app_list = app_dict.values()
+
+        #register custom menus
+        for app in self._top_menu.values():
+            if isinstance(app, dict):
+                for child in app['models']:
+                    if not 'show' in child and 'perms' in app and hasattr(app['perms'], '__call__'):
+                        child['show'] = app['perms'](request, child)
+                app_list.append(app)
+
         app_list.sort(key=lambda x: x['name'])
 
         # Sort the models alphabetically within each app.
