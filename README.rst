@@ -29,5 +29,5 @@ site and offers the following:
 Usage and demo
 ==============
 
-See the `yawd-admin documentation <http://yawd-admin.readthedocs.org/en/latest/>`_ 
+See the `yawd-admin v0.6.0 documentation <http://yawd-admin.readthedocs.org/en/v0.6.0/>`_ 
 for information on how to install the demo and use yawd-admin.
