@@ -15,6 +15,11 @@ v.0.7.0, ?
 * automatic calculation of the popover (help text) placement
 * some work towards PEP8/pylint compliance
 
+v.0.6.1, 2013.03.06
+===================
+
+* Fixed packaging problems with v0.6.0
+
 v.0.6.0, 2013.02.28
 ===================
 
