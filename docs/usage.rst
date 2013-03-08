@@ -433,6 +433,65 @@ in your Inline class:
 		#bla bla
 		description = 'My inline description text'
 
+.. custom-widgets:
+
+Custom Widgets
+++++++++++++++
+
+AutoCompleteTextInput widget
+----------------------------
+
+yawd-admin implements a 
+`bootstrap typeahead <http://twitter.github.com/bootstrap/javascript.html#typeahead>`_
+widget that you can use in your forms. As you type in the text input, the
+widget will provide suggestions for auto-completing the field.
+
+Say for example there is a ``Contact`` model having a field named
+``profession``. You want the `profession` text input to suggest professions
+while typing. First you should create a view that returns a json-serialized
+object with the suggestions::
+
+.. code-block:: python
+	
+	class TypeaheadProfessionsView(View):
+	    def get(self, request, *args, **kwargs):
+	        if not request.is_ajax():
+	            raise PermissionDenied
+
+	        query = request.GET.get('query', None)
+	        results = []
+
+	        for el in Contact.objects.values_list('profession', flat=True).distinct():
+	            if el and (not query or el.find(query.decode('utf-8')) != -1):
+	                results.append(el)
+	
+	        return HttpResponse(json.dumps({'results': results}))
+
+As you type in the text field, the js code makes a get request to your custom view,
+with the typed text being sent in the ``query`` `GET variable`. As you can
+see from the code above, the dictionary returned by the view must have a
+``results`` element that contains a list with all suggestions.
+
+No suppose we register this view with the name `'profession-suggestions-view'`.
+We can create a custom admin form for the ``Contact`` and override the
+widget for the ``profession`` field as follows:
+
+.. code-block:: python
+	from yawdadmin.widgets import AutoCompleteTextInput
+
+	class MyContactForm(forms.ModelForm):
+	    class Meta:
+	        widgets = {
+	            'profession': AutoCompleteTextInput(source=reverse_lazy('profession-suggestions-view'))
+	        }
+
+Finally, in our admin.py we must force the ``Contact``'s model admin to use
+the custom form:
+
+.. code-block:: python
+	class MyContactAdmin(admin.ModelAdmin)
+		form = MyContactForm
+
 .. _other-templates:
 
 Templates for popular django applications
