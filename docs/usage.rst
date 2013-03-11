@@ -406,6 +406,9 @@ both stacked and tabular inlines:
 Modal inlines
 -------------
 
+.. image:: contacts-email-addresses.png
+	:align: left
+
 Another nice & new option is the inline modal functionality. It can
 be really useful when you have a lot of fields in your inline model. Add
 ``modal=True`` to the ``StackedInline`` class and your inline form will
@@ -418,6 +421,9 @@ open in a popup-style modal window:
 		modal = True 
 
 This does not work with tabular inlines
+
+.. image:: contacts-email-address.png
+	:align: center
 
 Inline description
 ------------------
@@ -452,7 +458,7 @@ while typing. First you should create a view that returns a json-serialized
 object with the suggestions::
 
 .. code-block:: python
-	
+
 	class TypeaheadProfessionsView(View):
 	    def get(self, request, *args, **kwargs):
 	        if not request.is_ajax():
