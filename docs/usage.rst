@@ -492,6 +492,21 @@ the custom form:
 	class MyContactAdmin(admin.ModelAdmin)
 		form = MyContactForm
 
+Radio buttons
+-------------
+
+To use the built-in bootstrap-style radio buttons use the ``BootstrapRadioRenderer``
+renderer:
+
+.. code-block:: python
+	from yawdadmin.widgets import BootstrapRadioRenderer
+
+	class MyContactForm(forms.ModelForm):
+	    class Meta:
+	        widgets = {
+	            'myselectfield': forms.RadioSelect(renderer=BootstrapRadioRenderer)
+	        }
+
 .. _other-templates:
 
 Templates for popular django applications

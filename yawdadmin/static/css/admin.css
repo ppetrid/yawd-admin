@@ -827,6 +827,10 @@ ul.toplinks li {
 	background-color: #fdfdfd;
 }
 
+.radio.inline {
+	padding-top: 0 !important;
+}
+
 .form-horizontal .color-form .control-group {
 	margin-bottom: 0;
 }
