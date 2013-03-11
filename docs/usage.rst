@@ -383,8 +383,8 @@ to go through the confirmation process again.
 
 .. _admin-inlines:
 
-Admin inlines
-+++++++++++++
+Admin inline customizations
++++++++++++++++++++++++++++
 
 Collapsing inlines
 ------------------
@@ -409,7 +409,7 @@ Modal inlines
 .. image:: contacts-email-addresses.png
 	:align: left
 
-Another nice & new option is the inline modal functionality. It can
+Another nice option is the inline modal functionality. It can
 be really useful when you have a lot of fields in your inline model. Add
 ``modal=True`` to the ``StackedInline`` class and your inline form will
 open in a popup-style modal window:
@@ -439,7 +439,27 @@ in your Inline class:
 		#bla bla
 		description = 'My inline description text'
 
-.. custom-widgets:
+.. _side-navigation:
+
+Side navigation for change forms
+++++++++++++++++++++++++++++++++
+
+.. img:: yawd-admin-affix.png
+	:align:center
+
+You can optionally enable a left menu navigation for your change form pages
+on any model. This will automatically list and track all fieldsets and
+inlines set in the ModelAdmin: 
+
+.. code-block:: python
+
+	class MyModelAdmin(admin.ModelAdmin):
+		..other stuff..
+		fieldsets = (...)
+		inlines = (...)
+		affix=True
+
+.. _custom-widgets:
 
 Custom Widgets
 ++++++++++++++
@@ -455,7 +475,7 @@ widget will provide suggestions for auto-completing the field.
 Say for example there is a ``Contact`` model having a field named
 ``profession``. You want the `profession` text input to suggest professions
 while typing. First you should create a view that returns a json-serialized
-object with the suggestions::
+object with the suggestions:
 
 .. code-block:: python
 

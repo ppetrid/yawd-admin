@@ -12,7 +12,7 @@
 		<script src="{% static "js/bootstrap.min.js" %}"></script>{% block extrahead %}{% endblock %}{% block blockbots %}
 		<meta name="robots" content="NONE,NOARCHIVE" />{% endblock %}
 	</head>
-	<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}dashboard{% endblock %}">{% block top-bar %}{% if not is_popup %}{% if user.is_active and user.is_staff %}
+	<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}dashboard{% endblock %}"{% block bodyspy %}{% endblock%}>{% block top-bar %}{% if not is_popup %}{% if user.is_active and user.is_staff %}
 		{% admin_top_menu %}{% endif %}{% endif %}{% endblock %}{% block mainbody %}
 		<div class="container-fluid main">{% block breadcrumbs %}
 			<ul class="breadcrumb">

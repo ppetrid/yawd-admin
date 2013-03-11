@@ -1,4 +1,4 @@
-{% load i18n %}<div id="{{ inline_admin_formset.formset.prefix }}-group">
+{% load i18n %}<div id="{{ inline_admin_formset.formset.prefix }}-group"{% if adminform.model_admin.affix %} class="affix-header"{% endif %}>
 							<h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>{% if inline_admin_formset.opts.description %}
 							<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
 							{{ inline_admin_formset.formset.management_form }}{% if inline_admin_formset.formset.non_form_errors %}

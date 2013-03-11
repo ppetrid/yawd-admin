@@ -31,6 +31,15 @@ fieldset {
 	margin-bottom: 25px;
 }
 
+.affix-main fieldset {
+	margin-bottom: 0;
+}
+
+h2.affix-header, .affix-header h2 {
+	padding-top: 50px;
+	margin-top: 0;
+}
+
 .page-header .grey {
 	color: #999;
 }
@@ -1220,6 +1229,10 @@ div.select2-container {
 	margin-bottom: 25px;
 }
 
+.affix-main .inline-group {
+	margin-bottom: 0;
+} 
+
 .inline-related h2 {
 	padding-left: 10px;
 }
@@ -1375,6 +1388,83 @@ h3.popover-title {
 
 .popover-content {
 	line-height: 20px;
+}
+
+/* Sidenav for Affix
+-------------------------------------------------- */
+
+.affix-main #fieldset-no-1 .row-fluid.color-form:first-child {
+	-webkit-border-top-left-radius: 6px;
+	-moz-border-radius-topleft: 6px;
+	border-top-left-radius: 6px;
+	-webkit-border-top-right-radius: 6px;
+	-moz-border-radius-topright: 6px;
+	border-top-right-radius: 6px;
+}
+
+.affix-sidenav {
+  width:inherit;
+  margin: 0;
+  padding: 0;
+  background-color: #fff;
+  -webkit-border-radius: 6px;
+     -moz-border-radius: 6px;
+          border-radius: 6px;
+  -webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+.affix-sidenav > li > a {
+  display: block;
+  width: 190px \9;
+  margin: 0 0 -1px;
+  padding: 8px 14px;
+  border: 1px solid #e5e5e5;
+}
+.affix-sidenav > li:first-child > a {
+  -webkit-border-radius: 6px 6px 0 0;
+     -moz-border-radius: 6px 6px 0 0;
+          border-radius: 6px 6px 0 0;
+}
+.affix-sidenav > li:last-child > a {
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+}
+.affix-sidenav > .active > a {
+  position: relative;
+  z-index: 2;
+  padding: 9px 15px;
+  border: 0;
+  text-shadow: 0 1px 0 rgba(0,0,0,.15);
+  -webkit-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+     -moz-box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+          box-shadow: inset 1px 0 0 rgba(0,0,0,.1), inset -1px 0 0 rgba(0,0,0,.1);
+}
+/* Chevrons */
+.affix-sidenav .icon-chevron-right {
+  float: right;
+  margin-top: 2px;
+  margin-right: -6px;
+  opacity: .25;
+}
+.affix-sidenav > li > a:hover {
+  background-color: #f5f5f5;
+}
+.affix-sidenav a:hover .icon-chevron-right {
+  opacity: .5;
+}
+.affix-sidenav .active .icon-chevron-right,
+.affix-sidenav .active a:hover .icon-chevron-right {
+  opacity: 1;
+}
+.affix-sidenav.affix {
+  top: 60px;
+}
+.affix-sidenav.affix-bottom {
+  position: absolute;
+  top: auto;
+  bottom: 270px;
 }
 
 /*!

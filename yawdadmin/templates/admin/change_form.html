@@ -1,5 +1,7 @@
 {% extends "admin/base_site.html" %}{% load i18n admin_modify admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
 
+{% block bodyspy %}{% if adminform.model_admin.affix %} data-spy="scroll" data-target=".affix-sidebar"{% endif %}{% endblock %}
+
 {% block extrastyle %}{{ block.super }}
 			<link rel="stylesheet" type="text/css" href="{% static "css/fancybox/jquery.fancybox.css" %}" />{% endblock %}
 	
@@ -12,7 +14,7 @@
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
 
 {% block content_title %}{% if title %}
-			<header class="page-header">
+			<header class="page-header" id="page-header">
 				<h1>{% if adminform.model_admin.title_icon %}<i class="{{adminform.model_admin.title_icon}} title-icon"></i>{% endif %}{{title}}</h1>
 			</header>{% endif %}{% endblock %}
 
@@ -39,7 +41,24 @@
 			</div>{% endif %}{% endblock %}
 
 {% block content %}
-			<div id="content-main">
+			<div id="content-main">{% if adminform.model_admin.affix %}
+				<div class="container">
+				<div class="row">
+					<div class="span3 affix-sidebar">
+						<ul data-spy="affix" data-offset-top="150" class="affix-sidenav nav nav-list" id="left-affix">{% for fieldset in adminform %}
+							<li{% if forloop.first %} class="active"{% endif %}>
+								<a href="#{% if fieldset.name %}fieldset-no-{{forloop.counter}}-header{% else %}page-header{% endif %}">
+									<i class="icon-chevron-right"></i> {% if fieldset.name %}{{fieldset.name}}{% else %}{% trans 'General' %}{% endif %}
+								</a>
+							</li>{% endfor %}{% for inline_admin_formset in inline_admin_formsets %}
+							<li>
+								<a href="#{{ inline_admin_formset.formset.prefix }}-group">
+									<i class="icon-chevron-right"></i> {{ inline_admin_formset.opts.verbose_name_plural|capfirst }}
+								</a>
+							</li>{% endfor %}
+						</ul>
+				</div>
+				<div class="span9 affix-main">{% endif %}
 				<form class="form-horizontal form-inline" {% if has_file_field %}enctype="multipart/form-data" {% endif %}action="{{ form_url }}" method="post" id="{{ opts.module_name }}_form">
 					{% csrf_token %}{% block form_top %}{% endblock %}{% if save_on_top %}{% submit_row %}{% endif %}
 					<div class="row-fluid">{% if is_popup %}
@@ -55,5 +74,8 @@
 						<script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>{% endif %}
 						{% prepopulated_fields_js %}
 					</div>
-				</form>
+				</form>{% if adminform.model_admin.affix %}
+						</div>
+					</div>
+				</div>{% endif %}
 			</div>{% endblock %}
