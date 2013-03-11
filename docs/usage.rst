@@ -456,11 +456,11 @@ object with the suggestions::
 	class TypeaheadProfessionsView(View):
 	    def get(self, request, *args, **kwargs):
 	        if not request.is_ajax():
-	            raise PermissionDenied
-
+	        raise PermissionDenied
+	
 	        query = request.GET.get('query', None)
 	        results = []
-
+	
 	        for el in Contact.objects.values_list('profession', flat=True).distinct():
 	            if el and (not query or el.find(query.decode('utf-8')) != -1):
 	                results.append(el)
