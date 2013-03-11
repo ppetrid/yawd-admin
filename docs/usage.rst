@@ -477,6 +477,7 @@ We can create a custom admin form for the ``Contact`` and override the
 widget for the ``profession`` field as follows:
 
 .. code-block:: python
+
 	from yawdadmin.widgets import AutoCompleteTextInput
 
 	class MyContactForm(forms.ModelForm):
@@ -489,6 +490,7 @@ Finally, in our admin.py we must force the ``Contact``'s model admin to use
 the custom form:
 
 .. code-block:: python
+
 	class MyContactAdmin(admin.ModelAdmin)
 		form = MyContactForm
 
@@ -499,6 +501,7 @@ To use the built-in bootstrap-style radio buttons use the ``BootstrapRadioRender
 renderer:
 
 .. code-block:: python
+
 	from yawdadmin.widgets import BootstrapRadioRenderer
 
 	class MyContactForm(forms.ModelForm):
