@@ -1,6 +1,6 @@
 {% extends "admin/base_site.html" %}{% load i18n admin_modify admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
 
-{% block bodyspy %}{% if adminform.model_admin.affix %} data-spy="scroll" data-target=".affix-sidebar"{% endif %}{% endblock %}
+{% block bodyspy %}{% if adminform.model_admin.affix and not is_popup %} data-spy="scroll" data-target=".affix-sidebar"{% endif %}{% endblock %}
 
 {% block extrastyle %}{{ block.super }}
 			<link rel="stylesheet" type="text/css" href="{% static "css/fancybox/jquery.fancybox.css" %}" />{% endblock %}
@@ -41,7 +41,7 @@
 			</div>{% endif %}{% endblock %}
 
 {% block content %}
-			<div id="content-main">{% if adminform.model_admin.affix %}
+			<div id="content-main">{% if adminform.model_admin.affix and not is_popup %}
 				<div class="container">
 				<div class="row">
 					<div class="span3 affix-sidebar">
@@ -74,7 +74,7 @@
 						<script type="text/javascript">document.getElementById("{{ adminform.first_field.id_for_label }}").focus();</script>{% endif %}
 						{% prepopulated_fields_js %}
 					</div>
-				</form>{% if adminform.model_admin.affix %}
+				</form>{% if adminform.model_admin.affix and not is_popup %}
 						</div>
 					</div>
 				</div>{% endif %}
