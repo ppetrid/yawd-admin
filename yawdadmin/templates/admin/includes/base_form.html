@@ -14,7 +14,7 @@
 							<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.auto_id}}">{{ field.label }}:</label>
 							<div class="controls">
 								{{ field }}{% if field.help_text %}
-									<i class="help icon-question-sign" data-html="true" data-title="{{ field.label }} - {% trans 'help text' %}" data-content="{{ field.help_text }}"></i>
+									<i class="help icon-question-sign" data-original-title="{{ field.label }} - {% trans 'help text' %}" data-content="{{ field.help_text }}"></i>
 								{% endif %}{% if field.errors %}
 									<span class="help-inline">{{ field.errors }}</span>{% endif %}
 							</div>

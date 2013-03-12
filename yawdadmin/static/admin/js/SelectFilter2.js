@@ -44,7 +44,7 @@ window.SelectFilter = {
         selector_available.className = 'selector-available';
         var title_available = quickElement('h2', selector_available, interpolate(gettext('Available %s') + ' ', [field_name]));
         
-        var ic = quickElement('i', title_available, '', 'class', 'help help-tooltip icon-question-sign icon-white', 'data-placement', 'bottom', 'data-title', interpolate(gettext('Help text')), 'data-content', interpolate(gettext('This is the list of available %s. You may choose some by selecting them in the box below and then clicking the "Choose" arrow between the two boxes.'), [field_name]));
+        var ic = quickElement('i', title_available, '', 'class', 'help help-tooltip icon-question-sign icon-white', 'data-placement', 'bottom', 'data-original-title', interpolate(gettext('Help text')), 'data-content', interpolate(gettext('This is the list of available %s. You may choose some by selecting them in the box below and then clicking the "Choose" arrow between the two boxes.'), [field_name]));
         $(ic).popover({trigger : 'click'});
         
         var filter_p = quickElement('p', selector_available, '', 'id', field_id + '_filter');
@@ -79,7 +79,7 @@ window.SelectFilter = {
         selector_chosen.className = 'selector-chosen';
         var title_chosen = quickElement('h2', selector_chosen, interpolate(gettext('Chosen %s') + ' ', [field_name]));
         
-        var ic2 = quickElement('i', title_chosen, '', 'class', 'help help-tooltip icon-question-sign  icon-white', 'data-placement', 'bottom', 'data-title', interpolate(gettext('Help text')), 'data-content', interpolate(gettext('This is the list of chosen %s. You may remove some by selecting them in the box below and then clicking the "Remove" arrow between the two boxes.'), [field_name]));
+        var ic2 = quickElement('i', title_chosen, '', 'class', 'help help-tooltip icon-question-sign  icon-white', 'data-placement', 'bottom', 'data-original-title', interpolate(gettext('Help text')), 'data-content', interpolate(gettext('This is the list of chosen %s. You may remove some by selecting them in the box below and then clicking the "Remove" arrow between the two boxes.'), [field_name]));
         $(ic2).popover({trigger : 'click'});
         
         var to_box = quickElement('select', selector_chosen, '', 'id', field_id + '_to', 'multiple', 'multiple', 'size', from_box.size, 'name', from_box.getAttribute('name'));

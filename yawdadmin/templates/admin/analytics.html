@@ -38,13 +38,13 @@
 				<div class="row">
 					<div class="span12">
 						<a href="{% url 'admin:analytics-connect' %}" class="btn">{% trans 'Authenticate new account' %}</a>
-						<i class="help icon-question-sign" data-html="true" data-title="{% trans 'Authenticate new account' %} - {% trans 'help text' %}" data-content="{% trans '<p>Use this button to connect to a Google account and enable statistics. The google account must have access to the above Google Analytics Profile ID.</p><p class=\'add-top\'>This action is required to be performed at least once.</p><p class=\'add-top\'>If a user is already connected (i.e. see \'connected\' column above) the stored credentials will be deleted and a new user can be connected.</p>' %}"></i>
+						<i class="help icon-question-sign" data-original-title="{% trans 'Authenticate new account' %} - {% trans 'help text' %}" data-content="{% trans '<p>Use this button to connect to a Google account and enable statistics. The google account must have access to the above Google Analytics Profile ID.</p><p class=\'add-top\'>This action is required to be performed at least once.</p><p class=\'add-top\'>If a user is already connected (i.e. see \'connected\' column above) the stored credentials will be deleted and a new user can be connected.</p>' %}"></i>
 					</div>
 				</div>
 			</section>
 			<script>
 				(function($){
-					$('.help').popover({trigger: 'click'});
+					$('.help').popover({trigger: 'click', html: true});
 				})(yawdadmin.jQuery)
 			</script>
 		</div>{% endblock %}

@@ -81,6 +81,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
 		});
 		
 		$('body').popover({selector:'.help',
+				html: true,
 				trigger: 'click',
 				placement: function (tip, element) {
 					$container = $(element).closest('.modal');

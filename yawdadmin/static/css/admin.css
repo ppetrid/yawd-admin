@@ -148,12 +148,12 @@ h2.affix-header, .affix-header h2 {
 }
 
 .navbar-blue .brand, .navbar-inverse .nav > li > a {
-	color: #eee;
+	color: #eee !important;
 	text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.5);
 }
 
 .navbar-blue .nav > li > a {
-	color: #fff;
+	color: #fff !important;
 	text-shadow: 0 1px 0 rgba(0, 0, 0, 0.5);
 	opacity: .9;
 }
@@ -193,12 +193,16 @@ h2.affix-header, .affix-header h2 {
 }
 
 @media (max-width: 979px) {
+	.navbar-blue .nav-collapse .nav > li > a, .navbar-blue .nav-collapse .dropdown-menu a {
+		color: #eee !important;
+	}
+
 	.navbar-blue .nav-collapse .nav > li > a:hover, .navbar-blue .nav-collapse .dropdown-menu a:hover {
 		background-color: #005E9D !important;
 	}
 	
 	.nav-collapse .nav > li > a, .nav-collapse .dropdown-menu a {
-		color: #eee;
+		color: #eee !important;
 	}
 }
 
@@ -1414,6 +1418,13 @@ h3.popover-title {
      -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
           box-shadow: 0 1px 4px rgba(0,0,0,.065);
 }
+
+@media (max-width: 767px) {
+	.affix-sidenav {
+		display: none !important;
+	}
+}
+
 .affix-sidenav > li > a {
   display: block;
   width: 190px \9;

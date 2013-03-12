@@ -11,7 +11,7 @@
 										<span class="switch-thumb"></span>
 									</span>{% else %}
 									{{ field }}{% endif %}{% if field.help_text %}
-									<i class="help icon-question-sign" data-html="true" data-title="{{field.field.label}} - {% trans 'help text' %}" data-content="{{ field.field.help_text }}"></i>{% endif %}{% if not field.is_readonly and field.errors %}
+									<i class="help icon-question-sign" data-original-title="{{field.field.label}} - {% trans 'help text' %}" data-content="{{ field.field.help_text }}"></i>{% endif %}{% if not field.is_readonly and field.errors %}
 									<span class="help-inline">{{ field.errors }}</span>{% endif %}
 								</div>
 							</div>
