@@ -444,7 +444,7 @@ in your Inline class:
 Side navigation for change forms
 ++++++++++++++++++++++++++++++++
 
-.. img:: yawd-admin-affix.png
+.. image:: yawd-admin-affix.png
 	:align:center
 
 You can optionally enable a left menu navigation for your change form pages
