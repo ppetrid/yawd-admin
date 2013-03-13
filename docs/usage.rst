@@ -445,7 +445,7 @@ Side navigation for change forms
 ++++++++++++++++++++++++++++++++
 
 .. image:: yawd-admin-affix.png
-	:align:center
+	:align: center
 
 You can optionally enable a left menu navigation for your change form pages
 on any model. This will automatically list and track all fieldsets and
