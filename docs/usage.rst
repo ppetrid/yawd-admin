@@ -6,8 +6,8 @@ Using yawd-admin
 Set up
 ++++++
 
-To use the yawd-admin website you first need to include yawdadmin in 
-your ``INSTALLED_APPS`` setting. You also not need to include 
+To use the yawd-admin website you first need to include yawdadmin in
+your ``INSTALLED_APPS`` setting. You also not need to include
 `django.contrib.admin` in ``INSTALLED_APPS`` and place
 it **after** `yawdadmin` for yawd-admin to work properly. In `settings.py`:
 
@@ -19,9 +19,9 @@ it **after** `yawdadmin` for yawd-admin to work properly. In `settings.py`:
 		'django.contrib.admin',
 		...
 	)
-	
-yawd-admin uses the :class:`yawdadmin.middleware.PopupMiddleware` middleware 
-to replace the  standard django admin popups with fancybox. Make sure the 
+
+yawd-admin uses the :class:`yawdadmin.middleware.PopupMiddleware` middleware
+to replace the  standard django admin popups with fancybox. Make sure the
 middleware is enabled in your ``MIDDLEWARE_CLASSES`` setting. In `settings.py`:
 
 .. code-block:: python
@@ -31,7 +31,7 @@ middleware is enabled in your ``MIDDLEWARE_CLASSES`` setting. In `settings.py`:
 		'yawdadmin.middleware.PopupMiddleware',
 		...
 	)
-	
+
 Finally, the `django.core.context_processors.request` context
 processor must also be enabled:
 
@@ -42,52 +42,66 @@ processor must also be enabled:
 		"django.core.context_processors.request",
 		...
 	)
-	
+
 .. register-urls:
 
 Register the yawd-admin urls
 ++++++++++++++++++++++++++++
-    
+
 To register the admin site views, use the following (inside your `urls.py`):
 
 .. code-block:: python
 
 	from yawdadmin import admin_site
-	
+
 	patterns = (''
 		url(r'^admin', include(admin_site.urls)),
 		...
 	)
-	
-You **do not** need to register the django admin urls as well, the 
+
+You **do not** need to register the django admin urls as well, the
 yawd ``admin_site`` extends the original admin class.
+
+.. settings:
+
+Settings
+++++++++
+
+You can change the admin site name and add a description to the login page by adding a couple attributes to your settings:
+
+ADMIN_SITE_NAME = 'My Admin Site'
+ADMIN_SITE_DESCRIPTION = 'This is a private site.  Please don't hack me'
+
+If you don't want a description at all just null the attribute:
+
+ADMIN_SITE_DESCRIPTION = None
 
 .. _auto-discover:
 
 ModelAdmin registration and auto-discovery
 ++++++++++++++++++++++++++++++++++++++++++
 
-Normally, to register your normal ModelAdmin class with yawd-admin you 
-should use ``yawdadmin.admin_site`` instead of the original 
+Normally, to register your normal ModelAdmin class with yawd-admin you
+should use ``yawdadmin.admin_site`` instead of the original
 ``django.contrib.admin.site`` instance (in `admin.py`):
 
 .. code-block:: python
 
 	from django.contrib import admin
 	from models import MyModel
-	
+
 	class MyModelAdmin(admin.ModelAdmin):
 		pass
-	
+
 	from yawdadmin import admin_site
 	#you can use this instead of admin.site.register():
 	admin_site.register(MyModel, MyModelAdmin)
-	
-However, many applications might have registered their `ModelAdmin` 
-classes with the default django admin site. As you can see from the 
-above snippet yawd-admin uses the `ModelAdmin` class as well, therefore 
-you can easily add all standard registrations to the yawd-admin website. 
-To do so, use the standard `admin.autodiscover()` method and then update 
+
+However, many applications might have registered their `ModelAdmin`
+classes with the default django admin site. As you can see from the
+above snippet yawd-admin uses the `ModelAdmin` class as well, therefore
+you can easily add all standard registrations to the yawd-admin website.
+To do so, use the standard `admin.autodiscover()` method and then update
 the yawd-admin registry as follows (in `urls.py`):
 
 .. code-block:: python
@@ -96,15 +110,15 @@ the yawd-admin registry as follows (in `urls.py`):
 	from yawdadmin import admin_site
 
 	admin.autodiscover()
-	admin_site._registry.update(admin.site._registry) 
-	
+	admin_site._registry.update(admin.site._registry)
+
 .. _top-bar:
-	
+
 Top-bar navigation
 ++++++++++++++++++
 
 yawd-admin provides a top navigation bar. If you wish, you can register
-an application's admin models along with an accompanying image to the 
+an application's admin models along with an accompanying image to the
 top-bar as follows:
 
 .. code-block:: python
@@ -119,17 +133,17 @@ The above snippet will register the `django.contrib.admin.sites` application to
 the top bar. Note however that if the application you try to register
 is not yet registered with the admin website, an Exception will be raised.
 Therefore, a safe place to put this code is in your `urls.py module`, right
-after the :ref:`auto-discovery <auto-discover>` code. If you want to register the current 
-application, you could use the `admin.py` module and place the code right 
+after the :ref:`auto-discovery <auto-discover>` code. If you want to register the current
+application, you could use the `admin.py` module and place the code right
 after the `ModelAdmin` registrations (as in the :ref:`demo project <demo-project>`).
 
 .. image:: admin-top-bar.png
 
 A screenshot of the top-bar navigation from the demo project. Note that the
 order in which `ModelAdmin` classes are presented in the drop-down box
-is not alphabetical and that there is also a separator line between 
-the `Expenses` and `Invoices` items. yawd-admin provides two custom 
-`ModelAdmin` attributes to achieve this behavior: 
+is not alphabetical and that there is also a separator line between
+the `Expenses` and `Invoices` items. yawd-admin provides two custom
+`ModelAdmin` attributes to achieve this behavior:
 ``order`` and ``separator``. You can use them like this:
 
 .. code-block:: python
@@ -141,13 +155,13 @@ the `Expenses` and `Invoices` items. yawd-admin provides two custom
 	class MyPageAdmin(admin.ModelAdmin)
 		... #bla bla..
 		order = 1
-		
+
 	class MyThirdAdmin(admin.ModelAdmin)
 		... #bla bla..
 		order = 3
 		separator = True
 
-The above will place `MyPageAdmin` before `MyCategoryAdmin` and 
+The above will place `MyPageAdmin` before `MyCategoryAdmin` and
 `MyThirdAdmin` will come last. A separator line will also be drawed
 **before** the `MyThirdAdmin` item.
 
@@ -176,7 +190,7 @@ method, specifying child menu items like this:
 	admin_site.register_top_menu_item('Custom menu', icon_class="icon-th",
 		children=[{'name': 'Custom view 1', 'admin_url': reverse_lazy('custom-url-view'), 'order': 1, 'title_icon': 'icon-hand-left' },
 		          {'name': 'Custom view 2', 'admin_url': reverse_lazy('custom-url-view-2'), 'order': 2, separator: True, 'title_icon': 'icon-hand-right' }],
-	perms=perms_func) 
+	perms=perms_func)
 
 
 The ``children`` keyword argument must be a list holding the actual sub-menu items.
@@ -204,19 +218,19 @@ Admin db options
 ++++++++++++++++
 
 You can register sets of custom options that editable from the admin
-interface. 
+interface.
 
 .. image:: admin-options.png
 
-Each set of options is defined by extending the 
+Each set of options is defined by extending the
 :class:`yawdadmin.admin_options.OptionSetAdmin` class:
 
 .. code-block:: python
-	
+
 	class CustomOptions(OptionSetAdmin):
 		optionset_label = 'custom-options'
 		verbose_name = 'Custom Options'
-    
+
 		option_1 = SiteOption(field=forms.CharField(
 			widget=forms.Textarea(
 				attrs = {'class' : 'textarea-medium'}
@@ -224,32 +238,32 @@ Each set of options is defined by extending the
 			required=False,
 			help_text='A fancy custom text area option.',
 		))
-    
+
 		option_2 = SiteOption(field=forms.CharField(
 			help_text='The second awesome option. This one is required!',
 		))
-    
+
 The ``optionset_label`` attribute is the equivalent of the ``app_label``
 for models. By defining a ``verbose_name`` you can explicitly set how
 you want this option-set label to be displayed.
 
 Each option is implemented as a member of the ``OptionSetAdmin`` sub-class,
 exactly like you would do in a database model. The options must be of
-the :class:`yawdadmin.admin_options.SiteOption` type. The ``field`` 
+the :class:`yawdadmin.admin_options.SiteOption` type. The ``field``
 argument of the `SiteOption` constructor can refer to any standard django
-form field class instance. In the above example, `option_1` will be a 
+form field class instance. In the above example, `option_1` will be a
 text area and `option_2` a text input.
 
-.. note:: 
+.. note::
 
 	a `SiteOption` initialization can accept a ``lang_dependant`` boolean
 	keyword argument as well. Set this to ``True`` if you use yawd-admin
 	along with `yawd-translations <http://yawd.eu/open-source-projects/yawd-translations/>`_
 	and you need multilingual options:
-	
+
 	.. image:: multilingual-options.png
-	
-After defining your custom ``OptionSetAdmin`` class you must register it 
+
+After defining your custom ``OptionSetAdmin`` class you must register it
 with the yawd-admin website:
 
 .. code-block:: python
@@ -267,38 +281,38 @@ To retrieve a single option you can use the ``get_option()`` method:
 
 	from yawdadmin.utils import get_option
 	option = get_option('custom-options', 'option_1')
-	
+
 	if option == 'whatever value':
 		#do your stuff..
-	
-... where the first argument of the method is the `optionset_label` 
+
+... where the first argument of the method is the `optionset_label`
 and the second is the option name.
 
 If you want to retrieve all options of a single option-set at once
-use the ``get_options()`` method (if you need access to more than one 
+use the ``get_options()`` method (if you need access to more than one
 options this is preferred since it will hit the database only once):
 
 .. code-block:: python
 
 	from yawdadmin.utils import get_options
 	options = get_options('custom-options')
-	
+
 	if options['option_1'] == 'whatever value':
 		#do your stuff
-	
+
 ...or in the template:
- 
+
 .. code-block:: django
- 
+
  	<p><span>Option 1 value:</span> {{options.option_1}}</p>
- 	
+
 .. _google-analytics:
 
 Integration with Google Analytics
 +++++++++++++++++++++++++++++++++
- 
+
 To access your google analytics reports through the yawd-admin
-index page you need to first create a new google API application 
+index page you need to first create a new google API application
 by performing the following steps:
 
 * Visit the Google APIs Console (https://code.google.com/apis/console)
@@ -309,17 +323,17 @@ by performing the following steps:
 
 	* Fill out the Branding Information fields and click Next.
 	* In Client ID Settings, set Application type to 'Web application'.
-	* In the **Your site or hostname** section click 'more options'. 
-		
+	* In the **Your site or hostname** section click 'more options'.
+
 		* The **Authorized redirect URIs** field must be set to ``http://localhost:8000/admin/oauth2callback``. Replace `localhost:8000` with a domain if you are on a production system. The '/admin/' part of the URL refers to the :ref:`prefix <register-urls>` you used to register the admin site with.
 		* The **Authorized JavaScript Origins** field must be set to ``http://localhost:8000/`` (or the domain root if you are on a production system).
-		
+
 	* Click Create client ID
 
 Keep a node of the generated `Client ID` and `Client secret` as we will
-use them later on. 
+use them later on.
 
-Go into your project source files and create a new file named 
+Go into your project source files and create a new file named
 `client_secrets.json`. The file contents should look like this::
 
 	{
@@ -328,10 +342,10 @@ Go into your project source files and create a new file named
 	    "client_secret": "[[INSERT CLIENT SECRET HERE]]",
 	    "redirect_uris": [],
 	    "auth_uri": "https://accounts.google.com/o/oauth2/auth",
-	    "token_uri": "https://accounts.google.com/o/oauth2/token" 
+	    "token_uri": "https://accounts.google.com/o/oauth2/token"
 	  }
 	}
-	
+
 Replace ``[[INSERT CLIENT ID HERE]]`` and ``[[INSERT CLIENT SECRET HERE]]``
 with the actual `Client ID` and `Client secret` you created in the previous
 step.
@@ -347,7 +361,7 @@ settings module (`settings.py`):
 		'profile_id' : '12345678',
 		'admin_root_url' : 'http://localhost:8000/admin/'
 	}
-	
+
 The ``client_secrets`` key must hold the absolute path to the
 the `client_secrets.json` file we created.
 
@@ -368,14 +382,14 @@ A screenshot of an analytics account showing the Profile ID.
 The last setting, ``admin_root_url`` must be set to the root url of the
 admin website.
 
-Now restart the web server and visit the admin interface 
-(e.g. http://localhost:8000/admin). 
+Now restart the web server and visit the admin interface
+(e.g. http://localhost:8000/admin).
 
 .. image:: configure-google-analytics.png
 
-Visit the 'Configure Google Analytics' page (image above) and click 
-'Authenticate new account' to grant the application access to your 
-google analytics data. Make sure the google account you link has access 
+Visit the 'Configure Google Analytics' page (image above) and click
+'Authenticate new account' to grant the application access to your
+google analytics data. Make sure the google account you link has access
 to the specified ``profile_id``.
 
 Now yawd-admin has stored your data and you don't need
@@ -394,15 +408,15 @@ your fieldsets. Collapsing an admin inline is easy and works for
 both stacked and tabular inlines:
 
 .. code-block:: python
-	
+
 	class MyStackedInline(admin.StackedInline):
 		#bla bla
 		collapse = True
-		
+
 	class MyTabularInline(admin.TabularInline):
 		#bla bla
 		collapse = True
-		
+
 Modal inlines
 -------------
 
@@ -418,7 +432,7 @@ open in a popup-style modal window:
 
 	class MyStackedInline(admin.StackedInline):
 		#bla bla
-		modal = True 
+		modal = True
 
 This does not work with tabular inlines
 
@@ -449,7 +463,7 @@ Side navigation for change forms
 
 You can optionally enable a left menu navigation for your change form pages
 on any model. This will automatically list and track all fieldsets and
-inlines set in the ModelAdmin: 
+inlines set in the ModelAdmin:
 
 .. code-block:: python
 
@@ -467,7 +481,7 @@ Custom Widgets
 AutoCompleteTextInput widget
 ----------------------------
 
-yawd-admin implements a 
+yawd-admin implements a
 `bootstrap typeahead <http://twitter.github.com/bootstrap/javascript.html#typeahead>`_
 widget that you can use in your forms. As you type in the text input, the
 widget will provide suggestions for auto-completing the field.
@@ -483,14 +497,14 @@ object with the suggestions:
 	    def get(self, request, *args, **kwargs):
 	        if not request.is_ajax():
 	        raise PermissionDenied
-	
+
 	        query = request.GET.get('query', None)
 	        results = []
-	
+
 	        for el in Contact.objects.values_list('profession', flat=True).distinct():
 	            if el and (not query or el.find(query.decode('utf-8')) != -1):
 	                results.append(el)
-	
+
 	        return HttpResponse(json.dumps({'results': results}))
 
 As you type in the text field, the js code makes a get request to your custom view,

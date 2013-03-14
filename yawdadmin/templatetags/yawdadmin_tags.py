@@ -2,6 +2,7 @@ import re
 from django import template
 from django.conf import settings
 from django.core import urlresolvers
+from django.utils.translation import ugettext as _
 from django.contrib.admin.views.main import PAGE_VAR
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language
@@ -11,7 +12,7 @@ from yawdadmin.conf import settings as ls
 register = template.Library()
 
 @register.inclusion_tag('admin/includes/topmenu.html', takes_context=True)
-def admin_top_menu(context):        
+def admin_top_menu(context):
     return {
         'perms' : context['perms'],
         'top_menu' : admin_site.top_menu(context['request']),
@@ -46,3 +47,11 @@ def yawdadmin_paginator_number(cl,i):
                            cl.get_query_string({PAGE_VAR: i}),
                            mark_safe(' class="end"' if i == cl.paginator.num_pages-1 else ''),
                            i+1)
+
+@register.simple_tag(takes_context=True)
+def get_admin_site_meta(context):
+    context['ADMIN_SITE_NAME'] = getattr(settings, 'ADMIN_SITE_NAME',
+        _('Django Administration'))
+    context['ADMIN_SITE_DESCRIPTION'] = getattr(settings, 'ADMIN_SITE_DESCRIPTION',
+        _('Welcome to the yawd-admin administration page. Please sign in to manage your website.'))
+    return ''
