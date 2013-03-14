@@ -1,4 +1,4 @@
-{% extends "admin/logged_out_base.html" %}{% load i18n %}
+{% extends "admin/logged_out_base.html" %}{% load i18n yawdadmin_tags %}
 
 {% block bodyclass %}login{% endblock %}
 
@@ -18,7 +18,7 @@
 					<input type="hidden" name="this_is_the_login_form" value="1" />
 					<input type="hidden" name="next" value="{{ next }}" />
 					<div class="control-group{% if form.username.errors %} error{% endif %}">{% if not form.this_is_the_login_form.errors %}
-						<label class="control-label required" for="id_username">{% trans 'Username:' %}</label>{% endif %}
+						<label class="control-label required" for="id_username">{% trans 'Login' %}:</label>{% endif %}
 						<div class="controls">
 							<div class="input-prepend">
 								<span class="add-on"><i class="icon-user"></i></span>
@@ -28,7 +28,7 @@
 						</div>
 					</div>
 					<div class="control-group{% if form.password.errors %} error{% endif %}">{% if not form.this_is_the_login_form.errors %}
-						<label class="control-label required" for="id_password">{% trans 'Password:' %}</label>{% endif %}
+						<label class="control-label required" for="id_password">{% trans 'Password' %}:</label>{% endif %}
 						<div class="controls">
 							<div class="input-prepend">
 								<span class="add-on"><i class="icon-lock"></i></span>
@@ -43,4 +43,4 @@
 					</div>
 				</form>
 			</div>
-			<script type="text/javascript">document.getElementById('id_username').focus();</script>{% endblock %} 
+			<script type="text/javascript">document.getElementById('id_username').focus();</script>{% endblock %}

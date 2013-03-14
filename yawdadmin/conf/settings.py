@@ -1,6 +1,5 @@
 from oauth2client.client import flow_from_clientsecrets
 from django.conf import settings
-from yawdadmin.forms import AdminUserModelForm
 
 ADMIN_GOOGLE_ANALYTICS = {
     'client_secrets' : '',
@@ -23,8 +22,9 @@ if ADMIN_GOOGLE_ANALYTICS['client_secrets'] and ADMIN_GOOGLE_ANALYTICS['profile_
     ADMIN_GOOGLE_ANALYTICS_FLOW.params['approval_prompt'] = 'force'
 else:
      ADMIN_GOOGLE_ANALYTICS_FLOW = None
-     
-ADMIN_USER_MODELFORM = getattr(settings, 'ADMIN_USER_MODELFORM', AdminUserModelForm)
+
+ADMIN_USER_MODELFORM = getattr(settings, 'ADMIN_USER_MODELFORM',
+    'yawdadmin.forms.AdminUserModelForm')
 
 #load the modelform if it's a string
 if isinstance(ADMIN_USER_MODELFORM, str):

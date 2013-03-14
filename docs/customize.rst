@@ -8,7 +8,7 @@ As with the default django admin site you can override the templates of
 yawd-admin. Just make sure your application is listed before 'yawd-admin'
 in your ``INSTALLED_APPS`` settings and place your templates inside the
 `myapp/templates/admin` directory.
-`Per-model template override <https://docs.djangoproject.com/en/dev/ref/contrib/admin/#set-up-your-projects-admin-template-directories>`_ 
+`Per-model template override <https://docs.djangoproject.com/en/dev/ref/contrib/admin/#set-up-your-projects-admin-template-directories>`_
 works exactly like the original django admin as well.
 
 Object tools
@@ -34,7 +34,7 @@ The html in templates for object tools is like this:
 			<i class="lookup-item"></i> {% trans "View on site" %}
 		</a>
 	</div>{% endif %}{% endblock %}
-	
+
 Since you might override the `'object-tools-items'` template block to add
 your custom object tools, yawd-admin provides a set of icons to
 use for your buttons.
@@ -59,8 +59,8 @@ icon name as is in this case. E.g.:
 	 <i class="copy-item"></i>
 
 
-"My account" view
-+++++++++++++++++
+Integration with Custom User Models
++++++++++++++++++++++++++++++++++++
 
 yawdadmin comes with a new admin view to allow staff users edit their own
 account information (username,  first name, last name and email). This view
@@ -68,7 +68,7 @@ uses a ModelForm of the standard ``django.contrib.auth.models.User`` model.
 
 If your projects makes use of the
 `new django 1.5 custom user functionality <https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user>`_
-you can set the ``ADMIN_USER_MODELFORM`` yawd-admin setting to override the 
+you can set the ``ADMIN_USER_MODELFORM`` yawd-admin setting to override the
 ModelForm used by the view (in settings.py):
 
 .. code-block:: python
@@ -90,12 +90,12 @@ You can set an accompanying icon class for each of your models in the
 	class MyModelAdmin(admin.ModelAdmin):
 		....
 		title_icon = 'icon-group'
-		
+
 yawd-admin will display this icon in various places (e.g drop-down menus,
 change list pages, change form pages) in an effort to make your UI more
 eye-appealing.
 
-The icon classes you can choose from are listed 
+The icon classes you can choose from are listed
 `here <http://fortawesome.github.com/Font-Awesome/>`_. yawd-admin uses the
 font-awesome bootstrap icons instead of the original ones. Therefore
 you can apply any CSS rule to customize the look & feel of your icons.

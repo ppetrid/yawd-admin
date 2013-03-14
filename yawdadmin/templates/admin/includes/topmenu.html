@@ -1,8 +1,10 @@
-{% load i18n yawdadmin_filters %}<div class="navbar-blue navbar navbar-inverse navbar-fixed-top">
+{% load i18n yawdadmin_filters yawdadmin_tags %}
+{% get_admin_site_meta %}
+<div class="navbar-blue navbar navbar-inverse navbar-fixed-top">
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a class="brand" href="{{homeurl}}">
-						<i class="icon-globe icon-white"></i> {% trans "Django administration" %}
+						<i class="icon-globe icon-white"></i> {{ ADMIN_SITE_NAME }}
 					</a>
 					<nav id="logged-user-menu">
 						<ul class="nav pull-right">{% if langs %}
