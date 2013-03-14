@@ -1,11 +1,11 @@
-{% extends "admin/base_site.html" %}{% load i18n %}
+{% extends "admin/base_site.html" %}{% load i18n yawdadmin_tags %}
 
 {% block top-bar %}{% endblock %}
 
 {% block mainbody %}
 		<section class="hero-unit">
-			<h1>{% trans "Django administration" %}</h1>
-			<p>{% trans "Welcome to the yawd-admin administration page. Please sign in to manage your website." %}</p>
+			{% get_admin_site_name %}
+			<h1>{{ ADMIN_SITE_NAME }}</h1>
 			<p>{% for lang in langs %}{% get_language_info for lang.name as info %}
 				<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}"><img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /></a>{% endfor %}
 			</p>
