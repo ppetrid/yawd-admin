@@ -49,7 +49,9 @@ def yawdadmin_paginator_number(cl,i):
                            i+1)
 
 @register.simple_tag(takes_context=True)
-def get_admin_site_name(context):
+def get_admin_site_meta(context):
     context['ADMIN_SITE_NAME'] = getattr(settings, 'ADMIN_SITE_NAME',
         _('Django Administration'))
+    context['ADMIN_SITE_DESCRIPTION'] = getattr(settings, 'ADMIN_SITE_DESCRIPTION',
+        _('Welcome to the yawd-admin administration page. Please sign in to manage your website.'))
     return ''
