@@ -151,9 +151,8 @@ class PermissionTestCase(TestCase):
         self.assertEqual(response.status_code, expected_status)
         response = self.client.get(reverse('admin:%s_change' % model_prefix, args=(item,)))
         self.assertEqual(response.status_code, expected_status)
-        #TODO: WTF
-        #response = self.client.get(reverse('admin:%s_history' % model_prefix, args=(item,)))
-        #self.assertEqual(response.status_code, expected_status)
+        response = self.client.get(reverse('admin:%s_history' % model_prefix, args=(item,)))
+        self.assertEqual(response.status_code, expected_status)
         response = self.client.get(reverse('admin:%s_delete' % model_prefix, args=(item,)))
         self.assertEqual(response.status_code, expected_status)
         response = self.client.get(reverse('admin:%s_add' % model_prefix))
