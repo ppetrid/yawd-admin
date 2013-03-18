@@ -65,6 +65,14 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
     yawdadmin.jQuery.popupTriggeringLink = null;
 }
 
+var affix_offset = {
+	top: function () {
+		if (yawdadmin.jQuery('.affix-main').length == 0)
+			return yawdadmin.jQuery('.affix-sidebar').offset().top;
+		return yawdadmin.jQuery('.affix-main').offset().top - 60;
+	}
+};
+
 (function($){ 
 	$(document).ready( function() {
 		$('.add-another, .related-lookup').each(function() {

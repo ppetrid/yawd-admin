@@ -1397,6 +1397,11 @@ h3.popover-title {
 /* Sidenav for Affix
 -------------------------------------------------- */
 
+.affix {
+	top: 60px;
+	width: inherit;
+}
+
 .affix-main #fieldset-no-1 .row-fluid.color-form:first-child {
 	-webkit-border-top-left-radius: 6px;
 	-moz-border-radius-topleft: 6px;
