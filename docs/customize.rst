@@ -1,6 +1,27 @@
 Customizing yawd-admin
 ======================
 
+Integration with Custom User Models
++++++++++++++++++++++++++++++++++++
+
+yawdadmin comes with a new admin view to allow staff users edit their own
+account information (username,  first name, last name and email). This view
+uses a ModelForm of the standard ``django.contrib.auth.models.User`` model.
+
+If your projects makes use of the
+`new django 1.5 custom user functionality <https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user>`_
+you can set the ``ADMIN_USER_MODELFORM`` yawd-admin setting to override the
+ModelForm used by the view (in settings.py):
+
+.. code-block:: python
+
+	ADMIN_USER_MODELFORM = 'myapp.module.MyModelForm'
+
+Note that the setting value can be a string or Class. A string is normally
+preferred to avoid import errors during environment initialization.
+
+.. _overriding-templates:
+
 Overriding the templates
 ++++++++++++++++++++++++
 
@@ -58,26 +79,21 @@ icon name as is in this case. E.g.:
 	 <i class="add-item"></i>
 	 <i class="copy-item"></i>
 
+Javascript message translations
++++++++++++++++++++++++++++++++
 
-Integration with Custom User Models
-+++++++++++++++++++++++++++++++++++
-
-yawdadmin comes with a new admin view to allow staff users edit their own
-account information (username,  first name, last name and email). This view
-uses a ModelForm of the standard ``django.contrib.auth.models.User`` model.
-
-If your projects makes use of the
-`new django 1.5 custom user functionality <https://docs.djangoproject.com/en/dev/topics/auth/customizing/#auth-custom-user>`_
-you can set the ``ADMIN_USER_MODELFORM`` yawd-admin setting to override the
-ModelForm used by the view (in settings.py):
+If you use :ref:`custom templates <overriding-templates>` and want to add
+multilingual javascript messages as described in `the django documentation 
+<https://docs.djangoproject.com/en/dev/topics/i18n/translation/#module-django.views.i18n>`_,
+you can use the `ADMIN_JS_CATALOG` setting:
 
 .. code-block:: python
 
-	ADMIN_USER_MODELFORM = 'myapp.module.MyModelForm'
+	ADMIN_JS_CATALOG = ['your.app.package', 'your.app.package.2']
 
-Note that the setting value can be a string or Class. A string is normally
-preferred to avoid import errors during environment initialization.
-
+Make sure you have compiled the translated javascript messages (`djangojs`
+namespace) for all listed applications, so they're included in the admin
+catalog view.
 
 Model icons
 +++++++++++

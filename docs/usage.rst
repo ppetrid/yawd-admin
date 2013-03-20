@@ -67,12 +67,17 @@ yawd ``admin_site`` extends the original admin class.
 Settings
 ++++++++
 
-You can change the admin site name and add a description to the login page by adding a couple attributes to your settings:
+You can change the admin site name and add a description to the login page
+by adding a couple attributes to your settings:
 
-ADMIN_SITE_NAME = 'My Admin Site'
-ADMIN_SITE_DESCRIPTION = 'This is a private site.  Please don't hack me'
+.. code-block:: python
+	
+	ADMIN_SITE_NAME = 'My Admin Site'
+	ADMIN_SITE_DESCRIPTION = 'This is a private site.  Please don't hack me'
 
 If you don't want a description at all just null the attribute:
+
+.. code-block:: python
 
 ADMIN_SITE_DESCRIPTION = None
 

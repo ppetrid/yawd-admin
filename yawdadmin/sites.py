@@ -238,3 +238,17 @@ class YawdAdminSite(AdminSite):
                 extra_context['ga_data'] = get_analytics_data(credential.authorize(http))
 
         return super(YawdAdminSite, self).index(request, extra_context)
+
+    def i18n_javascript(self, request):
+        """
+        Override the original js catalog function to include additional
+        js translation messages based on a yawd-admin setting.
+        """
+        if settings.USE_I18N:
+            from django.views.i18n import javascript_catalog
+        else:
+            from django.views.i18n import null_javascript_catalog as javascript_catalog
+        return javascript_catalog(request, packages=['django.conf', 'django.contrib.admin']
+                                  + getattr(settings, 'ADMIN_JS_CATALOG', []))
+
+
