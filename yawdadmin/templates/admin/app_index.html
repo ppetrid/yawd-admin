@@ -11,10 +11,20 @@
 				<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
 					<thead>
 						<tr class="grey-degrade">
-							<th colspan="2" class="title"><a href="{{ app.app_url }}" class="section">{% blocktrans with app.name as name %}{{ name }}{% endblocktrans %}</a></th>
+							<th colspan="2" class="title">{% if app.icon %}
+								<i class="{{app.icon}}"></i> {% endif %}{% if dashboard.show_app_label_link %}
+								<a href="{{ app.app_url }}" class="section">{% endif %}
+									{% blocktrans with app.name|app_title as name %}{{ name }}{% endblocktrans %}{% if dashboard.show_app_label_link %}
+								</a>{% endif %}
+							</th>
 						</tr>
 					</thead>
-					<tbody>{% for model in app.models %}
+					<tbody>{% for set in app.sets %}{% if set.0 %}
+						<tr class="summary-table-subheader">
+							<td colspan="2">
+								<h4>{{set.0}}</h4>
+							</td>
+						</tr>{% endif %}{% for model in set.1 %}
 						<tr>{% if model.perms.change %}
 							<td><a href="{{ model.admin_url }}">{{ model.name }}</a></td>{% else %}
 							<td>{{ model.name }}</td>{% endif %}
@@ -25,10 +35,13 @@
 									</a>{% endif %}{% if model.perms.change %}
 									<a href="{{ model.admin_url }}" class="btn btn-mini btn-info">
 										{% trans 'Change' %}&#xa0;<i class="icon-edit icon-white"></i>
+									</a>{% endif %}{% if model.url %}
+									<a href="{{ model.url }}" class="btn btn-mini btn-info">
+										{{model.url_text}}&#xa0;<i class="{{model.url_icon}} icon-white"></i>
 									</a>{% endif %}
 								</div>
 							</td>
-						</tr>{% endfor %}
+						</tr>{% endfor %}{% endfor %}
 					</tbody>
 				</table>{% endfor %}{% else %}
 				<p class="alert">{% trans "You don't have permission to edit anything." %}</p>{% endif %}

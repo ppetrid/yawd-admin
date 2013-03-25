@@ -40,6 +40,10 @@ h2.affix-header, .affix-header h2 {
 	margin-top: 0;
 }
 
+.page-header h1 {
+	text-shadow: 1px 1px 1px #DDD;
+}
+
 .page-header .grey {
 	color: #999;
 }
@@ -91,7 +95,7 @@ h2.affix-header, .affix-header h2 {
 
 .title-icon {
 	color: #333;
-	font-size: 20px;
+	font-size: 30px;
 	padding-right: 6px;
 }
 
@@ -1481,6 +1485,12 @@ h3.popover-title {
   position: absolute;
   top: auto;
   bottom: 270px;
+}
+
+/* Dashboard */
+
+.summary-table-subheader, .summary-table-subheader td {
+	background: #F9F9F9 !important;
 }
 
 /*!

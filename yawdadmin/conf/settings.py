@@ -21,7 +21,7 @@ if ADMIN_GOOGLE_ANALYTICS['client_secrets'] and ADMIN_GOOGLE_ANALYTICS['profile_
     #always prompt for authentication
     ADMIN_GOOGLE_ANALYTICS_FLOW.params['approval_prompt'] = 'force'
 else:
-     ADMIN_GOOGLE_ANALYTICS_FLOW = None
+    ADMIN_GOOGLE_ANALYTICS_FLOW = None
 
 ADMIN_USER_MODELFORM = getattr(settings, 'ADMIN_USER_MODELFORM',
     'yawdadmin.forms.AdminUserModelForm')
