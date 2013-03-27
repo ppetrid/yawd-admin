@@ -6,7 +6,10 @@ Changelog
 v.0.7.0, ?
 ==========
 
+* auto side-navigation affix menu in change pages (based on fieldsets & inlines)
+* drag & drop ordering in changelist view
 * "my account" view for non-admin users to edit their own info
+* new admin widgets
 * reworked filters section
 * reworked authentication/registration templates
 * added the font-awesome icons
