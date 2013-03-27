@@ -767,6 +767,10 @@ if (typeof JSON !== 'object') {
 				//$('#changelist-sortables').siblings().css('opacity', '0.5');
 				$('<div class="sortables-list"><i class="loading-item"></i></div>').insertAfter('#changelist-top');
 				$.get(this.href, function(data) {
+					if (!data) {
+						$('#content-main .sortables-list').remove();
+						return; 
+					}
 					$('#content-main .sortables-list').html('<div class="save-bar"><a class="btn btn-success" href="'
 							+$reorderUrl+'"><i class="icon-save"></i> '
 							+gettext('Save order')+'</a></div>'+data);
