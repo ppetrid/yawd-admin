@@ -478,7 +478,67 @@ inlines set in the ModelAdmin:
 		inlines = (...)
 		affix=True
 
+.. _reorder-changelist:
+
+Sortable changelists
+++++++++++++++++++++
+
+.. image:: sortable-changelists.png
+	:align: center
+
+You can enable a "sorting mode" in the changelist view for
+orderable objects by subklassing ``yawdadmin.admin.SortableModelAdmin``
+instead of ``admin.ModelAdmin``:
+
+.. code-block:: python
+
+	#Model admin class
+	class CategoryAdmin(SortableModelAdmin):
+		...
+		...
+	
+	admin_site.register(Category, CategoryAdmin)
+
+By default yawdadmin expects the ordering model field to be named "order"
+(it must be an `IntegerField`). If the name is different you need to set
+the  `"sorting_order_field"` attribute:
+
+.. code-block:: python
+
+	#model definition
+	class Catagory(models.Model):
+		...
+		weird_order_field_name = models.IntegerField(default=0)
+
+	#Model admin class
+	class CategoryAdmin(SortableModelAdmin):
+		sortable_order_field = 'weird_order_field_name'
+		...
+
+If you use `django-mptt <https://github.com/django-mptt/django-mptt>`_ for
+nested categories, you can enable nested ordering like so (see screenshot
+above):
+
+.. code-block:: python
+
+	#Model admin class
+	class CategoryAdmin(SortableModelAdmin):
+		sortable_mptt = True
+		...
+
 .. _custom-widgets:
+
+The sorting mechanism assumes items are orderd by the ordering field
+in the default queryset. If that's not true, you should
+override the `"sortables_ordered"` method to provide a proper default
+ordering:
+
+.. code-block:: python
+
+	#Model admin class
+	class CategoryAdmin(SortableModelAdmin):
+		def sortables_ordered(self, queryset):
+			return queryset.order_by("order")
 
 Custom Widgets
 ++++++++++++++

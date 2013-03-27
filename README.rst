@@ -31,3 +31,29 @@ Usage and demo
 
 See the `yawd-admin documentation <http://yawd-admin.readthedocs.org/en/latest/>`_ 
 for information on how to install the demo and use yawd-admin.
+
+Screenshots
+===========
+
+Side navigation for change forms
+++++++++++++++++++++++++++++++++
+
+.. image:: docs/yawd-admin-affix.png
+	:align: center
+
+Sortable changelists
+++++++++++++++++++++
+
+.. image:: docs/sortable-changelists.png
+	:align: center
+
+Modal inlines
++++++++++++++
+
+.. image:: docs/contacts-email-addresses.png
+	:align: left
+	
+Admin db options
+++++++++++++++++
+
+.. image:: docs/admin-options-full.png

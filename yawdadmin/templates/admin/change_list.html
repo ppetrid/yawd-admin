@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}{% load admin_list i18n admin_static yawdadmin_tags yawdadmin_filters %}
+{% extends "admin/base_site.html" %}{% load admin_list i18n admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
 
 {% block extrastyle %}{{ block.super }}{% if cl.has_filters %}
 		<link rel="stylesheet" type="text/css" href="{% static 'css/select2/select2.css' %}" />{% endif %}{% if not actions_on_top and not actions_on_bottom %}
@@ -8,7 +8,10 @@
 
 {% block extrahead %}{{ block.super }}{% if cl.formset or action_form %}{% url 'admin:jsi18n' as jsi18nurl %}
 		<script src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>{% endif %}{% if cl.has_filters %}
-		<script src="{% static 'css/select2/select2.min.js' %}"></script>
+		<script src="{% static 'css/select2/select2.min.js' %}"></script>{% if cl.model_admin.sortable %}
+		<script src="{% static 'js/jquery-ui-sortables.min.js' %}"></script>
+		<script src="{% static 'admin/js/sortables.js' %}"></script>
+		<script>var recursive_sorting = {{cl.model_admin.sortable_mptt|yesno:"true,false"}};</script>{% endif %}
 		<script>
 			(function($) {
 				$(document).ready(function($) {
@@ -80,6 +83,18 @@
 													{% admin_list_filter cl spec %}{% if not forloop.last %}
 													<li class="divider"></li>{% endif %}{% endfor %}
 												</ul>
+											</li>
+										</ul>{% endif %}{% if cl.model_admin.sortable %}
+										<ul id="changelist-sortables" class="nav pull-right">
+											<li class="active">
+												<a id="default-view" href="{% url cl.opts|admin_urlname:'partial_changelist' %}" title="{% trans 'List view' %}">
+													<i class="icon-list"></i>
+												</a>
+											</li>
+											<li>
+												<a id="sortables-view" href="{% url cl.opts|admin_urlname:'sortables' %}" data-reorder="{% url cl.opts|admin_urlname:'reorder' %}" title="{% trans 'Reorder view' %}">
+													<i class="icon-move"></i>
+												</a>
 											</li>
 										</ul>{% endif %}
 									</div>

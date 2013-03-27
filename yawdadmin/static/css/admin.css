@@ -1493,6 +1493,60 @@ h3.popover-title {
 	background: #F9F9F9 !important;
 }
 
+/* Sortables */
+
+.sortables-list {
+	padding: 8px 4px;
+	background-color: #f9f9f9;
+	border: 1px solid #DDD;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.sortables-list .save-bar {
+	margin-bottom: 8px;	
+}
+
+.sortables-list ol {
+	list-style-type: none;
+}
+
+.sortables-list .root {
+	padding: 0;
+	margin: 0;	
+}
+
+.sortables-list .title {
+	padding: 8px;
+	background-color: #f7f7f7;
+	margin: 3px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+	cursor: pointer;
+	color: #08c;
+}
+
+.sortables-list .title i {
+	color: #333;
+}
+
+.sortables-list .placeholder {
+	border: 2px dashed #bbb;
+	display: block;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+	border-radius: 4px;
+}
+
+.sortables-list .save-bar .loading-item {
+	display: inline-block;
+	vertical-align: bottom;
+}
+
+/* EndSortables */
+
 /*!
  *  Font Awesome 3.0.2
  *  the iconic font designed for use with Twitter Bootstrap
