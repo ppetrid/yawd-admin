@@ -969,6 +969,10 @@ table.elfinder-info-tb tr {
 	line-height: normal;
 }
 
+.elfinder-widget {
+	margin-right: 5px;
+}
+
 /* Form field classes */
 
 .tinymce {
