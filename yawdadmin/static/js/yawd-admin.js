@@ -73,6 +73,13 @@ var affix_offset = {
 	}
 };
 
+function collapse_switcher(el, target_id) {
+	$target = yawdadmin.jQuery('#'+target_id).slideToggle();
+	$icon = yawdadmin.jQuery(el).find('i.h2-icon');
+	if ($icon.hasClass('icon-arrow-down')) $icon.addClass('icon-arrow-up').removeClass('icon-arrow-down');
+	else $icon.addClass('icon-arrow-down').removeClass('icon-arrow-up');
+}
+
 (function($){ 
 	$(document).ready( function() {
 		$('.add-another, .related-lookup').each(function() {
