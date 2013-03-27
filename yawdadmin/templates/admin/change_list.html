@@ -71,7 +71,19 @@
 							<form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %}>{% csrf_token %}{% if cl.formset %}
 								<div>{{ cl.formset.management_form }}</div>{% endif %}{% block result_list %}
 								<div id="changelist-top" class="navbar">
-									<div class="navbar-inner actions">{% if action_form and actions_on_top and cl.full_result_count %}
+									<div class="navbar-inner actions">{% if cl.model_admin.sortable %}
+										<ul id="changelist-sortables" class="nav pull-right">
+											<li class="active">
+												<a id="default-view" href="{% url cl.opts|admin_urlname:'partial_changelist' %}" title="{% trans 'List view' %}">
+													<i class="icon-list"></i>
+												</a>
+											</li>
+											<li>
+												<a id="sortables-view" href="{% url cl.opts|admin_urlname:'sortables' %}" data-reorder="{% url cl.opts|admin_urlname:'reorder' %}" title="{% trans 'Reorder view' %}">
+													<i class="icon-move"></i>
+												</a>
+											</li>
+										</ul>{% endif %}{% if action_form and actions_on_top and cl.full_result_count %}
 										{% admin_actions %}{% endif %}{% if cl.has_filters %}
 										<ul id="changelist-filters" class="nav pull-right filters">
 											<li class="divider-vertical"></li>
@@ -83,18 +95,6 @@
 													{% admin_list_filter cl spec %}{% if not forloop.last %}
 													<li class="divider"></li>{% endif %}{% endfor %}
 												</ul>
-											</li>
-										</ul>{% endif %}{% if cl.model_admin.sortable %}
-										<ul id="changelist-sortables" class="nav pull-right">
-											<li class="active">
-												<a id="default-view" href="{% url cl.opts|admin_urlname:'partial_changelist' %}" title="{% trans 'List view' %}">
-													<i class="icon-list"></i>
-												</a>
-											</li>
-											<li>
-												<a id="sortables-view" href="{% url cl.opts|admin_urlname:'sortables' %}" data-reorder="{% url cl.opts|admin_urlname:'reorder' %}" title="{% trans 'Reorder view' %}">
-													<i class="icon-move"></i>
-												</a>
 											</li>
 										</ul>{% endif %}
 									</div>
