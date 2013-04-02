@@ -621,10 +621,11 @@ Templates for popular django applications
 +++++++++++++++++++++++++++++++++++++++++
 
 yawd-admin comes with templates for the following popular django
-applications (thanks `pahaz <https://github.com/pahaz>`_)::
+applications::
 
-* django-reversion
-* django-mptt
+* django-reversion (thanks `pahaz <https://github.com/pahaz>`_)
+* django-mptt (thanks `pahaz <https://github.com/pahaz>`_)
+* django-import-export
 
 Just remember to place yawd-admin above these applications in your
 ``settings.py`` file.
