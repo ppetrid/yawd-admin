@@ -1,4 +1,4 @@
-<ol class="root">{% if mptt %}{% load mptt_tags %}{% recursetree objects %}
+{% if objects %}<ol class="root">{% if mptt %}{% load mptt_tags %}{% recursetree objects %}
         <li data-pk="{{node.pk}}">
             <div class="title grey-degrade"><i class="icon-sort"></i> {{node}}</div>
             {% if not node.is_leaf_node %}
@@ -11,4 +11,4 @@
         	<div class="title grey-degrade"><i class="icon-sort"></i> {{node}}</div>
         </li>{% endfor %}
         {% endif %}
-</ol>
+</ol>{% endif %}

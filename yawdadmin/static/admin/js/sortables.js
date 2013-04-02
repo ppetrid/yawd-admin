@@ -764,8 +764,13 @@ if (typeof JSON !== 'object') {
 				$parent.addClass('active').siblings().removeClass('active');
 				$('#content-main .results').hide();
 				$('#content-main .paginator-wrapper').hide();
+				//$('#changelist-sortables').siblings().css('opacity', '0.5');
 				$('<div class="sortables-list"><i class="loading-item"></i></div>').insertAfter('#changelist-top');
 				$.get(this.href, function(data) {
+					if (!data) {
+						$('#content-main .sortables-list').remove();
+						return; 
+					}
 					$('#content-main .sortables-list').html('<div class="save-bar"><a class="btn btn-success" href="'
 							+$reorderUrl+'"><i class="icon-save"></i> '
 							+gettext('Save order')+'</a></div>'+data);
@@ -810,9 +815,10 @@ if (typeof JSON !== 'object') {
 			$parent = $this.parent();
 			if(!$parent.hasClass('active')) {
 				$parent.addClass('active').siblings().removeClass('active');
+				//$('#changelist-sortables').siblings().css('opacity', '1');
 				$('#content-main .sortables-list').remove();
 				$('#content-main .results').html('<i class="loading-item"></i>').show();
-				$.get(this.href, function(data) {
+				$.get(this.href, window.location.search.substring(1), function(data) {
 					$('#content-main .results')
 						.replaceWith($(data).find('.results'));
 					$('#content-main .paginator-wrapper')
