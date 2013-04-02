@@ -1,0 +1,12 @@
+{% extends "admin/change_list.html" %}
+{% load i18n %}
+
+{% block object-tools-items %}
+	{{ block.super }}
+	<div class="span2">
+		<a href="export/{{ cl.get_query_string }}" class="big-button">
+			<i class="processing-02-item"></i> {% trans "Export" %}
+		</a>
+	</div>
+{% endblock %}
+
