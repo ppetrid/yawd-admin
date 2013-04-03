@@ -1,8 +1,6 @@
 from itertools import chain
 from django import forms
-from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
-from django.utils.encoding import force_text
 from django.utils.safestring import mark_safe
 
 
@@ -54,7 +52,12 @@ class AutoCompleteTextInput(forms.TextInput):
             attrs['autocomplete'] = 'off'
         output = super(AutoCompleteTextInput, self).render(name, value, attrs)
         if self.source:
-            js = '<script>(function($){$("#%(id)s").typeahead({source: function(query, process) { $.get("%(source)s", {query: query},function(data) { return typeof data.results == "undefined" ? false : process(data.results); }, "json") }});})(yawdadmin.jQuery);</script>' % {'id': attrs['id'], 'source': self.source}
+            js = '<script>(function($){$("#%(id)s").typeahead({source: ' \
+                'function(query, process) { $.get("%(source)s", {query: ' \
+                'query},function(data) { return typeof data.results == ' \
+                '"undefined" ? false : process(data.results); }, "json") ' \
+                '}});})(yawdadmin.jQuery);</script>' % {'id': attrs['id'],
+                                                        'source': self.source}
         return output + mark_safe(js)
 
 class BootstrapRadioRenderer(forms.RadioSelect.renderer):

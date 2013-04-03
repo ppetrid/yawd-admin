@@ -3,12 +3,12 @@
 {% block bodyspy %}{% if adminform.model_admin.affix and not is_popup %} data-spy="scroll" data-target=".affix-sidebar"{% endif %}{% endblock %}
 
 {% block extrastyle %}{{ block.super }}
-			<link rel="stylesheet" type="text/css" href="{% static "css/fancybox/jquery.fancybox.css" %}" />{% endblock %}
+			<link rel="stylesheet" type="text/css" href="{% static "yawd-admin/css/fancybox/jquery.fancybox.css" %}" />{% endblock %}
 	
 {% block extrahead %}{{ block.super }}{% url 'admin:jsi18n' as jsi18nurl %}
 		<script src="{{ jsi18nurl|default:"../../../jsi18n/" }}"></script>
-		<script src="{% static "js/jquery.fancybox.pack.js" %}"></script>
-		<script src="{% static 'js/yawd-admin.js' %}"></script>
+		<script src="{% static "yawd-admin/js/jquery.fancybox.pack.js" %}"></script>
+		<script src="{% static 'yawd-admin/js/yawd-admin.js' %}"></script>
 		{% clean_media media %}{% endblock %}
 
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}

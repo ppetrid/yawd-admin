@@ -1,16 +1,16 @@
 {% extends "admin/base_site.html" %}{% load admin_list i18n admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
 
 {% block extrastyle %}{{ block.super }}{% if cl.has_filters %}
-		<link rel="stylesheet" type="text/css" href="{% static 'css/select2/select2.css' %}" />{% endif %}{% if not actions_on_top and not actions_on_bottom %}
+		<link rel="stylesheet" type="text/css" href="{% static 'yawd-admin/css/select2/select2.css' %}" />{% endif %}{% if not actions_on_top and not actions_on_bottom %}
 		<style>
 			#changelist table thead th:first-child { width: inherit; }
 		</style>{% endif %}{% endblock %}
 
 {% block extrahead %}{{ block.super }}{% if cl.formset or action_form %}{% url 'admin:jsi18n' as jsi18nurl %}
 		<script src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>{% endif %}{% if cl.has_filters %}
-		<script src="{% static 'css/select2/select2.min.js' %}"></script>{% if cl.model_admin.sortable and cl.full_result_count %}
-		<script src="{% static 'js/jquery-ui-sortables.min.js' %}"></script>
-		<script src="{% static 'admin/js/sortables.js' %}"></script>
+		<script src="{% static 'yawd-admin/css/select2/select2.min.js' %}"></script>{% if cl.model_admin.sortable and cl.full_result_count %}
+		<script src="{% static 'yawd-admin/js/jquery-ui-sortables.min.js' %}"></script>
+		<script src="{% static 'yawd-admin/js/sortables.js' %}"></script>
 		<script>var recursive_sorting = {{cl.model_admin.sortable_mptt|yesno:"true,false"}};</script>{% endif %}
 		<script>
 			(function($) {
