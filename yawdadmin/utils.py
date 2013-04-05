@@ -12,7 +12,9 @@ from models import AppOption
 
 def get_option(optionset_label, name, current_only=True):
     """
-    Return the value of an option.
+    Return the value of an option. The ``current only`` kwarg affects
+    only language-dependant options and decides whether to return its value
+    for all languages or only the current language.
     """
     try:
         option = AppOption.objects.get(optionset_label=optionset_label, name=name)
