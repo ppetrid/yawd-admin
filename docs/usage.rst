@@ -55,7 +55,7 @@ To register the admin site views, use the following (inside your `urls.py`):
 	from yawdadmin import admin_site
 
 	patterns = (''
-		url(r'^admin', include(admin_site.urls)),
+		url(r'^admin/', include(admin_site.urls)),
 		...
 	)
 
