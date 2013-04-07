@@ -8,7 +8,7 @@ admin_site._registry.update(admin.site._registry)
 
 urlpatterns = patterns('',
     #register the yawd-admin URLs
-    url(r'^', include(admin_site.urls)),
+    url(r'^admin/', include(admin_site.urls)),
 )
 
 if settings.DEBUG:
