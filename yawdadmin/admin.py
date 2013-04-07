@@ -1,4 +1,4 @@
-import simplejson as json
+import json
 from django.conf.urls import patterns, url
 from django.contrib import admin
 from django.template.response import TemplateResponse, HttpResponse
