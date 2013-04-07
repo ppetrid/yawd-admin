@@ -107,6 +107,12 @@ h2.affix-header, .affix-header h2 {
 	opacity: 1;
 }
 
+/* Breadcrumb */
+
+.breadcrumb {
+	font-size: 13px;
+}
+
 .breadcrumb a i {
 	color: #333;
 }
@@ -115,6 +121,12 @@ h2.affix-header, .affix-header h2 {
 	text-decoration: none;
 	color: #666;
 }
+
+.breadcrumb li:first-child i {
+	margin-top: 0px;
+}
+
+/* End breadcrumb */
 
 .sortoptions i {
 	color: #333;
@@ -258,10 +270,6 @@ h2.affix-header, .affix-header h2 {
 	background-repeat: repeat-x;
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#FFFFFF', endColorstr='#F2F2F2',GradientType=0 );
 	border: 1px solid #e4e4e4;
-}
-
-.breadcrumb {
-	font-size: 13px;
 }
 
 .light-blue-degrade {
@@ -824,6 +832,17 @@ ul.toplinks li {
 	padding: 5px;
 }
 
+#changelist-form .results .table-bordered td,
+#changelist-form .results .table-bordered th {
+	border-left: 0;
+}
+
+#changelist-form .results .table-bordered {
+	border-left: 1px solid #ddd;
+	color: #555;
+	margin-bottom: 5px;
+}
+
 .help:hover {
 	cursor: pointer;
 	opacity: 1;
@@ -928,21 +947,7 @@ ul.toplinks li {
 	line-height: 30px;
 }
 
-.breadcrumb li:first-child i {
-	margin-top: 0px;
-}
-
-/*.breadcrumb .active {
-	color: #fff;
-}
-
-.breadcrumb a {
-	color: #fff;
-}
-
-.breadcrumb li {
-	text-shadow: 0 1px 0 #666;
-}*/
+/* Google analytics */
 
 #chart_div {
 	height: 250px;
@@ -957,6 +962,8 @@ ul.toplinks li {
 	padding: 10px 0 5px 0;
 	text-align: center;
 }
+
+/* End google analytics */
 
 /* Elfinder overrides to remove bootstrap styling */
 
@@ -1016,7 +1023,8 @@ table.elfinder-info-tb tr {
 
 .sortoptions {
 	display: inline-block;
-	float: right;
+	padding-left: 5px;
+	font-size: 13px;
 }
 
 .sortoptions a:hover {
