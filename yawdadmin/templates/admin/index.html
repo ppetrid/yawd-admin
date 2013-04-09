@@ -54,7 +54,7 @@
 								<strong>{% trans 'Warning!' %}</strong>
 								{% trans 'Analytics data could not be generated' %}:{% if ga_data.error == 'refresh' %}
 								{% trans 'The key has expired.' %}{% elif ga_data.error == 'authentication' %}
-								{% trans 'The analytics user is not authenticated.' %} <a href="{% url 'admin:analytics' %}">{% trans 'Click here' %}</a> to connect a user with the analytics account.{% elif ga_data.error == 'empty' %}
+								{% url 'admin:analytics' as analytics_url %}{% blocktrans %}The analytics user is not authenticated. <a href="{{analytics_url}}">Click here</a> to connect a user with the analytics account.{% endblocktrans %}{% elif ga_data.error == 'empty' %}
 								{% trans 'Your account has no data yet. <strong>Just be patient, visits will come!<strong> :)' %}{% else %}
 								{% trans 'Error code'%} <strong>{{ga_data.error}}</strong>.{% endif %}
 							</div>
@@ -63,7 +63,7 @@
 							<div class="span6">{% for app in app_list %}{% if forloop.counter0 == sep %}
 							</div>
 							<div class="span6">{% endif %}
-								<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}Models available in the {{ name }} application.{% endblocktrans %}">
+								<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}'{{ name }}' section links.{% endblocktrans %}">
 									<thead>
 										<tr class="grey-degrade">
 											<th colspan="2" class="title">{% if app.icon %}

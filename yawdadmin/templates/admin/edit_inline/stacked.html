@@ -37,7 +37,7 @@
 									prefix: '{{ inline_admin_formset.formset.prefix }}',
 									adminStaticPrefix: '{% static "admin/" %}',
 									deleteText: "{% trans "Remove" %}",
-									addText: "{% blocktrans with verbose_name=inline_admin_formset.opts.verbose_name|title %}Add another {{ verbose_name }}{% endblocktrans %}"
+									addText: "{% trans 'Add new' %}"
 								});
 							})(yawdadmin.jQuery);{% block extrainlinejs %}{% endblock %}
 						</script>
