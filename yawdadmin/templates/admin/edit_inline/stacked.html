@@ -15,7 +15,7 @@
 									<div class="modal hide fade" id="modal-wrapper-{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">
   										<div class="modal-header">
   											<button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-  											<h3>Edit {{ inline_admin_formset.opts.verbose_name|title }}</h3>
+  											<h3>{% blocktrans with inline_admin_formset.opts.verbose_name|title as modaltitle %}Edit {{modaltitle}}{% endblocktrans %}</h3>
   										</div>
   										<div class="modal-body">
 										{% endif %}{% if inline_admin_form.form.non_field_errors %}

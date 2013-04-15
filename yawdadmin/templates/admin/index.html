@@ -115,7 +115,7 @@
 								<a class="log-link" href="{{ entry.get_admin_url }}">{% endif %}
 									<i class="icon-{% if entry.is_addition %}plus{% elif entry.is_change %}edit{% elif entry.is_deletion %}remove{% endif %}"></i> {{ entry.object_repr }}{% if not entry.is_deletion and entry.get_admin_url %}
 								</a>{% endif %}{% if entry.content_type %}
-								<span class="mini quiet">{% filter capfirst %}{% trans entry.content_type.name %}{% endfilter %}</span>{% else %}
+								<span class="mini quiet">{% with entryname=entry.content_type.name|capfirst|escape %}{% trans entryname %}{% endwith %}</span>{% else %}
 								<span class="mini quiet">{% trans 'Unknown content' %}</span>{% endif %}
 								<span class="mini">{{entry.action_time|date:"d N, H:i"}}</span>
 							</li>{% endfor %}{% endif %}

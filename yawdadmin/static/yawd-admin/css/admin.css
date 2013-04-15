@@ -310,9 +310,14 @@ h2.affix-header, .affix-header h2 {
 	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.055) !important;
 }
 
+.well-open .nav-list {
+	padding-right: 0;
+	padding-left: 0;
+}
+
 .well-open h3 {
 	background-color: #f5f5f5;
-	padding-left: 15px;
+	text-align: center;
 }
 
 .collapse-switcher:hover {

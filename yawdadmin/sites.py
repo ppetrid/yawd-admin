@@ -402,5 +402,7 @@ class YawdAdminSite(AdminSite):
             from django.views.i18n import javascript_catalog
         else:
             from django.views.i18n import null_javascript_catalog as javascript_catalog
-        return javascript_catalog(request, packages=['django.conf', 'django.contrib.admin']
+        return javascript_catalog(request, packages=['django.conf',
+                                                     'django.contrib.admin',
+                                                     'yawdadmin']
                                   + getattr(settings, 'ADMIN_JS_CATALOG', []))
