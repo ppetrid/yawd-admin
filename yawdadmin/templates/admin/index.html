@@ -69,7 +69,7 @@
 											<th colspan="2" class="title">{% if app.icon %}
 												<i class="{{app.icon}}"></i> {% endif %}{% if dashboard.show_app_label_link %}
 												<a href="{{ app.app_url }}" class="section">{% endif %}
-													{% blocktrans with app.name|app_title as name %}{{ name }}{% endblocktrans %}{% if dashboard.show_app_label_link %}
+													{% trans app.name|app_title %}{% if dashboard.show_app_label_link %}
 												</a>{% endif %}
 											</th>
 										</tr>
