@@ -19,46 +19,48 @@ msgstr ""
 
 #: admin.py:60
 msgid "No data sent with the request"
-msgstr ""
+msgstr "Δε στάλθηκαν δεδομένα"
 
 #: admin.py:64
 msgid "Unable to reorder objects"
-msgstr ""
+msgstr "Δεν ήταν δυνατόν να ταξινομηθούν τα αντικείμενα"
 
 #: admin.py:65
 msgid "The order was saved"
-msgstr ""
+msgstr "Η σειρά αποθηκεύτηκε"
 
 #: sites.py:370
 msgid "Site administration"
-msgstr ""
+msgstr "Διαχείριση ιστοσελίδας"
 
 #: sites.py:385
 #, python-format
 msgid "%s administration"
-msgstr ""
+msgstr "Διαχείριση %s"
 
 #: views.py:38
 msgid "Configuration"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 #: views.py:48
 msgid "The options were succesfully saved."
-msgstr ""
+msgstr "Οι επιλογές αποθηκεύτηκαν επιτυχώς."
 
 #: views.py:73
 msgid "The user was successfully connected."
-msgstr ""
+msgstr "Ο χρήστης συνδέθηκε επιτυχώς."
 
 #: views.py:119
 msgid ""
 "The server does not have permissions to write to the token file. Please "
 "contact your system administrator."
 msgstr ""
+"Ο εξυπηρετητής δεν έχει δικαιώματα να γράψει στο κατάλληλο αρχείο. Παρακαλούμε "
+"επικοινωνήστε με το διαχειριστή συστήματός σας."
 
 #: views.py:145
 msgid "Your account has been updated successfuly."
-msgstr ""
+msgstr "Οι αλλαγές σας αποθηκεύτηκαν επιτυχώς."
 
 #: views.py:153 templates/registration/password_change_done.html:6
 #: templates/registration/password_change_form.html:6
@@ -67,23 +69,23 @@ msgstr "Ο λογαριασμός μου"
 
 #: templates/admin/404.html:4 templates/admin/404.html.py:8
 msgid "Page not found"
-msgstr ""
+msgstr "Η σελίδα δε βρέθηκε"
 
 #: templates/admin/404.html:10
 msgid "We're sorry, but the requested page could not be found."
-msgstr ""
+msgstr "Λυπούμαστε, αλλά η σελίδα που ζητήσατε δε βρέθηκε."
 
 #: templates/admin/500.html:4
 msgid "Server error"
-msgstr ""
+msgstr "Σφάλμα εξυπηρετητή"
 
 #: templates/admin/500.html:6
 msgid "Server error (500)"
-msgstr ""
+msgstr "Σφάλμα εξυπηρετητή (500)"
 
 #: templates/admin/500.html:9
 msgid "Server Error <em>(500)</em>"
-msgstr ""
+msgstr "Σφάλμα εξυπηρετητή <em>(500)</em>"
 
 #: templates/admin/500.html:10
 msgid ""
@@ -93,33 +95,33 @@ msgstr ""
 
 #: templates/admin/actions.html:3
 msgid "Run the selected action"
-msgstr ""
+msgstr "Εκτελέστε την επιλεγμένη ενέργεια"
 
 #: templates/admin/actions.html:3
 msgid "Go"
-msgstr ""
+msgstr "ΟΚ"
 
 #: templates/admin/actions.html:8
 msgid "Click here to select the objects across all pages"
-msgstr ""
+msgstr "Κάντε κλικ για να επιλέξετε όλα τα στοιχεία όλων των σελίδων"
 
 #: templates/admin/actions.html:8
 #, python-format
 msgid "Select all %(total_count)s %(module_name)s"
-msgstr ""
+msgstr "%(total_count)s %(module_name)s: Επιλογή όλων"
 
 #: templates/admin/actions.html:11
 msgid "Clear selection"
-msgstr ""
+msgstr "Εκκαθάριση επιλεγμένων"
 
 #: templates/admin/analytics.html:6 templates/admin/analytics.html.py:10
 #: templates/admin/includes/topmenu.html:35
 msgid "Configure Google Analytics"
-msgstr ""
+msgstr "Ρυθμίσεις Google Analytics"
 
 #: templates/admin/analytics.html:17
 msgid "Profile ID"
-msgstr ""
+msgstr "ID προφίλ"
 
 #: templates/admin/analytics.html:21
 msgid "Showing last"
@@ -127,33 +129,33 @@ msgstr ""
 
 #: templates/admin/analytics.html:22
 msgid "days"
-msgstr ""
+msgstr "ημέρες"
 
 #: templates/admin/analytics.html:25
 msgid "Connected"
-msgstr ""
+msgstr "Συνδεδεμένο"
 
 #: templates/admin/analytics.html:26 templates/admin/analytics.html.py:34
 #: templates/admin/includes/translation_messages_list.html:5
 msgid "Yes"
-msgstr ""
+msgstr "Ναι"
 
 #: templates/admin/analytics.html:26 templates/admin/analytics.html.py:34
 #: templates/admin/includes/translation_messages_list.html:5
 msgid "No"
-msgstr ""
+msgstr "Όχι"
 
 #: templates/admin/analytics.html:29
 msgid "Current session expiry"
-msgstr ""
+msgstr "Λήξη τρέχουσας σύνδεσης"
 
 #: templates/admin/analytics.html:33
 msgid "Refresh token"
-msgstr ""
+msgstr "Ανανέωση token"
 
 #: templates/admin/analytics.html:40 templates/admin/analytics.html.py:41
 msgid "Authenticate new account"
-msgstr ""
+msgstr "Συνδέστε νέο λογαριασμό"
 
 #: templates/admin/analytics.html:41
 #: templates/admin/auth/user/change_password.html:37
@@ -199,7 +201,7 @@ msgstr ""
 #: templates/reversion/revision_form.html:12
 #: templates/reversion-compare/compare.html:25
 msgid "History"
-msgstr ""
+msgstr "Ιστορικό"
 
 #: templates/admin/change_form.html:38
 #: templates/admin/edit_inline/stacked.html:12
@@ -210,7 +212,7 @@ msgstr ""
 
 #: templates/admin/change_form.html:52
 msgid "General"
-msgstr ""
+msgstr "Γενικά"
 
 #: templates/admin/change_form.html:71 templates/admin/change_list.html:68
 #: templates/admin/login.html:8 templates/admin/options.html:36
@@ -231,15 +233,15 @@ msgstr ""
 
 #: templates/admin/change_list.html:78
 msgid "List view"
-msgstr ""
+msgstr "Προβολή λίστας"
 
 #: templates/admin/change_list.html:83
 msgid "Reorder view"
-msgstr ""
+msgstr "Προβολή ταξινόμησης"
 
 #: templates/admin/change_list.html:93
 msgid "Filters"
-msgstr ""
+msgstr "Φίλτρα"
 
 #: templates/admin/change_list_results.html:15
 msgid "Remove from sorting"
@@ -252,7 +254,7 @@ msgstr ""
 
 #: templates/admin/change_list_results.html:19
 msgid "Toggle sorting"
-msgstr ""
+msgstr "Εναλλαγή ταξινόμησης"
 
 #: templates/admin/change_list_results.html:37
 msgid "No results found matching the specified criteria. Please try again!"
@@ -268,7 +270,7 @@ msgstr ""
 #: templates/admin/submit_line.html:4
 #: templates/admin/import_export/import.html:105
 msgid "Delete"
-msgstr ""
+msgstr "Διαγραφή"
 
 #: templates/admin/delete_confirmation.html:14
 #, python-format
