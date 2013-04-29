@@ -14,20 +14,22 @@
 	</head>
 	<body class="{% if is_popup %}popup {% endif %}{% block bodyclass %}dashboard{% endblock %}"{% block bodyspy %}{% endblock%}>{% block top-bar %}{% if not is_popup %}{% if user.is_active and user.is_staff %}
 		{% admin_top_menu %}{% endif %}{% endif %}{% endblock %}{% block mainbody %}
-		<div class="container-fluid main">{% block breadcrumbs %}
+		<div id="top-header" class="container-fluid main">{% block breadcrumbs %}
 			<ul class="breadcrumb">
-				<li><a href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
+				<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
 				<li class="active">{% if title %} {{ title }}{% endif %}</li>
-			</ul>{% endblock %}{% if messages %}
+			</ul>{% endblock %}{% block pretitle %}{% endblock %}{% block content_title %}{% if title %}
+			<header class="page-header" id="page-header">
+				<h1>{{ title }}</h1>
+			</header>{% endif %}{% endblock %}{% block object-tools %}{% endblock %}
+		</div>
+		<div class="container-fluid">{% if messages %}
 			<ul class="messagelist">{% for message in messages %}
 				<li class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
 					<button type="button" class="close" data-dismiss="alert">×</button>
 					{{ message }}
 				</li>{% endfor %}
-			</ul>{% endif %}{% block pretitle %}{% endblock %}{% block content_title %}{% if title %}
-			<header class="page-header" id="page-header">
-				<h1>{{ title }}</h1>
-			</header>{% endif %}{% endblock %}{% block object-tools %}{% endblock %}{% block content %}
+			</ul>{% endif %}{% block content %}
 			<div class="row-fluid show-grid">
 				<div class="span9">{% block main-struct %}
 					{{ content }}{% endblock %}

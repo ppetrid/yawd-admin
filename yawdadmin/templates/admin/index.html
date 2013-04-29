@@ -109,12 +109,12 @@
 						<ul class="nav nav-list">
 							<li class="nav-header">{% filter utfupper %}{% trans 'My Actions' %}{% endfilter %}</li>{% load log %}{% get_admin_log 10 as admin_log for_user user %}{% if not admin_log %}
 							<li>
-								<p class="tip">{% trans 'None available' %}</p>
+								<p class="tip">{% trans 'No history yet' %}</p>
 							</li>{% else %}{% for entry in admin_log %}
 							<li>{% if not entry.is_deletion and entry.get_admin_url %}
 								<a class="log-link" href="{{ entry.get_admin_url }}">{% endif %}
 									<i class="icon-{% if entry.is_addition %}plus{% elif entry.is_change %}edit{% elif entry.is_deletion %}remove{% endif %}"></i> {{ entry.object_repr }}{% if not entry.is_deletion and entry.get_admin_url %}
-								</a>{% endif %}{% if entry.content_type %}
+								</a>{% endif %}<br/>{% if entry.content_type %}
 								<span class="mini quiet">{% with entryname=entry.content_type.name|capfirst|escape %}{% trans entryname %}{% endwith %}</span>{% else %}
 								<span class="mini quiet">{% trans 'Unknown content' %}</span>{% endif %}
 								<span class="mini">{{entry.action_time|date:"d N, H:i"}}</span>
