@@ -51,12 +51,17 @@
 									<a href="#{% if fieldset.name %}fieldset-no-{{forloop.counter}}-header{% else %}page-header{% endif %}">
 										<i class="icon-chevron-right"></i> {% if fieldset.name %}{{fieldset.name}}{% else %}{% trans 'General' %}{% endif %}
 									</a>
-								</li>{% endfor %}{% for inline_admin_formset in inline_admin_formsets %}
+								</li>{% endfor %}{% for inline_admin_formset in inline_admin_formsets %}{% if inline_admin_formset|istranslationinline and inline_admin_formset.formset|length <= 1 %}{% for inline_admin_form in inline_admin_formset %}{% if not forloop.last %}{% for fieldset in inline_admin_form %}
+								<li>
+									<a href="#{{ inline_admin_formset.formset.prefix }}-fieldsets-{{forloop.counter}}">
+										<i class="icon-chevron-right"></i> {{ fieldset.name }}
+									</a>
+								</li>{% endfor %}{% endif %}{% endfor %}{% else %}
 								<li>
 									<a href="#{{ inline_admin_formset.formset.prefix }}-group">
 										<i class="icon-chevron-right"></i> {{ inline_admin_formset.opts.verbose_name_plural|capfirst }}
 									</a>
-								</li>{% endfor %}
+								</li>{% endif %}{% endfor %}
 							</ul>
 						</div>
 					</div>

@@ -1,5 +1,6 @@
-{% load i18n %}<fieldset class="module aligned {{ fieldset.classes }}">{% if fieldset.name %}
-										<h3>{{ fieldset.name }}</h3>{% endif %}{% if fieldset.description %}
+{% load i18n %}<fieldset class="module aligned {{ fieldset.classes }}" id="{{ inline_admin_formset.formset.prefix }}-fieldsets-{{forloop.counter}}">{% if fieldset.name %}{% if inline_admin_formset.formset|length > 1 %}
+										<h3>{{ fieldset.name }}</h3>{% else %}
+										<h2>{{ fieldset.name }}</h2>{% endif %}{% endif %}{% if fieldset.description %}
 										<div class="alert">{{ fieldset.description|safe }}</div>{% endif %}{% for line in fieldset %}{% if line.fields.0 != 'language' %}
 											<div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %} {{ field.field.name }}{% endfor %}">
 												<div class="field ">{% if not line.fields|length_is:'1' and line.errors %}
@@ -7,7 +8,7 @@
 														{{ line.errors }}
 													</div>{% endif %}{% for field in line %}
 													<div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
-														<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
+														<label class="control-label{% if field.field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
 														<div class="controls">{% if field.is_readonly %}
 															<span><i>{{ field.contents }}</i></span>{% elif field.is_checkbox %}
 															<span class="switch">

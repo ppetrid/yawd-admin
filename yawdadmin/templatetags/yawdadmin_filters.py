@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from django import template
 
+
 register = template.Library()
 
 
@@ -20,3 +21,18 @@ def utfupper(value):
     rep = [u'Α', u'Ε', u'Η', u'Ι', u'Ϊ', u'Ο', u'Υ', u'Ω']
     return u''.join([rep[orig.index(x)] if x in orig else x
                      for x in value.upper()])
+
+
+@register.filter
+def istranslationinline(value):
+    """
+    This filter is used if yawd-translations is installed.
+    """
+    try:
+        from translations.admin import TranslationInline
+    except:
+        return False
+
+    if hasattr(value, 'opts') and isinstance(value.opts, TranslationInline):
+        return True
+    return False
