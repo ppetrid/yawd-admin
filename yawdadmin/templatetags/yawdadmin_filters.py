@@ -16,7 +16,7 @@ def app_title(value):
 
 @register.filter
 def utfupper(value):
-    orig = [u'Ά', u'Έ', u'Ή', u'Ί', u'Ό', u'Ύ', u'Ώ']
-    rep = [u'Α', u'Ε', u'Η', u'Ι', u'Ο', u'Υ', u'Ω']
+    orig = [u'Ά', u'Έ', u'Ή', u'Ί', u'ΐ', u'Ό', u'Ύ', u'Ώ']
+    rep = [u'Α', u'Ε', u'Η', u'Ι', u'Ϊ', u'Ο', u'Υ', u'Ω']
     return u''.join([rep[orig.index(x)] if x in orig else x
                      for x in value.upper()])
