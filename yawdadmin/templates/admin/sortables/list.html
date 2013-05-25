@@ -1,14 +1,12 @@
 {% if objects %}<ol class="root">{% if mptt %}{% load mptt_tags %}{% recursetree objects %}
-        <li data-pk="{{node.pk}}">
-            <div class="title grey-degrade"><i class="icon-sort"></i> {{node}}</div>
-            {% if not node.is_leaf_node %}
-                <ol class="children">
-                    {{ children }}
-                </ol>
-            {% endif %}
-        </li>{% endrecursetree %}{% else %}{% for node in objects %}
-        <li data-pk="{{node.pk}}">
-        	<div class="title grey-degrade"><i class="icon-sort"></i> {{node}}</div>
-        </li>{% endfor %}
+	<li data-pk="{{node.pk}}">
+		<div class="title grey-degrade"><i class="icon-sort"></i> {{node}}</div>{% if not node.is_leaf_node %}
+		<ol class="children">
+			{{ children }}
+		</ol>{% endif %}
+	</li>{% endrecursetree %}{% else %}{% for node in objects %}
+	<li data-pk="{{node.pk}}">
+		<div class="title grey-degrade"><i class="icon-sort"></i> {{node}}</div>
+	</li>{% endfor %}
         {% endif %}
 </ol>{% endif %}

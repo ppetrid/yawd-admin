@@ -1563,6 +1563,35 @@ h3.popover-title {
 	list-style-type: none;
 }
 
+.sortables-list li.mjs-nestedSortable-collapsed > ol {
+	display: none;
+}
+
+.sortables-list li {
+	padding-left: 11px;
+	background-image: url(../img/li.gif);
+	background-position: 6px 16px;
+	background-repeat: no-repeat;
+}
+
+.sortables-list ol {
+	background-image: url(../img/dot.gif);
+	background-position: 6px 0;
+	background-repeat: repeat-y;
+}
+
+.sortables-list li.mjs-nestedSortable-collapsed {
+	background-image: url(../img/fplus.gif);
+	background-position: 0 5px;
+	background-repeat: no-repeat;
+}
+
+.sortables-list li.mjs-nestedSortable-expanded {
+	background-image: url(../img/fminus.gif);
+	background-position: 0 5px;
+	background-repeat: no-repeat;
+}
+
 .sortables-list .root {
 	padding: 0;
 	margin: 0;	
