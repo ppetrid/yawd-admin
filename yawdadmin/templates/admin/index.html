@@ -69,7 +69,7 @@
 											<th colspan="2" class="title">{% if app.icon %}
 												<i class="{{app.icon}}"></i> {% endif %}{% if dashboard.show_app_label_link %}
 												<a href="{{ app.app_url }}" class="section">{% endif %}
-													{% trans app.name|app_title %}{% if dashboard.show_app_label_link %}
+													{% if app.verbose %}{{app.verbose}}{% else %}{% trans app.name|app_title %}{% endif %}{% if dashboard.show_app_label_link %}
 												</a>{% endif %}
 											</th>
 										</tr>
@@ -80,8 +80,8 @@
 												<h4>{{set.0}}</h4>
 											</td>
 										</tr>{% endif %}{% for model in set.1 %}
-										<tr>{% if model.perms.change %}
-											<td><a href="{{ model.admin_url }}">{{ model.name }}</a></td>{% else %}
+										<tr>{% if model.perms.change or model.url %}
+											<td><a href="{% if model.url %}{{model.url}}{% else %}{{ model.admin_url }}{% endif %}">{{ model.name }}</a></td>{% else %}
 											<td>{{ model.name }}</td>{% endif %}
 											<td>
 												<div class="pull-right">{% if model.perms.add %}

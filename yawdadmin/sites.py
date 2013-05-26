@@ -74,8 +74,8 @@ class YawdAdminDashboard(object):
             if model['classname'] == label:
                 return model
         if 'extras' in self.app_dict[app_label]:
-            for extra in self.app_dict[app_label]['extra']:
-                if 'name' in extra and extra['name'] == label:
+            for extra in self.app_dict[app_label]['extras']:
+                if 'label' in extra and extra['label'] == label:
                     return extra       
  
     @classmethod
