@@ -54,32 +54,30 @@
 					<a data-target=".nav-collapse" data-toggle="collapse" class="btn btn-navbar ">
 						<span class="icon-align-justify icon-white"></span>
 					</a>
-					<div class="nav-collapse" role="menu">
-						<nav>
-							<ul class="nav">{% for app in top_menu %}
-								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#">{% if app.icon %}
-										<i class="{{app.icon}} icon-white"></i>
-										{% endif %}&#xa0;{{app.name|app_title}}
-										<b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu" role="menu">{% for model in app.models %}{% if model.show %}{% if model.separator %}
-										<li class="divider"></li>{% endif %}
-										<li><a href="{{model.admin_url}}">{% if model.title_icon %}<i class="{{model.title_icon}}"></i> {% endif %}{{model.name}}</a></li>{% endif %}{% endfor %}
-									</ul>
-								</li>{% endfor %}{% if optionset_labels and perms.yawdadmin.change_appoption %}
-								<li class="dropdown">
-									<a data-toggle="dropdown" class="dropdown-toggle" href="#">
-										<i class="icon-cog  icon-white"></i>&#xa0;{% trans "Options" %}
-										<b class="caret"></b>
-									</a>
-									<ul class="dropdown-menu">{% for label in optionset_labels %}
-										<li><a href="{{label.url}}">{{label.optionset_label}}</a></li>{% endfor %}
-									</ul>
-								</li>{% endif %}
-							</ul>
-						</nav>
-					</div>
+					<nav class="nav-collapse">
+						<ul class="nav">{% for app in top_menu %}
+							<li class="dropdown">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#">{% if app.icon %}
+									<i class="{{app.icon}} icon-white"></i>
+									{% endif %}&#xa0;{{app.name|app_title}}
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">{% for model in app.models %}{% if model.show %}{% if model.separator %}
+									<li class="divider"></li>{% endif %}
+									<li><a href="{{model.admin_url}}">{% if model.title_icon %}<i class="{{model.title_icon}}"></i> {% endif %}{{model.name}}</a></li>{% endif %}{% endfor %}
+								</ul>
+							</li>{% endfor %}{% if optionset_labels and perms.yawdadmin.change_appoption %}
+							<li class="dropdown">
+								<a data-toggle="dropdown" class="dropdown-toggle" href="#">
+									<i class="icon-cog  icon-white"></i>&#xa0;{% trans "Options" %}
+									<b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">{% for label in optionset_labels %}
+									<li><a href="{{label.url}}">{{label.optionset_label}}</a></li>{% endfor %}
+								</ul>
+							</li>{% endif %}
+						</ul>
+					</nav>					
 				</div>
 			</div>
 		</div>

@@ -1,5 +1,5 @@
-{% load i18n %}{% if fieldset.name %}<h2 id="fieldset-no-{{forloop.counter}}-header" class="{% if adminform.model_admin.affix and not is_popup %}affix-header{% endif %}{% if 'collapse' in fieldset.classes %}{% if adminform.model_admin.affix and not is_popup %} {% endif %}collapse-switcher{% endif %}" {% if 'collapse' in fieldset.classes %} onclick="collapse_switcher(this, 'fieldset-no-{{forloop.counter}}');"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>
-						{% endif %}<fieldset id="fieldset-no-{{forloop.counter}}" class="module aligned{% for c in fieldset.classes %} {% if c != 'collapse' %}{{c}}{% endif %}{% endfor %}{% if 'collapse' in fieldset.classes %} hide{% endif %}">{% if fieldset.description %}
+{% load i18n %}{% if fieldset.name %}<h2 {% if not fprefix %}id="fieldset-no-{{forloop.counter}}-header" {% endif %}class="{% if adminform.model_admin.affix and not is_popup %}affix-header{% endif %}{% if 'collapse' in fieldset.classes %}{% if adminform.model_admin.affix and not is_popup %} {% endif %}collapse-switcher{% endif %}" {% if 'collapse' in fieldset.classes %} onclick="collapse_switcher(this, 'fieldset-no-{{forloop.counter}}');"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>
+						{% endif %}<fieldset {% if not fprefix %}id="fieldset-no-{{forloop.counter}}" {% endif %}class="module aligned{% for c in fieldset.classes %} {% if c != 'collapse' %}{{c}}{% endif %}{% endfor %}{% if 'collapse' in fieldset.classes %} hide{% endif %}">{% if fieldset.description %}
 							<div class="description alert">
 								{{ fieldset.description|safe }}
 							</div>{% endif %}{% for line in fieldset %}
@@ -9,7 +9,7 @@
 										{{ line.errors }}
 									</div>{% endif %}{% for field in line %}
 									<div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
-										<label class="control-label{% if field.field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
+										<label class="control-label{% if field.field.field.required %} required{% endif %}"{% if field.field.auto_id and not field.is_readonly %} for="{{field.field.auto_id}}"{% endif %}>{{ field.field.label }}:</label>
 										<div class="controls">{% if field.is_readonly %}
 											<span><i>{{ field.contents|linebreaksbr }}</i></span>{% elif field.is_checkbox %}
 											<span class="switch">
