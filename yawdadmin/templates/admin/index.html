@@ -60,7 +60,7 @@
 							</div>
 						</div>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
 						<div class="row-fluid">
-							<div class="span6">{% for app in app_list %}{% if forloop.counter0 == sep %}
+							<div class="span6">{% for app in app_list %}{% if app.show %}{% if forloop.counter0 == sep %}
 							</div>
 							<div class="span6">{% endif %}
 								<table class="table table-rounded table-striped" summary="{% blocktrans with app.name as name %}'{{ name }}' section links.{% endblocktrans %}">
@@ -98,7 +98,7 @@
 											</td>
 										</tr>{% endfor %}{% endfor %}
 									</tbody>
-								</table>{% endfor %}
+								</table>{% endif %}{% endfor %}
 							</div>
 						</div>{% endwith %}{% else %}
 						<p class="alert">{% trans "You don't have permission to edit anything." %}</p>{% endif %}

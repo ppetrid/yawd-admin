@@ -37,6 +37,9 @@ class YawdAdminDashboard(object):
         for app_label in self.app_dict:
             if not 'linksets' in self.app_dict[app_label]:
                 #sort models alphabetically
+                if not 'models' in self.app_dict[app_label]:
+                    self.app_dict[app_label]['models'] = []
+
                 self.app_dict[app_label]['models'].sort(key=lambda x: x['name'])
                 if not 'extras' in self.app_dict[app_label]:
                     self.app_dict[app_label]['sets'] = (('', self.\
@@ -54,6 +57,15 @@ class YawdAdminDashboard(object):
                         if model:
                             models.append(model)
                     self.app_dict[app_label]['sets'].append((set[0], models))
+
+            self.app_dict[app_label]['show'] = self._get_has_any_perms(self.app_dict[app_label])
+    
+    def _get_has_any_perms(self, data):
+        for set in data['sets']:
+            for m in set[1]:
+                if ('perms' in m and m['perms']['change']) or \
+                        ('url' in m and m['url']):
+                    return True
 
     def _check_app_dict(self, app_label, has_module_perms):
         if not app_label in self.app_dict:
