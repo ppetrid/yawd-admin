@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-10 03:57+0300\n"
+"POT-Creation-Date: 2013-05-28 19:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,11 +29,11 @@ msgstr "Δεν ήταν δυνατόν να ταξινομηθούν τα αντ
 msgid "The order was saved"
 msgstr "Η σειρά αποθηκεύτηκε"
 
-#: sites.py:370
+#: sites.py:382
 msgid "Site administration"
 msgstr "Διαχείριση ιστοσελίδας"
 
-#: sites.py:385
+#: sites.py:397
 #, python-format
 msgid "%s administration"
 msgstr "Διαχείριση %s"
@@ -55,15 +55,15 @@ msgid ""
 "The server does not have permissions to write to the token file. Please "
 "contact your system administrator."
 msgstr ""
-"Ο εξυπηρετητής δεν έχει δικαιώματα να γράψει στο κατάλληλο αρχείο. Παρακαλούμε "
-"επικοινωνήστε με το διαχειριστή συστήματός σας."
+"Ο εξυπηρετητής δεν έχει δικαιώματα να γράψει στο κατάλληλο αρχείο. "
+"Παρακαλούμε επικοινωνήστε με το διαχειριστή συστήματός σας."
 
 #: views.py:145
 msgid "Your account has been updated successfuly."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν επιτυχώς."
 
 #: views.py:153 templates/registration/password_change_done.html:6
-#: templates/registration/password_change_form.html:6
+#: templates/registration/password_change_form.html:10
 msgid "My account"
 msgstr "Ο λογαριασμός μου"
 
@@ -160,7 +160,7 @@ msgstr "Συνδέστε νέο λογαριασμό"
 #: templates/admin/analytics.html:41
 #: templates/admin/auth/user/change_password.html:37
 #: templates/admin/includes/base_form.html:17
-#: templates/admin/includes/fieldset-with-hidden-language.html:19
+#: templates/admin/includes/fieldset-with-hidden-language.html:20
 #: templates/admin/includes/fieldset.html:21
 #: templates/admin/includes/optionfields.html:14
 msgid "help text"
@@ -173,27 +173,26 @@ msgid ""
 "p><p class=\\"
 msgstr ""
 
-#: templates/admin/app_index.html:6 templates/admin/app_index.html.py:17
-#: templates/admin/index.html:72
+#: templates/admin/app_index.html:6
 #, python-format
 msgid "%(name)s"
 msgstr ""
 
-#: templates/admin/app_index.html:11
+#: templates/admin/app_index.html:13
 #, python-format
 msgid "Models available in the %(name)s application."
 msgstr ""
 
-#: templates/admin/app_index.html:34 templates/admin/change_form.html:26
+#: templates/admin/app_index.html:36 templates/admin/change_form.html:26
 #: templates/admin/index.html:89
 msgid "Add"
 msgstr ""
 
-#: templates/admin/app_index.html:37 templates/admin/index.html:92
+#: templates/admin/app_index.html:39 templates/admin/index.html:92
 msgid "Change"
 msgstr ""
 
-#: templates/admin/app_index.html:47 templates/admin/index.html:104
+#: templates/admin/app_index.html:49 templates/admin/index.html:104
 msgid "You don't have permission to edit anything."
 msgstr ""
 
@@ -214,11 +213,11 @@ msgstr ""
 msgid "General"
 msgstr "Γενικά"
 
-#: templates/admin/change_form.html:71 templates/admin/change_list.html:68
+#: templates/admin/change_form.html:76 templates/admin/change_list.html:68
 #: templates/admin/login.html:8 templates/admin/options.html:36
 #: templates/admin/auth/user/change_password.html:24
 #: templates/admin/includes/base_form.html:5
-#: templates/registration/password_change_form.html:21
+#: templates/registration/password_change_form.html:22
 #: templates/registration/password_reset_confirm.html:8
 #: templates/registration/password_reset_form.html:8
 msgid "Please correct the error below."
@@ -430,8 +429,8 @@ msgid "My Actions"
 msgstr "Οι ενέργειές μου"
 
 #: templates/admin/index.html:112
-msgid "None available"
-msgstr "Κανένα διαθέσιμο"
+msgid "No history yet"
+msgstr ""
 
 #: templates/admin/index.html:119
 msgid "Unknown content"
@@ -605,7 +604,8 @@ msgid "Please set at least one language to manage translatable objects."
 msgstr ""
 
 #: templates/admin/edit_inline/translatable-inline.html:28
-msgid "Delete the "
+#, fuzzy
+msgid "Clear the "
 msgstr "Διαγραψτε την μετάφραση του"
 
 #: templates/admin/edit_inline/translatable-inline.html:28
@@ -682,7 +682,7 @@ msgstr "Αλλαγή κωδικού"
 msgid "Logout"
 msgstr "Έξοδος"
 
-#: templates/admin/includes/topmenu.html:73
+#: templates/admin/includes/topmenu.html:72
 msgid "Options"
 msgstr "Επιλογές"
 
@@ -717,7 +717,7 @@ msgstr "Εφαρμογή"
 #: templates/registration/password_change_done.html:7
 #: templates/registration/password_change_done.html:11
 #: templates/registration/password_change_done.html:15
-#: templates/registration/password_change_form.html:7
+#: templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:11
 #: templates/registration/password_change_form.html:15
 msgid "Password change"
@@ -727,7 +727,7 @@ msgstr "Αλλαγή κωδικού"
 msgid "Your password was changed successfully."
 msgstr "Ο κωδικός σας ανανεώθηκε επιτυχώς."
 
-#: templates/registration/password_change_form.html:16
+#: templates/registration/password_change_form.html:18
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
@@ -736,19 +736,19 @@ msgstr ""
 "εισάγετε το νέο σας κωδικό δύο φορές για να βεβαιωθούμε ότι τον "
 "πληκτρολογήσατε σωστά."
 
-#: templates/registration/password_change_form.html:26
+#: templates/registration/password_change_form.html:27
 msgid "Old password"
 msgstr "Παλιός κωδικός"
 
-#: templates/registration/password_change_form.html:35
+#: templates/registration/password_change_form.html:36
 msgid "New password"
 msgstr "Νέος κωδικός"
 
-#: templates/registration/password_change_form.html:44
+#: templates/registration/password_change_form.html:45
 msgid "New password (again)"
 msgstr "Νέος κωδικός (2η φορά)"
 
-#: templates/registration/password_change_form.html:52
+#: templates/registration/password_change_form.html:53
 #: templates/registration/password_reset_confirm.html:37
 msgid "Change my password"
 msgstr "Αλλαγή κωδικού"
@@ -842,6 +842,10 @@ msgstr "Η ομάδα του %(site_name)s"
 #: templates/registration/password_reset_form.html:30
 msgid "Reset my password"
 msgstr "Επαναφορά κωδικού"
+
+#: templates/registration/password_reset_form.html:30
+msgid "Take me to login"
+msgstr "Είσοδος"
 
 #: templates/reversion/change_list.html:15
 #: templates/reversion/recover_form.html:11
@@ -941,3 +945,6 @@ msgid ""
 msgstr ""
 "Καλωσήλθατε στη σελίδα διαχείρισης yawd-admin. Παρακαλώ συνδεθείτε για να "
 "διαχειριστείτε την ιστοσελίδα."
+
+#~ msgid "None available"
+#~ msgstr "Κανένα διαθέσιμο"
