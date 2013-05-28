@@ -802,7 +802,7 @@ msgid ""
 "instructions for setting a new one."
 msgstr ""
 "Ξεχάσατε τον κωδικό σας; Εισάγετε τη διεύθυνση email στο παρακάτω πεδίο και "
-"θα σας στείλουμε οδηγίες για να εισάγετε έναν νέο."
+"θα σας στείλουμε οδηγίες για να ανανεώσετε τον κωδικό σας."
 
 #: templates/registration/password_reset_done.html:12
 msgid ""
