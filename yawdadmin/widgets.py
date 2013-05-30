@@ -60,6 +60,21 @@ class AutoCompleteTextInput(forms.TextInput):
                                                         'source': self.source}
         return output + mark_safe(js)
 
+
 class BootstrapRadioRenderer(forms.RadioSelect.renderer):
     def render(self):
         return mark_safe(u'\n'.join([u'%s\n' % unicode(w).replace('<label ', '<label class="radio inline" ') for w in self])+'&#xa0;')
+
+
+class Select2MultipleWidget(forms.SelectMultiple):
+
+    class Media:
+        css = {'all': ('yawd-admin/css/select2/select2.css',)}
+        js = ('yawd-admin/css/select2/select2.min.js',)
+
+    def render(self, name, value, attrs=None, choices=()):
+        result = super(Select2MultipleWidget, self).render(name, value, attrs, choices)
+        return result + mark_safe('<script>(function($){'\
+                                  '$(\'#%s\').select2();'\
+                                  '})(yawdadmin.jQuery);</script>' % attrs['id'])
+

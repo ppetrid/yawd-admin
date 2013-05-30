@@ -921,6 +921,18 @@ ul.toplinks li {
 	font-size: 16px;
 }
 
+.field-box {
+	display: inline-block;
+	vertical-align: top;
+}
+
+.field-box .inline-field {
+	width: inherit;
+	display: inline-block;
+	float: none;
+	margin-left: 10px;
+}
+
 .pointer {
 	cursor: pointer;
 }

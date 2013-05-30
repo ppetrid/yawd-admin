@@ -8,9 +8,9 @@
 									<div class="alert alert-error">
 										{{ line.errors }}
 									</div>{% endif %}{% for field in line %}
-									<div class="control-group {% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
-										<label class="control-label{% if field.field.field.required %} required{% endif %}"{% if field.field.auto_id and not field.is_readonly %} for="{{field.field.auto_id}}"{% endif %}>{{ field.field.label }}:</label>
-										<div class="controls">{% if field.is_readonly %}
+									<div class="control-group{% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
+										<label class="control-label{% if field.field.field.required %} required{% endif %}{% if not line.fields|length_is:'1' and not forloop.first %} inline-field{% endif %}"{% if field.field.auto_id and not field.is_readonly %} for="{{field.field.auto_id}}"{% endif %}>{{ field.field.label }}:</label>
+										<div class="controls{% if not line.fields|length_is:'1' and not forloop.first %} inline-field{% endif %}">{% if field.is_readonly %}
 											<span><i>{{ field.contents|linebreaksbr }}</i></span>{% elif field.is_checkbox %}
 											<span class="switch">
 												{{field.field}}

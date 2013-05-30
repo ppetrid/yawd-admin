@@ -526,8 +526,6 @@ above):
 		sortable_mptt = True
 		...
 
-.. _custom-widgets:
-
 The sorting mechanism assumes items are orderd by the ordering field
 in the default queryset. If that's not true, you should
 override the `"sortables_ordered"` method to provide a proper default
@@ -540,8 +538,26 @@ ordering:
 		def sortables_ordered(self, queryset):
 			return queryset.order_by("order")
 
+.. _custom-widgets:
+
 Custom Widgets
 ++++++++++++++
+
+Select2MultipleWidget widget
+----------------------------
+
+You can use this widget instead of the default `SelectMultipleWidget` for a
+prettier multiple choice selection input.
+
+.. code-block:: python
+
+	from yawdadmin.widgets import Select2MultipleWidget
+
+	class MyForm(forms.ModelForm):
+	    class Meta:
+	        widgets = {
+	            'multiplefield': Select2MultipleWidget
+	        }
 
 AutoCompleteTextInput widget
 ----------------------------
