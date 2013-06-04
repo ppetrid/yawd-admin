@@ -8,10 +8,7 @@
 
 {% block extrahead %}{{ block.super }}{% if cl.formset or action_form %}{% url 'admin:jsi18n' as jsi18nurl %}
 		<script src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>{% endif %}{% if cl.has_filters %}
-		<script src="{% static 'yawd-admin/css/select2/select2.min.js' %}"></script>{% if cl.model_admin.sortable and cl.full_result_count %}
-		<script src="{% static 'yawd-admin/js/jquery-ui-sortables.min.js' %}"></script>
-		<script src="{% static 'yawd-admin/js/sortables.js' %}"></script>
-		<script>var recursive_sorting = {{cl.model_admin.sortable_mptt|yesno:"true,false"}};</script>{% endif %}
+		<script src="{% static 'yawd-admin/css/select2/select2.min.js' %}"></script>
 		<script>
 			(function($) {
 				$(document).ready(function($) {
@@ -23,7 +20,10 @@
 					});
 				});
 			})(yawdadmin.jQuery);
-		</script>{% endif %}{% if is_popup %}
+		</script>{% endif %}{% if cl.model_admin.sortable and cl.full_result_count %}
+		<script src="{% static 'yawd-admin/js/jquery-ui-sortables.min.js' %}"></script>
+		<script src="{% static 'yawd-admin/js/sortables.js' %}"></script>
+		<script>var recursive_sorting = {{cl.model_admin.sortable_mptt|yesno:"true,false"}};</script>{% endif %}{% if is_popup %}
 		<script>
 			var opener = parent;
 		</script>{% endif %}{% if action_form %}{% if actions_on_top or actions_on_bottom %}
