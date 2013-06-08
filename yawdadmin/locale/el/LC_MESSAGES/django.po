@@ -44,7 +44,7 @@ msgstr "Ρυθμίσεις"
 
 #: views.py:48
 msgid "The options were succesfully saved."
-msgstr "Οι επιλογές αποθηκεύτηκαν επιτυχώς."
+msgstr "Οι ρυθμίσεις αποθηκεύτηκαν επιτυχώς."
 
 #: views.py:73
 msgid "The user was successfully connected."
@@ -684,7 +684,7 @@ msgstr "Έξοδος"
 
 #: templates/admin/includes/topmenu.html:72
 msgid "Options"
-msgstr "Επιλογές"
+msgstr "Ρυθμίσεις"
 
 #: templates/admin/includes/translation_messages_list.html:4
 msgid ""
