@@ -78,3 +78,17 @@ class Select2MultipleWidget(forms.SelectMultiple):
                                   '$(\'#%s\').select2();'\
                                   '})(yawdadmin.jQuery);</script>' % attrs['id'])
 
+
+class Select2Widget(forms.Select):
+    select2_options = ''
+
+    class Media:
+        css = {'all': ('yawd-admin/css/select2/select2.css',)}
+        js = ('yawd-admin/css/select2/select2.min.js',)
+
+    def render(self, name, value, attrs=None, choices=()):
+        result = super(Select2Widget, self).render(name, value, attrs, choices)
+        return result + mark_safe('<script>(function($){'\
+                                  '$(\'#%s\').select2(%s);'\
+                                  '})(yawdadmin.jQuery);</script>' % (attrs['id'],
+                                                                      self.select2_options))
