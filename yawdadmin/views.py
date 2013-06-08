@@ -35,7 +35,7 @@ class AppOptionView(TemplateView):
         from yawdadmin import admin_site
         context = super(AppOptionView, self).get_context_data(**kwargs)
         context['optionset_admin'] = admin_site.get_optionset_admin(self.kwargs['optionset_label'])(**self.get_form_kwargs())
-        context['title'] = '%s %s' % (unicode(context['optionset_admin'].verbose_name), _('Configuration'))
+        context['title'] = '%s' % (unicode(context['optionset_admin'].verbose_name))
         return context
     
     def post(self, request, *args, **kwargs):
