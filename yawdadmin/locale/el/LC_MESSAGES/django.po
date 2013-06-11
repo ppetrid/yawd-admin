@@ -207,7 +207,7 @@ msgstr "Ιστορικό"
 #: templates/admin/edit_inline/tabular.html:25
 #: templates/reversion/revision_form.html:22
 msgid "View on site"
-msgstr ""
+msgstr "Δες το στην ιστοσελίδα"
 
 #: templates/admin/change_form.html:52
 msgid "General"
@@ -257,13 +257,14 @@ msgstr "Εναλλαγή ταξινόμησης"
 
 #: templates/admin/change_list_results.html:37
 msgid "No results found matching the specified criteria. Please try again!"
-msgstr ""
+msgstr "Δεν βρέθηκαν αποτελέσματα βάσει των καθορισμένων κριτηρίων. Παρακαλώ δοκιμάστε ξανά!"
 
 #: templates/admin/change_list_results.html:38
 msgid ""
 "There are no records yet. Use the <strong>add</strong> button above to "
 "create a new"
-msgstr ""
+msgstr "Δεν υπάρχουν εγγραφές ακόμα. Χρησιμοποιήστε το παραπάνω κουμπί <strong>προσθήκης</strong> "
+"για να δημιουργήσετε ένα νέο αντικείμενο τύπου"
 
 #: templates/admin/delete_confirmation.html:9
 #: templates/admin/submit_line.html:4
