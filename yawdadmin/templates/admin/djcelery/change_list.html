@@ -1,0 +1,14 @@
+{% extends "admin/change_list.html" %}{% load i18n %}
+
+{% block breadcrumbs %}<ul class="breadcrumb">
+			<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>{% if not ADMIN_DISABLE_APP_INDEX %}
+			<li><a href="../">{{ app_label|capfirst }}</a> <span class="divider">/</span></li>{% endif %}
+			<li class="active">{{ cl.opts.verbose_name_plural|capfirst }}</li>
+		</ul>{% if wrong_scheduler %}
+		<div class="alert alert-info">{% blocktrans %}
+			Periodic tasks won't be dispatched unless you set the
+			<code>CELERYBEAT_SCHEDULER</code> setting to
+			<code>djcelery.schedulers.DatabaseScheduler</code>,
+			or specify it using the <code>-S</code> option to celerybeat{% endblocktrans %}
+		</div>{% endif %}
+{% endblock %}
