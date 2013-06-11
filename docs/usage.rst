@@ -81,6 +81,20 @@ If you don't want a description at all just null the attribute:
 
 ADMIN_SITE_DESCRIPTION = None
 
+To set a logo that will show up in the right side of the header:
+
+..code-block:: python
+
+ADMIN_SITE_LOGO_HTML = '<div id="myproject-logo hidden-phone">Logo</div>'
+
+With yawd-admin you can optionaly disable the app index view (the one that lists an application's 
+models). Doing so will raise "Page Not Found" (404) errors when accessing the application urls and
+will also hide all corresponding links from breadcrumbs.
+
+..code-block:: python
+
+ADMIN_DISABLE_APP_INDEX = True 
+
 .. _auto-discover:
 
 ModelAdmin registration and auto-discovery

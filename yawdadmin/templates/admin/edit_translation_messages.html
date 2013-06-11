@@ -2,8 +2,8 @@
 
 {% block breadcrumbs %}
 			<ul class="breadcrumb">
-			    <li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-			    <li><a href=".{% url 'admin:app_list' app_label=opts.app_label %}">{% with app_title=opts.app_label|app_title|escape %}{{ app_title.title }}{% endwith %}</a> <span class="divider">/</span></li>
+			    <li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>{% if not ADMIN_DISABLE_APP_INDEX %}
+			    <li><a href=".{% url 'admin:app_list' app_label=opts.app_label %}">{% with app_title=opts.app_label|app_title|escape %}{{ app_title.title }}{% endwith %}</a> <span class="divider">/</span></li>{% endif %}
 			    <li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} <span class="divider">/</span></li>
 			    <li>{% if has_change_object_permission %}<a href="{% url opts|admin_urlname:'change' language.pk %}">{{ language }}</a>{% else %}{{ language }}{% endif %} <span class="divider">/</span></li>
 			    <li>{% if perms.translations.view_translations %}<a href="{% url 'admin:translations-messages-view' language.pk %}">{% trans 'Translate Static Messages' %}</a>{% else %}{% trans 'Translate Static Messages' %}{% endif %} <span class="divider">/</span></li>

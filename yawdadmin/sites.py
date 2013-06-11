@@ -24,7 +24,6 @@ _optionset_labels = {}
 
 class YawdAdminDashboard(object):
     exclude = []
-    show_app_label_link = True
 
     def __init__(self, app_labels, admin_name):
         self.name = admin_name
@@ -145,6 +144,10 @@ class YawdAdminDashboard(object):
             return app_list
 
         return self.app_dict[label]
+
+    @property
+    def show_app_label_link(self):
+        return not getattr(settings, 'ADMIN_DISABLE_APP_INDEX', False)
 
 
 class YawdAdminSite(AdminSite):
@@ -389,6 +392,10 @@ class YawdAdminSite(AdminSite):
                                 current_app=self.name)
 
     def app_index(self, request, app_label, extra_context=None):
+        #check if the view is disabled
+        if getattr(settings, 'ADMIN_DISABLE_APP_INDEX', False):
+            raise Http404
+
         dashboard = self.dashboard_class(self._app_labels, self.name)
         app_dict = dashboard.get_app_list(request, self._registry, app_label)
         if not app_dict:

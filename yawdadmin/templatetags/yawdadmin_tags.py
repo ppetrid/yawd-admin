@@ -9,7 +9,9 @@ from django.utils.translation import get_language
 from yawdadmin import admin_site
 from yawdadmin.conf import settings as ls
 
+
 register = template.Library()
+
 
 @register.inclusion_tag('admin/includes/topmenu.html', takes_context=True)
 def admin_top_menu(context):
@@ -26,12 +28,14 @@ def admin_top_menu(context):
         'analytics' : context['user'].is_superuser and ls.ADMIN_GOOGLE_ANALYTICS_FLOW,
     }
 
+
 @register.simple_tag
 def clean_media(media):
     if hasattr(media, '_js'):
         media._js = [i for i in media._js if not re.match(
             r'%sadmin/js/((jquery(\.init)?|collapse|admin/RelatedObjectLookups)(\.min)?\.)js' % settings.STATIC_URL, i)]
     return media
+
 
 @register.simple_tag
 def yawdadmin_paginator_number(cl,i):
@@ -48,10 +52,18 @@ def yawdadmin_paginator_number(cl,i):
                            mark_safe(' class="end"' if i == cl.paginator.num_pages-1 else ''),
                            i+1)
 
+
 @register.simple_tag(takes_context=True)
 def get_admin_site_meta(context):
     context['ADMIN_SITE_NAME'] = getattr(settings, 'ADMIN_SITE_NAME',
         _('Django Administration'))
     context['ADMIN_SITE_DESCRIPTION'] = getattr(settings, 'ADMIN_SITE_DESCRIPTION',
         _('Welcome to the yawd-admin administration page. Please sign in to manage your website.'))
+    context['ADMIN_DISABLE_APP_INDEX'] = getattr(settings, 'ADMIN_DISABLE_APP_INDEX', False)
     return ''
+
+
+@register.simple_tag
+def get_admin_logo():
+    return getattr(settings, 'ADMIN_SITE_LOGO_HTML', '')
+

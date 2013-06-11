@@ -1,6 +1,6 @@
 {% load i18n admin_static yawdadmin_tags %}<!DOCTYPE html>
 <html lang="{{ LANGUAGE_CODE|default:"en-us" }}" {% if LANGUAGE_BIDI %}dir="rtl"{% endif %}>
-	<head>
+	<head>{% get_admin_site_meta %}
 		<meta charset="utf-8">
 		<title>{% block title %}{% endblock %}</title>
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -21,7 +21,8 @@
 			</ul>{% endblock %}{% block pretitle %}{% endblock %}{% block content_title %}{% if title %}
 			<header class="page-header" id="page-header">
 				<h1>{{ title }}</h1>
-			</header>{% endif %}{% endblock %}{% block object-tools %}{% endblock %}
+			</header>{% endif %}{% endblock %}{% block object-tools %}{% endblock %}{% block admin-logo %}{% if not is_popup %}
+			{% get_admin_logo %}{% endif %}{% endblock %}
 		</div>
 		<div class="container-fluid">{% if messages %}
 			<ul class="messagelist">{% for message in messages %}

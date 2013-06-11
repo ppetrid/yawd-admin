@@ -2,13 +2,13 @@
 
 {% block content_title %}{% if title %}
 			<header class="page-header">
-				<h1><i class="icon-pencil title-icon"></i>{{title}}{% comment %}<span class="blue pull-right elorus-head small">Elorus beta <span class="elorus-icon"></span>{% endcomment %}</h1>
+				<h1><i class="icon-pencil title-icon"></i>{{title}}</h1>
 			</header>{% endif %}{% endblock %}
 
 {% block breadcrumbs %}
 		<ul class="breadcrumb">
-			<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-			<li><a href="{% url 'admin:app_list' app_label=app_label %}">{{ app_label|capfirst }}</a> <span class="divider">/</span></li>
+			<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>{% if not ADMIN_DISABLE_APP_INDEX %}
+			<li><a href="{% url 'admin:app_list' app_label=app_label %}">{{ app_label|capfirst }}</a> <span class="divider">/</span></li>{% endif %}
 			<li><a href="{% url opts|admin_urlname:'changelist' %}">{{ module_name }}</a> <span class="divider">/</span></li>
 			<li><a href="{% url opts|admin_urlname:'change' object.pk|admin_urlquote %}">{{ object|truncatewords:"18" }}</a> <span class="divider">/</span></li>
 			<li class="active">{% trans 'History' %}</li>

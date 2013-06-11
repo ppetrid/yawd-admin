@@ -5,13 +5,12 @@
 
 {% block breadcrumbs %}
     <ul class="breadcrumbs">
-			    <li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>
-			    <li><a href="{% url 'admin:app_list' app_label %}">{{app_label|capfirst|escape}}</a></a> <span class="divider">/</span></li>
+		<li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>{% if not ADMIN_DISABLE_APP_INDEX %}
+		<li><a href="{% url 'admin:app_list' app_label %}">{{app_label|capfirst|escape}}</a></a> <span class="divider">/</span></li>{% endif %}
         <li><a href="{{changelist_url}}">{{opts.verbose_name_plural|capfirst}}</a> <span class="divider">/</span></li>
         <li><a href="{{recoverlist_url}}">{% blocktrans with opts.verbose_name_plural as name %}Recover deleted {{name}}{% endblocktrans %}</a> <span class="divider">/</span></li>
         <li>{{title}}</li>
-    </ul>
-{% endblock %}
+    </ul>{% endblock %}
 
 
 {% block form_top %}
