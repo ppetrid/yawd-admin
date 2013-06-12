@@ -1,4 +1,11 @@
-{% extends "admin/base_site.html" %}{% load i18n admin_urls %}
+{% extends "admin/base_site.html" %}{% load i18n admin_urls yawdadmin_tags %}
+
+{% block inner-title %}{% trans 'Delete' %} < {{object}} < {{ opts.verbose_name_plural|capfirst }}{% endblock %}
+
+{% block content_title %}{% if title %}
+			<header class="page-header">
+				<h1><i class="{% get_object_icon object 'icon-remove-sign' %} title-icon"></i>{{object}}: {% trans 'delete' %}</h1>
+			</header>{% endif %}{% endblock %}
 
 {% block breadcrumbs %}
 			<ul class="breadcrumb">

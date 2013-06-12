@@ -1269,18 +1269,11 @@ div#id_password {
 
 /* End overriding widget styling */
 
-/* SELECT2 STYLING */
-
-div.select2-container {
-	min-width: 180px;
-}
-
-/* End Select 2styling */
-
 /* CHANGELIST FILTERS STYLING */
 
 .filters div.select2-container {
 	margin: 0 10px;
+	min-width: 180px;
 }
 
 .filters .nav-header {

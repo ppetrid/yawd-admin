@@ -1,3 +1,4 @@
+import inspect
 import re
 from django import template
 from django.conf import settings
@@ -67,3 +68,10 @@ def get_admin_site_meta(context):
 def get_admin_logo():
     return getattr(settings, 'ADMIN_SITE_LOGO_HTML', '')
 
+
+@register.simple_tag
+def get_object_icon(obj, default_icon=''):
+    try:
+        return admin_site._registry[obj if inspect.isclass(obj) else obj.__class__].title_icon
+    except:
+            return default_icon

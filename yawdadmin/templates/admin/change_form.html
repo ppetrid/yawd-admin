@@ -13,9 +13,11 @@
 
 {% block bodyclass %}{{ opts.app_label }}-{{ opts.object_name.lower }} change-form{% endblock %}
 
+{% block inner-title %}{% if add %}{% trans "Add" %}{% else %}{% trans 'Edit' %} < {{original}}{% endif %} < {{ opts.verbose_name_plural|capfirst }}{% endblock %}
+
 {% block content_title %}{% if title %}
 			<header class="page-header" id="page-header">
-				<h1>{% if adminform.model_admin.title_icon %}<i class="{{adminform.model_admin.title_icon}} title-icon"></i>{% endif %}{{title}}</h1>
+				<h1>{% if adminform.model_admin.title_icon %}<i class="{{adminform.model_admin.title_icon}} title-icon"></i>{% endif %}{% if add %}{{ opts.verbose_name_plural|capfirst }}: {% trans 'add' %}{% else %}{{original}}: {% trans 'edit' %}{% endif %}</h1>
 			</header>{% endif %}{% endblock %}
 
 {% block breadcrumbs %}{% if not is_popup %}
@@ -23,7 +25,7 @@
 			    <li><a href="{% url 'admin:index' %}"><i class="icon-home"></i></a> <span class="divider">/</span></li>{% if not ADMIN_DISABLE_APP_INDEX %}
 			    <li><a href="{% url 'admin:app_list' app_label=opts.app_label %}">{% with app_title=app_label|app_title|escape %}{{ app_title.title }}{% endwith %}</a> <span class="divider">/</span></li>{% endif %}
 			    <li>{% if has_change_permission %}<a href="{% url opts|admin_urlname:'changelist' %}">{{ opts.verbose_name_plural|capfirst }}</a>{% else %}{{ opts.verbose_name_plural|capfirst }}{% endif %} <span class="divider">/</span></li>
-			    <li class="active">{% if add %}{% trans "Add" %} {{ opts.verbose_name }}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
+			    <li class="active">{% if add %}{% trans "Add" %}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
 			</ul>{% endif %}{% endblock %}
 
 {% block object-tools %}{% if change and not is_popup %}
