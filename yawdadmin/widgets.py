@@ -100,11 +100,11 @@ class SwitchWidget(forms.CheckboxInput):
         js = ('yawd-admin/js/bootstrap.switch.min.js',)
 
     def render(self, name, value, attrs=None):
-        data_on_label =attrs.pop('data-on-label', _('YES'))
-        data_off_label =attrs.pop('data-off-label', _('NO'))
+        output = super(SwitchWidget, self).render(name, value, attrs)
 
-        output = mark_safe('<div class="switch" data-on-label="%s" data-off-label="%s">' % (
-                                                            data_on_label, data_off_label))
-        output += super(SwitchWidget, self).render(name, value, attrs)
-        output += mark_safe('</div>')
-        return output
+        data_on_label = attrs.pop('data-on-label', _('YES'))
+        data_off_label = attrs.pop('data-off-label', _('NO'))
+        classes = self.attrs.pop('class', '')
+
+        return mark_safe('<div class="switch %s" data-on-label="%s" data-off-label="%s">' % (
+                    classes, data_on_label, data_off_label)) + output + mark_safe('</div>')
