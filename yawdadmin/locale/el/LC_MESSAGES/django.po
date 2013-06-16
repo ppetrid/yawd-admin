@@ -195,7 +195,7 @@ msgstr ""
 
 #: templates/admin/app_index.html:39 templates/admin/index.html:92
 msgid "Change"
-msgstr ""
+msgstr "Μετάβαση"
 
 #: templates/admin/app_index.html:49 templates/admin/index.html:104
 msgid "You don't have permission to edit anything."
@@ -209,11 +209,11 @@ msgstr "Επεξεργασία"
 
 #: templates/admin/change_form.html:20
 msgid "add"
-msgstr ""
+msgstr "προσθήκη"
 
 #: templates/admin/change_form.html:20
 msgid "edit"
-msgstr ""
+msgstr "επεξεργασία"
 
 #: templates/admin/change_form.html:35 templates/admin/object_history.html:3
 #: templates/admin/object_history.html:16
@@ -456,7 +456,7 @@ msgstr "Οι ενέργειές μου"
 
 #: templates/admin/index.html:112
 msgid "No history yet"
-msgstr ""
+msgstr "Δε βρέθηκε ιστορικό"
 
 #: templates/admin/index.html:119
 msgid "Unknown content"
