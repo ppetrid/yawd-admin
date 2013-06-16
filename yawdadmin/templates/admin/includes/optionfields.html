@@ -2,7 +2,7 @@
 					<div class="row-fluid color-form {% cycle 'row1' 'row2' %}">
 						<div class="field">
 							<div class="control-group{% if not field.is_readonly and field.errors %} error{% endif %}">
-								<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:</label>
+								<label class="control-label{% if field.field.required %} required{% endif %}" for="{{field.field.auto_id}}">{{ field.field.label }}:{% if field.field.required %} <span class="text-error">*</span>{% endif %}</label>
 								<div class="controls">{% if field.is_readonly %}
 									<span><i>{{ field.contents }}</i></span>{% elif field.is_checkbox %}
 									<span class="switch">
