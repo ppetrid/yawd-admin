@@ -645,6 +645,14 @@ renderer:
 	            'myselectfield': forms.RadioSelect(renderer=BootstrapRadioRenderer)
 	        }
 
+
+SwitchWidget
+------------
+
+The `SwitchWidget` can be used on Boolean Fields to display smartphone-style switches instead 
+of checkboxes.
+
+
 .. _other-templates:
 
 Templates for popular django applications

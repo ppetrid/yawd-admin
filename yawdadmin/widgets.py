@@ -1,6 +1,7 @@
 from itertools import chain
 from django import forms
 from django.contrib.contenttypes.models import ContentType
+from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 
 
@@ -92,3 +93,18 @@ class Select2Widget(forms.Select):
                                   '$(\'#%s\').select2(%s);'\
                                   '})(yawdadmin.jQuery);</script>' % (attrs['id'],
                                                                       self.select2_options))
+
+
+class SwitchWidget(forms.CheckboxInput):
+    class Media:
+        js = ('yawd-admin/js/bootstrap.switch.min.js',)
+
+    def render(self, name, value, attrs=None):
+        data_on_label =attrs.pop('data-on-label', _('YES'))
+        data_off_label =attrs.pop('data-off-label', _('NO'))
+
+        output = mark_safe('<div class="switch" data-on-label="%s" data-off-label="%s">' % (
+                                                            data_on_label, data_off_label))
+        output += super(SwitchWidget, self).render(name, value, attrs)
+        output += mark_safe('</div>')
+        return output

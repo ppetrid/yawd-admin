@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-05-28 19:15+0300\n"
+"POT-Creation-Date: 2013-06-16 23:03+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -29,18 +29,14 @@ msgstr "Δεν ήταν δυνατόν να ταξινομηθούν τα αντ
 msgid "The order was saved"
 msgstr "Η σειρά αποθηκεύτηκε"
 
-#: sites.py:382
+#: sites.py:385
 msgid "Site administration"
 msgstr "Διαχείριση ιστοσελίδας"
 
-#: sites.py:397
+#: sites.py:404
 #, python-format
 msgid "%s administration"
 msgstr "Διαχείριση %s"
-
-#: views.py:38
-msgid "Configuration"
-msgstr "Ρυθμίσεις"
 
 #: views.py:48
 msgid "The options were succesfully saved."
@@ -66,6 +62,14 @@ msgstr "Οι αλλαγές σας αποθηκεύτηκαν επιτυχώς."
 #: templates/registration/password_change_form.html:10
 msgid "My account"
 msgstr "Ο λογαριασμός μου"
+
+#: widgets.py:103
+msgid "YES"
+msgstr "ΝΑΙ"
+
+#: widgets.py:104
+msgid "NO"
+msgstr "ΟΧΙ"
 
 #: templates/admin/404.html:4 templates/admin/404.html.py:8
 msgid "Page not found"
@@ -183,7 +187,8 @@ msgstr ""
 msgid "Models available in the %(name)s application."
 msgstr ""
 
-#: templates/admin/app_index.html:36 templates/admin/change_form.html:26
+#: templates/admin/app_index.html:36 templates/admin/change_form.html:16
+#: templates/admin/change_form.html:28 templates/admin/change_list.html:59
 #: templates/admin/index.html:89
 msgid "Add"
 msgstr ""
@@ -196,28 +201,43 @@ msgstr ""
 msgid "You don't have permission to edit anything."
 msgstr ""
 
-#: templates/admin/change_form.html:33 templates/admin/object_history.html:15
+#: templates/admin/change_form.html:16
+#: templates/admin/edit_inline/stacked.html:11
+#: templates/admin/includes/translation_messages_list.html:21
+msgid "Edit"
+msgstr "Επεξεργασία"
+
+#: templates/admin/change_form.html:20
+msgid "add"
+msgstr ""
+
+#: templates/admin/change_form.html:20
+msgid "edit"
+msgstr ""
+
+#: templates/admin/change_form.html:35 templates/admin/object_history.html:3
+#: templates/admin/object_history.html:16
 #: templates/reversion/revision_form.html:12
-#: templates/reversion-compare/compare.html:25
+#: templates/reversion-compare/compare.html:24
 msgid "History"
 msgstr "Ιστορικό"
 
-#: templates/admin/change_form.html:38
+#: templates/admin/change_form.html:40
 #: templates/admin/edit_inline/stacked.html:12
 #: templates/admin/edit_inline/tabular.html:25
-#: templates/reversion/revision_form.html:22
+#: templates/reversion/revision_form.html:21
 msgid "View on site"
 msgstr "Δες το στην ιστοσελίδα"
 
-#: templates/admin/change_form.html:52
+#: templates/admin/change_form.html:54
 msgid "General"
 msgstr "Γενικά"
 
-#: templates/admin/change_form.html:76 templates/admin/change_list.html:68
+#: templates/admin/change_form.html:78 templates/admin/change_list.html:69
 #: templates/admin/login.html:8 templates/admin/options.html:36
 #: templates/admin/auth/user/change_password.html:24
 #: templates/admin/includes/base_form.html:5
-#: templates/registration/password_change_form.html:22
+#: templates/registration/password_change_form.html:21
 #: templates/registration/password_reset_confirm.html:8
 #: templates/registration/password_reset_form.html:8
 msgid "Please correct the error below."
@@ -225,20 +245,15 @@ msgid_plural "Please correct the errors below."
 msgstr[0] ""
 msgstr[1] ""
 
-#: templates/admin/change_list.html:58 templates/reversion/change_list.html:9
-#, python-format
-msgid "Add %(name)s"
-msgstr ""
-
-#: templates/admin/change_list.html:78
+#: templates/admin/change_list.html:79
 msgid "List view"
 msgstr "Προβολή λίστας"
 
-#: templates/admin/change_list.html:83
+#: templates/admin/change_list.html:84
 msgid "Reorder view"
 msgstr "Προβολή ταξινόμησης"
 
-#: templates/admin/change_list.html:93
+#: templates/admin/change_list.html:94
 msgid "Filters"
 msgstr "Φίλτρα"
 
@@ -257,22 +272,32 @@ msgstr "Εναλλαγή ταξινόμησης"
 
 #: templates/admin/change_list_results.html:37
 msgid "No results found matching the specified criteria. Please try again!"
-msgstr "Δεν βρέθηκαν αποτελέσματα βάσει των καθορισμένων κριτηρίων. Παρακαλώ δοκιμάστε ξανά!"
+msgstr ""
+"Δεν βρέθηκαν αποτελέσματα βάσει των καθορισμένων κριτηρίων. Παρακαλώ "
+"δοκιμάστε ξανά!"
 
 #: templates/admin/change_list_results.html:38
 msgid ""
 "There are no records yet. Use the <strong>add</strong> button above to "
 "create a new"
-msgstr "Δεν υπάρχουν εγγραφές ακόμα. Χρησιμοποιήστε το παραπάνω κουμπί <strong>προσθήκης</strong> "
-"για να δημιουργήσετε ένα νέο αντικείμενο τύπου"
+msgstr ""
+"Δεν υπάρχουν εγγραφές ακόμα. Χρησιμοποιήστε το παραπάνω κουμπί "
+"<strong>προσθήκης</strong> για να δημιουργήσετε ένα νέο αντικείμενο τύπου"
 
-#: templates/admin/delete_confirmation.html:9
+#: templates/admin/delete_confirmation.html:3
+#: templates/admin/delete_confirmation.html:16
+#: templates/admin/delete_selected_confirmation.html:3
 #: templates/admin/submit_line.html:4
 #: templates/admin/import_export/import.html:105
 msgid "Delete"
 msgstr "Διαγραφή"
 
-#: templates/admin/delete_confirmation.html:14
+#: templates/admin/delete_confirmation.html:7
+#: templates/admin/delete_selected_confirmation.html:7
+msgid "delete"
+msgstr "διαγραφή"
+
+#: templates/admin/delete_confirmation.html:21
 #, python-format
 msgid ""
 "Deleting the %(object_name)s '%(escaped_object)s' would result in deleting "
@@ -280,14 +305,14 @@ msgid ""
 "following types of objects:"
 msgstr ""
 
-#: templates/admin/delete_confirmation.html:18
+#: templates/admin/delete_confirmation.html:25
 #, python-format
 msgid ""
 "Deleting the %(object_name)s '%(escaped_object)s' would require deleting the "
 "following protected related objects:"
 msgstr ""
 
-#: templates/admin/delete_confirmation.html:22
+#: templates/admin/delete_confirmation.html:29
 #, python-format
 msgid ""
 "Are you sure you want to delete the %(object_name)s \"%(escaped_object)s\"? "
@@ -297,21 +322,21 @@ msgstr ""
 "διαγραφή της εγγραφής. Εάν προχωρήσετε θα διαγραφούν επίσης όλα τα παρακάτω "
 "αντικείμενα που σχετίζονται με αυτήν:"
 
-#: templates/admin/delete_confirmation.html:29
-#: templates/admin/delete_selected_confirmation.html:30
+#: templates/admin/delete_confirmation.html:36
+#: templates/admin/delete_selected_confirmation.html:37
 msgid "Cancel"
 msgstr "Ακύρωση"
 
-#: templates/admin/delete_confirmation.html:30
-#: templates/admin/delete_selected_confirmation.html:31
+#: templates/admin/delete_confirmation.html:37
+#: templates/admin/delete_selected_confirmation.html:38
 msgid "Yes, I'm sure"
 msgstr "Ναι, είμαι βέβαιος"
 
-#: templates/admin/delete_selected_confirmation.html:8
+#: templates/admin/delete_selected_confirmation.html:15
 msgid "Delete multiple objects"
 msgstr "Διαγραφή πολλαπλών αντικειμένων"
 
-#: templates/admin/delete_selected_confirmation.html:13
+#: templates/admin/delete_selected_confirmation.html:20
 #, python-format
 msgid ""
 "Deleting the selected %(objects_name)s would result in deleting related "
@@ -319,14 +344,14 @@ msgid ""
 "types of objects:"
 msgstr ""
 
-#: templates/admin/delete_selected_confirmation.html:17
+#: templates/admin/delete_selected_confirmation.html:24
 #, python-format
 msgid ""
 "Deleting the selected %(objects_name)s would require deleting the following "
 "protected related objects:"
 msgstr ""
 
-#: templates/admin/delete_selected_confirmation.html:21
+#: templates/admin/delete_selected_confirmation.html:28
 #, python-format
 msgid ""
 "Are you sure you want to delete the selected %(objects_name)s? All of the "
@@ -466,25 +491,29 @@ msgstr "Είσοδος"
 msgid "Forgot password?"
 msgstr "Ξεχάσατε τον κωδικό σας;"
 
-#: templates/admin/object_history.html:24
+#: templates/admin/object_history.html:7
+msgid "history"
+msgstr "ιστορικό"
+
+#: templates/admin/object_history.html:25
 #: templates/reversion/object_history.html:12
-#: templates/reversion/recover_list.html:25
+#: templates/reversion/recover_list.html:24
 #: templates/reversion-compare/object_history.html:24
 msgid "Date/time"
 msgstr "Ημέρα/ώρα"
 
-#: templates/admin/object_history.html:25
+#: templates/admin/object_history.html:26
 #: templates/reversion/object_history.html:13
 #: templates/reversion-compare/object_history.html:25
 msgid "User"
 msgstr "Χρήστης"
 
-#: templates/admin/object_history.html:26
+#: templates/admin/object_history.html:27
 #: templates/reversion/object_history.html:14
 msgid "Action"
 msgstr "Ενέργεια"
 
-#: templates/admin/object_history.html:37
+#: templates/admin/object_history.html:38
 #: templates/reversion/object_history.html:30
 #: templates/reversion-compare/object_history.html:56
 msgid ""
@@ -576,10 +605,14 @@ msgstr "Κωδικός (2η φορά)"
 msgid "Enter the same password as above, for verification."
 msgstr "Εισάγετε τον ίδιο κωδικό για επιβεβαίωση."
 
-#: templates/admin/edit_inline/stacked.html:11
-#: templates/admin/includes/translation_messages_list.html:21
-msgid "Edit"
-msgstr "Επεξεργασία"
+#: templates/admin/djcelery/change_list.html:8
+msgid ""
+"\n"
+"\t\t\tPeriodic tasks won't be dispatched unless you set the\n"
+"\t\t\t<code>CELERYBEAT_SCHEDULER</code> setting to\n"
+"\t\t\t<code>djcelery.schedulers.DatabaseScheduler</code>,\n"
+"\t\t\tor specify it using the <code>-S</code> option to celerybeat"
+msgstr ""
 
 #: templates/admin/edit_inline/stacked.html:18
 #, python-format
@@ -605,9 +638,8 @@ msgid "Please set at least one language to manage translatable objects."
 msgstr ""
 
 #: templates/admin/edit_inline/translatable-inline.html:28
-#, fuzzy
 msgid "Clear the "
-msgstr "Διαγραψτε την μετάφραση του"
+msgstr "Διαγράψτε το αντικείμενο "
 
 #: templates/admin/edit_inline/translatable-inline.html:28
 msgid "translation"
@@ -716,19 +748,19 @@ msgid "Update account"
 msgstr "Εφαρμογή"
 
 #: templates/registration/password_change_done.html:7
-#: templates/registration/password_change_done.html:11
-#: templates/registration/password_change_done.html:15
+#: templates/registration/password_change_done.html:10
+#: templates/registration/password_change_done.html:14
 #: templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:11
-#: templates/registration/password_change_form.html:15
+#: templates/registration/password_change_form.html:14
 msgid "Password change"
 msgstr "Αλλαγή κωδικού"
 
-#: templates/registration/password_change_done.html:17
+#: templates/registration/password_change_done.html:16
 msgid "Your password was changed successfully."
 msgstr "Ο κωδικός σας ανανεώθηκε επιτυχώς."
 
-#: templates/registration/password_change_form.html:18
+#: templates/registration/password_change_form.html:17
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
 "password twice so we can verify you typed it in correctly."
@@ -737,19 +769,19 @@ msgstr ""
 "εισάγετε το νέο σας κωδικό δύο φορές για να βεβαιωθούμε ότι τον "
 "πληκτρολογήσατε σωστά."
 
-#: templates/registration/password_change_form.html:27
+#: templates/registration/password_change_form.html:26
 msgid "Old password"
 msgstr "Παλιός κωδικός"
 
-#: templates/registration/password_change_form.html:36
+#: templates/registration/password_change_form.html:35
 msgid "New password"
 msgstr "Νέος κωδικός"
 
-#: templates/registration/password_change_form.html:45
+#: templates/registration/password_change_form.html:44
 msgid "New password (again)"
 msgstr "Νέος κωδικός (2η φορά)"
 
-#: templates/registration/password_change_form.html:53
+#: templates/registration/password_change_form.html:52
 #: templates/registration/password_reset_confirm.html:37
 msgid "Change my password"
 msgstr "Αλλαγή κωδικού"
@@ -848,6 +880,11 @@ msgstr "Επαναφορά κωδικού"
 msgid "Take me to login"
 msgstr "Είσοδος"
 
+#: templates/reversion/change_list.html:9
+#, python-format
+msgid "Add %(name)s"
+msgstr ""
+
 #: templates/reversion/change_list.html:15
 #: templates/reversion/recover_form.html:11
 #: templates/reversion/recover_list.html:12
@@ -864,20 +901,20 @@ msgstr ""
 "Επιλέξτε μια ημερομηνία από την παρακάτω λίστα για να επιστρέψετε σε μια "
 "προηγούμενη έκδοση του αντικειμένου."
 
-#: templates/reversion/recover_form.html:18
+#: templates/reversion/recover_form.html:17
 msgid "Press the save button below to recover this version of the object."
 msgstr ""
 "Πατήστε το κουμπί αποθήκευσης για να ανακτήσετε αυτή την έκδοση του "
 "αντικειμένου."
 
-#: templates/reversion/recover_list.html:19
+#: templates/reversion/recover_list.html:18
 msgid ""
 "Choose a date from the list below to recover a deleted version of an object."
 msgstr ""
 "Επιλέξτε μια ημερομηνία από την παρακάτω λίστα για να ανακτήσετε μια "
 "δεγραμμένη έκδοση του αντικειμένου."
 
-#: templates/reversion/recover_list.html:39
+#: templates/reversion/recover_list.html:38
 msgid "There are no deleted objects to recover."
 msgstr "Δεν υπάρχουν διεγραμένα αντικείμενα."
 
@@ -886,21 +923,21 @@ msgstr "Δεν υπάρχουν διεγραμένα αντικείμενα."
 msgid "Revert %(verbose_name)s"
 msgstr "Ανακαλέστε το %(verbose_name)s"
 
-#: templates/reversion/revision_form.html:36
+#: templates/reversion/revision_form.html:35
 msgid "Press the save button below to revert to this version of the object."
 msgstr "Πατήστε το κουμπί αποθήκευσης για να επιστρέψετε σε αυτή την έκδοση."
 
-#: templates/reversion-compare/compare.html:26
+#: templates/reversion-compare/compare.html:25
 #, python-format
 msgid "Compare %(name)s"
 msgstr "Σύγκριση %(name)s"
 
-#: templates/reversion-compare/compare.html:36
+#: templates/reversion-compare/compare.html:33
 #: templates/reversion-compare/object_history.html:42
 msgid "DATETIME_FORMAT"
 msgstr "DATETIME_FORMAT"
 
-#: templates/reversion-compare/compare.html:36
+#: templates/reversion-compare/compare.html:33
 #, python-format
 msgid ""
 "\n"
@@ -913,16 +950,16 @@ msgstr ""
 "strong>:\n"
 "            "
 
-#: templates/reversion-compare/compare.html:41
-#: templates/reversion-compare/compare.html:70
+#: templates/reversion-compare/compare.html:38
+#: templates/reversion-compare/compare.html:67
 msgid "Go back to history list"
 msgstr "Επιστροφή στη σελίδα ιστορικού"
 
-#: templates/reversion-compare/compare.html:59
+#: templates/reversion-compare/compare.html:56
 msgid "Edit comment:"
 msgstr "Επεξεργασία σχολίου:"
 
-#: templates/reversion-compare/compare.html:63
+#: templates/reversion-compare/compare.html:60
 msgid "Note:"
 msgstr "Σημείωση:"
 
@@ -935,17 +972,20 @@ msgstr "σύγκριση"
 msgid "Comment"
 msgstr "Σχόλιο"
 
-#: templatetags/yawdadmin_tags.py:54
+#: templatetags/yawdadmin_tags.py:60
 msgid "Django Administration"
 msgstr "Διαχείριση Django"
 
-#: templatetags/yawdadmin_tags.py:56
+#: templatetags/yawdadmin_tags.py:62
 msgid ""
 "Welcome to the yawd-admin administration page. Please sign in to manage your "
 "website."
 msgstr ""
 "Καλωσήλθατε στη σελίδα διαχείρισης yawd-admin. Παρακαλώ συνδεθείτε για να "
 "διαχειριστείτε την ιστοσελίδα."
+
+#~ msgid "Configuration"
+#~ msgstr "Ρυθμίσεις"
 
 #~ msgid "None available"
 #~ msgstr "Κανένα διαθέσιμο"
