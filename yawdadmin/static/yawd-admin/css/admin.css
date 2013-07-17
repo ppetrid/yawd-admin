@@ -162,6 +162,14 @@ h2.affix-header, .affix-header h2 {
 
 /* End breadcrumb */
 
+.changelist-save {
+	margin: 4px 6px 0 0;
+}
+
+#changelist-form .results table td input {
+	margin-bottom: 0 !important;
+}
+ 
 .sortoptions i {
 	color: #333;
 	text-shadow: 1px 1px 1px #ccc;
