@@ -209,4 +209,8 @@ class SortableModelAdmin(admin.ModelAdmin):
         finally:
             self.change_list_template = template
             return response
-        
+
+
+class OneToOneInline(admin.StackedInline):
+    template = 'admin/edit_inline/one-to-one-inline.html'
+    can_delete = False
