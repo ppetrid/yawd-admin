@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import template
+from ..forms import PopupInlineFormSet
 
 
 register = template.Library()
@@ -36,3 +37,18 @@ def istranslationinline(value):
     if hasattr(value, 'opts') and isinstance(value.opts, TranslationInline):
         return True
     return False
+
+
+@register.filter
+def popup_change_url(formset, obj_id):
+    """
+    Used in PopupInline
+    """
+    if isinstance(formset, PopupInlineFormSet):
+        return formset.get_change_url(obj_id)
+
+
+@register.filter
+def popup_delete_url(formset, obj_id):
+    if isinstance(formset, PopupInlineFormSet):
+        return formset.get_delete_url(obj_id)

@@ -50,7 +50,7 @@
 						<div class="affix-sidebar">
 							<ul class="affix-sidenav nav nav-list" id="left-affix">{% for fieldset in adminform %}
 								<li{% if forloop.first %} class="active"{% endif %}>
-									<a href="#{% if fieldset.name %}fieldset-no-{{forloop.counter}}-header{% else %}page-header{% endif %}">
+									<a href="#{% if fieldset.name %}fieldset-no-{{forloop.counter}}{% else %}page-header{% endif %}">
 										<i class="icon-chevron-right"></i> {% if fieldset.name %}{{fieldset.name}}{% else %}{% trans 'General' %}{% endif %}
 									</a>
 								</li>{% endfor %}{% for inline_admin_formset in inline_admin_formsets %}{% if inline_admin_formset|istranslationinline and inline_admin_formset.formset|length <= 1 %}{% for inline_admin_form in inline_admin_formset %}{% if not forloop.last %}{% for fieldset in inline_admin_form %}

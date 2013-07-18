@@ -1,4 +1,5 @@
 {% load i18n %}<div id="{{ inline_admin_formset.formset.prefix }}-group"{% if adminform.model_admin.affix and not is_popup %} class="affix-header"{% endif %}>{% if inline_admin_formset.formset|length > 1 %}
+						<div class="inline-group-wrapper">
 							<h2>{{ inline_admin_formset.opts.verbose_name_plural|title }}</h2>{% endif %}{% if inline_admin_formset.opts.description %}
 							<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
 							{{ inline_admin_formset.formset.management_form }}{% if inline_admin_formset.formset.non_form_errors %}
@@ -42,5 +43,6 @@
 										$('#{{ inline_admin_formset.formset.prefix }}-tabs a:first').tab('show');
 									});
 								})(yawdadmin.jQuery);{% block extrainlinejs %}{% endblock %}
-							</script>{% endif %}{% endif %}
-						</div>
+							</script>{% endif %}
+						</div>{% endif %}
+					</div>

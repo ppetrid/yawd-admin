@@ -1,0 +1,106 @@
+{% load i18n admin_static yawdadmin_filters yawdadmin_tags %}{% if not add %}<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
+							<div class="inline-group-wrapper">
+								<h2{% if inline_admin_formset.opts.collapse %} class="pointer" data-toggle="collapse" data-target="#{{inline_admin_formset.formset.prefix}}-wrapper"{% endif %}>{{ inline_admin_formset.opts.verbose_name_plural|title }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
+								<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
+								<div class="inline-wrapper inline-related-modal-wrapper{% if inline_admin_formset.opts.collapse %} collapse{% endif %}" id="{{inline_admin_formset.formset.prefix}}-wrapper">
+									{{ inline_admin_formset.formset.management_form }}{% if inline_admin_formset.formset.non_form_errors %}
+									<div class="alert alert-error">
+										{{ inline_admin_formset.formset.non_form_errors }}
+									</div>{% endif %}{% for inline_admin_form in inline_admin_formset %}
+									<div class="inline-related inline-related-modal inline-related-popup{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}"{% if inline_admin_form.original %} data-pk="{{inline_admin_form.original.pk}}"{% endif %}>
+										<h3 class="inline-modal-header{%if inline_admin_form.form.errors or inline_admin_form.form.non_field_errors %} error{% endif %}">{% if inline_admin_formset.opts.sortable %}
+											<i class="icon-move"></i>&#xa0;{% endif %}
+											<b>{{ inline_admin_formset.opts.verbose_name|title }}</b>&nbsp;
+											<span class="inline_label popup_inline_label">{% if inline_admin_form.original %}
+												{% inline_items_for_result inline_admin_formset.opts inline_admin_form.original %}{% else %}
+												#{{ forloop.counter }}{% endif %}</span>
+											<span class="inline-edit">
+												<i class="admin-inline-icon icon-edit text-warning"></i>&#xa0;
+												<a class="add-another" role="button" href="{% if inline_admin_form.original %}{{inline_admin_formset.formset|popup_change_url:inline_admin_form.original.pk}}{% else %}{{inline_admin_formset.formset.get_add_url}}{% endif %}" onclick="return showAddAnotherPopupInline(yawdadmin.jQuery(this));"{% if not inline_admin_form.original %} data-edit-href="{{inline_admin_formset.formset|popup_change_url:0}}" data-delete-href="{{inline_admin_formset.formset|popup_delete_url:0}}"{% endif %}>{% if inline_admin_form.original %}{% trans 'Edit' %}{% else %}{% trans 'Add' %}{% endif %}</a>
+											</span>{% if inline_admin_formset.formset.can_delete and inline_admin_form.original %}
+											<span class="inline-edit">
+												<i class="admin-inline-icon icon-trash text-error"></i>&nbsp;
+												<a class="inline-deletelink inline-delete" href="{{inline_admin_formset.formset|popup_delete_url:inline_admin_form.original.pk}}">{% trans 'Delete' %}</a>
+											</span>{% endif %}
+										</h3>{% if inline_admin_form.form.non_field_errors %}
+											{{ inline_admin_form.form.non_field_errors }}{% endif %}{% if inline_admin_form.has_auto_field %}
+											{{ inline_admin_form.pk_field.field }}{% endif %}
+									</div>{% endfor %}
+								</div>
+								<div id="{{ inline_admin_formset.formset.prefix }}-delete-modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="{{ inline_admin_formset.formset.prefix }}-modal-label" aria-hidden="true">
+									<div class="modal-header">
+										<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+										<h3 id="{{ inline_admin_formset.formset.prefix }}-modal-label">{% trans 'Delete' %}</h3>
+									</div>
+									<div class="modal-body">
+										<p>
+											<i class="icon-warning-sign"></i>&#xa0;
+											{% trans 'You are about to delete this object! Are you sure you want to continue?' %}
+										</p>
+									</div>
+									<div class="modal-footer">
+										<button class="btn" data-dismiss="modal" aria-hidden="true">{% trans 'Cancel' %}</button>
+										<button id="{{ inline_admin_formset.formset.prefix }}-delete-action" class="btn btn-danger">{% trans 'Delete' %}</button>
+									</div>
+								</div>
+							</div>
+						</div>
+						<script>
+							(function($) {
+								$("#{{ inline_admin_formset.formset.prefix }}-group .inline-related").stackedFormset({
+									prefix: '{{ inline_admin_formset.formset.prefix }}',
+									adminStaticPrefix: '{% static "admin/" %}',
+									deleteText: "{% trans "Remove row" %}",
+									addText: "{% trans 'Add new row' %}"
+								}).on('click', '.inline-delete', function() {
+									$.rowToBeDeleted = $(this).closest('.inline-related');
+									var $deleteModal = $('#{{ inline_admin_formset.formset.prefix }}-delete-modal');
+									$deleteModal.find('#{{ inline_admin_formset.formset.prefix }}-delete-action').data('delete-url', $(this).attr('href'));
+									$deleteModal.modal();
+									return false;
+								});
+								$('#{{ inline_admin_formset.formset.prefix }}-delete-action').click(function() {
+									var $modal = $(this).closest('.modal');
+									$modal.find('.modal-body').append('<span class="loading-item"></span>');
+									$.get($(this).data('delete-url'), function(data) {
+										$.rowToBeDeleted.find('h3').addClass('error').find('.inline-edit').remove();
+										$.rowToBeDeleted.find('.inline_label').html('{{ inline_admin_formset.opts.verbose_name|title }} {% trans 'was succesfully deleted' %}');
+										setTimeout(function() {
+											$.rowToBeDeleted.fadeOut(function() {
+												$(this).remove();
+											});
+										}, 1400);
+										$modal.modal('hide');
+										$modal.find('.modal-body .loading-item').remove();
+									}, 'html');
+									return false;
+								})
+							})(yawdadmin.jQuery);{% block extrainlinejs %}{% endblock %}
+						</script>{% if inline_admin_formset.opts.sortable %}
+						<script src="{% static 'yawd-admin/js/jquery-ui-sortables.min.js' %}"></script>
+						<script>
+							(function($) {
+								$('#{{ inline_admin_formset.formset.prefix }}-group').sortable({
+									placeholder: 'placeholder',
+									forcePlaceholderSize: true,
+									handle: '.icon-move',
+									items: '.inline-related',
+									update: function(e) {
+										$h3 = $(e.srcElement).parent();
+										var data = []; 
+										$('#{{ inline_admin_formset.formset.prefix }}-group .inline-related-popup').each(function() {
+											if ($(this).data('pk')) {
+												data.push({pk: $(this).data('pk'), order: $(this).index() })
+											}
+										});
+										if (data.length) {
+											$.get('{{inline_admin_formset.formset.get_reorder_url}}', {data: JSON.stringify(data)}, function() {
+												$h3.append('<span class="pull-right">{% trans 'The order was saved' %}</span>');
+											}, 'html');
+										}
+									}
+								});
+							})(yawdadmin.jQuery);
+						</script>{% endif %}{% else %}
+							{{ inline_admin_formset.formset.management_form }}
+						{% endif %}

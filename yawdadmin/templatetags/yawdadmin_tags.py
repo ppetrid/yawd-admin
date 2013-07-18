@@ -1,12 +1,17 @@
 import inspect
+import datetime
 import re
 from django import template
 from django.conf import settings
-from django.core import urlresolvers
-from django.utils.translation import ugettext as _
 from django.contrib.admin.views.main import PAGE_VAR
+from django.contrib.admin.util import lookup_field, display_for_field, display_for_value
+from django.core import urlresolvers
+from django.core.exceptions import ObjectDoesNotExist
+from django.db import models
+from django.utils.encoding import force_text
+from django.utils.html import escapejs, format_html
 from django.utils.safestring import mark_safe
-from django.utils.translation import get_language
+from django.utils.translation import get_language, ugettext as _
 from yawdadmin import admin_site
 from yawdadmin.conf import settings as ls
 
@@ -75,3 +80,43 @@ def get_object_icon(obj, default_icon=''):
         return admin_site._registry[obj if inspect.isclass(obj) else obj.__class__].title_icon
     except:
             return default_icon
+
+
+@register.simple_tag
+def inline_items_for_result(inline, result):
+    """
+    Generates the actual list of data for the inline.
+    """
+    list_display = inline.list_display if inline.list_display else ('__unicode__',)
+    ret = ''
+    for field_name in list_display:
+        row_class =  mark_safe(' class="column"')
+        try:
+            f, attr, value = lookup_field(field_name, result, inline)
+        except ObjectDoesNotExist:
+            result_repr = ''
+        else:
+            if f is None:
+                allow_tags = getattr(attr, 'allow_tags', False)
+                boolean = getattr(attr, 'boolean', False)
+                if boolean:
+                    allow_tags = True
+                result_repr = display_for_value(value, boolean)
+                # Strip HTML tags in the resulting text, except if the
+                # function has an "allow_tags" attribute set to True.
+                if allow_tags:
+                    result_repr = mark_safe(result_repr)
+            else:
+                if isinstance(f.rel, models.ManyToOneRel):
+                    field_val = getattr(result, f.name)
+                    if field_val is None:
+                        result_repr = ''
+                    else:
+                        result_repr = field_val
+                else:
+                    result_repr = display_for_field(value, f)
+        if force_text(result_repr) == '':
+            result_repr = mark_safe('&nbsp;')
+
+        ret += format_html('<span{0}>{1}</span>', row_class, result_repr)
+    return ret

@@ -1,8 +1,145 @@
 import json
 from django.conf.urls import patterns, url
 from django.contrib import admin
+from django.contrib.admin.options import InlineModelAdmin 
+from django.contrib.admin.util import unquote, get_deleted_objects
+from django.core.exceptions import PermissionDenied
+from django.db import router
+from django.http import Http404
+from django.forms.widgets import HiddenInput
 from django.template.response import TemplateResponse, HttpResponse
+from django.utils.encoding import force_text
+from django.utils.html import escape, escapejs
 from django.utils.translation import ugettext as _
+from templatetags.yawdadmin_tags import inline_items_for_result
+from forms import PopupInlineFormSet
+
+
+class PopupInline(InlineModelAdmin):
+    extra = 1
+    formset = PopupInlineFormSet
+    list_display = []
+    sortable = False
+    sortable_order_field = 'order'
+    template = 'admin/edit_inline/popup.html'
+
+
+class PopupModelAdmin(admin.ModelAdmin):
+    linked_inline = None
+
+    def ajaxdelete_view(self, request, object_id):
+        "The 'delete' admin view for this model."
+        opts = self.model._meta
+        app_label = opts.app_label
+
+        obj = self.get_object(request, unquote(object_id))
+
+        if not self.has_delete_permission(request, obj):
+            raise PermissionDenied
+
+        if obj is None:
+            raise Http404(
+                _('%(name)s object with primary key %(key)r does not exist.') %
+                    {'name': force_text(opts.verbose_name), 'key': escape(object_id)}
+            )
+
+        using = router.db_for_write(self.model)
+
+        # Populate deleted_objects, a data structure of all related objects that
+        # will also be deleted.
+        (deleted_objects, perms_needed, protected) = get_deleted_objects(
+            [obj], opts, request.user, self.admin_site, using)
+
+        if perms_needed:
+            return PermissionDenied
+
+        obj_display = force_text(obj)
+        self.log_deletion(request, obj, obj_display)
+        self.delete_model(request, obj)
+
+        return HttpResponse('<html><body>OK</body></html>')
+
+    def formfield_for_dbfield(self, db_field, **kwargs):
+        """
+        Override foreignkey widget if popup and field matches fk_name
+        """
+        formfield = super(PopupModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+
+        request = kwargs.pop("request", None)
+        fk_name = request.GET.get('fk_name')
+        fk_id = request.GET.get('fk_id')
+
+        if '_popup' in request.REQUEST and db_field.name == fk_name:
+            formfield.widget = HiddenInput()
+            formfield.popup_fk = True
+            if fk_id:
+                formfield.initial = fk_id
+        return formfield
+
+    def get_urls(self):
+        """
+        Override get_urls to include the ajax delete url
+        """
+        urls = super(PopupModelAdmin, self).get_urls()
+
+        info = self.model._meta.app_label, self.model._meta.module_name
+        my_urls = patterns('',
+            url(r'^(.+)/ajax/delete/$',
+                self.admin_site.admin_view(self.ajaxdelete_view),
+                name="%s_%s_deleteit" % info),
+            url(r'^ajax/reorder/$',
+                self.admin_site.admin_view(self.inline_reorder),
+                name="%s_%s_inlinereorder" % info),
+        )
+        return my_urls + urls
+
+    def inline_reorder(self, request):
+        if not self.linked_inline or not self.linked_inline.sortable or \
+                not self.linked_inline.sortable_order_field:
+            raise Http404
+        if not request.GET.get('data'):
+            raise PermissionDenied
+        for obj in json.loads(request.GET['data']):
+            model_obj = self.model.objects.get(pk=int(obj['pk']))
+            setattr(model_obj, self.linked_inline.sortable_order_field, int(obj['order']))
+            model_obj.save()
+        return HttpResponse('<html><body>OK</body></html>')
+
+    def response_add(self, request, obj, post_url_continue='../%s/',
+                     continue_editing_url=None, add_another_url=None,
+                     hasperm_url=None, noperm_url=None):
+        """
+        Override add response to handle the PopupInline case 
+        """
+        if "_popup" in request.POST and request.GET.get('fk_name'):
+            return HttpResponse(
+                    '<!DOCTYPE html><html><head><title></title></head><body>'
+                    '<script type="text/javascript">parent.dismissAddAnotherPopupInline(window, "%s", "%s");</script></body></html>' % \
+                    # escape() calls force_text.
+                    (escape(obj.pk), escapejs(inline_items_for_result(self.linked_inline, obj) \
+                                              if self.linked_inline else obj)))
+        return super(PopupModelAdmin, self).response_add(request, obj, post_url_continue,
+                                                  continue_editing_url,
+                                                  add_another_url, hasperm_url,
+                                                  noperm_url)
+
+    def response_change(self, request, obj, continue_editing_url=None,
+                        save_as_new_url=None, add_another_url=None,
+                        hasperm_url=None, noperm_url=None):
+        """
+        Override change response to handle the PopupInline case 
+        """
+        if "_popup" in request.POST and request.GET.get('fk_name'):
+            return HttpResponse(
+                    '<!DOCTYPE html><html><head><title></title></head><body>'
+                    '<script type="text/javascript">parent.dismissEditPopupInline(window, "%s", "%s");</script></body></html>' % \
+                    # escape() calls force_text.
+                    (escape(obj.pk), escapejs(inline_items_for_result(self.linked_inline, obj) \
+                                              if self.linked_inline else obj)))
+        return super(PopupModelAdmin, self).response_add(request, obj, post_url_continue,
+                                                  continue_editing_url,
+                                                  add_another_url, hasperm_url,
+                                                  noperm_url)
 
 
 class SortableModelAdmin(admin.ModelAdmin):

@@ -65,6 +65,43 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
     yawdadmin.jQuery.popupTriggeringLink = null;
 }
 
+function showAddAnotherPopupInline(triggeringLink) { 
+	yawdadmin.jQuery.popupInlineTriggeringLink = triggeringLink;
+	return false;
+}
+
+function dismissAddAnotherPopupInline(win, newId, newRepr) {
+    newId = html_unescape(newId);
+    newRepr = html_unescape(newRepr);
+    var elem = (yawdadmin.jQuery.popupInlineTriggeringLink) ?
+    		yawdadmin.jQuery.popupInlineTriggeringLink : null;
+    if (elem) {
+    	elem.parent().siblings('.inline_label').html(newRepr);
+    	elem.closest('.inline-modal-header').find('.inline-deletelink')
+    		.attr('onlick','')
+    		.unbind('click')
+    		.addClass('inline-delete')
+    		.attr('href', elem.data('delete-href').replace('0', newId))
+    		.html(gettext('Delete'));
+    	elem.closest('.inline-related-popup').data('pk', newId);
+    	elem.closest('.inline-modal-header').find('.icon-trash').addClass('text-error');
+        elem.attr('href', elem.data('edit-href').replace('0', newId)+"&_popup=1").html(gettext('Edit'));
+    }
+    yawdadmin.jQuery.fancybox.close();
+    yawdadmin.jQuery.popupTriggeringLink = null;
+}
+
+function dismissEditPopupInline(win, newId, newRepr) {
+    newId = html_unescape(newId);
+    newRepr = html_unescape(newRepr);
+    var elem = (yawdadmin.jQuery.popupInlineTriggeringLink) ?
+    		yawdadmin.jQuery.popupInlineTriggeringLink : null;
+    if (elem)
+    	elem.parent().siblings('.inline_label').html(newRepr);
+    yawdadmin.jQuery.fancybox.close();
+    yawdadmin.jQuery.popupTriggeringLink = null;
+}
+
 var affix_offset = {
 	top: function () {
 		if (yawdadmin.jQuery('.affix-main').length == 0)

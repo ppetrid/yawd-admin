@@ -38,8 +38,16 @@ fieldset {
 	margin-bottom: 0;
 }
 
-h2.affix-header, .affix-header h2 {
-	padding-top: 50px;
+.affix-header {
+	padding-top: 25px;
+	margin-top: 0;
+}
+
+.affix-header:first-child {
+	padding-top: 0;
+}
+
+.affix-header:first-child .fieldset-wrapper {
 	margin-top: 0;
 }
 
@@ -188,8 +196,11 @@ h2.affix-header, .affix-header h2 {
 }
 
 @media (max-width: 979px) {
+	.navbar-fixed-top {
+		margin-bottom: 0; 
+	}
 	.main {
-		padding-top: 0;
+		padding-top: 20px;
 	}
 }
 
@@ -255,7 +266,10 @@ h2.affix-header, .affix-header h2 {
 		color: #eee !important;
 	}
 
-	.navbar-blue .nav-collapse .nav > li > a:hover, .navbar-blue .nav-collapse .dropdown-menu a:hover {
+	.navbar-blue .nav-collapse .nav > li > a:hover,
+	.navbar-blue .nav-collapse .nav > li > a:focus,
+	.navbar-blue .nav-collapse .dropdown-menu a:hover,
+	.navbar-blue .nav-collapse .dropdown-menu a:focus {
 		background-color: #005E9D !important;
 	}
 	
@@ -923,10 +937,6 @@ ul.toplinks li {
 	margin-bottom: 0;
 }
 
-.form-horizontal fieldset {
-	border-bottom: 1px solid #EEE;
-}
-
 .submits {
 	margin: 40px 0 0 0;
 }
@@ -1304,12 +1314,36 @@ div#id_password {
 /* INLINES */
 
 .inline-group {
-	margin-bottom: 25px;
+	margin: 0;
 }
 
-.affix-main .inline-group {
+.inline-group.ui-sortable .inline-related-popup .icon-move {
+	cursor: pointer;
+	padding: 0 5px 0 0;
+}
+
+.inline-group-wrapper, .fieldset-wrapper {
+	margin: 10px 0 25px 0;
+	background-color: #fff;
+	border: 1px solid #eee;
+	padding: 10px;
+	border-radius: 6px;
+	-webkit-border-radius: 6px;
+	-moz-border-radius: 6px;
+	-webkit-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+     -moz-box-shadow: 0 1px 4px rgba(0,0,0,.065);
+          box-shadow: 0 1px 4px rgba(0,0,0,.065);
+}
+
+.inline-group h2, .inline-group-wrapper h2,
+.fieldset-wrapper h2 {
+	margin: 5px 0 18px 0;
+}
+
+.affix-main .inline-group-wrapper,
+.affix-main .fieldset-wrapper {
 	margin-bottom: 0;
-} 
+}
 
 .inline-related h2 {
 	padding-left: 10px;
@@ -1344,8 +1378,6 @@ div#id_password {
 	color: #555;
 }
 
-
-
 .inline-related h3.error {
 	background: #B94A48;
 	background: -moz-linear-gradient(top, #C95A58 0%, #B94A48 100%);
@@ -1355,6 +1387,16 @@ div#id_password {
 	background: -ms-linear-gradient(top, #C95A58 0%,#B94A48 100%);
 	background: linear-gradient(top, #C95A58 0%,#D96A68 100%);
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#C95A58', endColorstr='#B94A48',GradientType=0 );
+	color: #fff !important;
+	border-radius: 4px;
+	-webkit-border-radius: 4px;
+	-moz-border-radius: 4px;
+}
+
+.inline-related h3.error a,
+.inline-related h3.error .text-error,
+.inline-related h3.error .text-warning {
+	color: #fff;
 }
 
 .inline-related .modal h2 {
@@ -1421,6 +1463,7 @@ h3.popover-title {
 .inline-modal-header {
 	border-bottom: 0 !important;
 	color: #333 !important;
+	position: relative;
 }
 
 .inline-related-modal .inline-edit, .inline-related-modal span.delete {
@@ -1461,6 +1504,37 @@ h3.popover-title {
 .inline-edit a:focus, .navbar a:focus {
 	outline: none;
 }
+
+.inline-related-popup {
+	border: 1px solid #eee !important;
+}
+
+.inline-related .popup_inline_label {	
+	position: absolute;
+	left: 40%;
+	background: #f9f9f9;
+	padding: 0 5px;
+	border-left: 1px solid #eee;
+	border-right: 1px solid #eee;
+}
+
+.inline-related .popup_inline_label .column {
+	display: inline-block;
+	padding: 0 8px;
+}
+
+.inline-related .popup_inline_label .column img {
+	width: 38px;
+	height: 37px;
+}
+
+@media (max-width: 767px) {
+	.inline-related .popup_inline_label {
+		right: 0;
+		left: inherit;
+	}
+}
+
 
 /* End inlines */
 
