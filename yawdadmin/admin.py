@@ -26,6 +26,13 @@ class PopupInline(InlineModelAdmin):
 
 class PopupModelAdmin(admin.ModelAdmin):
     linked_inline = None
+    popup_only = False
+    
+    def add_view(self, request, form_url='', extra_context=None):
+        if self.popup_only and not '_popup' in request.REQUEST:
+            raise Http404
+        
+        return super(PopupModelAdmin, self).add_view(request, form_url, extra_context)
 
     def ajaxdelete_view(self, request, object_id):
         "The 'delete' admin view for this model."
@@ -58,6 +65,13 @@ class PopupModelAdmin(admin.ModelAdmin):
         self.delete_model(request, obj)
 
         return HttpResponse('<html><body>OK</body></html>')
+    
+    def change_view(self, request, object_id, form_url='', extra_context=None):
+        if self.popup_only and not '_popup' in request.REQUEST:
+            raise Http404
+        
+        return super(PopupModelAdmin, self).change_view(self, request, object_id, 
+                                                        form_url, extra_context)
 
     def formfield_for_dbfield(self, db_field, **kwargs):
         """
