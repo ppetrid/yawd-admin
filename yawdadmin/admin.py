@@ -70,7 +70,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         if self.popup_only and not '_popup' in request.REQUEST:
             raise Http404
         
-        return super(PopupModelAdmin, self).change_view(self, request, object_id, 
+        return super(PopupModelAdmin, self).change_view(request, object_id, 
                                                         form_url, extra_context)
 
     def formfield_for_dbfield(self, db_field, **kwargs):
