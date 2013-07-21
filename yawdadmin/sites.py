@@ -330,11 +330,12 @@ class YawdAdminSite(AdminSite):
             #Initialize options
             optionset_admin()
 
-    def unregister_options(self, optionset_admin):
+    def unregister_options(self, optionset_admin, delete_db_records=False):
         optionset_label = optionset_admin.optionset_label
         if optionset_label in _optionset_labels:
-            AppOption.objects.filter(optionset_label=optionset_label).delete()
             del _optionset_labels[optionset_label]
+            if delete_db_records:
+                AppOption.objects.filter(optionset_label=optionset_label).delete()
 
     def get_option_admin_urls(self):
         """
