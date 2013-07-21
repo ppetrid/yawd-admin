@@ -49,6 +49,10 @@ class OptionSetBase(type):
             optionset_label = attrs.pop('optionset_label')
         except KeyError:
             optionset_label = None
+            for parent in parents:
+                if hasattr(parent, 'optionset_label') and parent.optionset_label:
+                    optionset_label = parent.optionset_label
+                    break
 
         if not optionset_label or not re.match(r'[a-zA-z-]+', optionset_label):
             raise TypeError("optionset_label must be set and contain only letters and underscores")
@@ -57,19 +61,31 @@ class OptionSetBase(type):
         # the first time this model tries to register with the framework. 
         # There should only be one class for each OptionSetAdmin.
         global _optionsetadmin_classes
-        if optionset_label in _optionsetadmin_classes:
-            return _optionsetadmin_classes[optionset_label]
+        if '%s.%s' % (optionset_label, name) in _optionsetadmin_classes:
+            return _optionsetadmin_classes['%s.%s' % (optionset_label, name)]
 
         try:        
             verbose_name = attrs.pop('verbose_name')
         except KeyError:
             verbose_name = optionset_label.title().replace ('-', ' ')
-        
+
+        #gather parent attributes
+        field_attrs = []
+        options = {}
+        lang_options = {}
+        for parent in parents:
+            if hasattr(parent, 'option_fields'):
+                field_attrs += parent.option_fields  
+            if hasattr(parent, 'options'):
+                options.update(parent.options)
+            if hasattr(parent, 'lang_options'):
+                lang_options.update(parent.lang_options)
+
         new_class = super_new(self, name, bases, {
             '__module__': module, 
-            'options' : {},
-            'lang_options' : {},
-            'attrs' : [],
+            'options' : options,
+            'lang_options' : lang_options,
+            'option_fields': field_attrs,
             'optionset_label' : optionset_label,
             'verbose_name' : verbose_name,
         })
@@ -81,12 +97,12 @@ class OptionSetBase(type):
             if not hasattr(value.field, 'label') or not value.field.label:
                 value.field.label = attr.title().replace('_', ' ')
 
-            new_class.attrs.append((attr, value))
+            new_class.option_fields.append((attr, value))
             new_class.options[attr] = value.field 
             
-        new_class.attrs.sort(lambda (attr1, value1), (attr2, value2): cmp(value1.order_counter, value2.order_counter))
+        new_class.option_fields.sort(lambda (attr1, value1), (attr2, value2): cmp(value1.order_counter, value2.order_counter))
         
-        _optionsetadmin_classes[optionset_label] = new_class
+        _optionsetadmin_classes['%s.%s' % (optionset_label, name)] = new_class
         return new_class
 
 def _init_option(optionset_label, name, siteoption):
@@ -100,18 +116,19 @@ def _init_option(optionset_label, name, siteoption):
     else:
         ret = ''
         db_option.value = ret
-    
+
     if db_option.lang_dependant != siteoption.lang_dependant:
         db_option.lang_dependant = siteoption.lang_dependant
-            
+
     if created:
         db_option.save()
-    
+
     return ret
-    
+
+
 class OptionSetAdmin(object):
     __metaclass__ = OptionSetBase
-    
+
     def __init__(self, **kwargs):
         self.form = forms.Form(**kwargs)
 
@@ -120,9 +137,9 @@ class OptionSetAdmin(object):
         self.formfields = []
         self.langformfields = {}
 
-        for (attr, value) in self.attrs:
+        for (attr, value) in self.option_fields:
 
-            if not attr in self.value_dict:
+            if not attr in self.value_dict or self.value_dict[attr] is None:
                 self.value_dict[attr] = _init_option(self.optionset_label, attr, value)
 
             if value.lang_dependant:
@@ -170,9 +187,11 @@ class OptionSetAdmin(object):
                 })
             else:
                 if self.value_dict[field] != prep_value:
-                    AppOption.objects.filter(optionset_label=self.optionset_label, name=field).update(value = prep_value)
+                    AppOption.objects.filter(optionset_label=self.optionset_label,
+                                             name=field).update(value = prep_value)
     
         #save lang-dependant options
         for key, value in lang_dependant_value_dict.iteritems():
             if self.value_dict[key] != value:
-                AppOption.objects.filter(optionset_label=self.optionset_label, name=key).update(value = json.dumps(value))
+                AppOption.objects.filter(optionset_label=self.optionset_label,
+                                         name=key).update(value = json.dumps(value))
