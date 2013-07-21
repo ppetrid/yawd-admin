@@ -77,7 +77,8 @@ class PopupModelAdmin(admin.ModelAdmin):
         """
         Override foreignkey widget if popup and field matches fk_name
         """
-        formfield = super(PopupModelAdmin, self).formfield_for_dbfield(db_field, **kwargs)
+        formfield = super(PopupModelAdmin, self).formfield_for_dbfield(db_field,
+                                                                       **kwargs)
 
         request = kwargs.pop("request", None)
         fk_name = request.GET.get('fk_name')
@@ -115,7 +116,8 @@ class PopupModelAdmin(admin.ModelAdmin):
             raise PermissionDenied
         for obj in json.loads(request.GET['data']):
             model_obj = self.model.objects.get(pk=int(obj['pk']))
-            setattr(model_obj, self.linked_inline.sortable_order_field, int(obj['order']))
+            setattr(model_obj, self.linked_inline.sortable_order_field,
+                    int(obj['order']))
             model_obj.save()
         return HttpResponse('<html><body>OK</body></html>')
 
@@ -127,15 +129,18 @@ class PopupModelAdmin(admin.ModelAdmin):
         """
         if "_popup" in request.POST and request.GET.get('fk_name'):
             return HttpResponse(
-                    '<!DOCTYPE html><html><head><title></title></head><body>'
-                    '<script type="text/javascript">parent.dismissAddAnotherPopupInline(window, "%s", "%s");</script></body></html>' % \
+                '<!DOCTYPE html><html><head><title></title></head><body>'
+                '<script type="text/javascript">parent.dismissAddAnotherPopupInline'
+                '(window, "%s", "%s");</script></body></html>' % \
                     # escape() calls force_text.
-                    (escape(obj.pk), escapejs(inline_items_for_result(self.linked_inline, obj) \
+                    (escape(obj.pk),
+                     escapejs(inline_items_for_result(self.linked_inline, obj) \
                                               if self.linked_inline else obj)))
-        return super(PopupModelAdmin, self).response_add(request, obj, post_url_continue,
-                                                  continue_editing_url,
-                                                  add_another_url, hasperm_url,
-                                                  noperm_url)
+        return super(PopupModelAdmin, self).response_add(request, obj,
+                                                         post_url_continue,
+                                                         continue_editing_url,
+                                                         add_another_url, hasperm_url,
+                                                         noperm_url)
 
     def response_change(self, request, obj, continue_editing_url=None,
                         save_as_new_url=None, add_another_url=None,
@@ -146,14 +151,17 @@ class PopupModelAdmin(admin.ModelAdmin):
         if "_popup" in request.POST and request.GET.get('fk_name'):
             return HttpResponse(
                     '<!DOCTYPE html><html><head><title></title></head><body>'
-                    '<script type="text/javascript">parent.dismissEditPopupInline(window, "%s", "%s");</script></body></html>' % \
+                    '<script type="text/javascript">parent.dismissEditPopupInline'
+                    '(window, "%s", "%s");</script></body></html>' % \
                     # escape() calls force_text.
-                    (escape(obj.pk), escapejs(inline_items_for_result(self.linked_inline, obj) \
+                    (escape(obj.pk),
+                     escapejs(inline_items_for_result(self.linked_inline, obj) \
                                               if self.linked_inline else obj)))
-        return super(PopupModelAdmin, self).response_add(request, obj, post_url_continue,
-                                                  continue_editing_url,
-                                                  add_another_url, hasperm_url,
-                                                  noperm_url)
+        return super(PopupModelAdmin, self).response_add(request, obj,
+                                                         post_url_continue,
+                                                         continue_editing_url,
+                                                         add_another_url, hasperm_url,
+                                                         noperm_url)
 
 
 class SortableModelAdmin(admin.ModelAdmin):

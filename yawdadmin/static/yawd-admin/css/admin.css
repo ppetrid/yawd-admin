@@ -1518,6 +1518,11 @@ h3.popover-title {
 	border-right: 1px solid #eee;
 }
 
+.inline-related h3.error .popup_inline_label {
+		background: transparent;
+		border: 0px;
+}
+
 .inline-related .popup_inline_label .column {
 	display: inline-block;
 	padding: 0 8px;
