@@ -44,7 +44,7 @@
 									</div>
 								</div>
 							</div>
-						</div>
+						</div>{% if not inline_admin_formset.opts.one_to_one %}
 						<script>
 							(function($) {
 								$("#{{ inline_admin_formset.formset.prefix }}-group .inline-related").stackedFormset({
@@ -58,7 +58,7 @@
 									$deleteModal.find('#{{ inline_admin_formset.formset.prefix }}-delete-action').data('delete-url', $(this).attr('href'));
 									$deleteModal.modal();
 									return false;
-								});
+								});{% if inline_admin_formset.formset.can_delete %}
 								$('#{{ inline_admin_formset.formset.prefix }}-delete-action').click(function() {
 									var $modal = $(this).closest('.modal');
 									$modal.find('.modal-body').append('<span class="loading-item"></span>');
@@ -74,9 +74,9 @@
 										$modal.find('.modal-body .loading-item').remove();
 									}, 'html');
 									return false;
-								})
-							})(yawdadmin.jQuery);{% block extrainlinejs %}{% endblock %}
-						</script>{% if inline_admin_formset.opts.sortable %}
+								});{% endif %}
+							})(yawdadmin.jQuery);
+						</script>{% endif %}{% block extrainlinejs %}{% endblock %}{% if inline_admin_formset.opts.sortable %}
 						<script src="{% static 'yawd-admin/js/jquery-ui-sortables.min.js' %}"></script>
 						<script>
 							(function($) {

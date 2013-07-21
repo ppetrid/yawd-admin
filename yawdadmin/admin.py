@@ -131,11 +131,12 @@ class PopupModelAdmin(admin.ModelAdmin):
             return HttpResponse(
                 '<!DOCTYPE html><html><head><title></title></head><body>'
                 '<script type="text/javascript">parent.dismissAddAnotherPopupInline'
-                '(window, "%s", "%s");</script></body></html>' % \
+                '(window, "%s", "%s", "%s");</script></body></html>' % \
                     # escape() calls force_text.
                     (escape(obj.pk),
                      escapejs(inline_items_for_result(self.linked_inline, obj) \
-                                              if self.linked_inline else obj)))
+                                              if self.linked_inline else obj),
+                     'true' if self.linked_inline.can_delete else 'false'))
         return super(PopupModelAdmin, self).response_add(request, obj,
                                                          post_url_continue,
                                                          continue_editing_url,
@@ -236,3 +237,4 @@ class SortableModelAdmin(admin.ModelAdmin):
 class OneToOneInline(admin.StackedInline):
     template = 'admin/edit_inline/one-to-one-inline.html'
     can_delete = False
+    one_to_one = True

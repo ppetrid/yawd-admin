@@ -70,19 +70,21 @@ function showAddAnotherPopupInline(triggeringLink) {
 	return false;
 }
 
-function dismissAddAnotherPopupInline(win, newId, newRepr) {
+function dismissAddAnotherPopupInline(win, newId, newRepr, can_delete) {
     newId = html_unescape(newId);
     newRepr = html_unescape(newRepr);
     var elem = (yawdadmin.jQuery.popupInlineTriggeringLink) ?
     		yawdadmin.jQuery.popupInlineTriggeringLink : null;
     if (elem) {
     	elem.parent().siblings('.inline_label').html(newRepr);
-    	elem.closest('.inline-modal-header').find('.inline-deletelink')
-    		.attr('onlick','')
-    		.unbind('click')
-    		.addClass('inline-delete')
-    		.attr('href', elem.data('delete-href').replace('0', newId))
-    		.html(gettext('Delete'));
+    	if (can_delete) {
+    		elem.closest('.inline-modal-header').find('.inline-deletelink')
+    			.attr('onlick','')
+    			.unbind('click')
+    			.addClass('inline-delete')
+    			.attr('href', elem.data('delete-href').replace('0', newId))
+    			.html(gettext('Delete'));
+    	}
     	elem.closest('.inline-related-popup').data('pk', newId);
     	elem.closest('.inline-modal-header').find('.icon-trash').addClass('text-error');
         elem.attr('href', elem.data('edit-href').replace('0', newId)+"&_popup=1").html(gettext('Edit'));
