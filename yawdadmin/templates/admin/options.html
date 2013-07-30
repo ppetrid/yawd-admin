@@ -39,18 +39,7 @@
 								{% include "admin/includes/optionfields.html" %}
 							</div>{% endfor %}
 						</div>{% if optionset_admin.langformfields|length > 1 %}
-					</div>
-					<script>
-						(function($) {
-							$(document).ready( function() {
-								$('#fieldset-tabs a').click(function (e) {
-									e.preventDefault();
-									$(this).tab('show');
-								});
-								$('#fieldset-tabs a:first').tab('show');
-							});
-						})(yawdadmin.jQuery);
-					</script>{% endif %}{% endif %}
+					</div>{% endif %}{% endif %}
 				</fieldset>
 				<div class="row-fluid submits submit-row">
 					<div class="pull-right">
@@ -58,5 +47,18 @@
 					</div>
 				</div>
 			</form>
-		</div>
+		</div>{% endblock %}
+
+{% block bottomjs %}{{block.super}}{% if optionset_admin.langformfields and optionset_admin.langformfields|length > 1 %}
+		<script>
+			(function($) {
+				$(document).ready( function() {
+					$('#fieldset-tabs a').click(function (e) {
+						e.preventDefault();
+						$(this).tab('show');
+					});
+					$('#fieldset-tabs a:first').tab('show');
+				});
+			})(yawdadmin.jQuery);
+		</script>{% endif %}
 {% endblock %}
