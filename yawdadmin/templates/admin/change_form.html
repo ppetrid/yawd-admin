@@ -17,7 +17,7 @@
 
 {% block content_title %}{% if title %}
 			<header class="page-header" id="page-header">
-				<h1>{% if adminform.model_admin.title_icon %}<i class="{{adminform.model_admin.title_icon}} title-icon"></i>{% endif %}{% if add %}{{ opts.verbose_name_plural|capfirst }}: {% trans 'add' %}{% else %}{{original}}: {% trans 'edit' %}{% endif %}</h1>
+				<h1>{% if adminform.model_admin.title_icon %}<i class="{{adminform.model_admin.title_icon}} title-icon"></i>{% endif %}{% if add %}{{ opts.verbose_name_plural|capfirst }}: {% trans 'add' %}{% else %}{% filter truncatechars:50 %}{{original}}{% endfilter %}: {% trans 'edit' %}{% endif %}</h1>
 			</header>{% endif %}{% endblock %}
 
 {% block breadcrumbs %}{% if not is_popup %}
