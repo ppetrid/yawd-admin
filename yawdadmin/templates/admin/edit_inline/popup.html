@@ -95,7 +95,7 @@
 										});
 										if (data.length) {
 											$h3.append('<span class="save-msg pull-right loading-item"></span>')
-											$.get('{{inline_admin_formset.formset.get_reorder_url}}', {data: JSON.stringify(data)}, function() {
+											$.post('{{inline_admin_formset.formset.get_reorder_url}}', {csrfmiddlewaretoken: getCookie('csrftoken'), data: JSON.stringify(data)}, function() {
 												$h3.find('.save-msg').removeClass('loading-item').text('{% trans 'The order was saved' %}');
 												setTimeout(function() {
 													$h3.find('.save-msg').remove();

@@ -666,7 +666,7 @@
 									parent: $this.parent().closest('li, .root').data('pk')
 							});
 						});
-						$.get(this.href, {data: JSON.stringify(collected)}, function(data) {
+						$.post(this.href, {csrfmiddlewaretoken: getCookie('csrftoken'), data: JSON.stringify(collected)}, function(data) {
 							$savebar.append('<span class="small">&#xa0;'+data.message+'</span>').find('i').remove();
 							setTimeout(function(){ $savebar.find('span').remove();}, 3000);
 						}, 'json');

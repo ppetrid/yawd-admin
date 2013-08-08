@@ -112,9 +112,9 @@ class PopupModelAdmin(admin.ModelAdmin):
         if not self.linked_inline or not self.linked_inline.sortable or \
                 not self.linked_inline.sortable_order_field:
             raise Http404
-        if not request.GET.get('data'):
+        if not request.POST.get('data'):
             raise PermissionDenied
-        for obj in json.loads(request.GET['data']):
+        for obj in json.loads(request.POST['data']):
             model_obj = self.model.objects.get(pk=int(obj['pk']))
             setattr(model_obj, self.linked_inline.sortable_order_field,
                     int(obj['order']))
@@ -216,10 +216,10 @@ class SortableModelAdmin(admin.ModelAdmin):
                                  'objects': self.sortables_ordered(self.queryset(request))})
     
     def reorder(self, request):
-        if not request.GET.get('data', None):
+        if not request.POST.get('data', None):
             return HttpResponse(json.dumps({'message': _('No data sent with the request')}))
         try:
-            self._reorder(json.loads(request.GET.get('data', None)), request) 
+            self._reorder(json.loads(request.POST.get('data', None)), request) 
         except:
             return HttpResponse(json.dumps({'message': _('Unable to reorder objects')}))
         return HttpResponse(json.dumps({'message': _('The order was saved')}))
