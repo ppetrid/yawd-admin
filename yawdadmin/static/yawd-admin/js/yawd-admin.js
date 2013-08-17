@@ -61,7 +61,23 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
             var o = new Option(newRepr, newId);
             elem.options[elem.options.length] = o;
             o.selected = true;
-            yawdadmin.jQuery(elem).change();
+            var $elem = yawdadmin.jQuery(elem);
+            $elem.change();
+            //handle inlines
+            var $inline_group = $elem.closest('.inline-group');
+            if ($inline_group.length) {
+            	var $id = $elem.attr('id');
+            	var keyw = $elem.closest('.inline-related').attr('id');
+            	$inline_group.find('.inline-related').each(function() {
+            		var $this = yawdadmin.jQuery(this);
+            		var iter_elem_id = $id.replace(keyw, $this.attr('id')).replace('-empty', '-__prefix__');
+            		if (iter_elem_id != $id) {
+            			var iter_elem = $this.find('#'+iter_elem_id).get(0);
+            			var iter_o = new Option(newRepr, newId);
+            			iter_elem.options[iter_elem.options.length] = iter_o;
+            		}
+            	});
+            }
         } else if (elemName == 'INPUT') {
             if (elem.className.indexOf('vManyToManyRawIdAdminField') != -1 && elem.value) {
                 elem.value += ',' + newId;
@@ -70,6 +86,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
             }
         }
     } else {
+    	alert('wtf');
         var toId = name + "_to";
         elem = document.getElementById(toId);
         var o = new Option(newRepr, newId);
