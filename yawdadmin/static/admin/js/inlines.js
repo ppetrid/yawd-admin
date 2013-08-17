@@ -119,6 +119,12 @@
         var totalForms = $("#id_" + options.prefix + "-TOTAL_FORMS");
         var template = $("#" + options.prefix + "-empty");
         var row = template.clone(true);
+        //handle possible select2 widgets
+        var select2_cont = row.find('.select2-container');
+        if (row.find('.select2-container').length) {
+        	select2_cont.remove();
+        	row.find('.select2-offscreen').select2();
+        }
         row.removeClass(options.emptyCssClass)
           .addClass(options.formCssClass)
           .attr("id", options.prefix + "-" + nextIndex);
