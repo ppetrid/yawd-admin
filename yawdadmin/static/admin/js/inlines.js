@@ -121,9 +121,13 @@
         var row = template.clone(true);
         //handle possible select2 widgets
         var select2_cont = row.find('.select2-container');
-        if (row.find('.select2-container').length) {
+        if (select2_cont.length) {
         	select2_cont.remove();
-        	row.find('.select2-offscreen').select2();
+        	var select2_offscreen = row.find('.select2-offscreen');
+        	if (select2_offscreen.data('options-callback'))
+        		select2_offscreen.select2(window[select2_offscreen.data('options-callback')]());
+        	else
+        		select2_offscreen.select2();
         }
         row.removeClass(options.emptyCssClass)
           .addClass(options.formCssClass)
