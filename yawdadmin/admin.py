@@ -158,11 +158,7 @@ class PopupModelAdmin(admin.ModelAdmin):
                     (escape(obj.pk),
                      escapejs(inline_items_for_result(self.linked_inline, obj) \
                                               if self.linked_inline else obj)))
-        return super(PopupModelAdmin, self).response_add(request, obj,
-                                                         post_url_continue,
-                                                         continue_editing_url,
-                                                         add_another_url, hasperm_url,
-                                                         noperm_url)
+        return super(PopupModelAdmin, self).response_change(request, obj)
 
 
 class SortableModelAdmin(admin.ModelAdmin):
