@@ -121,9 +121,7 @@ class PopupModelAdmin(admin.ModelAdmin):
             model_obj.save()
         return HttpResponse('<html><body>OK</body></html>')
 
-    def response_add(self, request, obj, post_url_continue='../%s/',
-                     continue_editing_url=None, add_another_url=None,
-                     hasperm_url=None, noperm_url=None):
+    def response_add(self, request, obj, post_url_continue=None):
         """
         Override add response to handle the PopupInline case 
         """
@@ -138,14 +136,9 @@ class PopupModelAdmin(admin.ModelAdmin):
                                               if self.linked_inline else obj),
                      'true' if self.linked_inline.can_delete else 'false'))
         return super(PopupModelAdmin, self).response_add(request, obj,
-                                                         post_url_continue,
-                                                         continue_editing_url,
-                                                         add_another_url, hasperm_url,
-                                                         noperm_url)
+                                                         post_url_continue)
 
-    def response_change(self, request, obj, continue_editing_url=None,
-                        save_as_new_url=None, add_another_url=None,
-                        hasperm_url=None, noperm_url=None):
+    def response_change(self, request, obj):
         """
         Override change response to handle the PopupInline case 
         """
