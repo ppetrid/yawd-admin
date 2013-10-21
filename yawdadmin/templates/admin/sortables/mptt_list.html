@@ -1,0 +1,8 @@
+{% load mptt_tags %}{% if objects %}{% csrf_token %}<ol class="root">{% recursetree objects %}
+	<li data-pk="{{node.pk}}">
+		<div class="title grey-degrade"><i class="icon-sort"></i> {{node}}</div>{% if not node.is_leaf_node %}
+		<ol class="children">
+			{{ children }}
+		</ol>{% endif %}
+	</li>{% endrecursetree %}
+</ol>{% endif %}

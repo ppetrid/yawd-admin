@@ -200,7 +200,8 @@ class SortableModelAdmin(admin.ModelAdmin):
         return queryset
 
     def sortables(self, request):
-        return TemplateResponse(request, 'admin/sortables/list.html',
+        return TemplateResponse(request, 'admin/sortables/mptt_list.html' if self.sortable_mptt \
+                                    else 'admin/sortables/list.html',
                                 {'mptt': self.sortable_mptt,
                                  'objects': self.sortables_ordered(self.queryset(request))})
     
