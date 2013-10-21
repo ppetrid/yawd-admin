@@ -71,7 +71,8 @@ fieldset {
 	padding-top: 0;
 }
 
-.affix-header:first-child .fieldset-wrapper {
+.affix-header:first-child .fieldset-wrapper,
+.affix-header:first-child .inline-fieldset-wrapper {
 	margin-top: 0;
 }
 
@@ -1376,13 +1377,21 @@ div#id_password {
 }
 
 .inline-group h2, .inline-group-wrapper h2,
-.fieldset-wrapper h2 {
+.fieldset-wrapper h2,
+.inline-fieldset-wrapper h2 {
 	margin: 5px 0 18px 0;
 }
 
 .affix-main .inline-group-wrapper,
-.affix-main .fieldset-wrapper {
+.affix-main .fieldset-wrapper,
+.affix-main .inline-fieldset-wrapper {
 	margin-bottom: 0;
+}
+
+.inline-fieldset-wrapper {
+	margin: 10px 0 25px 0;
+	background-color: #fff;
+	padding: 10px;
 }
 
 .inline-related h2 {

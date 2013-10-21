@@ -1,7 +1,7 @@
 {% load i18n admin_static admin_modify %}<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
-							<h2{% if inline_admin_formset.opts.collapse %} class="pointer" data-toggle="collapse" data-target="#{{inline_admin_formset.formset.prefix}}-wrapper"{% endif %}>{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
+							<h2{% if inline_admin_formset.opts.collapse %} class="collapse-switcher" onclick="collapse_switcher(this, '#{{inline_admin_formset.formset.prefix}}-wrapper');"{% endif %}>{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
 							<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
-							<div class="inline-wrapper{% if inline_admin_formset.opts.collapse %} collapse{% endif %}" id="{{inline_admin_formset.formset.prefix}}-wrapper">{% if inline_admin_formset.formset.non_form_errors %}
+							<div class="inline-wrapper{% if inline_admin_formset.opts.collapse %} hide{% endif %}" id="{{inline_admin_formset.formset.prefix}}-wrapper">{% if inline_admin_formset.formset.non_form_errors %}
 								<div class="alert alert-error">
 									{{ inline_admin_formset.formset.non_form_errors }}
 								</div>{% endif %}
