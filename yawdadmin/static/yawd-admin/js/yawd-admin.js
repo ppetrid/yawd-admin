@@ -43,7 +43,7 @@ function dismissRelatedLookupPopup(win, chosenId) {
 }
 
 //this function exists to not break the foreign key widget code
-function showAddAnotherPopup(triggeringLink) { 
+function showAddAnotherPopup(triggeringLink) {
 	yawdadmin.jQuery.popupTriggeringLink = triggeringLink.id.replace(/^add_/, '');
 	return false;
 }
@@ -86,8 +86,7 @@ function dismissAddAnotherPopup(win, newId, newRepr) {
             }
         }
     } else {
-    	alert('wtf');
-        var toId = name + "_to";
+        var toId = yawdadmin.jQuery.popupTriggeringLink + "_to";
         elem = document.getElementById(toId);
         var o = new Option(newRepr, newId);
         SelectBox.add_to_cache(toId, o);
