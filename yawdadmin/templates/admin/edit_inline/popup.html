@@ -8,8 +8,7 @@
 										{{ inline_admin_formset.formset.non_form_errors }}
 									</div>{% endif %}{% for inline_admin_form in inline_admin_formset %}
 									<div class="inline-related inline-related-modal inline-related-popup{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}"{% if inline_admin_form.original %} data-pk="{{inline_admin_form.original.pk}}"{% endif %}>
-										{{inline_admin_form.form.errors}}
-										<h3 class="inline-modal-header{%if inline_admin_form.form.errors or inline_admin_form.form.non_field_errors %} error{% endif %}">{% if inline_admin_formset.opts.sortable %}
+										<h3 class="inline-modal-header{%if inline_admin_form.form.non_field_errors %} error{% endif %}">{% if inline_admin_formset.opts.sortable %}
 											<i class="icon-move"></i>&#xa0;{% endif %}
 											<b>{{ inline_admin_formset.opts.verbose_name|title }}</b>&nbsp;
 											<span class="inline_label popup_inline_label">{% if inline_admin_form.original %}
