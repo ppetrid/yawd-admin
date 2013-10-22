@@ -49,7 +49,7 @@ settings module (`settings.py`):
 
 	ADMIN_GOOGLE_ANALYTICS = {
 		'client_secrets' : '/absolute/path/to/client_secrets.json',
-		'token_file_name' : '/absolute/path/to/analytics.dat'),
+		'token_file_name' : '/absolute/path/to/analytics.dat',
 		'profile_id' : '12345678',
 		'admin_root_url' : 'http://localhost:8000/admin/'
 	}
