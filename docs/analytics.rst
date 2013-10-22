@@ -17,7 +17,7 @@ by performing the following steps:
 	* In Client ID Settings, set Application type to 'Web application'.
 	* In the **Your site or hostname** section click 'more options'.
 
-		* The **Authorized redirect URIs** field must be set to ``http://localhost:8000/admin/oauth2callback``. Replace `localhost:8000` with a domain if you are on a production system. The '/admin/' part of the URL refers to the :ref:`prefix <register-urls>` you used to register the admin site with.
+		* The **Authorized redirect URIs** field must be set to ``http://localhost:8000/admin/oauth2callback/`` (trailing slash seems to matter at this point of time). Replace `localhost:8000` with a domain if you are on a production system. The '/admin/' part of the URL refers to the :ref:`prefix <register-urls>` you used to register the admin site with.
 		* The **Authorized JavaScript Origins** field must be set to ``http://localhost:8000/`` (or the domain root if you are on a production system).
 
 	* Click Create client ID
