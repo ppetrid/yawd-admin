@@ -1,0 +1,7 @@
+{% extends "admin/change_list.html" %}
+
+{% block content_title %}{% if title %}
+			<header class="page-header">
+				<h1>{% if cl.model_admin.title_icon %}<i class="{{cl.model_admin.title_icon}} title-icon"></i>{% endif %}{{ cl.opts.verbose_name_plural|capfirst }}</h1>
+				<p class="add-top"><span class="label label-info"><i class="icon-info-sign"></i> Note</span> Click on the arrow button (to the right of the search bar) for drag n' drop ordering functionality.</span></p>
+			</header>{% endif %}{% endblock %}

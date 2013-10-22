@@ -81,7 +81,7 @@ class TabularInlineExampleAdmin(admin.TabularInline):
 
     description = 'Inlines can be have a description'
     
-    extra = 4
+    extra = 3
     model = TabularInlineExample
 
 
@@ -103,7 +103,8 @@ class PopupInlineExampleInline(PopupInline):
     model = PopupInlineExample
     #Popup inlines can be sorted using drag n' drop
     sortable = True
-    
+
+    extra = 1
     description = 'Drag n\' drop to order rows.'
 
 

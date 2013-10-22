@@ -1,0 +1,343 @@
+[
+{
+    "pk": 1, 
+    "model": "demo_application.sidebarmenuexample", 
+    "fields": {
+        "field8": "", 
+        "field9": "", 
+        "title": "Record 1", 
+        "field2": "", 
+        "field3": "", 
+        "field1": "", 
+        "field6": "", 
+        "field7": "", 
+        "field4": "", 
+        "field5": ""
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.sidebarmenuexample", 
+    "fields": {
+        "field8": "", 
+        "field9": "", 
+        "title": "Record 2", 
+        "field2": "", 
+        "field3": "", 
+        "field1": "", 
+        "field6": "", 
+        "field7": "", 
+        "field4": "", 
+        "field5": ""
+    }
+},
+{
+    "pk": 3, 
+    "model": "demo_application.sidebarmenuexample", 
+    "fields": {
+        "field8": "", 
+        "field9": "", 
+        "title": "Record 3", 
+        "field2": "", 
+        "field3": "", 
+        "field1": "", 
+        "field6": "", 
+        "field7": "", 
+        "field4": "", 
+        "field5": ""
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.dragndropchangelistexample", 
+    "fields": {
+        "boolean": true, 
+        "subtitle": "Subtitle 1", 
+        "order": 0, 
+        "title": "Record 1"
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.dragndropchangelistexample", 
+    "fields": {
+        "boolean": false, 
+        "subtitle": "Subtitle 2", 
+        "order": 2, 
+        "title": "Record 2"
+    }
+},
+{
+    "pk": 3, 
+    "model": "demo_application.dragndropchangelistexample", 
+    "fields": {
+        "boolean": true, 
+        "subtitle": "Subtitle 3", 
+        "order": 1, 
+        "title": "Record 3"
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.inlineexample", 
+    "fields": {
+        "title": "Record 1"
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.inlineexample", 
+    "fields": {
+        "title": "Record 2"
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.inlineexampleextension", 
+    "fields": {
+        "field2": "Field 2", 
+        "field3": "Field 3", 
+        "field1": "Field 1", 
+        "inline": 1
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.inlineexampleextension", 
+    "fields": {
+        "field2": "Field 2", 
+        "field3": "Field 3", 
+        "field1": "Field 1", 
+        "inline": 2
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.stackedinlineexample", 
+    "fields": {
+        "inline": 1, 
+        "choice": "choice1", 
+        "field1": "", 
+        "title": "Stacked record"
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.stackedinlineexample", 
+    "fields": {
+        "inline": 2, 
+        "choice": "choice1", 
+        "field1": "", 
+        "title": "Stacked record"
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.tabularinlineexample", 
+    "fields": {
+        "inline": 1, 
+        "choice": "choice1", 
+        "title": "Tabular inline record"
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.modalstackedinlineexample", 
+    "fields": {
+        "date": "2013-10-22", 
+        "inline": 1, 
+        "choice": "choice1", 
+        "description": "", 
+        "title": "Modal record"
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.modalstackedinlineexample", 
+    "fields": {
+        "date": "2013-10-22", 
+        "inline": 1, 
+        "choice": "choice1", 
+        "description": "", 
+        "title": "Modal record 2"
+    }
+},
+{
+    "pk": 3, 
+    "model": "demo_application.modalstackedinlineexample", 
+    "fields": {
+        "date": "2013-10-22", 
+        "inline": 2, 
+        "choice": "choice2", 
+        "description": "", 
+        "title": "Modal record"
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.popupinlineexample", 
+    "fields": {
+        "inline": 1, 
+        "order": 0, 
+        "description": "", 
+        "title": "Ajax popup record"
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.popupinlineexample", 
+    "fields": {
+        "inline": 2, 
+        "order": 0, 
+        "description": "", 
+        "title": "Record 1"
+    }
+},
+{
+    "pk": 3, 
+    "model": "demo_application.popupinlineexample", 
+    "fields": {
+        "inline": 2, 
+        "order": 0, 
+        "description": "", 
+        "title": "Record 2"
+    }
+},
+{
+    "pk": 4, 
+    "model": "demo_application.popupinlineexample", 
+    "fields": {
+        "inline": 2, 
+        "order": 0, 
+        "description": "", 
+        "title": "Record 3"
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.nestedinlineexample", 
+    "fields": {
+        "property": "Nested inline record", 
+        "popupinline": 1
+    }
+},
+{
+    "pk": 1, 
+    "model": "demo_application.widgetsexample", 
+    "fields": {
+        "boolean4": false, 
+        "foreign_key3": null, 
+        "boolean2": true, 
+        "boolean3": true, 
+        "multiple_select2": [
+            3
+        ], 
+        "multiple_select": [
+            2
+        ], 
+        "foreign_key2": null, 
+        "datetime": "2013-10-21T08:26:54", 
+        "autocomplete": "Suggestion 1", 
+        "text_area": "", 
+        "boolean": false, 
+        "radio_select": "choice1", 
+        "foreign_key": null
+    }
+},
+{
+    "pk": 2, 
+    "model": "demo_application.widgetsexample", 
+    "fields": {
+        "boolean4": false, 
+        "foreign_key3": null, 
+        "boolean2": false, 
+        "boolean3": false, 
+        "multiple_select2": [
+            2
+        ], 
+        "multiple_select": [], 
+        "foreign_key2": null, 
+        "datetime": "2013-10-21T08:27:03", 
+        "autocomplete": "Another suggestion", 
+        "text_area": "", 
+        "boolean": false, 
+        "radio_select": "choice1", 
+        "foreign_key": null
+    }
+},
+{
+    "pk": 3, 
+    "model": "demo_application.widgetsexample", 
+    "fields": {
+        "boolean4": false, 
+        "foreign_key3": null, 
+        "boolean2": false, 
+        "boolean3": false, 
+        "multiple_select2": [
+            2
+        ], 
+        "multiple_select": [], 
+        "foreign_key2": null, 
+        "datetime": "2013-10-21T08:27:08", 
+        "autocomplete": "Suggestion 2", 
+        "text_area": "", 
+        "boolean": true, 
+        "radio_select": "choice1", 
+        "foreign_key": null
+    }
+},
+{
+    "pk": 4, 
+    "model": "demo_application.widgetsexample", 
+    "fields": {
+        "boolean4": false, 
+        "foreign_key3": null, 
+        "boolean2": false, 
+        "boolean3": false, 
+        "multiple_select2": [
+            1, 
+            2
+        ], 
+        "multiple_select": [
+            1
+        ], 
+        "foreign_key2": null, 
+        "datetime": "2013-10-22T08:52:00", 
+        "autocomplete": "abcdefg", 
+        "text_area": "", 
+        "boolean": false, 
+        "radio_select": "choice1", 
+        "foreign_key": null
+    }
+},
+{
+    "pk": 1, 
+    "model": "yawdadmin.appoption", 
+    "fields": {
+        "lang_dependant": false, 
+        "optionset_label": "custom-options", 
+        "value": "Hello, I'm saved in the DB and to create me you can use any django form field. Standard or custom!", 
+        "name": "option_1"
+    }
+},
+{
+    "pk": 2, 
+    "model": "yawdadmin.appoption", 
+    "fields": {
+        "lang_dependant": false, 
+        "optionset_label": "custom-options", 
+        "value": "This is a required option!", 
+        "name": "option_2"
+    }
+},
+{
+    "pk": 3, 
+    "model": "yawdadmin.appoption", 
+    "fields": {
+        "lang_dependant": false, 
+        "optionset_label": "custom-options", 
+        "value": "True", 
+        "name": "option_3"
+    }
+}
+]

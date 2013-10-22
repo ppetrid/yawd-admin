@@ -164,11 +164,16 @@ class WidgetsExample(models.Model):
                                      'the records you\'re looking for.',
                                      related_name='fk3')
     multiple_select = models.ManyToManyField(SideBarMenuExample, null=True, blank=True,
-                                             help_text='Default multiple select with '\
-                                             'horizontal filtering.')
-    multiple_select2 = models.ManyToManyField(DragNDropChangelistExample, null=True, blank=True,
-                                             help_text='Same as above, but with the '\
-                                             'Select2MultipleWidget widget.')
+                                             help_text='<p>Default multiple select with '\
+                                             'horizontal filtering.</p>')
+    multiple_select2 = models.ManyToManyField(DragNDropChangelistExample, null=True,
+                                              blank=True,
+                                              help_text='<p>Same as above, but with '\
+                                              'the Select2MultipleWidget widget.</p>'\
+                                              '<p class="small text-info">The annoying "Hold down Control..."'\
+                                              ' message that django automatically '\
+                                              'appends to this help text will be at '\
+                                              'last removed in django 1.6!</p>')
 
     
     class Meta:

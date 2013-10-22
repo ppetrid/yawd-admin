@@ -53,10 +53,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'demo_application',
     # Yawdadmin must be above the admin aplication
     'yawdadmin',
     'django.contrib.admin',
-    'demo_application'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
