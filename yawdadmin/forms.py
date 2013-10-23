@@ -15,6 +15,27 @@ class PopupInlineFormSet(BaseInlineFormSet):
         """
         return True
 
+    def clean(self):
+        """
+        Clean should not validate forms.
+        """
+        pass
+
+    def full_clean(self):
+        """
+        Do not check for form errors as it will force form validation.
+        The clean() hook remains for possible use in subclasses.
+        """
+        self._errors = []
+        if not self.is_bound: # Stop further processing.
+            return
+
+        # Give self.clean() a chance to do cross-form validation.
+        try:
+            self.clean()
+        except ValidationError as e:
+            self._non_form_errors = self.error_class(e.messages)
+
     def get_add_url(self):
         return '%s?fk_name=%s&fk_id=%s' % (reverse('admin:%s_%s_add' % \
             (self.model._meta.app_label, self.model._meta.object_name.lower())),

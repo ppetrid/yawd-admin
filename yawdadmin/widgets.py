@@ -102,9 +102,13 @@ class SwitchWidget(forms.CheckboxInput):
     def render(self, name, value, attrs=None):
         output = super(SwitchWidget, self).render(name, value, attrs)
 
-        data_on_label = attrs.pop('data-on-label', _('YES'))
-        data_off_label = attrs.pop('data-off-label', _('NO'))
+        data_on_label = self.attrs.pop('data-on-label', _('YES'))
+        data_off_label = self.attrs.pop('data-off-label', _('NO'))
+        data_on = self.attrs.pop('data-on', 'primary')
+        data_off = self.attrs.pop('data-off', 'default')
         classes = self.attrs.pop('class', '')
 
-        return mark_safe('<div class="switch %s" data-on-label="%s" data-off-label="%s">' % (
-                    classes, data_on_label, data_off_label)) + output + mark_safe('</div>')
+        return mark_safe('<div class="switch %s" data-on="%s" data-off="%s" '\
+                         'data-on-label="%s" data-off-label="%s">' % (
+                    classes, data_on, data_off,
+                    data_on_label, data_off_label)) + output + mark_safe('</div>')

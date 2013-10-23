@@ -1,10 +1,10 @@
-{% load i18n %}<fieldset {% if not fprefix %}id="fieldset-no-{{forloop.counter}}" {% endif %}class="module aligned{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}{% for c in fieldset.classes %} {% if c != 'collapse' %}{{c}}{% endif %}{% endfor %}{% if 'collapse' in fieldset.classes %} hide{% endif %}">
-							<div class="fieldset-wrapper">{% if fieldset.name %}
-								<h2 {% if not fprefix %}id="fieldset-no-{{forloop.counter}}-header" {% endif %}class="{% if 'collapse' in fieldset.classes %}{% if adminform.model_admin.affix and not is_popup %} {% endif %}collapse-switcher{% endif %}" {% if 'collapse' in fieldset.classes %} onclick="collapse_switcher(this, 'fieldset-no-{{forloop.counter}}');"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% endif %}{% if fieldset.description %}
+{% load i18n yawdadmin_filters %}<fieldset {% if not fprefix %}id="fieldset-no-{{forloop.counter}}" {% endif %}class="module aligned{% if adminform.model_admin.affix and not is_popup and not inlinefieldset %} affix-header{% endif %} {{fieldset.classes|fix_collapse}}">
+							<div class="{% if inlinefieldset %}inline-{% endif %}fieldset-wrapper">{% if fieldset.name %}
+								<h2 {% if not fprefix %}id="fieldset-no-{{forloop.counter}}-header" {% endif %}{% if 'collapse' in fieldset.classes %}class="collapse-switcher" onclick="collapse_switcher(this, '#fieldset-no-{{forloop.counter}} .row-fluid');"{% endif %}>{{ fieldset.name }}{% if 'collapse' in fieldset.classes %}&#xa0;<i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% endif %}{% if fieldset.description %}
 								<div class="description alert">
 									{{ fieldset.description|safe }}
 								</div>{% endif %}{% for line in fieldset %}
-								<div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %}{% if field.field.is_hidden %} has-hidden-field{% endif %}{% if field.field.field.popup_fk %} hidden{% endif %}{% endfor %}">
+								<div class="row-fluid color-form {% cycle 'row1' 'row2' %}{% if line.fields|length_is:'1' and line.errors %} errors{% endif %}{% for field in line %}{% if field.field.is_hidden %} has-hidden-field{% endif %}{% if field.field.field.popup_fk %} hidden{% endif %}{% endfor %}{% if 'collapse' in fieldset.classes %} hide{% endif %}">
 									<div class="field">{% if not line.fields|length_is:'1' and line.errors %}
 										<div class="alert alert-error">
 											{{ line.errors }}

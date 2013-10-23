@@ -4,7 +4,7 @@ Changelog
 +++++++++
 
 v.0.7.0, 2013.10.23
-===================
+---------------------
 
 * popup/ajax inlines, one-to-one inlines
 * auto side-navigation affix menu in change pages (based on fieldsets & inlines)
@@ -19,24 +19,19 @@ v.0.7.0, 2013.10.23
 * documentation enhancements
 * some work towards PEP8/pylint compliance
 
-v.0.6.1, 2013.03.06
-===================
-
-* Fixed packaging problems with v0.6.0
-
 v.0.6.0, 2013.02.28
-===================
+-------------------
 
 * Added modal inlines functionality
 * Upgraded to bootstrap v2.2.2
 * Added gcons icon set
 * Collapsible inlines
-* Fixed google analytics bugs (thanks to @chielteuben)
+* Fixed google analytics bugs (thanks to `@chielteuben <https://github.com/chielteuben>`_)
 * Various css updates
-* Added django-reversion, django-mptt templates (thanks to @pahaz)
+* Added django-reversion, django-mptt templates (thanks to `@pahaz <https://github.com/pahaz>`_)
 * Various minor enhancements, like the ability to exclude a model from the top menu
 
 v.0.5.0, 2012.11.01
-====================
+-------------------
 
 * Initial Release

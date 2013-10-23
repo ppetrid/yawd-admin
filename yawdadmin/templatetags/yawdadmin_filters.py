@@ -1,5 +1,6 @@
 # -*- coding: utf-8 -*-
 from django import template
+from ..admin import PopupInline
 from ..forms import PopupInlineFormSet
 
 
@@ -40,6 +41,16 @@ def istranslationinline(value):
 
 
 @register.filter
+def ispopupinline(value):
+    """
+    This filter is used if yawd-translations is installed.
+    """
+    if hasattr(value, 'opts') and isinstance(value.opts, PopupInline):
+        return True
+    return False
+
+
+@register.filter
 def popup_change_url(formset, obj_id):
     """
     Used in PopupInline
@@ -52,6 +63,11 @@ def popup_change_url(formset, obj_id):
 def popup_delete_url(formset, obj_id):
     if isinstance(formset, PopupInlineFormSet):
         return formset.get_delete_url(obj_id)
+
+
+@register.filter
+def fix_collapse(classes):
+    return classes.replace('collapse', '')
 
 
 @register.filter

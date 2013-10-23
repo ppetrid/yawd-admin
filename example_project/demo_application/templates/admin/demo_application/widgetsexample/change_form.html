@@ -1,0 +1,7 @@
+{% extends 'admin/change_form.html' %}{% load i18n %}
+
+{% block content_title %}{% if title %}
+			<header class="page-header" id="page-header">
+				<h1>{% if adminform.model_admin.title_icon %}<i class="{{adminform.model_admin.title_icon}} title-icon"></i>{% endif %}{% if add %}{{ opts.verbose_name_plural|capfirst }}: {% trans 'add' %}{% else %}{% filter truncatechars:50 %}{{original}}{% endfilter %}: {% trans 'edit' %}{% endif %}</h1>
+				<p class="add-top"><span class="label label-info"><i class="icon-info-sign"></i> Note</span> Type a capital "s" (S) into the "autocomplete" field to view the available suggestions. Click on the <i class="icon-question-sign"></i> icon to view extra notes on each widget -where applicable-.</span></p>
+			</header>{% endif %}{% endblock %}

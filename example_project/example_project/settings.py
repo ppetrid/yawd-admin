@@ -53,10 +53,10 @@ INSTALLED_APPS = (
     'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'demo_application',
     # Yawdadmin must be above the admin aplication
     'yawdadmin',
     'django.contrib.admin',
-    'demo_application'
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
@@ -66,3 +66,6 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     #Make sure the request context processor is enabled:
     "django.core.context_processors.request",
 )
+
+ADMIN_SITE_NAME = 'yawd-admin demo site'
+ADMIN_SITE_DESCRIPTION = 'This is a demo website. Please do your best to keep it clean :)'
