@@ -1,11 +1,12 @@
 yawd-admin, a django administration website
 ======================================================
 
-.. tip::
+yawd-admin now has a live demo at
+`http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
+Use demo / demo as username & passowrd.
 
-	yawd-admin now has a live demo at
-	`http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
-	Use demo / demo as username & passowrd.
+.. image:: docs/yawd-admin-screenshot.png
+	:align: center
 
 `yawd-admin <http://yawd.eu/open-source-projects/yawd-admin/>`_ is an 
 administration website for django. It extends the default django admin 
@@ -30,9 +31,6 @@ site and offers the following:
 	v0.6.1 pypi package. New features will not be backported to the ``0.6.x``
 	branch. Since many of us run production systems tied to Django 1.4, both
 	v0.6.1 and the latest documentation will be online on readthedocs.org. 
-
-.. image:: docs/yawd-admin-screenshot.png
-	:align: center
 
 Usage and demo
 ==============
