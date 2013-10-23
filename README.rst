@@ -24,7 +24,7 @@ site and offers the following:
 .. note::
 
 	yawd-admin v0.6.1 is the last version intended to work with
-	Django 1.4. The current master is actively developed under Django 1.5.x
+	Django 1.4. yawd-admin v.0.7.0 and on is developed under Django 1.5.x
 	and does NOT work with older Django releases. For those still using
 	Django 1.4, you can checkout the ``0.6.x`` branch or use the yawd-admin
 	v0.6.1 pypi package. New features will not be backported to the ``0.6.x``
