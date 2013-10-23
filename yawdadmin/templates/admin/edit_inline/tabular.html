@@ -1,4 +1,4 @@
-{% load i18n admin_static admin_modify %}<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
+{% load i18n admin_static admin_modify yawdadmin_filters %}<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
 							<h2{% if inline_admin_formset.opts.collapse %} class="pointer" data-toggle="collapse" data-target="#{{inline_admin_formset.formset.prefix}}-wrapper"{% endif %}>{{ inline_admin_formset.opts.verbose_name_plural|capfirst }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
 							<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
 							<div class="inline-wrapper{% if inline_admin_formset.opts.collapse %} collapse{% endif %}" id="{{inline_admin_formset.formset.prefix}}-wrapper">{% if inline_admin_formset.formset.non_form_errors %}
@@ -10,9 +10,9 @@
 									<fieldset class="module">
 										<table class="table table-striped">
 											<thead>
-												<tr class="light-blue-degrade">{% for field in inline_admin_formset.fields %}{% if not field.widget.is_hidden %}
-													<th{% if forloop.first %} colspan="2"{% endif %}{% if field.required %} class="required"{% endif %}>{{ field.label|capfirst }}{% if field.required %} <span class="text-error">*</span>{% endif %}</th>{% endif %}{% endfor %}{% if inline_admin_formset.formset.can_delete %}<th>{% trans "Delete?" %}</th>{% endif %}
-												</tr>
+												<tr class="light-blue-degrade">{% with non_hidden_field=inline_admin_formset.fields|indexof_non_hidden %}{% for field in inline_admin_formset.fields %}{% if not field.widget.is_hidden %}
+													<th{% if forloop.counter0 == non_hidden_field %} colspan="2"{% endif %}{% if field.required %} class="required"{% endif %}>{{ field.label|capfirst }}{% if field.required %} <span class="text-error">*</span>{% endif %}</th>{% endif %}{% endfor %}{% if inline_admin_formset.formset.can_delete %}<th>{% trans "Delete?" %}</th>{% endif %}
+												</tr>{% endwith %}
 											</thead>
 											<tbody>{% for inline_admin_form in inline_admin_formset %}{% if inline_admin_form.form.non_field_errors %}
 											<tr>
@@ -25,14 +25,14 @@
 														<a href="{% url 'admin:view_on_site' inline_admin_form.original_content_type_id inline_admin_form.original.pk %}">{% trans "View on site" %}</a>{% endif %}
 													</p>{% endif %}{% if inline_admin_form.has_auto_field %}
 													{{ inline_admin_form.pk_field.field }}{% endif %}
-													{{ inline_admin_form.fk_field.field }}{% spaceless %}{% for fieldset in inline_admin_form %}{% for line in fieldset %}{% for field in line %}{% if field.is_hidden %}
+													{{ inline_admin_form.fk_field.field }}{% spaceless %}{% for fieldset in inline_admin_form %}{% for line in fieldset %}{% for field in line %}{% if field.field.is_hidden %}
 													{{ field.field }}{% endif %}{% endfor %}{% endfor %}{% endfor %}{% endspaceless %}
-												</td>{% for fieldset in inline_admin_form %}{% for line in fieldset %}{% for field in line %}
+												</td>{% for fieldset in inline_admin_form %}{% for line in fieldset %}{% for field in line %}{% if not field.field.is_hidden %}
 												<td class="control-group {{ field.field.name }}{% if field.field.errors %} error{% endif %}">{% if field.is_readonly %}
 													<p>{{ field.contents }}</p>{% else %}
 													{{ field.field }}{% if field.field.errors %}
 													<span class="help-inline">{{ field.field.errors }}</span>{% endif %}{% endif %}
-												</td>{% endfor %}{% endfor %}{% endfor %}{% if inline_admin_formset.formset.can_delete %}
+												</td>{% endif %}{% endfor %}{% endfor %}{% endfor %}{% if inline_admin_formset.formset.can_delete %}
 												<td class="delete">{% if inline_admin_form.original %}
 													{{ inline_admin_form.deletion_field.field }}{% endif %}
 												</td>{% endif %}</tr>{% endfor %}

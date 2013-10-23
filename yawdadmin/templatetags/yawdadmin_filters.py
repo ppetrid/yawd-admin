@@ -52,3 +52,13 @@ def popup_change_url(formset, obj_id):
 def popup_delete_url(formset, obj_id):
     if isinstance(formset, PopupInlineFormSet):
         return formset.get_delete_url(obj_id)
+
+
+@register.filter
+def indexof_non_hidden(fields):
+    """
+    Used in TabularInline
+    """
+    for index, field in enumerate(fields):
+        if not field.widget.is_hidden:
+            return index
