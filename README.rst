@@ -32,7 +32,7 @@ site and offers the following:
 	v0.6.1 and the latest documentation will be online on readthedocs.org. 
 
 .. image:: docs/yawd-admin-screenshot.png
-	:align:center
+	:align: center
 
 Usage and demo
 ==============
