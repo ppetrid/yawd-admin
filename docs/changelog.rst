@@ -3,8 +3,8 @@
 Changelog
 +++++++++
 
-v.0.7.0, ?
-----------
+v.0.7.0, 2013.10.23
+---------------------
 
 * popup/ajax inlines, one-to-one inlines
 * auto side-navigation affix menu in change pages (based on fieldsets & inlines)
