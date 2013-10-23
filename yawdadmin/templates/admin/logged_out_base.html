@@ -12,6 +12,8 @@
 				<a href="{% if not lang.default %}/{{info.code}}{% endif %}{{clean_url}}"><img class="lang-switcher" src="{{lang.image.url}}" alt="{{info.name}}" title="{{info.name}}" /></a>{% endfor %}
 			</p>
 		</section>
-		<section class="span10 offset1">
-			{% block content %}{% endblock %}
+		<section class="row-fluid add-bottom">
+			<div class="span10 offset1">
+				{% block content %}{% endblock %}
+			</div>
 		</section>{% endblock %}
