@@ -1,6 +1,12 @@
 yawd-admin, a django administration website
 ======================================================
 
+.. tip::
+
+	yawd-admin now has a live demo at
+	`http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
+	Use demo / demo as username & passowrd.
+
 `yawd-admin <http://yawd.eu/open-source-projects/yawd-admin/>`_ is an 
 administration website for django. It extends the default django admin 
 site and offers the following:
@@ -16,6 +22,7 @@ site and offers the following:
 * Seamless integration with `yawd-translations` for multilingual admin websites
 
 .. note::
+
 	yawd-admin v0.6.1 is the last version intended to work with
 	Django 1.4. The current master is actively developed under Django 1.5.x
 	and does NOT work with older Django releases. For those still using
@@ -24,13 +31,16 @@ site and offers the following:
 	branch. Since many of us run production systems tied to Django 1.4, both
 	v0.6.1 and the latest documentation will be online on readthedocs.org. 
 
-.. image:: http://yawd.eu/media/images/yawd-admin-screenshot.png
+.. image:: docs/yawd-admin-screenshot.png
+	:align:center
 
 Usage and demo
 ==============
 
 See the `yawd-admin documentation <http://yawd-admin.readthedocs.org/en/latest/>`_ 
-for information on how to install the demo and use yawd-admin.
+for information on how to install the demo and use yawd-admin. There is also an
+online version of the demo at `http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
+Just use *demo*/*demo* as username and password.
 
 Screenshots
 ===========

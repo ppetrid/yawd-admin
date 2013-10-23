@@ -88,3 +88,15 @@ understand how to use yawd-admin.
 Once you are done, you can deactivate the virtual environment::
 
    $ deactivate yawdadmin
+
+
+Live demo
++++++++++
+
+Alternatively, you can visit the live demo at 
+`http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
+Use demo / demo as username & passowrd.
+
+.. note::
+
+	The live demo uses yawd-admin v0.7.0.
