@@ -2556,3 +2556,15 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 	.navbar-blue .brand {color: #000 !important; }
 }
 /* End print directives */
+
+.badge-hierarchy[href] {
+	background-color: #fafafa;
+	border: 1px dotted #eee;
+	color: #F59B00;
+	text-shadow: none;
+	font-weight: normal;
+}
+
+.badge-hierarchy[href]:hover {
+	color: #FFAF0A;
+}
