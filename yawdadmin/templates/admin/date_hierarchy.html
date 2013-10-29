@@ -4,7 +4,7 @@
 											<a class="label badge-hierarchy" href="{{ back.link }}">&lsaquo; {{ back.title }}</a>
 										</li>{% endif %}{% for choice in choices %}
 										<li>{% if choice.link %}
-											<a class="badge badge-hierarchy" href="{{ choice.link }}">{% endif %}{{ choice.title }}{% if choice.link %}</a>{% endif %}
+											<a class="badge badge-hierarchy" href="{{ choice.link }}">{% else %}<span class="badge badge-hierarchy">{% endif %}{{ choice.title }}{% if choice.link %}</a>{% else %}</span>{% endif %}
 										</li>{% endfor %}
 									</ul>
 								</div>{% endif %}

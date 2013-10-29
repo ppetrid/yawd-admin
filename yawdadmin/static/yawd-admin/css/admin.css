@@ -2557,7 +2557,7 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 }
 /* End print directives */
 
-.badge-hierarchy[href] {
+.badge-hierarchy {
 	background-color: #fafafa;
 	border: 1px dotted #eee;
 	color: #F59B00;
@@ -2567,4 +2567,8 @@ a .icon-rotate-90:before,a .icon-rotate-180:before,a .icon-rotate-270:before,a .
 
 .badge-hierarchy[href]:hover {
 	color: #FFAF0A;
+}
+
+span.badge-hierarchy {
+	color: #999;
 }
