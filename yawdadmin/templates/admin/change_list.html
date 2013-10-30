@@ -90,15 +90,15 @@
 										{% admin_actions %}{% endif %}{% if cl.has_filters %}
 										<ul id="changelist-filters" class="nav pull-right filters">
 											<li class="divider-vertical"></li>
-											<li class="dropdown pull-right">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown">
-													<i class="icon-filter"></i>&#xa0;{% trans 'Filters' %} <b class="caret"></b>
+											<li class="dropdown pull-right">{% with is_filters_on=cl|filters_on %}
+												<a href="#" class="dropdown-toggle{% if is_filters_on %} filters-on{% endif %}" data-toggle="dropdown">
+													<i class="icon-filter"></i>&#xa0;{% trans 'Filters' %}{% if is_filters_on %} {% trans 'ON' %}{% endif %}  <b class="caret"></b>
 												</a>
 												<ul class="dropdown-menu">{% for spec in cl.filter_specs %}
 													{% admin_list_filter cl spec %}{% if not forloop.last %}
 													<li class="divider"></li>{% endif %}{% endfor %}
 												</ul>
-											</li>
+											</li>{% endwith %}
 										</ul>{% endif %}
 									</div>
 								</div>
