@@ -26,7 +26,7 @@
 					<li>{{ obj }}</li>{% endfor %}
 				</ul>{% endif %}{% else %}
 				<p>{% blocktrans %}Are you sure you want to delete the selected {{ objects_name }}? All of the following objects and their related items will be deleted:{% endblocktrans %}</p>{% for deletable_object in deletable_objects %}
-				<ul  class="delete-list">
+				<ul class="delete-list">
 					{{ deletable_object|unordered_list }}
 				</ul>{% endfor %}
 				<form action="" method="post">
