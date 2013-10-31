@@ -1350,6 +1350,23 @@ div#id_password {
 	margin: 9px 1px 3px 1px !important;
 }
 
+.filters-on {
+	color: #fff!important;
+	background-color: #66b768!important;
+}
+
+.filters-on .caret {
+	border-top-color: #fff!important;
+	border-bottom-color: #fff!important;
+	opacity: .5;
+}
+
+.filters-on:hover .caret {
+	border-top-color: #fff!important;
+	border-bottom-color: #fff!important;
+	opacity: 1;
+}
+
 /* End filters styline */
 
 /* INLINES */

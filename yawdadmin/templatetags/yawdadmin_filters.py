@@ -26,6 +26,14 @@ def utfupper(value):
 
 
 @register.filter
+def filters_on(change_list):
+    for spec in change_list.filter_specs:
+        if spec.used_parameters:
+            return True
+    return False
+
+
+@register.filter
 def istranslationinline(value):
     """
     This filter is used if yawd-translations is installed.
