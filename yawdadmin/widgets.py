@@ -108,7 +108,7 @@ class SwitchWidget(forms.CheckboxInput):
         data_off = self.attrs.pop('data-off', 'default')
         classes = self.attrs.pop('class', '')
 
-        return mark_safe('<div class="switch %s" data-on="%s" data-off="%s" '\
-                         'data-on-label="%s" data-off-label="%s">' % (
-                    classes, data_on, data_off,
+        return mark_safe('<div id="%s-switch" class="switch %s" data-on="%s" '
+                         'data-off="%s" data-on-label="%s" data-off-label="%s">' % (
+                    attrs['id'], classes, data_on, data_off,
                     data_on_label, data_off_label)) + output + mark_safe('</div>')
