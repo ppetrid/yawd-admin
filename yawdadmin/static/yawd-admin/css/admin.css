@@ -1353,6 +1353,7 @@ div#id_password {
 .filters-on {
 	color: #fff!important;
 	background-color: #66b768!important;
+	text-shadow: 0 1px 0 #56a758 !important;
 }
 
 .filters-on .caret {
