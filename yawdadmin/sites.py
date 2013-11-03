@@ -81,9 +81,10 @@ class YawdAdminDashboard(object):
             self.app_dict[app_label]['models'] = []
 
     def _find_model(self, label, app_label):
-        for model in self.app_dict[app_label]['models']:
-            if model['classname'] == label:
-                return model
+        if 'models' in self.app_dict[app_label]:
+            for model in self.app_dict[app_label]['models']:
+                if model['classname'] == label:
+                    return model
         if 'extras' in self.app_dict[app_label]:
             for extra in self.app_dict[app_label]['extras']:
                 if 'label' in extra and extra['label'] == label:
