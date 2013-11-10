@@ -23,7 +23,7 @@
 												<a class="inline-deletelink inline-delete" href="{{inline_admin_formset.formset|popup_delete_url:inline_admin_form.original.pk}}">{% trans 'Delete' %}</a>
 											</span>{% endif %}
 										</h3>{% if inline_admin_form.form.non_field_errors %}
-											{{ inline_admin_form.form.non_field_errors }}{% endif %}{% if inline_admin_form.has_auto_field %}
+											{{ inline_admin_form.form.non_field_errors }}{% endif %}{% if inline_admin_form.has_auto_field or inline_admin_form.needs_explicit_pk_field %}
 											{{ inline_admin_form.pk_field.field }}{% endif %}
 									</div>{% endfor %}
 								</div>

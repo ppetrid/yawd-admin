@@ -8,7 +8,7 @@
 								</div>{% endif %}{% for inline_admin_form in inline_admin_formset %}
 								<div class="{% if forloop.last %} empty-form last-related{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-{% if not forloop.last %}{{ forloop.counter0 }}{% else %}empty{% endif %}">{% if inline_admin_form.form.non_field_errors %}
 										{{ inline_admin_form.form.non_field_errors }}{% endif %}{% with fprefix=inline_admin_formset.formset.prefix %}{% for fieldset in inline_admin_form %}
-										{% include "admin/includes/fieldset.html" %}{% endfor %}{% endwith %}{% if inline_admin_form.has_auto_field %}
+										{% include "admin/includes/fieldset.html" %}{% endfor %}{% endwith %}{% if inline_admin_form.has_auto_field or inline_admin_form.needs_explicit_pk_field %}
 										{{ inline_admin_form.pk_field.field }}{% endif %}
 										{{ inline_admin_form.fk_field.field }}
 								</div>{% endfor %}
