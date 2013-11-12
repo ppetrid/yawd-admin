@@ -1,6 +1,7 @@
 class PopupMiddleware(object):
     """
-    This middleware must always be enabled when using yawd-elfinder.
+    This middleware must always be enabled when using yawd-admin WITH
+    DJANGO < 1.6.
     Place it **before** the :class:`django.middleware.common.CommonMiddleware`
     in your ``MIDLEWARE_CLASSESS`` setting.
 
