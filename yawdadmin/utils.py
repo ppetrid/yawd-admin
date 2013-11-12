@@ -4,10 +4,14 @@ import time
 from oauth2client.client import AccessTokenRefreshError
 from django.core.cache import cache
 from django.utils.translation import get_language
-from django.utils.encoding import smart_str
+from django.utils.encoding import force_str
 from yawdadmin import admin_site
 from conf import settings as ls
 from models import AppOption
+
+
+def get_option_cache_key(optionset_label):
+    return 'yawdadmin_options_%s' % optionset_label
 
 
 def get_option(optionset_label, name, current_only=True):
@@ -16,30 +20,35 @@ def get_option(optionset_label, name, current_only=True):
     only language-dependant options and decides whether to return its value
     for all languages or only the current language.
     """
-    try:
-        option = AppOption.objects.get(optionset_label=optionset_label, name=name)
-    except AppOption.DoesNotExist:
-        return None
-
-    optionset_admin = admin_site.get_optionset_admin(optionset_label)
-    return get_option_value(optionset_admin, option, current_only)
-
+    #Hit the cache
+    optionset = get_options(optionset_label, current_only)
+    if name in optionset:
+        return optionset[name]
+    return None
 
 def get_options(optionset_label, current_only=True):
     """
     Return all options for this app_label as dictionary with the option name
     being the key. 
     """
-    try:
+    #Hit the cache
+    cached = {}
+    if ls.ADMIN_CACHE_DB_OPTIONS:
+        cached = cache.get(get_option_cache_key(optionset_label), {})
+
+    if cached:
+        options = cached
+    else:
         options = AppOption.objects.filter(optionset_label=optionset_label)
-    except:
-        return {}
+        if ls.ADMIN_CACHE_DB_OPTIONS:
+            cache.set(get_option_cache_key(optionset_label), options,
+                  ls.ADMIN_CACHE_DB_OPTIONS)
 
     optionset_admin = admin_site.get_optionset_admin(optionset_label)
 
     option_dict = {}
     for option in options:
-        option_dict[smart_str(option.name)] = get_option_value(optionset_admin,
+        option_dict[force_str(option.name)] = get_option_value(optionset_admin,
                                                                option,
                                                                current_only)
     return option_dict
@@ -49,8 +58,10 @@ def get_option_value(optionset_admin, db_option, current_only):
     """
     Given an AppOption object, return its value for the current language.
     """
+    if not db_option:
+        return None
 
-    name = smart_str(db_option.name)
+    name = force_str(db_option.name)
     if not name in optionset_admin.options:
         return None
 
@@ -61,7 +72,7 @@ def get_option_value(optionset_admin, db_option, current_only):
 
     value_dict = {}
     for key, value in json.loads(db_option.value).items():
-        value_dict[smart_str(key)] = value
+        value_dict[force_str(key)] = value
 
     if current_only:
         curr_lang = get_language()

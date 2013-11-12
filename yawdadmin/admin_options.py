@@ -1,8 +1,9 @@
 import re, copy, json
 from django import forms
+from django.core.cache import cache
 from django.utils.encoding import force_text
-from utils import get_options
-from models import AppOption
+from .utils import get_options, get_option_cache_key
+from .models import AppOption
 
 #decouple yawd-admin and yawd-translations applications
 try:
@@ -168,6 +169,9 @@ class OptionSetAdmin(object):
                 self.formfields.append(self.form[attr])
     
     def save(self):
+        #clear cache
+        cache.delete(get_option_cache_key(self.optionset_label))
+
         #this dictionary is used to collect lang-dependant field values
         lang_dependant_value_dict = {}
 
