@@ -160,7 +160,8 @@ function collapse_switcher(el, target_selector) {
 			if (self.hasClass('add-another')) {
 				href += (href.indexOf('?') == -1) ? '?_popup=1' : '&_popup=1';
 			} else if (self.hasClass('related-lookup')) {
-				href += (href.indexOf('?') == -1) ? '?pop=1' : '&pop=1';
+				//TODO: Drop support for old popup in next versions
+				href += (href.indexOf('?') == -1) ? '?'+rel_lookup_popup_var+'=1' : '&'+rel_lookup_popup_var+'=1';
 			}
 			
 			self.attr('data-fancybox-type','iframe').attr('href', href).fancybox();

@@ -4,6 +4,16 @@ from django.contrib.contenttypes.models import ContentType
 from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 
+try: #Django 1.7+
+    from django.contrib.admin.options import TO_FIELD_VAR
+except:
+    TO_FIELD_VAR = 't'
+
+try: #Django 1.6+
+    from django.contrib.admin.options import IS_POPUP_VAR
+except:
+    IS_POPUP_VAR = 'pop'
+
 
 class ContentTypeSelect(forms.Select):
     def __init__(self, object_id,  attrs=None, choices=()):
@@ -16,8 +26,9 @@ class ContentTypeSelect(forms.Select):
         choiceoutput = ' var %s_choice_urls = {' % (attrs['id'],)
 
         for ctype in ContentType.objects.filter(pk__in=[int(c[0])for c in chain(self.choices, choices) if c[0]]):
-            choiceoutput += '    \'%s\' : \'../../../%s/%s?t=%s\','  % ( str(ctype.pk), 
-                    ctype.app_label, ctype.model, ctype.model_class()._meta.pk.name)
+            choiceoutput += '    \'%s\' : \'../../../%s/%s?%s=%s\','  % ( str(ctype.pk), 
+                    ctype.app_label, ctype.model,
+                    TO_FIELD_VAR, ctype.model_class()._meta.pk.name)
 
         choiceoutput += '};'
 
@@ -27,13 +38,14 @@ class ContentTypeSelect(forms.Select):
                    '%(choiceoutput)s'
                    '    $(\'#%(id)s\').change(function (){'
                    '        $(\'#%(fk_id)s\').val(\'\');'
-                   '        $(\'#lookup_%(fk_id)s\').attr(\'href\',%(id)s_choice_urls[$(this).val()]+"&pop=1").siblings(\'strong\').html(\'\');'
+                   '        $(\'#lookup_%(fk_id)s\').attr(\'href\',%(id)s_choice_urls[$(this).val()]+"&%(popup_var)s=1").siblings(\'strong\').html(\'\');'
                    '    });'
                    '  });'
                    '})(yawdadmin.jQuery);'
                    '</script>' % { 'choiceoutput' : choiceoutput, 
                                     'id' : attrs['id'],
-                                    'fk_id' : self.object_id
+                                    'fk_id' : self.object_id,
+                                    'popup_var': IS_POPUP_VAR
                                   })
         return mark_safe(u''.join(output))
 
