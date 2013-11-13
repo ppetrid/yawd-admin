@@ -1,6 +1,7 @@
 import httplib2
 from functools import update_wrapper
 from oauth2client.file import Storage
+from django import VERSION as DJANGO_VERSION
 from django.conf.urls import patterns, url
 from django.conf import settings
 from django.contrib.admin.sites import AdminSite
@@ -81,9 +82,10 @@ class YawdAdminDashboard(object):
             self.app_dict[app_label]['models'] = []
 
     def _find_model(self, label, app_label):
-        for model in self.app_dict[app_label]['models']:
-            if model['classname'] == label:
-                return model
+        if 'models' in self.app_dict[app_label]:
+            for model in self.app_dict[app_label]['models']:
+                if model['classname'] == label:
+                    return model
         if 'extras' in self.app_dict[app_label]:
             for extra in self.app_dict[app_label]['extras']:
                 if 'label' in extra and extra['label'] == label:
@@ -177,7 +179,8 @@ class YawdAdminSite(AdminSite):
                                        "'django.contrib.admin' in your "
                                        "INSTALLED_APPS setting to use the "
                                        "yawd-admin application") 
-        if not 'yawdadmin.middleware.PopupMiddleware' in settings.MIDDLEWARE_CLASSES:
+        if not 'yawdadmin.middleware.PopupMiddleware' in settings.MIDDLEWARE_CLASSES and \
+            DJANGO_VERSION[0]== 1 and DJANGO_VERSION[1] <= 5:
             raise ImproperlyConfigured("Put 'yawdadmin.middleware.PopupMiddleware' "
                                        "in your MIDDLEWARE_CLASSES setting "
                                        "in order to use the yawd-admin application.")

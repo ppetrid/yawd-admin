@@ -1,5 +1,5 @@
 from django.db import models
-from fields import OptionNameField
+from .fields import OptionNameField
 
 
 class AppOption(models.Model):

@@ -120,3 +120,18 @@ def inline_items_for_result(inline, result):
 
         ret += format_html('<span{0}>{1}</span>', row_class, result_repr)
     return ret
+
+
+#TODO: Remove this in future version
+@register.simple_tag
+def related_lookup_popup_var():
+    """
+    This templatetag is here to ensure fancybox related lookups
+    work for Django 1.6 and older versions. It should be removed
+    once support for Django 1.5 is dropped. 
+    """
+    try: #Django 1.6+
+        from django.contrib.admin.options import IS_POPUP_VAR
+    except:
+        IS_POPUP_VAR = 'pop'
+    return '<script>rel_lookup_popup_var = "%s"</script>' % IS_POPUP_VAR

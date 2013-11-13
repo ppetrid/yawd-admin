@@ -15,6 +15,12 @@ from templatetags.yawdadmin_tags import inline_items_for_result
 from forms import PopupInlineFormSet
 
 
+try: #django 1.6 and above
+    from django.contrib.admin.options import IS_POPUP_VAR
+except:
+    IS_POPUP_VAR = '_popup'
+
+
 class PopupInline(InlineModelAdmin):
     extra = 1
     formset = PopupInlineFormSet
@@ -29,7 +35,7 @@ class PopupModelAdmin(admin.ModelAdmin):
     popup_only = False
     
     def add_view(self, request, form_url='', extra_context=None):
-        if self.popup_only and not '_popup' in request.REQUEST:
+        if self.popup_only and not IS_POPUP_VAR in request.REQUEST:
             raise Http404
         
         return super(PopupModelAdmin, self).add_view(request, form_url, extra_context)
@@ -67,7 +73,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         return HttpResponse('<html><body>OK</body></html>')
     
     def change_view(self, request, object_id, form_url='', extra_context=None):
-        if self.popup_only and not '_popup' in request.REQUEST:
+        if self.popup_only and not IS_POPUP_VAR in request.REQUEST:
             raise Http404
         
         return super(PopupModelAdmin, self).change_view(request, object_id, 
@@ -84,7 +90,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         fk_name = request.GET.get('fk_name')
         fk_id = request.GET.get('fk_id')
 
-        if '_popup' in request.REQUEST and db_field.name == fk_name:
+        if IS_POPUP_VAR in request.REQUEST and db_field.name == fk_name:
             formfield.widget = HiddenInput()
             formfield.popup_fk = True
             if fk_id:
@@ -125,7 +131,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         """
         Override add response to handle the PopupInline case 
         """
-        if "_popup" in request.POST and request.GET.get('fk_name'):
+        if IS_POPUP_VAR in request.POST and request.GET.get('fk_name'):
             return HttpResponse(
                 '<!DOCTYPE html><html><head><title></title></head><body>'
                 '<script type="text/javascript">parent.dismissAddAnotherPopupInline'
@@ -142,7 +148,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         """
         Override change response to handle the PopupInline case 
         """
-        if "_popup" in request.POST and request.GET.get('fk_name'):
+        if IS_POPUP_VAR in request.POST and request.GET.get('fk_name'):
             return HttpResponse(
                     '<!DOCTYPE html><html><head><title></title></head><body>'
                     '<script type="text/javascript">parent.dismissEditPopupInline'

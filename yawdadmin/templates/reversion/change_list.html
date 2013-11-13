@@ -5,7 +5,7 @@
 {% block object-tools-items %}
 {% if has_add_permission %}
         <div class="span2">
-            <a href="add/{% if is_popup %}?_popup=1{% endif %}" class="big-button">
+            <a href="add/{% if is_popup %}?{% if is_popup_var %}{{is_popup_var}}{% else %}_popup{% endif %}=1{% endif %}" class="big-button">
                 <i class="add-item"></i> {% blocktrans with cl.opts.verbose_name as name %}Add {{ name }}{% endblocktrans %}
             </a>
         </div>

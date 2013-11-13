@@ -32,3 +32,6 @@ if isinstance(ADMIN_USER_MODELFORM, str):
     _user_modelform_split = ADMIN_USER_MODELFORM.split('.')
     _user_modelform_module = import_module('.'.join(_user_modelform_split[:-1]))
     ADMIN_USER_MODELFORM = getattr(_user_modelform_module, _user_modelform_split[-1])
+
+
+ADMIN_CACHE_DB_OPTIONS = getattr(settings, 'ADMIN_CACHE_DB_OPTIONS', 3600)

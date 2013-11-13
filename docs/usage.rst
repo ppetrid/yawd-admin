@@ -32,6 +32,12 @@ middleware is enabled in your ``MIDDLEWARE_CLASSES`` setting. In `settings.py`:
 		...
 	)
 
+
+Note::
+
+	If you're running Django 1.6 and above, you don't need to use this middleware.
+
+
 Finally, the `django.core.context_processors.request` context
 processor must also be enabled:
 
@@ -190,3 +196,13 @@ yawd-admin uses to allow staff users edit their account data. For more info plea
 .. code-block:: python
 
 	ADMIN_USER_MODELFORM = 'myapp.module.MyModelForm'
+
+
+ADMIN_CACHE_DB_OPTIONS
+**********************
+
+default: `3600`
+
+Cache duration (in seconds) for the admin database options. Cache gets updated each time an option value
+changes. That way cached values always reflect the db values. If set to 0 there will be no
+caching.
