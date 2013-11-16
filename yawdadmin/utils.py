@@ -14,19 +14,19 @@ def get_option_cache_key(optionset_label):
     return 'yawdadmin_options_%s' % optionset_label
 
 
-def get_option(optionset_label, name, current_only=True):
+def get_option(optionset_label, name, current_only=True, as_stored=False):
     """
     Return the value of an option. The ``current only`` kwarg affects
     only language-dependant options and decides whether to return its value
     for all languages or only the current language.
     """
     #Hit the cache
-    optionset = get_options(optionset_label, current_only)
+    optionset = get_options(optionset_label, current_only, as_stored)
     if name in optionset:
         return optionset[name]
     return None
 
-def get_options(optionset_label, current_only=True):
+def get_options(optionset_label, current_only=True, as_stored=False):
     """
     Return all options for this app_label as dictionary with the option name
     being the key. 
@@ -50,11 +50,12 @@ def get_options(optionset_label, current_only=True):
     for option in options:
         option_dict[force_str(option.name)] = get_option_value(optionset_admin,
                                                                option,
-                                                               current_only)
+                                                               current_only,
+                                                               as_stored)
     return option_dict
 
 
-def get_option_value(optionset_admin, db_option, current_only):
+def get_option_value(optionset_admin, db_option, current_only, as_stored):
     """
     Given an AppOption object, return its value for the current language.
     """
@@ -68,6 +69,8 @@ def get_option_value(optionset_admin, db_option, current_only):
     field = optionset_admin.options[name]
 
     if not db_option.lang_dependant:
+        if as_stored:
+            return db_option.value
         return field.to_python(db_option.value) if db_option.value else ''
 
     value_dict = {}
@@ -77,10 +80,13 @@ def get_option_value(optionset_admin, db_option, current_only):
     if current_only:
         curr_lang = get_language()
         if curr_lang in value_dict:
+            if as_stored:
+                return value_dict[curr_lang]
             return field.to_python(value_dict[curr_lang]) if value_dict[curr_lang] else ''
     else:
         for key in value_dict:
-            value_dict[key] = field.to_python(value_dict[key])
+            value_dict[key] = field.to_python(value_dict[key]) if as_stored else \
+                                                                    value_dict[key]
             return value_dict
 
 
