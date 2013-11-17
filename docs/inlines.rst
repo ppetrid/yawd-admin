@@ -208,6 +208,10 @@ For example, say you're developing an e-shop selling books. In your admin.py:
 	
 	class BookInlineAdmin(OneToOneIneline):
 		model = Book
+		#by default show_title is True
+		#disable show_title if you want to to hide the model verbose name
+		#and use it in conjuction with fieldsets to achieve the desired effect
+		show_title = False 
 	
 	class ProductAdmin(admin.ModelAdmin):
 		inlines = (BookInline,)
@@ -216,4 +220,5 @@ For example, say you're developing an e-shop selling books. In your admin.py:
 	admin_site.register(Product, ProductAdmin)
 
 That way the ``Product`` admin pages will look like a single form is being used.
+
 

@@ -234,3 +234,4 @@ class OneToOneInline(admin.StackedInline):
     template = 'admin/edit_inline/one-to-one-inline.html'
     can_delete = False
     one_to_one = True
+    show_title = True
