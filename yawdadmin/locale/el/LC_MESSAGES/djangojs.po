@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-04-10 14:55+0300\n"
+"POT-Creation-Date: 2013-11-18 14:30+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -147,6 +147,29 @@ msgstr ""
 msgid "Tomorrow"
 msgstr ""
 
-#: static/yawd-admin/js/sortables.js:776
+#: static/yawd-admin/css/select2/select2.js:2657
+#: static/yawd-admin/css/select2/select2.min.js:488
+msgid "No matches found"
+msgstr "Δε βρέθηκαν αποτελέσματα"
+
+#: static/yawd-admin/css/select2/select2.js:2661
+#: static/yawd-admin/css/select2/select2.min.js:488
+msgid "Loading more results..."
+msgstr "Φόρτωση περισσότερων αποτελεσμάτων..."
+
+#: static/yawd-admin/css/select2/select2.js:2662
+#: static/yawd-admin/css/select2/select2.min.js:488
+msgid "Searching..."
+msgstr "Αναζήτηση..."
+
+#: static/yawd-admin/js/sortables.js:631
 msgid "Save order"
+msgstr ""
+
+#: static/yawd-admin/js/yawd-admin.js:118
+msgid "Delete"
+msgstr ""
+
+#: static/yawd-admin/js/yawd-admin.js:122
+msgid "Edit"
 msgstr ""
