@@ -118,7 +118,7 @@ def inline_items_for_result(inline, result):
         if force_text(result_repr) == '':
             result_repr = mark_safe('&nbsp;')
 
-        ret += format_html('<span{0}>{1}</span>', row_class, result_repr)
+        ret += format_html(u'<span{0}>{1}</span>', row_class, result_repr)
     return ret
 
 
