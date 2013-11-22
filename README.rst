@@ -2,7 +2,7 @@ yawd-admin, a django administration website
 ======================================================
 
 yawd-admin now has a live demo at
-`http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
+`http://yawd-admin.yawd.eu/ <http://yawd-admin.yawd.eu/>`_.
 Use demo / demo as username & passowrd.
 
 .. image:: docs/yawd-admin-screenshot.png
