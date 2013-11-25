@@ -1,4 +1,5 @@
 from django import forms
+from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.forms.models import BaseInlineFormSet
 from django.contrib.auth import get_user_model
@@ -62,9 +63,3 @@ class PopupInlineFormSet(BaseInlineFormSet):
         Override save_new to do nothing, as everything is handled by ajax requests.
         """
         return True
-
-
-class AdminUserModelForm(forms.ModelForm):
-    class Meta:
-        model = get_user_model()
-        fields = ('username', 'first_name', 'last_name', 'email')

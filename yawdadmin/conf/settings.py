@@ -24,7 +24,7 @@ else:
     ADMIN_GOOGLE_ANALYTICS_FLOW = None
 
 ADMIN_USER_MODELFORM = getattr(settings, 'ADMIN_USER_MODELFORM',
-    'yawdadmin.forms.AdminUserModelForm')
+    'yawdadmin.admin_forms.AdminUserModelForm')
 
 #load the modelform if it's a string
 if isinstance(ADMIN_USER_MODELFORM, str):
