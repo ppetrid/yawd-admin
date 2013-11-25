@@ -7,7 +7,7 @@
 						<i class="icon-globe icon-white"></i> {{ ADMIN_SITE_NAME }}
 					</a>
 					<nav id="logged-user-menu">
-						<ul class="nav pull-right">{% if langs %}
+						<ul class="nav pull-right">{% if langs and langs|length > 1 %}
 							<li class="divider-vertical hidden-phone hidden-tablet"></li>
 							<li class="dropdown">
 								<a data-toggle="dropdown" class="dropdown-toggle lang-switcher" href="#">{% for lang in langs %}{% if lang.name == LANGUAGE_CODE %}{% get_language_info for lang.name as info %}{% if lang.image %}
