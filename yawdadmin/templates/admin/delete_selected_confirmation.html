@@ -34,7 +34,7 @@
 					<input type="hidden" name="{{ action_checkbox_name }}" value="{{ obj.pk|unlocalize }}" />{% endfor %}
 					<input type="hidden" name="action" value="delete_selected" />
 					<input type="hidden" name="post" value="yes" />
-					<a href="../" class="btn"><i class="icon-chevron-left"></i> {% trans 'Cancel' %}</a>
+					<a href="./" class="btn"><i class="icon-chevron-left"></i> {% trans 'Cancel' %}</a>
 					<input type="submit" class="btn btn-danger" value="{% trans "Yes, I'm sure" %}" />
 				</form>{% endif %}
 			</div>{% endblock %}
