@@ -1,5 +1,4 @@
 import inspect
-import datetime
 import re
 from django import template
 from django.conf import settings
@@ -9,7 +8,7 @@ from django.core import urlresolvers
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
 from django.utils.encoding import force_text
-from django.utils.html import escapejs, format_html
+from django.utils.html import format_html
 from django.utils.safestring import mark_safe
 from django.utils.translation import get_language, ugettext as _
 from yawdadmin import admin_site
@@ -32,6 +31,7 @@ def admin_top_menu(context):
         'LANGUAGE_CODE' : get_language(),
         'optionset_labels' : admin_site.get_option_admin_urls(),
         'analytics' : context['user'].is_superuser and ls.ADMIN_GOOGLE_ANALYTICS_FLOW,
+        'request': context['request']
     }
 
 
@@ -131,7 +131,7 @@ def related_lookup_popup_var():
     once support for Django 1.5 is dropped. 
     """
     try: #Django 1.6+
-        from django.contrib.admin.options import IS_POPUP_VAR
+        from django.contrib.admin.options import IS_POPUP_VAR #@UnresolvedImport
     except:
         IS_POPUP_VAR = 'pop'
     return '<script>rel_lookup_popup_var = "%s"</script>' % IS_POPUP_VAR
