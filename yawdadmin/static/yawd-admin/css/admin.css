@@ -888,12 +888,46 @@ fieldset {
 	border-radius: 6px;
 }
 
-#changelist-top.navbar .btn, #changelist-top.navbar select[name="action"], #changelist-top.navbar .search-query {
+#changelist-top.navbar .btn,
+#changelist-top.navbar select[name="action"],
+#changelist-top.navbar .search-query {
 	margin-top: 5px;
 }
 
-#changelist-top.navbar .small, #changelist-top.navbar .label {
+#changelist-top.navbar select[name="action"] {
+	width: 180px;
+}
+
+@media (max-width: 767px) {
+	#changelist-top.navbar .search-query {
+		width: 120px;
+	}
+}
+
+@media (max-width: 1020px) {
+	#changelist-form .actions {
+		padding-bottom: 14px;
+	}
+	.action-counter {
+		position: absolute;
+		bottom: -24px;
+		left: 0;
+	}
+}
+
+#changelist-top.navbar .label {
 	vertical-align: middle;
+}
+
+#changelist-top.navbar .small {
+	vertical-align: bottom;
+	line-height: 28px;
+}
+
+.action-wrapper {
+	display: inline-block;
+	float: left;
+	position: relative;
 }
 
 .toolbar {
@@ -909,6 +943,7 @@ fieldset {
 
 select[name="action"] {
 	margin-bottom: 0;
+	width: 180px;
 }
 
 .small {

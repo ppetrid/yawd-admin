@@ -242,8 +242,8 @@ msgstr "Γενικά"
 #: templates/registration/password_reset_form.html:8
 msgid "Please correct the error below."
 msgid_plural "Please correct the errors below."
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "Παρακαλούμε διορθώστε το παρακάτο σφάλμα."
+msgstr[1] "Παρακαλούμε διορθώστε το παρακάτω σφάλματα."
 
 #: templates/admin/change_list.html:79
 msgid "List view"
@@ -983,9 +983,3 @@ msgid ""
 msgstr ""
 "Καλωσήλθατε στη σελίδα διαχείρισης yawd-admin. Παρακαλώ συνδεθείτε για να "
 "διαχειριστείτε την ιστοσελίδα."
-
-#~ msgid "Configuration"
-#~ msgstr "Ρυθμίσεις"
-
-#~ msgid "None available"
-#~ msgstr "Κανένα διαθέσιμο"
