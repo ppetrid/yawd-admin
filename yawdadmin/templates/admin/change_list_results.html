@@ -32,7 +32,17 @@
 											</tr>{% endfor %}
 										</tbody>
 									</table>
-								</div>{% else %}
+								</div>
+								<script>
+									(function($) {
+										$('#changelist-form .results tr').each(function() {
+											$(this).children().each(function(index) {
+												if (index > 6) $(this).addClass('hidden-tablet');
+												if (index > 3) $(this).addClass('hidden-phone');
+											});
+										})
+									})(yawdadmin.jQuery);
+								</script>{% else %}
 								<div class="alert add-top">{% if cl.full_result_count %}
 									{% trans 'No results found matching the specified criteria. Please try again!' %}{% else %}
 									{% trans 'There are no records yet. Use the <strong>add</strong> button above to create a new' %} {{cl.opts.verbose_name|capfirst}}!{% endif %}

@@ -87,7 +87,9 @@
 												</a>
 											</li>
 										</ul>{% endif %}{% if action_form and actions_on_top and cl.full_result_count %}
-										{% admin_actions %}{% endif %}{% if cl.has_filters %}
+										<div class="action-wrapper">
+											{% admin_actions %}
+										</div>{% endif %}{% if cl.has_filters %}
 										<ul id="changelist-filters" class="nav pull-right filters">
 											<li class="divider-vertical"></li>
 											<li class="dropdown pull-right">{% with is_filters_on=cl|filters_on %}

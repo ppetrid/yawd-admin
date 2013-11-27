@@ -45,7 +45,7 @@ def istranslationinline(value):
     This filter is used if yawd-translations is installed.
     """
     try:
-        from translations.admin import TranslationInline
+        from translations.admin import TranslationInline #@UnresolvedImport
     except:
         return False
 
