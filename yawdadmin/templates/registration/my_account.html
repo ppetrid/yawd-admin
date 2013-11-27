@@ -3,7 +3,7 @@
 {% block extrahead %}{{block.super}}<script src="{% static 'yawd-admin/js/yawd-admin.js' %}"></script>{% endblock %}
 
 {% block object-tools %}
-			<div class="row-fluid nav">
+			<div class="row-fluid nav object-tools">
 				<div class="span2">
 					<a href="{% url 'admin:password_change' %}" class="big-button">
 						<i class="configuration-item"></i> {% trans "Change password" %}
