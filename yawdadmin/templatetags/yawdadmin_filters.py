@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+import itertools
 from django import template
 from ..admin import PopupInline
 from ..forms import PopupInlineFormSet
@@ -23,6 +24,11 @@ def utfupper(value):
     rep = [u'Α', u'Ε', u'Η', u'Ι', u'Ϊ', u'Ο', u'Υ', u'Ω']
     return u''.join([rep[orig.index(x)] if x in orig else x
                      for x in value.upper()])
+
+
+@register.filter
+def filter_show(app_list):
+    return list(itertools.ifilter(lambda x: x['show'], app_list)) 
 
 
 @register.filter

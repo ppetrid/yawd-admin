@@ -58,7 +58,7 @@
 								{% trans 'Your account has no data yet. <strong>Just be patient, visits will come!</strong> :)' %}{% else %}
 								{% trans 'Error code'%} <strong>{{ga_data.error}}</strong>.{% endif %}
 							</div>
-						</div>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|length|divide:2 %}
+						</div>{% endif %}{% endif %}{% if app_list %}{% with sep=app_list|filter_show|length|divide:2 %}
 						<div class="row-fluid">
 							<div class="span6">{% for app in app_list %}{% if app.show %}{% if forloop.counter0 == sep %}
 							</div>
