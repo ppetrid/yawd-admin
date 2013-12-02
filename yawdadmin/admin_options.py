@@ -7,7 +7,7 @@ from .models import AppOption
 
 #decouple yawd-admin and yawd-translations applications
 try:
-    from translations.utils import get_supported_languages
+    from translations.utils import get_supported_languages #@UnresolvedImport
 except:
     #mimic the yawd-translations get_supported languages() behavior
     #for the languages defined in settings.LANGUAGES

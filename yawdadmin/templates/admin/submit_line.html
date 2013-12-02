@@ -17,10 +17,13 @@
 						        name: $.lastClicked.name,
 						        value: $.lastClicked.value
 						    }));{% if show_delete_link %}
-			    			$('.deletelink').addClass('disabled').click(function() {
-			    				return false;
-			    			});{% endif %}
-						});
+			    			$('.deletelink').addClass('disabled');{% endif %}
+						});{% if show_delete_link %}
+						$('.deletelink').click(function() {
+							if ($(this).hasClass('disabled'))
+								return false;
+							return true;
+						});{% endif %}
 						$(document).click(function(e) {
 						    e = e || event;
 						    $.lastClicked = e.target || e.srcElement;
