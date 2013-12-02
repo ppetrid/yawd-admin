@@ -919,7 +919,8 @@ fieldset {
 	vertical-align: middle;
 }
 
-#changelist-top.navbar .small {
+#changelist-top.navbar .small,
+#changelist-top.navbar .small a{
 	vertical-align: bottom;
 	line-height: 28px;
 }
