@@ -1004,6 +1004,12 @@ ul.toplinks li {
 	margin-bottom: 0;
 }
 
+span.control-label {
+	font-size: 14px;
+	font-weight: normal;
+	line-height: 20px;
+}
+
 .submits {
 	margin: 40px 0 0 0;
 }
