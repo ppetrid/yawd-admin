@@ -104,25 +104,17 @@
 		$('form#changelist-form table#result_list tr').find('td:gt(0) :input').change(function() {
 			list_editable_changed = true;
 		});
-		$('form#changelist-form button[name="index"]').click(function(event) {
+		$(options.actionContainer + ' .action-option a').click(function(event) {
 			if (list_editable_changed) {
-				return confirm(gettext("You have unsaved changes on individual editable fields. If you run an action, your unsaved changes will be lost."));
+				confirm(gettext("You have unsaved changes on individual editable fields. If you run an action, your unsaved changes will be lost."));
+			} else {
+				$(options.actionContainer + ' select[name="action"]').val($(this).attr('href').replace('#',''));
+				$(options.actionContainer + ' .action-wrapper').removeClass('open');
+				$(options.actionContainer + ' input[name="index"]').prop('checked', true);
+				$(options.actionLoader).removeClass('hidden');
+				$('form#changelist-form').submit();
 			}
-		});
-		$('form#changelist-form input[name="_save"]').click(function(event) {
-			var action_changed = false;
-			$('div.actions select option:selected').each(function() {
-				if ($(this).val()) {
-					action_changed = true;
-				}
-			});
-			if (action_changed) {
-				if (list_editable_changed) {
-					return confirm(gettext("You have selected an action, but you haven't saved your changes to individual fields yet. Please click OK to save. You'll need to re-run the action."));
-				} else {
-					return confirm(gettext("You have selected an action, and you haven't made any changes on individual fields. You're probably looking for the Go button rather than the Save button."));
-				}
-			}
+			return false;
 		});
 	};
 	/* Setup plugin defaults */
@@ -134,6 +126,7 @@
 		acrossQuestions: "div.actions span.question",
 		acrossClears: "div.actions span.clear",
 		allToggle: "#action-toggle",
-		selectedClass: "selected"
+		selectedClass: "selected",
+		actionLoader: ".actions-loader"
 	};
 })(yawdadmin.jQuery);

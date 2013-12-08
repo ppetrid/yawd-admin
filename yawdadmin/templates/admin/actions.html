@@ -1,12 +1,26 @@
-{% load i18n %}{% for field in action_form %}{% if field.label %}
-									<span class="label label-inverse">{{ field.label }}</span>&#xa0;{% endif %}{{ field }}{% endfor %} 
-									<button type="submit" class="btn" title="{% trans "Run the selected action" %}" name="index" value="{{ action_index|default:0 }}">{% trans "Go" %}</button>{% if actions_selection_counter %}
-									<script>var _actions_icnt="{{ cl.result_list|length|default:"0" }}";</script>
-									&#xa0;<span class="action-counter small">{{ selection_note }}</span>{% if cl.result_count != cl.result_list|length %}
-									<span class="all small">{{ selection_note_all }}</span>
-									<span class="question small">
-										<a href="#" title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
-									</span>
-									<span class="clear small">
-										<a href="#">{% trans "Clear selection" %}</a>
-									</span>{% endif %}{% endif %}
+{% load i18n %}<li class="dropdown action-wrapper">
+								<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+									<i class="icon-bolt"></i><span class="hidden-phone">&nbsp;{% trans 'Actions' %}</span> <b class="caret"></b>
+								</a>
+								<ul class="dropdown-menu">{% for field in action_form %}
+									<li class="hidden">
+									{{ field }}{% if field.label %}
+									</li>{% for choice in field.field.widget.choices%}{% if not forloop.first %}
+									<li class="action-option">
+										<a href="#{{choice.0}}">{{choice.1}}</a>
+									</li>{% endif %}{% endfor %}{% endif %}{% endfor %}
+								</ul>
+							</li>
+							<li>{% if actions_selection_counter %}
+								<script>var _actions_icnt="{{ cl.result_list|length|default:"0" }}";</script>
+								&#xa0;<span class="action-counter small">{{ selection_note }}</span>{% if cl.result_count != cl.result_list|length %}
+								<span class="all small">{{ selection_note_all }}</span>
+								<span class="question small">
+									<a href="#" title="{% trans "Click here to select the objects across all pages" %}">{% blocktrans with cl.result_count as total_count %}Select all {{ total_count }} {{ module_name }}{% endblocktrans %}</a>
+								</span>
+								<span class="clear small">
+									<a href="#">{% trans "Clear selection" %}</a>
+								</span>{% endif %}{% endif %}
+								<i class="loading-align loading-item actions-loader hidden hidden-phone"></i>
+								<input class="hidden" type="checkbox" name="index" />
+							</li>

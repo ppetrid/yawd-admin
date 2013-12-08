@@ -619,7 +619,6 @@
 				$parent.addClass('active').siblings().removeClass('active');
 				$('#content-main .results').hide();
 				$('#content-main .paginator-wrapper').hide();
-				//$('#changelist-sortables').siblings().css('opacity', '0.5');
 				$('<div class="sortables-list"><i class="loading-item"></i></div>').insertAfter('#changelist-top');
 				$.get(this.href, function(data) {
 					if (!data) {
@@ -681,7 +680,6 @@
 			$parent = $this.parent();
 			if(!$parent.hasClass('active')) {
 				$parent.addClass('active').siblings().removeClass('active');
-				//$('#changelist-sortables').siblings().css('opacity', '1');
 				$('#content-main .sortables-list').remove();
 				$('#content-main .results').html('<i class="loading-item"></i>').show();
 				$.get(this.href, window.location.search.substring(1), function(data) {

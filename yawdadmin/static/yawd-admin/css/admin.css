@@ -173,6 +173,12 @@ fieldset {
 	margin-top: 10px;
 }
 
+@media (max-width: 767px) {
+	#top-header {
+		margin-bottom: 10px !important;
+	}	
+}
+
 /* Breadcrumb */
 
 .breadcrumb {
@@ -904,25 +910,21 @@ fieldset {
 	}
 }
 
-@media (max-width: 1020px) {
-	#changelist-form .actions {
-		padding-bottom: 14px;
-	}
-	.action-counter {
-		position: absolute;
-		bottom: -24px;
-		left: 0;
-	}
-}
-
 #changelist-top.navbar .label {
 	vertical-align: middle;
+	padding-bottom: 0;
 }
 
 #changelist-top.navbar .small,
 #changelist-top.navbar .small a{
 	vertical-align: bottom;
-	line-height: 28px;
+	line-height: 33px;
+	color: #777;
+	font-size: 12px;
+}
+
+#changelist-top.navbar .form-search .small a {
+	color: #08c;
 }
 
 .action-wrapper {
@@ -931,9 +933,43 @@ fieldset {
 	position: relative;
 }
 
+.actions-loader {
+	margin-top: 4px;
+	margin-left: 4px;
+}
+
 .toolbar {
 	padding: 10px;
 }
+
+.actions span.action-counter {
+	padding-left: 10px;
+}
+
+@media (max-width: 767px) {
+	#changelist-top.navbar .small,
+	#changelist-top.navbar .small a {
+		line-height: 40px;
+		font-size: 11px;
+	}
+	
+	.actions span.action-counter {
+		padding-left: 0;
+	}
+	
+	#changelist-top.navbar .navbar-inner {
+		padding: 0 2px 0 7px;
+	}
+	
+	#changelist-top.navbar .navbar-inner ul.nav {
+		margin: 0;
+	}
+	
+	.actions-loader {
+		margin-left: 0;
+	}
+}
+
 
 .actions span.all,
 .actions span.action-counter,
@@ -1002,6 +1038,10 @@ ul.toplinks li {
 
 .form-horizontal .color-form .control-group {
 	margin-bottom: 0;
+}
+
+.form-search .input-append {
+	height: 37px;
 }
 
 span.control-label {
@@ -1377,6 +1417,18 @@ div#id_password {
 /* End overriding widget styling */
 
 /* CHANGELIST FILTERS STYLING */
+
+#changelist-filters .label {
+	font-weight: normal;
+	background: #eee;
+	color: #555;
+	text-shadow: none;
+	padding-bottom: 0;
+}
+
+#changelist-filters .filters-on .label {
+	color: #66b768;
+}
 
 .filters div.select2-container {
 	margin: 0 10px;

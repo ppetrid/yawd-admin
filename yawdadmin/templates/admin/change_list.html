@@ -74,8 +74,18 @@
 							<form id="changelist-form" action="" method="post"{% if cl.formset.is_multipart %} enctype="multipart/form-data"{% endif %}>{% csrf_token %}{% if cl.formset %}
 								<div>{{ cl.formset.management_form }}</div>{% endif %}{% block result_list %}
 								<div id="changelist-top" class="navbar">
-									<div class="navbar-inner actions">{% if cl.model_admin.sortable and cl.full_result_count %}
-										<ul id="changelist-sortables" class="nav pull-right">
+									<div class="navbar-inner actions">
+										<ul class="nav">{% if cl.has_filters %}
+											<li id="changelist-filters" class="dropdown filters">{% with is_filters_on=cl|filters_on %}
+												<a href="#" class="dropdown-toggle{% if is_filters_on %} filters-on{% endif %}" data-toggle="dropdown">
+													<i class="icon-filter"></i><span class="hidden-phone">&#xa0;{% trans 'Filters' %}</span> <span class="label">{% if is_filters_on %} {% trans 'ON' %}{% else %}{% trans 'OFF' %}{% endif %}</span>  <b class="caret"></b>
+												</a>
+												<ul class="dropdown-menu">{% for spec in cl.filter_specs %}
+													{% admin_list_filter cl spec %}{% if not forloop.last %}
+													<li class="divider"></li>{% endif %}{% endfor %}
+												</ul>
+											</li>{% endwith %}{% endif %}{% if action_form and actions_on_top and cl.full_result_count %}
+											{% admin_actions %}{% endif %}{% if cl.model_admin.sortable and cl.full_result_count %}
 											<li class="active">
 												<a id="default-view" href="{% url cl.opts|admin_urlname:'partial_changelist' %}" title="{% trans 'List view' %}">
 													<i class="icon-list"></i>
@@ -85,23 +95,8 @@
 												<a id="sortables-view" href="{% url cl.opts|admin_urlname:'sortables' %}" data-reorder="{% url cl.opts|admin_urlname:'reorder' %}" title="{% trans 'Reorder view' %}">
 													<i class="icon-move"></i>
 												</a>
-											</li>
-										</ul>{% endif %}{% if action_form and actions_on_top and cl.full_result_count %}
-										<div class="action-wrapper">
-											{% admin_actions %}
-										</div>{% endif %}{% if cl.has_filters %}
-										<ul id="changelist-filters" class="nav pull-right filters">
-											<li class="divider-vertical"></li>
-											<li class="dropdown pull-right">{% with is_filters_on=cl|filters_on %}
-												<a href="#" class="dropdown-toggle{% if is_filters_on %} filters-on{% endif %}" data-toggle="dropdown">
-													<i class="icon-filter"></i>&#xa0;{% trans 'Filters' %}{% if is_filters_on %} {% trans 'ON' %}{% endif %}  <b class="caret"></b>
-												</a>
-												<ul class="dropdown-menu">{% for spec in cl.filter_specs %}
-													{% admin_list_filter cl spec %}{% if not forloop.last %}
-													<li class="divider"></li>{% endif %}{% endfor %}
-												</ul>
-											</li>{% endwith %}
-										</ul>{% endif %}
+											</li>{% endif %}
+										</ul>
 									</div>
 								</div>
 								{% block date_hierarchy %}{% date_hierarchy cl %}{% endblock %}
