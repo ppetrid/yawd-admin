@@ -80,6 +80,12 @@ class BootstrapRadioRenderer(forms.RadioSelect.renderer):
 
 
 class Select2MultipleWidget(forms.SelectMultiple):
+    """
+    Custom multiple selection widget based on http://ivaynberg.github.io/select2/
+    
+    Note that the resulting JavaScript assumes that the jsi18n
+    catalog has been loaded in the page
+    """
 
     class Media:
         css = {'all': ('yawd-admin/css/select2/select2.css',)}
@@ -93,6 +99,12 @@ class Select2MultipleWidget(forms.SelectMultiple):
 
 
 class Select2Widget(forms.Select):
+    """
+    Custom selection widget based on http://ivaynberg.github.io/select2/
+    
+    Note that the resulting JavaScript assumes that the jsi18n
+    catalog has been loaded in the page
+    """
     select2_options = ''
 
     class Media:
