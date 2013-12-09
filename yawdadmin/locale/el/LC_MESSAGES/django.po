@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2013-11-26 22:42+0200\n"
+"POT-Creation-Date: 2013-12-09 14:23+0200\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -63,16 +63,16 @@ msgstr ""
 msgid "Your account has been updated successfuly."
 msgstr "Οι αλλαγές σας αποθηκεύτηκαν επιτυχώς."
 
-#: views.py:153 templates/registration/password_change_done.html:6
+#: views.py:153 templates/registration/password_change_done.html:10
 #: templates/registration/password_change_form.html:10
 msgid "My account"
 msgstr "Ο λογαριασμός μου"
 
-#: widgets.py:117
+#: widgets.py:129
 msgid "YES"
 msgstr "ΝΑΙ"
 
-#: widgets.py:118
+#: widgets.py:130
 msgid "NO"
 msgstr "ΟΧΙ"
 
@@ -103,23 +103,19 @@ msgid ""
 msgstr ""
 
 #: templates/admin/actions.html:3
-msgid "Run the selected action"
-msgstr "Εκτελέστε την επιλεγμένη ενέργεια"
+msgid "Actions"
+msgstr "Ενέργειες"
 
-#: templates/admin/actions.html:3
-msgid "Go"
-msgstr "ΟΚ"
-
-#: templates/admin/actions.html:8
+#: templates/admin/actions.html:19
 msgid "Click here to select the objects across all pages"
 msgstr "Κάντε κλικ για να επιλέξετε όλα τα στοιχεία όλων των σελίδων"
 
-#: templates/admin/actions.html:8
+#: templates/admin/actions.html:19
 #, python-format
 msgid "Select all %(total_count)s %(module_name)s"
 msgstr "%(total_count)s %(module_name)s: Επιλογή όλων"
 
-#: templates/admin/actions.html:11
+#: templates/admin/actions.html:22
 msgid "Clear selection"
 msgstr "Εκκαθάριση επιλεγμένων"
 
@@ -196,7 +192,7 @@ msgstr ""
 #: templates/admin/change_form.html:28 templates/admin/change_list.html:60
 #: templates/admin/index.html:89 templates/admin/edit_inline/popup.html:19
 msgid "Add"
-msgstr ""
+msgstr "Προσθήκη"
 
 #: templates/admin/app_index.html:39 templates/admin/index.html:92
 msgid "Change"
@@ -251,21 +247,25 @@ msgid_plural "Please correct the errors below."
 msgstr[0] "Παρακαλούμε διορθώστε το παρακάτο σφάλμα."
 msgstr[1] "Παρακαλούμε διορθώστε τα παρακάτω σφάλματα."
 
-#: templates/admin/change_list.html:80
-msgid "List view"
-msgstr "Προβολή λίστας"
-
-#: templates/admin/change_list.html:85
-msgid "Reorder view"
-msgstr "Προβολή ταξινόμησης"
-
-#: templates/admin/change_list.html:97
+#: templates/admin/change_list.html:81
 msgid "Filters"
 msgstr "Φίλτρα"
 
-#: templates/admin/change_list.html:97
+#: templates/admin/change_list.html:81
 msgid "ON"
 msgstr ""
+
+#: templates/admin/change_list.html:81
+msgid "OFF"
+msgstr ""
+
+#: templates/admin/change_list.html:90
+msgid "List view"
+msgstr "Προβολή λίστας"
+
+#: templates/admin/change_list.html:95
+msgid "Reorder view"
+msgstr "Προβολή ταξινόμησης"
 
 #: templates/admin/change_list_results.html:15
 msgid "Remove from sorting"
@@ -777,8 +777,8 @@ msgstr "Συνδεθείτε ξανά"
 msgid "Update account"
 msgstr "Εφαρμογή"
 
-#: templates/registration/password_change_done.html:7
-#: templates/registration/password_change_done.html:10
+#: templates/registration/password_change_done.html:4
+#: templates/registration/password_change_done.html:11
 #: templates/registration/password_change_done.html:14
 #: templates/registration/password_change_form.html:4
 #: templates/registration/password_change_form.html:11
@@ -786,10 +786,11 @@ msgstr "Εφαρμογή"
 msgid "Password change"
 msgstr "Αλλαγή κωδικού"
 
-#: templates/registration/password_change_done.html:16
+#: templates/registration/password_change_done.html:17
 msgid "Your password was changed successfully."
 msgstr "Ο κωδικός σας ανανεώθηκε επιτυχώς."
 
+#: templates/registration/password_change_done.html:18
 #: templates/registration/password_change_form.html:17
 msgid ""
 "Please enter your old password, for security's sake, and then enter your new "
@@ -799,19 +800,23 @@ msgstr ""
 "εισάγετε το νέο σας κωδικό δύο φορές για να βεβαιωθούμε ότι τον "
 "πληκτρολογήσατε σωστά."
 
-#: templates/registration/password_change_form.html:26
+#: templates/registration/password_change_done.html:24
+#: templates/registration/password_change_form.html:27
 msgid "Old password"
 msgstr "Παλιός κωδικός"
 
-#: templates/registration/password_change_form.html:35
+#: templates/registration/password_change_done.html:32
+#: templates/registration/password_change_form.html:36
 msgid "New password"
 msgstr "Νέος κωδικός"
 
-#: templates/registration/password_change_form.html:44
+#: templates/registration/password_change_done.html:40
+#: templates/registration/password_change_form.html:45
 msgid "New password (again)"
 msgstr "Νέος κωδικός (2η φορά)"
 
-#: templates/registration/password_change_form.html:52
+#: templates/registration/password_change_done.html:48
+#: templates/registration/password_change_form.html:54
 #: templates/registration/password_reset_confirm.html:37
 msgid "Change my password"
 msgstr "Αλλαγή κωδικού"
@@ -1013,3 +1018,9 @@ msgid ""
 msgstr ""
 "Καλωσήλθατε στη σελίδα διαχείρισης yawd-admin. Παρακαλώ συνδεθείτε για να "
 "διαχειριστείτε την ιστοσελίδα."
+
+#~ msgid "Run the selected action"
+#~ msgstr "Εκτελέστε την επιλεγμένη ενέργεια"
+
+#~ msgid "Go"
+#~ msgstr "ΟΚ"
