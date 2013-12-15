@@ -923,7 +923,8 @@ fieldset {
 	font-size: 12px;
 }
 
-#changelist-top.navbar .form-search .small a {
+#changelist-top.navbar .form-search .small a,
+#changelist-top.navbar .question.small a  {
 	color: #08c;
 }
 
