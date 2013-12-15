@@ -1,5 +1,5 @@
 {% load i18n admin_static %}<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">{% if inline_admin_formset.opts.show_title %}
-							<h2{% if inline_admin_formset.opts.collapse %} class="collapse-switcher" onclick="collapse_switcher(this, '#{{inline_admin_formset.formset.prefix}}-wrapper');"{% endif %}>{{ inline_admin_formset.opts.verbose_name_plural|title }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
+							<h2{% if inline_admin_formset.opts.collapse %} class="collapse-switcher" onclick="collapse_switcher(this, '#{{inline_admin_formset.formset.prefix}}-wrapper');"{% endif %}>{{ inline_admin_formset.opts.verbose_name|title }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
 							<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}{% endif %}
 							<div class="inline-wrapper{% if inline_admin_formset.opts.collapse %} hide{% endif %}" id="{{inline_admin_formset.formset.prefix}}-wrapper">
 								{{ inline_admin_formset.formset.management_form }}{% if inline_admin_formset.formset.non_form_errors %}
