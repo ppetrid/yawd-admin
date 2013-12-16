@@ -880,6 +880,11 @@ fieldset {
 
 /*  END ICONS */
 
+.loading-align {
+	display: inline-block;
+	vertical-align: middle;
+}
+
 #changelist-top {
 	margin-bottom: 5px;
 }
