@@ -90,5 +90,5 @@ def indexof_non_hidden(fields):
     Used in TabularInline
     """
     for index, field in enumerate(fields):
-        if not field.widget.is_hidden:
+        if not hasattr(field, 'widget') or not field.widget.is_hidden:
             return index
