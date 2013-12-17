@@ -75,17 +75,7 @@
 								<div>{{ cl.formset.management_form }}</div>{% endif %}{% block result_list %}
 								<div id="changelist-top" class="navbar">
 									<div class="navbar-inner actions">
-										<ul class="nav">{% if cl.has_filters %}
-											<li id="changelist-filters" class="dropdown filters">{% with is_filters_on=cl|filters_on %}
-												<a href="#" class="dropdown-toggle{% if is_filters_on %} filters-on{% endif %}" data-toggle="dropdown">
-													<i class="icon-filter"></i><span class="hidden-phone">&#xa0;{% trans 'Filters' %}</span> <span class="label">{% if is_filters_on %} {% trans 'ON' %}{% else %}{% trans 'OFF' %}{% endif %}</span>  <b class="caret"></b>
-												</a>
-												<ul class="dropdown-menu">{% for spec in cl.filter_specs %}
-													{% admin_list_filter cl spec %}{% if not forloop.last %}
-													<li class="divider"></li>{% endif %}{% endfor %}
-												</ul>
-											</li>{% endwith %}{% endif %}{% if action_form and actions_on_top and cl.full_result_count %}
-											{% admin_actions %}{% endif %}{% if cl.model_admin.sortable and cl.full_result_count %}
+										<ul class="nav">{% if cl.model_admin.sortable and cl.full_result_count %}
 											<li class="active">
 												<a id="default-view" href="{% url cl.opts|admin_urlname:'partial_changelist' %}" title="{% trans 'List view' %}">
 													<i class="icon-list"></i>
@@ -95,7 +85,17 @@
 												<a id="sortables-view" href="{% url cl.opts|admin_urlname:'sortables' %}" data-reorder="{% url cl.opts|admin_urlname:'reorder' %}" title="{% trans 'Reorder view' %}">
 													<i class="icon-move"></i>
 												</a>
-											</li>{% endif %}
+											</li>{% endif %}{% if cl.has_filters %}
+											<li id="changelist-filters" class="dropdown filters">{% with is_filters_on=cl|filters_on %}
+												<a href="#" class="dropdown-toggle{% if is_filters_on %} filters-on{% endif %}" data-toggle="dropdown">
+													<i class="icon-filter"></i><span class="hidden-phone">&#xa0;{% trans 'Filters' %}</span> <span class="label">{% if is_filters_on %} {% trans 'ON' %}{% else %}{% trans 'OFF' %}{% endif %}</span>  <b class="caret"></b>
+												</a>
+												<ul class="dropdown-menu">{% for spec in cl.filter_specs %}
+													{% admin_list_filter cl spec %}{% if not forloop.last %}
+													<li class="divider"></li>{% endif %}{% endfor %}
+												</ul>
+											</li>{% endwith %}{% endif %}{% if action_form and actions_on_top and cl.full_result_count %}
+											{% admin_actions %}{% endif %}
 										</ul>
 									</div>
 								</div>
