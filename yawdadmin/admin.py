@@ -167,7 +167,7 @@ class SortableModelAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         """
-        Override get_urls to include the translation messages view
+        Override get_urls to include the sortable views
         for the specified language
         """
         urls = super(SortableModelAdmin, self).get_urls()

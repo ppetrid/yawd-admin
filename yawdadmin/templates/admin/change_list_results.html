@@ -42,8 +42,8 @@
 											});
 										})
 									})(yawdadmin.jQuery);
-								</script>{% else %}
+								</script>{% else %}{% block no-results-message %}
 								<div class="alert add-top">{% if cl.full_result_count %}
 									{% trans 'No results found matching the specified criteria. Please try again!' %}{% else %}
 									{% trans 'There are no records yet. Use the <strong>add</strong> button above to create a new' %} {{cl.opts.verbose_name|capfirst}}!{% endif %}
-								</div>{% endif %}
+								</div>{% endblock %}{% endif %}

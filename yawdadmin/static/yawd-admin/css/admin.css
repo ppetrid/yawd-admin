@@ -1714,6 +1714,10 @@ h3.popover-title {
 	line-height: 20px;
 }
 
+.vForeignKeyRawIdAdminField {
+	width: 50px;
+}
+
 /* Sidenav for Affix
 -------------------------------------------------- */
 
