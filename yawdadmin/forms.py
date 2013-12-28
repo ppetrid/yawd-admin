@@ -1,8 +1,6 @@
-from django import forms
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
 from django.forms.models import BaseInlineFormSet
-from django.contrib.auth import get_user_model
 
 
 class PopupInlineFormSet(BaseInlineFormSet):

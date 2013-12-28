@@ -1,6 +1,7 @@
 from oauth2client.client import flow_from_clientsecrets
 from django.conf import settings
 
+
 ADMIN_GOOGLE_ANALYTICS = {
     'client_secrets' : '',
     'token_file_name' : '',
@@ -9,10 +10,12 @@ ADMIN_GOOGLE_ANALYTICS = {
     'interval' : 30 #how many days back should we look for data?
 }
 
+
 try:
     ADMIN_GOOGLE_ANALYTICS.update(settings.ADMIN_GOOGLE_ANALYTICS)
 except AttributeError:
     pass
+
 
 if ADMIN_GOOGLE_ANALYTICS['client_secrets'] and ADMIN_GOOGLE_ANALYTICS['profile_id'] and ADMIN_GOOGLE_ANALYTICS['token_file_name']:
     ADMIN_GOOGLE_ANALYTICS_FLOW = flow_from_clientsecrets( ADMIN_GOOGLE_ANALYTICS['client_secrets'],
@@ -23,8 +26,10 @@ if ADMIN_GOOGLE_ANALYTICS['client_secrets'] and ADMIN_GOOGLE_ANALYTICS['profile_
 else:
     ADMIN_GOOGLE_ANALYTICS_FLOW = None
 
+
 ADMIN_USER_MODELFORM = getattr(settings, 'ADMIN_USER_MODELFORM',
     'yawdadmin.admin_forms.AdminUserModelForm')
+
 
 #load the modelform if it's a string
 if isinstance(ADMIN_USER_MODELFORM, str):

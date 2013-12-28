@@ -2,6 +2,7 @@ import inspect
 import re
 from django import template
 from django.conf import settings
+from django.contrib.admin.templatetags.admin_modify import submit_row
 from django.contrib.admin.views.main import PAGE_VAR
 from django.contrib.admin.util import lookup_field, display_for_field, display_for_value
 from django.core import urlresolvers
@@ -135,3 +136,19 @@ def related_lookup_popup_var():
     except:
         IS_POPUP_VAR = 'pop'
     return '<script>rel_lookup_popup_var = "%s"</script>' % IS_POPUP_VAR
+
+
+@register.inclusion_tag('admin/submit_line.html', takes_context=True)
+def explicit_submit_row(context, **kwargs):
+    """
+    This template tag allows disabling buttons explicitly from templates.
+    """
+    explicit_context = {}
+    for option in ('show_delete_link', 'show_save_as_new', 'show_save_and_add_another',
+              'show_save_and_continue', 'show_save'):
+        if option in kwargs and not kwargs[option] is None:
+            explicit_context[option] = kwargs[option]
+
+    original_context = submit_row(context)
+    original_context.update(explicit_context)                                                              
+    return original_context
