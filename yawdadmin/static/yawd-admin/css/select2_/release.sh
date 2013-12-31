@@ -22,14 +22,10 @@ timestamp=$(date)
 tokens="s/@@ver@@/$ver/g;s/\@@timestamp@@/$timestamp/g"
 remote="github"
 
-echo "Pulling from origin"
-
-git pull
-
 echo "Updating Version Identifiers"
 
-sed -E -e "s/\"version\": \"([0-9\.]+)\",/\"version\": \"$ver\",/g" -i "" bower.json select2.jquery.json
-git add bower.json
+sed -E -e "s/\"version\": \"([0-9\.]+)\",/\"version\": \"$ver\",/g" -i "" component.json select2.jquery.json
+git add component.json
 git add select2.jquery.json
 git commit -m "modified version identifiers in descriptors for release $ver"
 git push
@@ -41,7 +37,7 @@ echo "Tokenizing..."
 
 find . -name "$js" | xargs -I{} sed -e "$tokens" -i "" {} 
 find . -name "$css" | xargs -I{} sed -e "$tokens" -i "" {}
-sed -e "s/latest/$ver/g" -i "" bower.json
+sed -e "s/latest/$ver/g" -i "" component.json
 
 git add "$js"
 git add "$css"
@@ -53,8 +49,11 @@ cat LICENSE | sed "$tokens" >> "$mini"
 echo "*/" >> "$mini"
 
 curl -s \
+	-d compilation_level=SIMPLE_OPTIMIZATIONS \
+	-d output_format=text \
+	-d output_info=compiled_code \
 	--data-urlencode "js_code@$js" \
-	http://marijnhaverbeke.nl/uglifyjs \
+	http://closure-compiler.appspot.com/compile \
 	>> "$mini"
 
 git add "$mini"
