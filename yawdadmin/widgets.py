@@ -1,3 +1,4 @@
+import re
 from itertools import chain
 from django import forms
 from django.contrib.contenttypes.models import ContentType
@@ -5,12 +6,12 @@ from django.utils.translation import ugettext as _
 from django.utils.safestring import mark_safe
 
 try: #Django 1.7+
-    from django.contrib.admin.options import TO_FIELD_VAR
+    from django.contrib.admin.options import TO_FIELD_VAR #@UnresolvedImport
 except:
     TO_FIELD_VAR = 't'
 
 try: #Django 1.6+
-    from django.contrib.admin.options import IS_POPUP_VAR
+    from django.contrib.admin.options import IS_POPUP_VAR #@UnresolvedImport
 except:
     IS_POPUP_VAR = 'pop'
 
@@ -113,10 +114,16 @@ class Select2Widget(forms.Select):
 
     def render(self, name, value, attrs=None, choices=()):
         result = super(Select2Widget, self).render(name, value, attrs, choices)
+        #read-only mode
+        ro = ''
+        if self.attrs and 'readonly' in self.attrs and self.attrs['readonly']:
+            ro = '.select2("readonly", true)'
+
         return result + mark_safe('<script>(function($){'\
-                                  '$(\'#%s\').select2(%s);'\
+                                  '$(\'#%s\').select2(%s)%s;'\
                                   '})(yawdadmin.jQuery);</script>' % (attrs['id'],
-                                                                      self.select2_options))
+                                                            self.select2_options,
+                                                            ro))
 
 
 class SwitchWidget(forms.CheckboxInput):
