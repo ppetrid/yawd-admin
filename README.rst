@@ -65,3 +65,9 @@ Admin db options
 ++++++++++++++++
 
 .. image:: docs/admin-options-full.png
+
+
+.. image:: https://d2weczhvl823v0.cloudfront.net/yawd/yawd-admin/trend.png
+   :alt: Bitdeli badge
+   :target: https://bitdeli.com/free
+
