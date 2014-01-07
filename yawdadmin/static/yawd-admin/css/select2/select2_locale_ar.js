@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "تحمل المذيد من النتائج ..."; },
         formatSearching: function () { return "جاري البحث ..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

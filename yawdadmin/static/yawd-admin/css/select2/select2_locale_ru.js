@@ -12,4 +12,4 @@
         formatLoadMore: function (pageNumber) { return "Загрузка данных..."; },
         formatSearching: function () { return "Поиск..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

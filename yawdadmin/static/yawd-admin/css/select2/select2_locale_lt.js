@@ -26,4 +26,4 @@
         formatLoadMore: function (pageNumber) { return "Kraunama daugiau rezultatų..."; },
         formatSearching: function () { return "Ieškoma..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

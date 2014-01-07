@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Sedang memuatkan keputusan..."; },
         formatSearching: function () { return "Mencari..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

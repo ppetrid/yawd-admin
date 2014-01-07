@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "در حال بارگذاری موارد بیشتر ..."; },
         formatSearching: function () { return "در حال جستجو"; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

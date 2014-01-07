@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Loading more results..."; },
         formatSearching: function () { return "Searching..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

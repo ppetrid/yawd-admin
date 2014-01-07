@@ -2,7 +2,7 @@ import re
 from itertools import chain
 from django import forms
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, get_language
 from django.utils.safestring import mark_safe
 
 try: #Django 1.7+
@@ -86,11 +86,16 @@ class Select2MultipleWidget(forms.SelectMultiple):
     
     Note that the resulting JavaScript assumes that the jsi18n
     catalog has been loaded in the page
-    """
-
-    class Media:
-        css = {'all': ('yawd-admin/css/select2/select2.css',)}
-        js = ('yawd-admin/css/select2/select2.min.js',)
+    """    
+    def _media(self):
+        """
+        Set the widget's javascript and css
+        """
+        return forms.Media(css = {'all': ('yawd-admin/css/select2/select2.css',)}, 
+                           js = ('yawd-admin/css/select2/select2.min.js',
+                                 'yawd-admin/css/select2/select2_locale_'+
+                                 get_language()+'.js'))
+    media = property(_media)
 
     def render(self, name, value, attrs=None, choices=()):
         result = super(Select2MultipleWidget, self).render(name, value, attrs, choices)
@@ -107,10 +112,16 @@ class Select2Widget(forms.Select):
     catalog has been loaded in the page
     """
     select2_options = ''
-
-    class Media:
-        css = {'all': ('yawd-admin/css/select2/select2.css',)}
-        js = ('yawd-admin/css/select2/select2.min.js',)
+    
+    def _media(self):
+        """
+        Set the widget's javascript and css
+        """
+        return forms.Media(css = {'all': ('yawd-admin/css/select2/select2.css',)}, 
+                           js = ('yawd-admin/css/select2/select2.min.js',
+                                 'yawd-admin/css/select2/select2_locale_'+
+                                 get_language()+'.js'))
+    media = property(_media)
 
     def render(self, name, value, attrs=None, choices=()):
         result = super(Select2Widget, self).render(name, value, attrs, choices)

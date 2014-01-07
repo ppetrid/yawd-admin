@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "S'estan carregant més resultats..."; },
         formatSearching: function () { return "S'està cercant..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

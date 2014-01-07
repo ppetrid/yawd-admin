@@ -14,5 +14,5 @@
         formatLoadMore: function (pageNumber) { return "Đang lấy thêm kết quả..."; },
         formatSearching: function () { return "Đang tìm..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);
 

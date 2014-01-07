@@ -13,4 +13,4 @@
         formatSearching: function () { return "Meklēšana..."; }
     });
 	
-})(jQuery);
+})(yawdadmin.jQuery);

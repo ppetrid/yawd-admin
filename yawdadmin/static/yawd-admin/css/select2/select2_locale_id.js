@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Mengambil data..."; },
         formatSearching: function () { return "Mencari..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

@@ -40,4 +40,4 @@
             return "Buscando...";
         }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

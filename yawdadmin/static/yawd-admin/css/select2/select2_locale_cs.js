@@ -46,4 +46,4 @@
         formatLoadMore: function (pageNumber) { return "Načítají se další výsledky..."; },
         formatSearching: function () { return "Vyhledávání..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

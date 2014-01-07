@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Φόρτωση περισσότερων..."; },
         formatSearching: function () { return "Αναζήτηση..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

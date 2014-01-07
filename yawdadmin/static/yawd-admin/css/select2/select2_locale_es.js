@@ -12,4 +12,4 @@
         formatLoadMore: function (pageNumber) { return "Cargando más resultados..."; },
         formatSearching: function () { return "Buscando..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

@@ -34,4 +34,4 @@
             return "Szukanie...";
         }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

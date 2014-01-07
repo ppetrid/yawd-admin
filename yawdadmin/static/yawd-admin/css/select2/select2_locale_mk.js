@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Вчитување резултати..."; },
         formatSearching: function () { return "Пребарување..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

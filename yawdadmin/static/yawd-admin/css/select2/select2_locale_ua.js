@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Завантаження даних..."; },
         formatSearching: function () { return "Пошук..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

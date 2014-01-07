@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "불러오는 중…"; },
         formatSearching: function () { return "검색 중…"; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

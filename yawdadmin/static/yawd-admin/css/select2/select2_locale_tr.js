@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Daha fazla..."; },
         formatSearching: function () { return "Aranıyor..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

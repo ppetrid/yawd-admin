@@ -39,4 +39,4 @@
         formatLoadMore: function (pageNumber) { return "Učitavanje rezultata..."; },
         formatSearching: function () { return "Pretraga..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);

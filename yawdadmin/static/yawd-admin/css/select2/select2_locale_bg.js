@@ -14,4 +14,4 @@
         formatLoadMore: function (pageNumber) { return "Зареждат се още..."; },
         formatSearching: function () { return "Търсене..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);
