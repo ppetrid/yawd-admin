@@ -1641,7 +1641,7 @@ h3.popover-title {
 	display: none;
 }
 
-.inline-related fieldset {
+.inline-related fieldset, .no-bottom {
 	margin-bottom: 0;	
 }
 

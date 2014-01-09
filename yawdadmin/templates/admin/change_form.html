@@ -73,7 +73,7 @@
 					{% csrf_token %}{% block form_top %}{% endblock %}{% block top_submit_row %}{% if save_on_top %}{% explicit_submit_row %}{% endif %}{% endblock %}
 					<div class="row-fluid">{% if is_popup %}
 						<input type="hidden" name="{% if is_popup_var %}{{is_popup_var}}{% else %}_popup{% endif %}" value="1" />{% endif %}{% if errors %}
-			    		<div class="alert alert-error">
+			    		<div class="alert alert-error no-bottom">
 			    			<button type="button" class="close" data-dismiss="alert">×</button>
 			    			{% blocktrans count errors|length as counter %}Please correct the error below.{% plural %}Please correct the errors below.{% endblocktrans %}
 			    			{{ adminform.form.non_field_errors }}
