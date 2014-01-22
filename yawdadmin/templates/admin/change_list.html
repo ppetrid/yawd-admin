@@ -9,7 +9,8 @@
 {% block extrahead %}{{ block.super }}{% if cl.formset or action_form %}{% url 'admin:jsi18n' as jsi18nurl %}
 		<script src="{{ jsi18nurl|default:'../../jsi18n/' }}"></script>{% endif %}
 		<script src="{% static 'yawd-admin/js/yawd-admin.js' %}"></script>{% if cl.has_filters %}
-		<script src="{% static 'yawd-admin/css/select2/select2.min.js' %}"></script>
+		<script src="{% static 'yawd-admin/css/select2/select2.min.js' %}"></script>{% get_current_language as LANGUAGE_CODE %}
+		<script src="{% static 'yawd-admin/css/select2/select2_locale_'|add:LANGUAGE_CODE|add:'.js' %}"></script>
 		<script>
 			(function($) {
 				$(document).ready(function($) {
