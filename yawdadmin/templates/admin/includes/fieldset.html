@@ -9,9 +9,9 @@
 										<div class="alert alert-error">
 											{{ line.errors }}
 										</div>{% endif %}{% for field in line %}
-										<div class="control-group{% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
-											{% if not field.is_readonly %}<label class="control-label{% if field.field.field.required %} required{% endif %}{% if not line.fields|length_is:'1' and not forloop.first %} inline-field{% endif %}"{% if field.field.auto_id %} for="{{field.field.auto_id}}"{% endif %}>{% else %}<span class="control-label">{% endif %}{{ field.field.label }}:{% if field.field.field.required %} <span class="text-error">*</span>{% endif %}{% if not field.is_readonly %}</label>{% else %}</span>{% endif %}
-											<div class="controls{% if not line.fields|length_is:'1' and not forloop.first %} inline-field{% endif %}">{% if field.is_readonly %}
+										<div class="control-group{% if not line.fields|length_is:'1' %} field-box{% endif %}{% if not line.fields|length_is:'1' and not forloop.first %} inline-field{% endif %}{% if not field.is_readonly and field.errors %} error{% endif %}">
+											{% if not field.is_readonly %}<label class="control-label{% if field.field.field.required %} required{% endif %}"{% if field.field.auto_id %} for="{{field.field.auto_id}}"{% endif %}>{% else %}<span class="control-label">{% endif %}{{ field.field.label }}:{% if field.field.field.required %} <span class="text-error">*</span>{% endif %}{% if not field.is_readonly %}</label>{% else %}</span>{% endif %}
+											<div class="controls">{% if field.is_readonly %}
 												{% if field.contents %}{{ field.contents|linebreaksbr }}{% else %}-{% endif %}{% else %}
 												{{ field.field }}{% endif %}{% if field.field.help_text %}
 												<i class="help icon-question-sign" data-original-title="{{ field.field.label }} - {% trans 'help text' %}" data-content="{{ field.field.help_text }}"></i>{% endif %}{% if line.fields|length_is:'1' and not field.is_readonly and field.errors %}

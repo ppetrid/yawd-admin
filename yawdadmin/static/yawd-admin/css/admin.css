@@ -1069,11 +1069,12 @@ span.control-label {
 	vertical-align: top;
 }
 
-.field-box .inline-field {
-	width: inherit;
-	display: inline-block;
-	float: none;
-	margin-left: 10px;
+.field-box.inline-field .control-label{
+	width: 100px;
+}
+
+.field-box.inline-field .controls{
+	margin-left: 120px;
 }
 
 .pointer {
