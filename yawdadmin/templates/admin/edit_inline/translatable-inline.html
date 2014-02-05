@@ -26,8 +26,14 @@
 										<div class="alert alert-error">
 											{{ inline_admin_form.form.non_field_errors }}
 										</div>{% endif %}{% if inline_admin_formset.formset.can_delete and inline_admin_form.original and inline_admin_formset.formset|length > 1 %}
-										<div class="delete alert alert-info">{{ inline_admin_form.deletion_field.field }} {% trans 'Clear the ' %}{% if inline_admin_form.original %}{% get_language_info for inline_admin_form.original.language_id as lang %}{% else %}{% get_language_info for inline_admin_form.form.initial.language as lang %}{% endif %} {{lang.name}} {% trans 'translation' %}</div>{% endif %}{% for fieldset in inline_admin_form %}
-										{% include "admin/includes/fieldset-with-hidden-language.html" %}{% endfor %}{% if inline_admin_form.has_auto_field or inline_admin_form.needs_explicit_pk_field %}
+										<div class="delete alert alert-info">{{ inline_admin_form.deletion_field.field }} {% trans 'Clear the ' %}{% if inline_admin_form.original %}{% get_language_info for inline_admin_form.original.language_id as lang %}{% else %}{% get_language_info for inline_admin_form.form.initial.language as lang %}{% endif %} {{lang.name}} {% trans 'translation' %}</div>{% endif %}{% for fieldset in inline_admin_form %}{% if inline_admin_formset.formset|length == 1 %}
+										{% if adminform.model_admin.affix and not is_popup and not forloop.first %}
+										<div class="affix-header">{% endif %}
+										<div class="fieldset-wrapper">{% endif %}
+										{% include "admin/includes/fieldset-with-hidden-language.html" %}{% if inline_admin_formset.formset|length == 1 %}
+										{% if adminform.model_admin.affix and not is_popup and not forloop.first %}
+										</div>{% endif %}
+										</div>{% endif %}{% endfor %}{% if inline_admin_form.has_auto_field or inline_admin_form.needs_explicit_pk_field %}
 										{{ inline_admin_form.pk_field.field }}{% endif %}
 										{{ inline_admin_form.fk_field.field }}
 									</div>{% endif %}{% endfor %}
