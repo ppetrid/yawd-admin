@@ -2,7 +2,7 @@ import re
 from itertools import chain
 from django import forms
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext as _, get_language
+from django.utils.translation import ugettext as _, ugettext_lazy, get_language
 from django.utils.safestring import mark_safe
 
 try: #Django 1.7+
@@ -142,15 +142,15 @@ class SwitchWidget(forms.CheckboxInput):
         js = ('yawd-admin/js/bootstrap.switch.min.js',)
 
     def render(self, name, value, attrs=None):
-        output = super(SwitchWidget, self).render(name, value, attrs)
+        switch_defaults = {
+            'data-on-label': ugettext_lazy('YES'),
+            'data-off-label': ugettext_lazy('NO'),
+            'data-on': 'success',
+            'data-off': 'danger'
+        }
+        switch_defaults.update(self.attrs)
+        self.attrs = switch_defaults
 
-        data_on_label = self.attrs.pop('data-on-label', _('YES'))
-        data_off_label = self.attrs.pop('data-off-label', _('NO'))
-        data_on = self.attrs.pop('data-on', 'primary')
-        data_off = self.attrs.pop('data-off', 'default')
-        classes = self.attrs.pop('class', '')
-
-        return mark_safe('<div id="%s-switch" class="switch %s" data-on="%s" '
-                         'data-off="%s" data-on-label="%s" data-off-label="%s">' % (
-                    attrs['id'], classes, data_on, data_off,
-                    data_on_label, data_off_label)) + output + mark_safe('</div>')
+        return super(SwitchWidget, self).render(name, value, attrs) + \
+            mark_safe("<script>yawdadmin.jQuery('#%s').bootstrapSwitch();</script>" \
+                        % attrs['id'])
