@@ -1070,11 +1070,14 @@ span.control-label {
 }
 
 .field-box.inline-field .control-label{
-	width: 100px;
+	margin-left: 20px;
+	float: none;
+	width: auto;
 }
 
 .field-box.inline-field .controls{
-	margin-left: 120px;
+	margin-left: 10px;
+	display: inline-block;
 }
 
 .pointer {
