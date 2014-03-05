@@ -5,6 +5,7 @@ from django import VERSION as DJANGO_VERSION
 from django.conf.urls import patterns, url
 from django.conf import settings
 from django.contrib.admin.sites import AdminSite
+from django.core.cache import cache
 from django.core.exceptions import ImproperlyConfigured
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.http import Http404
@@ -12,7 +13,7 @@ from django.template.response import TemplateResponse
 from django.utils import six
 from django.utils.encoding import force_text
 from django.utils.text import capfirst
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, get_language
 from django.views.decorators.cache import never_cache
 from conf import settings as ls
 from models import AppOption
@@ -419,13 +420,23 @@ class YawdAdminSite(AdminSite):
     def i18n_javascript(self, request):
         """
         Override the original js catalog function to include additional
-        js translation messages based on a yawd-admin setting.
+        js translation messages based on a yawd-admin setting and cache
+        the results per language.
         """
-        if settings.USE_I18N:
-            from django.views.i18n import javascript_catalog
-        else:
-            from django.views.i18n import null_javascript_catalog as javascript_catalog
-        return javascript_catalog(request, packages=['django.conf',
+        cache_key = 'ya-jsi18n-%s' % get_language()
+        cache_timeout = getattr(settings, 'ADMIN_JS_CATALOG_CACHE_TIMEOUT', 60 * 60)
+        cached = cache.get(cache_key)
+
+        if not cached or not cache_timeout:
+            if settings.USE_I18N:
+                from django.views.i18n import javascript_catalog
+            else:
+                from django.views.i18n import null_javascript_catalog as javascript_catalog
+
+            cached = javascript_catalog(request, packages=['django.conf',
                                                      'django.contrib.admin',
                                                      'yawdadmin']
                                   + getattr(settings, 'ADMIN_JS_CATALOG', []))
+            cache.set(cache_key, cached, cache_timeout)
+
+        return cached
