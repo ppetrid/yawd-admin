@@ -154,7 +154,6 @@ class YawdAdminDashboard(object):
 
 
 class YawdAdminSite(AdminSite):
-
     top_menu_default_order = 3
     dashboard_class = YawdAdminDashboard
 
@@ -185,6 +184,9 @@ class YawdAdminSite(AdminSite):
             raise ImproperlyConfigured("Put 'yawdadmin.middleware.PopupMiddleware' "
                                        "in your MIDDLEWARE_CLASSES setting "
                                        "in order to use the yawd-admin application.")
+
+    def get_index_template(self):
+        return self.index_template
 
     def get_urls(self):
         global _optionset_labels
@@ -392,7 +394,7 @@ class YawdAdminSite(AdminSite):
             'dashboard': dashboard
         }
         context.update(extra_context or {})
-        return TemplateResponse(request, self.index_template or
+        return TemplateResponse(request, self.get_index_template() or
                                 'admin/index.html', context,
                                 current_app=self.name)
 

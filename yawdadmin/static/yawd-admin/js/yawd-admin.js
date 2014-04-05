@@ -138,9 +138,9 @@ function dismissEditPopupInline(win, newId, newRepr) {
 
 var affix_offset = {
 	top: function () {
-		if (yawdadmin.jQuery('.affix-main').length == 0)
+		if (yawdadmin.jQuery('.affix-main:visible').length == 0)
 			return yawdadmin.jQuery('.affix-sidebar').offset().top;
-		return yawdadmin.jQuery('.affix-main').offset().top - 60;
+		return yawdadmin.jQuery('.affix-main:visible').offset().top - 60;
 	}
 };
 

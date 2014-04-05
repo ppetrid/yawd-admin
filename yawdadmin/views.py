@@ -10,6 +10,7 @@ from django.utils.translation import ugettext as _
 from django.views.generic import TemplateView, View, UpdateView
 from conf import settings as ls
 
+
 class AppOptionView(TemplateView):
     template_name = 'admin/options.html'
     
@@ -50,7 +51,8 @@ class AppOptionView(TemplateView):
     
     def put(self, request, *args, **kwargs):
         return self.post(request, *args, **kwargs)
-    
+
+
 class AnalyticsAuthView(View):
     """
     This view implements the oauth2 authentication callback.
@@ -72,7 +74,8 @@ class AnalyticsAuthView(View):
         
         messages.add_message(self.request, messages.SUCCESS, _('The user was successfully connected.'))
         return HttpResponseRedirect(reverse('admin:analytics'))
-    
+
+
 class AnalyticsConfigView(TemplateView):
     """
     Admin view for the google analytics functionality. The view is 
@@ -101,7 +104,8 @@ class AnalyticsConfigView(TemplateView):
         }
         
         return context
-    
+
+
 class AnalyticsConnectView(View):
     """
     Connect a new user to the Google Analytics API
@@ -122,7 +126,8 @@ class AnalyticsConnectView(View):
         #Initialize flow
         ls.ADMIN_GOOGLE_ANALYTICS_FLOW.params['state'] = xsrfutil.generate_token(settings.SECRET_KEY, request.user) #@UndefinedVariable
         return HttpResponseRedirect(ls.ADMIN_GOOGLE_ANALYTICS_FLOW.step1_get_authorize_url()) #@UndefinedVariable
-    
+
+
 def valid_analytics_view(request):
     """
     Check if the user is superuser and analytics functionality is enabled. 
@@ -132,7 +137,8 @@ def valid_analytics_view(request):
     
     if not ls.ADMIN_GOOGLE_ANALYTICS_FLOW:
         raise Http404
-    
+
+
 class MyAccountView(UpdateView):
     template_name = 'registration/my_account.html'
     form_class = ls.ADMIN_USER_MODELFORM
@@ -142,7 +148,8 @@ class MyAccountView(UpdateView):
         self.success_url = reverse('admin:my-account')
         
     def form_valid(self, form):
-        messages.add_message(self.request, messages.SUCCESS, _('Your account has been updated successfuly.'))
+        messages.add_message(self.request, messages.SUCCESS,
+                             _('Your account has been updated successfuly.'))
         return super(MyAccountView, self).form_valid(form)
     
     def get_object(self):
@@ -152,4 +159,3 @@ class MyAccountView(UpdateView):
         context = super(MyAccountView, self).get_context_data(**kwargs)
         context['title'] = _('My account')
         return context
-    

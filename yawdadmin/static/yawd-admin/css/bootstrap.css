@@ -1286,23 +1286,27 @@ textarea::-webkit-input-placeholder {
 }
 
 .input-small {
-  width: 90px;
+  max-width: 90px;
 }
 
 .input-medium {
-  width: 150px;
+  max-width: 150px;
+  width: 88%;
 }
 
 .input-large {
-  width: 210px;
+  max-width: 210px;
+  width: 88%;
 }
 
 .input-xlarge {
-  width: 270px;
+  max-width: 270px;
+  width: 88%;
 }
 
 .input-xxlarge {
-  width: 530px;
+  max-width: 530px;
+  width: 88%;
 }
 
 input[class*="span"],
