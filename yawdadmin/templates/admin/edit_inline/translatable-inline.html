@@ -12,9 +12,9 @@
 								{% trans "Please set at least one language to manage translatable objects." %}
 							</div>{% else %}
 							<div id="{{ inline_admin_formset.formset.prefix }}-tabs">{% if inline_admin_formset.formset|length > 1 %}
-								<ul id="language-codes" class="nav nav-tabs">{% for inline_admin_form in inline_admin_formset %}{% if not forloop.last %}
+								<ul id="{{ inline_admin_formset.formset.prefix }}-language-codes" class="nav nav-tabs">{% for inline_admin_form in inline_admin_formset %}{% if not forloop.last %}
 									<li>
-										<a{% with index=forloop.counter|stringformat:"s" %}{% if inline_admin_formset.formset.errors|slice:index|last %} class="alert-error"{% endif %}{% endwith %} href="#{{ inline_admin_formset.formset.prefix }}-{{ forloop.counter0 }}">{% if inline_admin_form.original %}
+										<a{% with index=forloop.counter|stringformat:"s" %}{% if inline_admin_formset.formset.errors|slice:index|last %} class="alert-error"{% endif %}{% endwith %} href="#{{ inline_admin_formset.formset.prefix }}-{{ forloop.counter0 }}" data-toggle="tab">{% if inline_admin_form.original %}
 											{% get_language_info for inline_admin_form.original.language_id as lang %}{% else %}
 											{% get_language_info for inline_admin_form.form.initial.language as lang %}{% endif %}
 											{{lang.name}}
