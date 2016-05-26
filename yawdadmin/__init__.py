@@ -1,4 +1,4 @@
-__version__ = '0.7.1'
+__version__ = '0.7.2-rc'
 
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
