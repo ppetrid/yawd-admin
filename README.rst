@@ -1,14 +1,10 @@
 yawd-admin, a django administration website
 ======================================================
 
-yawd-admin now has a live demo at
-`http://yawd-admin.yawd.eu/ <http://yawd-admin.yawd.eu/>`_.
-Use demo / demo as username & passowrd.
-
 .. image:: docs/yawd-admin-screenshot.png
 	:align: center
 
-`yawd-admin <http://yawd.eu/open-source-projects/yawd-admin/>`_ is an 
+yawd-admin is an 
 administration website for django. It extends the default django admin 
 site and offers the following:
 
@@ -22,23 +18,27 @@ site and offers the following:
 * Mechanism for opening the original django admin popup windows with fancybox
 * Seamless integration with `yawd-translations` for multilingual admin websites
 
-.. note::
+History
+==============
 
-	yawd-admin v0.6.1 is the last version intended to work with
-	Django 1.4. yawd-admin v.0.7.0 and on is developed under Django 1.5.x
-	and does NOT work with older Django releases. For those still using
-	Django 1.4, you can checkout the ``0.6.x`` branch or use the yawd-admin
-	v0.6.1 pypi package. New features will not be backported to the ``0.6.x``
-	branch. Since many of us run production systems tied to Django 1.4, both
-	v0.6.1 and the latest documentation will be online on readthedocs.org. 
+master (dev)
+++++++++++++
+is developped under django 1.6.x and does NOT work with older Django releases.
+
+v0.7.0
+++++++
+is developed under Django 1.5.x and does NOT work with older Django releases.
+
+v0.6.1 
+++++++
+
+is the last version intended to work with Django 1.4. New features will not be backported to the ``0.6.x`` branch. Since many of us run production systems tied to Django 1.4, both v0.6.1 and the latest documentation will be online on readthedocs.org.
 
 Usage and demo
 ==============
 
 See the `yawd-admin documentation <http://yawd-admin.readthedocs.org/en/latest/>`_ 
-for information on how to install the demo and use yawd-admin. There is also an
-online version of the demo at `http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
-Just use *demo*/*demo* as username and password.
+for information on how to install the demo and use yawd-admin.
 
 Screenshots
 ===========
