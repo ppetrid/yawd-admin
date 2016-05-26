@@ -310,10 +310,11 @@ class YawdAdminSite(AdminSite):
         #register custom menus
         for app in self._top_menu.values():
             if isinstance(app, dict):
-                for child in app['models']:
-                    if not 'show' in child and 'perms' in app and hasattr(app['perms'], '__call__'):
-                        child['show'] = app['perms'](request, child)
-                app_list.append(app)
+                if 'models' in app:
+                    for child in app['models']:
+                        if not 'show' in child and 'perms' in app and hasattr(app['perms'], '__call__'):
+                            child['show'] = app['perms'](request, child)
+                    app_list.append(app)
 
         app_list.sort(key=lambda x: x['name'])
 
