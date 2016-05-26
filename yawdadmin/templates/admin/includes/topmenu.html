@@ -4,7 +4,7 @@
 			<div class="navbar-inner">
 				<div class="container-fluid">
 					<a class="brand" href="{{homeurl}}">
-						<i class="icon-globe icon-white"></i> {{ ADMIN_SITE_NAME }}
+						<i class="icon-globe icon-white"></i> {{ ADMIN_SITE_NAME|safe }}
 					</a>
 					<nav id="logged-user-menu">
 						<ul class="nav pull-right">{% if langs and langs|length > 1 %}

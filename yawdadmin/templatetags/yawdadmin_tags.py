@@ -67,6 +67,7 @@ def get_admin_site_meta(context):
     context['ADMIN_SITE_DESCRIPTION'] = getattr(settings, 'ADMIN_SITE_DESCRIPTION',
         _('Welcome to the yawd-admin administration page. Please sign in to manage your website.'))
     context['ADMIN_DISABLE_APP_INDEX'] = getattr(settings, 'ADMIN_DISABLE_APP_INDEX', False)
+    context["ADMIN_EXTRA_CSS"] = getattr(settings, "ADMIN_EXTRA_CSS", None)
     return ''
 
 

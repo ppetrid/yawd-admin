@@ -4,7 +4,7 @@
 
 {% block mainbody %}
 		<section class="hero-unit">
-			<h1>{{ ADMIN_SITE_NAME }}</h1>
+			<h1>{{ ADMIN_SITE_NAME|safe }}</h1>
 			{% if ADMIN_SITE_DESCRIPTION %}
 			<p>{{ ADMIN_SITE_DESCRIPTION }}</p>
 			{% endif %}{% if langs and langs|length > 1 %}
