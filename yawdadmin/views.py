@@ -1,5 +1,8 @@
 import json
-from oauth2client import xsrfutil
+try:
+    from oauth2client import xsrfutil
+except ImportError:
+    from oauth2client.contrib import xsrfutil
 from oauth2client.file import Storage
 from django.conf import settings
 from django.contrib import messages
