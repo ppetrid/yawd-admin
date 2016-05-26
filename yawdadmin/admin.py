@@ -16,7 +16,7 @@ from forms import PopupInlineFormSet
 
 
 try: #django 1.6 and above
-    from django.contrib.admin.options import IS_POPUP_VAR
+    from django.contrib.admin.options import IS_POPUP_VAR #@UnresolvedImport
 except:
     IS_POPUP_VAR = '_popup'
 
@@ -167,7 +167,7 @@ class SortableModelAdmin(admin.ModelAdmin):
 
     def get_urls(self):
         """
-        Override get_urls to include the translation messages view
+        Override get_urls to include the sortable views
         for the specified language
         """
         urls = super(SortableModelAdmin, self).get_urls()
@@ -187,15 +187,23 @@ class SortableModelAdmin(admin.ModelAdmin):
         return my_urls + urls
 
     def _reorder(self, data, request):
-        for obj in data:
-            model_obj = self.model.objects.get(pk=int(obj['pk']))
+        data = dict([(str(d['pk']), d) for d in data])
+        
+        data_objects = self.model.objects.filter(pk__in=data.keys())
+        for item in data_objects:
+            data[str(item.pk)]['object'] = item
+
+        for d in data.itervalues():
             if self.sortable_mptt:
-                setattr(model_obj,
-                    model_obj._mptt_meta.parent_attr,
-                    self.model.objects.get(pk=int(obj['parent'])) if 'parent' \
-                        in obj else None)
-            setattr(model_obj, self.sortable_order_field, int(obj['order']))
-            model_obj.save()
+                parent = data[str(d['parent'])]['object'] if 'parent' in d else None
+                setattr(d['object'],
+                        d['object']._mptt_meta.parent_attr,
+                        parent)
+            setattr(d['object'], self.sortable_order_field, int(d['order']))
+            d['object'].save()
+
+        if self.sortable_mptt:
+            self.model.objects.rebuild()
 
     def sortables_ordered(self, queryset):
         """

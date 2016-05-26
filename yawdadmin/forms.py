@@ -1,8 +1,8 @@
-from django import forms
 from django.core.exceptions import ValidationError
 from django.core.urlresolvers import reverse
+from django.forms.formsets import TOTAL_FORM_COUNT
 from django.forms.models import BaseInlineFormSet
-from django.contrib.auth import get_user_model
+from django.utils.translation import ungettext
 
 
 class PopupInlineFormSet(BaseInlineFormSet):
@@ -28,11 +28,21 @@ class PopupInlineFormSet(BaseInlineFormSet):
         The clean() hook remains for possible use in subclasses.
         """
         self._errors = []
+        self._non_form_errors = self.error_class()
+
         if not self.is_bound: # Stop further processing.
             return
 
-        # Give self.clean() a chance to do cross-form validation.
         try:
+            if (self.validate_max and
+                self.total_form_count() - len(self.deleted_forms) > self.max_num) or \
+                self.management_form.cleaned_data[TOTAL_FORM_COUNT] > self.absolute_max:
+                raise ValidationError(ungettext(
+                    "Please submit %d or fewer forms.",
+                    "Please submit %d or fewer forms.", self.max_num) % self.max_num,
+                    code='too_many_forms',
+                )
+            # Give self.clean() a chance to do cross-form validation.
             self.clean()
         except ValidationError as e:
             self._non_form_errors = self.error_class(e.messages)

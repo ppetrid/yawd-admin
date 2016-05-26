@@ -1,4 +1,4 @@
-{% extends "admin/base_site.html" %}{% load i18n admin_modify admin_urls yawdadmin_filters %}
+{% extends "admin/base_site.html" %}{% load i18n admin_urls yawdadmin_filters yawdadmin_tags %}
 
 {% block breadcrumbs %}
 			<ul class="breadcrumb">
@@ -14,6 +14,6 @@
 			<section id="content-main">{% comment %}
 				<div class="alert">{% trans 'Translate and save the following messages.' %}</div>{% endcomment %}
 				<form class="form-horizontal form-inline" action="" method="post" >
-					{% csrf_token %}{% include 'admin/includes/base_form.html' %}{% submit_row %}
+					{% csrf_token %}{% include 'admin/includes/base_form.html' %}{% block bottom_submit_row %}{% explicit_submit_row %}{% endblock %}
 				</form>
 			</section>{% endblock %}

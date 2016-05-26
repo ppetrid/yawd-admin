@@ -1,16 +1,17 @@
+import re
 from itertools import chain
 from django import forms
 from django.contrib.contenttypes.models import ContentType
-from django.utils.translation import ugettext as _
+from django.utils.translation import ugettext as _, ugettext_lazy, get_language
 from django.utils.safestring import mark_safe
 
 try: #Django 1.7+
-    from django.contrib.admin.options import TO_FIELD_VAR
+    from django.contrib.admin.options import TO_FIELD_VAR #@UnresolvedImport
 except:
     TO_FIELD_VAR = 't'
 
 try: #Django 1.6+
-    from django.contrib.admin.options import IS_POPUP_VAR
+    from django.contrib.admin.options import IS_POPUP_VAR #@UnresolvedImport
 except:
     IS_POPUP_VAR = 'pop'
 
@@ -85,11 +86,16 @@ class Select2MultipleWidget(forms.SelectMultiple):
     
     Note that the resulting JavaScript assumes that the jsi18n
     catalog has been loaded in the page
-    """
-
-    class Media:
-        css = {'all': ('yawd-admin/css/select2/select2.css',)}
-        js = ('yawd-admin/css/select2/select2.min.js',)
+    """    
+    def _media(self):
+        """
+        Set the widget's javascript and css
+        """
+        return forms.Media(css = {'all': ('yawd-admin/css/select2/select2.css',)}, 
+                           js = ('yawd-admin/css/select2/select2.min.js',
+                                 'yawd-admin/css/select2/select2_locale_'+
+                                 get_language()+'.js'))
+    media = property(_media)
 
     def render(self, name, value, attrs=None, choices=()):
         result = super(Select2MultipleWidget, self).render(name, value, attrs, choices)
@@ -106,17 +112,29 @@ class Select2Widget(forms.Select):
     catalog has been loaded in the page
     """
     select2_options = ''
-
-    class Media:
-        css = {'all': ('yawd-admin/css/select2/select2.css',)}
-        js = ('yawd-admin/css/select2/select2.min.js',)
+    
+    def _media(self):
+        """
+        Set the widget's javascript and css
+        """
+        return forms.Media(css = {'all': ('yawd-admin/css/select2/select2.css',)}, 
+                           js = ('yawd-admin/css/select2/select2.min.js',
+                                 'yawd-admin/css/select2/select2_locale_'+
+                                 get_language()+'.js'))
+    media = property(_media)
 
     def render(self, name, value, attrs=None, choices=()):
         result = super(Select2Widget, self).render(name, value, attrs, choices)
+        #read-only mode
+        ro = ''
+        if self.attrs and 'readonly' in self.attrs and self.attrs['readonly']:
+            ro = '.select2("readonly", true)'
+
         return result + mark_safe('<script>(function($){'\
-                                  '$(\'#%s\').select2(%s);'\
+                                  '$(\'#%s\').select2(%s)%s;'\
                                   '})(yawdadmin.jQuery);</script>' % (attrs['id'],
-                                                                      self.select2_options))
+                                                            self.select2_options,
+                                                            ro))
 
 
 class SwitchWidget(forms.CheckboxInput):
@@ -124,15 +142,15 @@ class SwitchWidget(forms.CheckboxInput):
         js = ('yawd-admin/js/bootstrap.switch.min.js',)
 
     def render(self, name, value, attrs=None):
-        output = super(SwitchWidget, self).render(name, value, attrs)
+        switch_defaults = {
+            'data-on-label': ugettext_lazy('YES'),
+            'data-off-label': ugettext_lazy('NO'),
+            'data-on': 'success',
+            'data-off': 'danger'
+        }
+        switch_defaults.update(self.attrs)
+        self.attrs = switch_defaults
 
-        data_on_label = self.attrs.pop('data-on-label', _('YES'))
-        data_off_label = self.attrs.pop('data-off-label', _('NO'))
-        data_on = self.attrs.pop('data-on', 'primary')
-        data_off = self.attrs.pop('data-off', 'default')
-        classes = self.attrs.pop('class', '')
-
-        return mark_safe('<div id="%s-switch" class="switch %s" data-on="%s" '
-                         'data-off="%s" data-on-label="%s" data-off-label="%s">' % (
-                    attrs['id'], classes, data_on, data_off,
-                    data_on_label, data_off_label)) + output + mark_safe('</div>')
+        return super(SwitchWidget, self).render(name, value, attrs) + \
+            mark_safe("<script>yawdadmin.jQuery('#%s').bootstrapSwitch();</script>" \
+                        % attrs['id'])

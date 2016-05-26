@@ -100,11 +100,11 @@ def get_analytics_data(http):
     from apiclient.discovery import build
     from apiclient.errors import HttpError
 
-    service = build('analytics', 'v3', http=http)
     end_date = datetime.datetime.now()
     start_date = end_date + datetime.timedelta(-ls.ADMIN_GOOGLE_ANALYTICS['interval'])
 
     try:
+        service = build('analytics', 'v3', http=http)
         pie_data = service.data().ga()\
             .get(ids = 'ga:' + ls.ADMIN_GOOGLE_ANALYTICS['profile_id'],
                  start_date = start_date.strftime('%Y-%m-%d'),

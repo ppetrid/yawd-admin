@@ -185,6 +185,13 @@ ADMIN_JS_CATALOG
 Additional javascript translation messages for use in the admin interface. Please see
 :ref:`message-translations`.
 
+ADMIN_JS_CATALOG_CACHE_TIMEOUT
+****************
+
+For how long you want the js catalog view to be cached. Yawd-admin will cache a different version
+of the view per language. Use 0 if you want to disable caching on the jsi18n view.
+Defaults to 60 * 60 (1 hour).
+
 
 ADMIN_USER_MODELFORM
 ********************

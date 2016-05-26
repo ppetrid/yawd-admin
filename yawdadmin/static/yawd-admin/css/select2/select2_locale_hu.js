@@ -12,4 +12,4 @@
         formatLoadMore: function (pageNumber) { return "Töltés..."; },
         formatSearching: function () { return "Keresés..."; }
     });
-})(jQuery);
+})(yawdadmin.jQuery);
