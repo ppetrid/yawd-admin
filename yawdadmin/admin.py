@@ -103,7 +103,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         """
         urls = super(PopupModelAdmin, self).get_urls()
 
-        info = self.model._meta.app_label, self.model._meta.module_name
+        info = self.model._meta.app_label, self.model._meta.model_name
         my_urls = patterns('',
             url(r'^(.+)/ajax/delete/$',
                 self.admin_site.admin_view(self.ajaxdelete_view),
@@ -172,7 +172,7 @@ class SortableModelAdmin(admin.ModelAdmin):
         """
         urls = super(SortableModelAdmin, self).get_urls()
 
-        info = self.model._meta.app_label, self.model._meta.module_name
+        info = self.model._meta.app_label, self.model._meta.model_name
         my_urls = patterns('',
             url(r'^sortables/$',
                 self.admin_site.admin_view(self.sortables),
