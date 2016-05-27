@@ -23,6 +23,10 @@ History
 
 master (dev)
 ++++++++++++
+is developped under django 1.8.x and does NOT work with older Django releases.
+
+v0.7.2
+++++++++++++
 is developped under django 1.7.x and does NOT work with older Django releases.
 
 v0.7.1
