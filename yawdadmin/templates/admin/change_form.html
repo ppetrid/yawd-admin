@@ -1,4 +1,5 @@
-{% extends "admin/base_site.html" %}{% load i18n admin_modify admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
+{% extends "admin/base_site.html" %}
+{% load i18n admin_modify admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
 
 {% block bodyspy %}{% if adminform.model_admin.affix and not is_popup %} data-spy="scroll" data-target=".affix-sidebar"{% endif %}{% endblock %}
 
@@ -31,7 +32,7 @@
 {% block object-tools %}{% if change and not is_popup %}
 			<div class="row-fluid nav object-tools">{% block object-tools-items %}
 				<div class="span2">
-					<a href="{% url opts|admin_urlname:'history' original.pk|admin_urlquote %}" class="big-button">
+					<a href="{% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}" class="big-button">
 						<i class="database-item"></i> {% trans "History" %}
 					</a>
 				</div>{% if has_absolute_url %}
