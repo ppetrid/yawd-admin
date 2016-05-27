@@ -3,7 +3,7 @@ from django.core.exceptions import ImproperlyConfigured
 from django.utils.importlib import import_module
 from yawdadmin.sites import YawdAdminSite
 
-__version__ = '0.7.2-rc'
+__version__ = '0.7.2'
 
 
 def _get_site():
