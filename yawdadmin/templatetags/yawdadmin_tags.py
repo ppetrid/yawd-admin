@@ -124,7 +124,7 @@ def inline_items_for_result(inline, result):
     return ret
 
 
-#TODO: Remove this in future version
+# TODO: Remove this in future version
 @register.simple_tag
 def related_lookup_popup_var():
     """
@@ -132,7 +132,7 @@ def related_lookup_popup_var():
     work for Django 1.6 and older versions. It should be removed
     once support for Django 1.5 is dropped. 
     """
-    try: #Django 1.6+
+    try: # Django 1.6+
         from django.contrib.admin.options import IS_POPUP_VAR #@UnresolvedImport
     except:
         IS_POPUP_VAR = 'pop'
