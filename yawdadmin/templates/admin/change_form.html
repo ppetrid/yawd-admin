@@ -29,19 +29,27 @@
 			    <li class="active">{% if add %}{% trans "Add" %}{% else %}{{ original|truncatewords:"18" }}{% endif %}</li>
 			</ul>{% endif %}{% endblock %}
 
-{% block object-tools %}{% if change and not is_popup %}
-			<div class="row-fluid nav object-tools">{% block object-tools-items %}
+{% block object-tools %}
+	{% if change and not is_popup %}
+		<div class="row-fluid nav object-tools">
+			{% block object-tools-items %}
 				<div class="span2">
-					<a href="{% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}" class="big-button">
+					{% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
+					<a href="{% add_preserved_filters history_url %}">
 						<i class="database-item"></i> {% trans "History" %}
 					</a>
-				</div>{% if has_absolute_url %}
-				<div class="span2">
-					<a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="big-button">
-						<i class="lookup-item"></i> {% trans "View on site" %}
-					</a>
-				</div>{% endif %}{% endblock %}
-			</div>{% endif %}{% endblock %}
+				</div>
+				{% if has_absolute_url %}
+					<div class="span2">
+						<a href="{% url 'admin:view_on_site' content_type_id original.pk %}" class="big-button">
+							<i class="lookup-item"></i> {% trans "View on site" %}
+						</a>
+					</div>
+				{% endif %}
+			{% endblock %}
+		</div>
+	{% endif %}
+{% endblock %}
 
 {% block content %}
 			<div id="content-main">{% if adminform.model_admin.affix and not is_popup %}

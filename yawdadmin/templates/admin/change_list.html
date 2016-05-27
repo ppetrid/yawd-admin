@@ -1,4 +1,5 @@
-{% extends "admin/base_site.html" %}{% load admin_list i18n admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
+{% extends "admin/base_site.html" %}
+{% load admin_list i18n admin_static yawdadmin_tags yawdadmin_filters admin_urls %}
 
 {% block extrastyle %}{{ block.super }}{% if cl.has_filters %}
 		<link rel="stylesheet" type="text/css" href="{% static 'yawd-admin/css/select2/select2.css' %}" />{% endif %}{% if not actions_on_top and not actions_on_bottom %}
