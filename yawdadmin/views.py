@@ -1,4 +1,5 @@
-from . import json
+# -*- coding: utf-8 -*-
+import json
 try:
     from oauth2client import xsrfutil
 except ImportError:

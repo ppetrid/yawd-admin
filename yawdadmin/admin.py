@@ -1,6 +1,7 @@
+# -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 
-from . import json
+import json
 from django.conf.urls import patterns, url
 from django.contrib import admin
 from django.contrib.admin.options import InlineModelAdmin

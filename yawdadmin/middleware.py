@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 class PopupMiddleware(object):
     """
     This middleware must always be enabled when using yawd-admin WITH

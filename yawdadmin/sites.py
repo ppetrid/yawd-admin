@@ -1,4 +1,5 @@
-from . import httplib2
+# -*- coding: utf-8 -*-
+import httplib2
 from functools import update_wrapper
 from oauth2client.file import Storage
 from django import VERSION as DJANGO_VERSION

@@ -1,6 +1,7 @@
-from . import re
-from . import copy
-from . import json
+# -*- coding: utf-8 -*-
+import re
+import copy
+import json
 from django import forms
 from django.core.cache import cache
 from django.utils.encoding import force_text

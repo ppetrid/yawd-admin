@@ -1,5 +1,5 @@
 # -*- coding: utf-8 -*-
-from . import itertools
+import itertools
 from django import template
 from ..admin import PopupInline
 from ..forms import PopupInlineFormSet
