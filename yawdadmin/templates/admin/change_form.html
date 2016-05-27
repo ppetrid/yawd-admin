@@ -34,8 +34,7 @@
 		<div class="row-fluid nav object-tools">
 			{% block object-tools-items %}
 				<div class="span2">
-					{% url opts|admin_urlname:'history' original.pk|admin_urlquote as history_url %}
-					<a href="{% add_preserved_filters history_url %}">
+					<a href="{% url opts|admin_urlname:'history' original.pk|admin_urlquote %}" class="big-button">
 						<i class="database-item"></i> {% trans "History" %}
 					</a>
 				</div>
