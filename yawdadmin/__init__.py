@@ -1,9 +1,9 @@
-__version__ = '0.7.2-rc'
-
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured
 from django.utils.importlib import import_module
 from yawdadmin.sites import YawdAdminSite
+
+__version__ = '0.7.2-rc'
 
 
 def _get_site():
@@ -19,5 +19,5 @@ admin_site = _get_site()()
 
 
 if not isinstance(admin_site, YawdAdminSite):
-    raise ImproperlyConfigured('The specified admin site is not a subclass of '\
+    raise ImproperlyConfigured('The specified admin site is not a subclass of'\
                                'yawdadmin.sites.YawdAdminSite')

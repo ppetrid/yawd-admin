@@ -22,16 +22,16 @@ register = template.Library()
 @register.inclusion_tag('admin/includes/topmenu.html', takes_context=True)
 def admin_top_menu(context):
     return {
-        'perms' : context['perms'],
-        'top_menu' : admin_site.top_menu(context['request']),
-        'homeurl' : urlresolvers.reverse('admin:index'),
-        'user' : context['user'],
-        'langs' : context['langs'] if 'langs' in context else [],
+        'perms': context['perms'],
+        'top_menu': admin_site.top_menu(context['request']),
+        'homeurl': urlresolvers.reverse('admin:index'),
+        'user': context['user'],
+        'langs': context['langs'] if 'langs' in context else [],
         'default_lang': context['default_lang'] if 'default_lang' in context else None,
-        'clean_url' : context['clean_url'] if 'clean_url' in context else '',
-        'LANGUAGE_CODE' : get_language(),
-        'optionset_labels' : admin_site.get_option_admin_urls(),
-        'analytics' : context['user'].is_superuser and ls.ADMIN_GOOGLE_ANALYTICS_FLOW,
+        'clean_url': context['clean_url'] if 'clean_url' in context else '',
+        'LANGUAGE_CODE': get_language(),
+        'optionset_labels': admin_site.get_option_admin_urls(),
+        'analytics': context['user'].is_superuser and ls.ADMIN_GOOGLE_ANALYTICS_FLOW,
         'request': context['request']
     }
 
@@ -45,7 +45,7 @@ def clean_media(media):
 
 
 @register.simple_tag
-def yawdadmin_paginator_number(cl,i):
+def yawdadmin_paginator_number(cl, i):
     """
     Generates an individual page index link in a paginated list.
     """
@@ -92,7 +92,7 @@ def inline_items_for_result(inline, result):
     list_display = inline.list_display if inline.list_display else ('__unicode__',)
     ret = ''
     for field_name in list_display:
-        row_class =  mark_safe(' class="column"')
+        row_class = mark_safe(' class="column"')
         try:
             f, attr, value = lookup_field(field_name, result, inline)
         except ObjectDoesNotExist:
@@ -130,10 +130,10 @@ def related_lookup_popup_var():
     """
     This templatetag is here to ensure fancybox related lookups
     work for Django 1.6 and older versions. It should be removed
-    once support for Django 1.5 is dropped. 
+    once support for Django 1.5 is dropped.
     """
-    try: # Django 1.6+
-        from django.contrib.admin.options import IS_POPUP_VAR #@UnresolvedImport
+    try:  # Django 1.6+
+        from django.contrib.admin.options import IS_POPUP_VAR  # @UnresolvedImport
     except:
         IS_POPUP_VAR = 'pop'
     return '<script>rel_lookup_popup_var = "%s"</script>' % IS_POPUP_VAR
@@ -151,5 +151,5 @@ def explicit_submit_row(context, **kwargs):
             explicit_context[option] = kwargs[option]
 
     original_context = submit_row(context)
-    original_context.update(explicit_context)                                                              
+    original_context.update(explicit_context)
     return original_context

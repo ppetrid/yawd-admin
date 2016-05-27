@@ -1,4 +1,4 @@
-import httplib2
+from . import httplib2
 from functools import update_wrapper
 from oauth2client.file import Storage
 from django import VERSION as DJANGO_VERSION
@@ -91,7 +91,7 @@ class YawdAdminDashboard(object):
             for extra in self.app_dict[app_label]['extras']:
                 if 'label' in extra and extra['label'] == label:
                     return extra       
- 
+
     @classmethod
     def app_sorter(self, x):
         return x['name']
@@ -190,7 +190,7 @@ class YawdAdminSite(AdminSite):
 
     def get_urls(self):
         global _optionset_labels
-        
+
         def wrap(view, cacheable=False):
             def wrapper(*args, **kwargs):
                 return self.admin_view(view, cacheable)(*args, **kwargs)
