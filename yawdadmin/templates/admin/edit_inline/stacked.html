@@ -1,4 +1,5 @@
-{% load i18n admin_static %}<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
+{% load i18n admin_static %}
+<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
 							<div class="inline-group-wrapper">
 								<h2{% if inline_admin_formset.opts.collapse %} class="collapse-switcher" onclick="collapse_switcher(this, '#{{inline_admin_formset.formset.prefix}}-wrapper');"{% endif %}>{{ inline_admin_formset.opts.verbose_name_plural|title }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
 								<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
