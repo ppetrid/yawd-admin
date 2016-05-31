@@ -4,7 +4,10 @@ from django import template
 from django.conf import settings
 from django.contrib.admin.templatetags.admin_modify import submit_row
 from django.contrib.admin.views.main import PAGE_VAR
-from django.contrib.admin.util import lookup_field, display_for_field, display_for_value
+try:
+    from django.contrib.admin.utils import lookup_field, display_for_field, display_for_value
+except ImportError:  # Django < 1.7
+    from django.contrib.admin.util import lookup_field, display_for_field, display_for_value
 from django.core import urlresolvers
 from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
