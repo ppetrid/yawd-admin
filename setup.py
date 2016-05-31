@@ -24,7 +24,7 @@ setup(
     include_package_data=True,
     install_requires=[
                      "httplib2",
-                     "django >=1.6, <1.8",
+                     "django >=1.6, <1.9",
                      "oauth2client"
     ],
     zip_safe=False
