@@ -28,7 +28,7 @@ def utfupper(value):
 
 @register.filter
 def filter_show(app_list):
-    return list(itertools.ifilter(lambda x: x['show'], app_list)) 
+    return list(itertools.ifilter(lambda x: x['show'], app_list))
 
 
 @register.filter
@@ -45,7 +45,7 @@ def istranslationinline(value):
     This filter is used if yawd-translations is installed.
     """
     try:
-        from translations.admin import TranslationInline #@UnresolvedImport
+        from translations.admin import TranslationInline  # @UnresolvedImport
     except:
         return False
 

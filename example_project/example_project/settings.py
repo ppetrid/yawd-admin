@@ -31,7 +31,7 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 )
 
-SECRET_KEY = '6()e7x_%6*@(_nm$ke)g!ellg)pffm*=288trl)@3u=@l$@5qn'
+SECRET_KEY = '6()e7x_%6*@(_nm$ke)g!ellg)pffm*=288trl)@3u=@l$@5qnm'
 
 MIDDLEWARE_CLASSES = (
     'django.middleware.common.CommonMiddleware',

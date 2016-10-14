@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import httplib2
 from functools import update_wrapper
 from oauth2client.file import Storage
@@ -91,7 +92,7 @@ class YawdAdminDashboard(object):
             for extra in self.app_dict[app_label]['extras']:
                 if 'label' in extra and extra['label'] == label:
                     return extra       
- 
+
     @classmethod
     def app_sorter(self, x):
         return x['name']
@@ -117,7 +118,7 @@ class YawdAdminDashboard(object):
                 # Check whether user has any perm for this module.
                 # If so, add the module to the model_list.
                 if True in perms.values():
-                    info = (app_label, model._meta.module_name)
+                    info = (app_label, model._meta.model_name)
                     model_dict = {
                         'classname': model.__name__,
                         'name': capfirst(model._meta.verbose_name_plural),
@@ -190,7 +191,7 @@ class YawdAdminSite(AdminSite):
 
     def get_urls(self):
         global _optionset_labels
-        
+
         def wrap(view, cacheable=False):
             def wrapper(*args, **kwargs):
                 return self.admin_view(view, cacheable)(*args, **kwargs)
@@ -274,7 +275,7 @@ class YawdAdminSite(AdminSite):
                     # Check whether user has any perm for this module.
                     # If so, add the module to the model_list.
                     if True in perms.values():
-                        info = (app_label, model._meta.module_name)
+                        info = (app_label, model._meta.model_name)
                         model_dict = {
                             'name': capfirst(model._meta.verbose_name_plural),
                             'show': perms['change'],
@@ -310,10 +311,11 @@ class YawdAdminSite(AdminSite):
         #register custom menus
         for app in self._top_menu.values():
             if isinstance(app, dict):
-                for child in app['models']:
-                    if not 'show' in child and 'perms' in app and hasattr(app['perms'], '__call__'):
-                        child['show'] = app['perms'](request, child)
-                app_list.append(app)
+                if 'models' in app:
+                    for child in app['models']:
+                        if not 'show' in child and 'perms' in app and hasattr(app['perms'], '__call__'):
+                            child['show'] = app['perms'](request, child)
+                    app_list.append(app)
 
         app_list.sort(key=lambda x: x['name'])
 

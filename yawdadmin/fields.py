@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import re
 from django.db import models
 from django.core.exceptions import ValidationError

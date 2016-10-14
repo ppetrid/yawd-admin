@@ -1,8 +1,14 @@
+# -*- coding: utf-8 -*-
+from __future__ import unicode_literals
+
 import json
 from django.conf.urls import patterns, url
 from django.contrib import admin
-from django.contrib.admin.options import InlineModelAdmin 
-from django.contrib.admin.util import unquote, get_deleted_objects
+from django.contrib.admin.options import InlineModelAdmin
+try:
+    from django.contrib.admin.utils import unquote, get_deleted_objects
+except ImportError:  # Django < 1.7
+    from django.contrib.admin.util import unquote, get_deleted_objects
 from django.core.exceptions import PermissionDenied
 from django.db import router
 from django.http import Http404
@@ -15,8 +21,8 @@ from templatetags.yawdadmin_tags import inline_items_for_result
 from forms import PopupInlineFormSet
 
 
-try: #django 1.6 and above
-    from django.contrib.admin.options import IS_POPUP_VAR #@UnresolvedImport
+try:  # django 1.6 and above
+    from django.contrib.admin.options import IS_POPUP_VAR  # @UnresolvedImport
 except:
     IS_POPUP_VAR = '_popup'
 
@@ -33,12 +39,13 @@ class PopupInline(InlineModelAdmin):
 class PopupModelAdmin(admin.ModelAdmin):
     linked_inline = None
     popup_only = False
-    
+
     def add_view(self, request, form_url='', extra_context=None):
         if self.popup_only and not IS_POPUP_VAR in request.REQUEST:
             raise Http404
-        
-        return super(PopupModelAdmin, self).add_view(request, form_url, extra_context)
+
+        return super(PopupModelAdmin, self).add_view(request,
+            form_url, extra_context)
 
     def ajaxdelete_view(self, request, object_id):
         "The 'delete' admin view for this model."
@@ -71,11 +78,11 @@ class PopupModelAdmin(admin.ModelAdmin):
         self.delete_model(request, obj)
 
         return HttpResponse('<html><body>OK</body></html>')
-    
+
     def change_view(self, request, object_id, form_url='', extra_context=None):
         if self.popup_only and not IS_POPUP_VAR in request.REQUEST:
             raise Http404
-        
+
         return super(PopupModelAdmin, self).change_view(request, object_id, 
                                                         form_url, extra_context)
 
@@ -84,7 +91,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         Override foreignkey widget if popup and field matches fk_name
         """
         formfield = super(PopupModelAdmin, self).formfield_for_dbfield(db_field,
-                                                                       **kwargs)
+            **kwargs)
 
         request = kwargs.pop("request", None)
         fk_name = request.GET.get('fk_name')
@@ -103,7 +110,7 @@ class PopupModelAdmin(admin.ModelAdmin):
         """
         urls = super(PopupModelAdmin, self).get_urls()
 
-        info = self.model._meta.app_label, self.model._meta.module_name
+        info = self.model._meta.app_label, self.model._meta.model_name
         my_urls = patterns('',
             url(r'^(.+)/ajax/delete/$',
                 self.admin_site.admin_view(self.ajaxdelete_view),
@@ -172,7 +179,7 @@ class SortableModelAdmin(admin.ModelAdmin):
         """
         urls = super(SortableModelAdmin, self).get_urls()
 
-        info = self.model._meta.app_label, self.model._meta.module_name
+        info = self.model._meta.app_label, self.model._meta.model_name
         my_urls = patterns('',
             url(r'^sortables/$',
                 self.admin_site.admin_view(self.sortables),
@@ -188,7 +195,7 @@ class SortableModelAdmin(admin.ModelAdmin):
 
     def _reorder(self, data, request):
         data = dict([(str(d['pk']), d) for d in data])
-        
+
         data_objects = self.model.objects.filter(pk__in=data.keys())
         for item in data_objects:
             data[str(item.pk)]['object'] = item
@@ -218,7 +225,7 @@ class SortableModelAdmin(admin.ModelAdmin):
                                     else 'admin/sortables/list.html',
                                 {'mptt': self.sortable_mptt,
                                  'objects': self.sortables_ordered(self.queryset(request))})
-    
+
     def reorder(self, request):
         if not request.POST.get('data', None):
             return HttpResponse(json.dumps({'message': _('No data sent with the request')}))

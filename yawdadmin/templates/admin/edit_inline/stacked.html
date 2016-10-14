@@ -1,4 +1,5 @@
-{% load i18n admin_static %}<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
+{% load i18n admin_static %}
+<div class="inline-group{% if adminform.model_admin.affix and not is_popup %} affix-header{% endif %}" id="{{ inline_admin_formset.formset.prefix }}-group">
 							<div class="inline-group-wrapper">
 								<h2{% if inline_admin_formset.opts.collapse %} class="collapse-switcher" onclick="collapse_switcher(this, '#{{inline_admin_formset.formset.prefix}}-wrapper');"{% endif %}>{{ inline_admin_formset.opts.verbose_name_plural|title }}{% if inline_admin_formset.opts.collapse %} <i class="h2-icon icon-arrow-down"></i>{% endif %}</h2>{% if inline_admin_formset.opts.description %}
 								<div class="description alert">{{inline_admin_formset.opts.description|safe}}</div>{% endif %}
@@ -20,9 +21,7 @@
 	  										</div>
 	  										<div class="modal-body">
 											{% endif %}{% if inline_admin_form.form.non_field_errors %}
-												<div class="alert alert-error">
-													{{ inline_admin_form.form.non_field_errors }}
-												</div>{% endif %}{% with fprefix=inline_admin_formset.formset.prefix inlinefieldset=1 %}{% for fieldset in inline_admin_form %}
+											{{ inline_admin_form.form.non_field_errors }}{% endif %}{% with fprefix=inline_admin_formset.formset.prefix inlinefieldset=1 %}{% for fieldset in inline_admin_form %}
 											{% include "admin/includes/fieldset.html" %}{% endfor %}{% endwith %}{% if inline_admin_form.has_auto_field or inline_admin_form.needs_explicit_pk_field %}
 											{{ inline_admin_form.pk_field.field }}{% endif %}
 											{{ inline_admin_form.fk_field.field }}{% if inline_admin_formset.opts.modal %}

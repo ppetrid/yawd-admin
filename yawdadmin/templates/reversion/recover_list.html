@@ -1,6 +1,6 @@
 {% extends "admin/base_site.html" %}
 {% load url from future %}
-{% load i18n %}
+{% load i18n admin_urls %}
 
 
 {% block breadcrumbs %}
@@ -8,14 +8,15 @@
         <li><a href="/"><i class="icon-home"></i></a> <span class="divider">/</span></li>
         <li><a href="{% url 'admin:index' %}">{% trans 'Home' %}</a> <span class="divider">/</span></li>{% if not ADMIN_DISABLE_APP_INDEX %}
         <li><a href="{% url 'admin:app_list' app_label %}">{{app_label|capfirst|escape}}</a> <span class="divider">/</span></li>{% endif %}
-        <li><a href="{{changelist_url}}">{{opts.verbose_name_plural|capfirst}}</a> <span class="divider">/</span></li>
+        <li><a href="{% url opts|admin_urlname:'changelist' %}">{{opts.verbose_name_plural|capfirst}}</a> <span class="divider">/</span></li>
         <li class="active">{% blocktrans with opts.verbose_name_plural|escape as name %}Recover deleted {{name}}{% endblocktrans %}</li>
     </ul>{% endblock %}
 
 
 {% block content %}
     <div id="content-main">
-        <p>{% blocktrans %}Choose a date from the list below to recover a deleted version of an object.{% endblocktrans %}</p>
+        <div class="alert alert-info">{% blocktrans %}Choose a date from the list below to recover a deleted version of an object.{% endblocktrans %}</div>
+    
         <div class="module">
             {% if deleted %}
                 <table id="change-history">
@@ -35,7 +36,7 @@
                     </tbody>
                 </table>
             {% else %}
-                <p>{% trans "There are no deleted objects to recover." %}</p>
+                <div class="alert alert-warn">{% trans "There are no deleted objects to recover." %}</div>
             {% endif %}
         </div>
     </div>

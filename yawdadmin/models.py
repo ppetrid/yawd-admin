@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from django.db import models
 from .fields import OptionNameField
 
@@ -11,6 +12,7 @@ class AppOption(models.Model):
     class Meta:
         unique_together = ('optionset_label', 'name')
         ordering = ['optionset_label', 'lang_dependant']
+        app_label = 'yawdadmin'
 
     def __unicode__(self):
         return u'%s.%s' % (self.optionset_label, self.name)
