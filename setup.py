@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 setup(
     name='yawd-admin',
     url='http://yawd.eu/open-source-projects/yawd-admin/',
-    version='0.7.2',
+    version='0.7.3',
     description='An administration website for Django',
     long_description=open('README.rst', 'rt').read(),
     author='yawd',
