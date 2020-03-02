@@ -3,7 +3,7 @@ yawd-admin, a django administration website
 
 yawd-admin now has a live demo at
 `http://yawd-admin.yawd.eu/ <http://yawd-admin.yawd.eu/>`_.
-Use demo / demo as username & passowrd.
+Use demo / demo as username & password.
 
 .. image:: docs/yawd-admin-screenshot.png
 	:align: center

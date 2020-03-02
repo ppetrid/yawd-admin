@@ -95,7 +95,7 @@ Live demo
 
 Alternatively, you can visit the live demo at 
 `http://yawd-admin.yawd.eu/ <http://yawd.eu/open-source-projects/yawd-admin/>`_.
-Use demo / demo as username & passowrd.
+Use demo / demo as username & password.
 
 .. note::
 
